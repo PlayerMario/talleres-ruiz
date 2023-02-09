@@ -55,6 +55,17 @@ class HomePage extends StatelessWidget {
               ListTile(
                 title: const Center(
                     child: Text(
+                  'CREAR USUARIO',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                )),
+                onTap: () {
+                  print('CREAR USUARIO');
+                  Navigator.pushNamed(context, '/crear-cliente');
+                },
+              ),
+              ListTile(
+                title: const Center(
+                    child: Text(
                   'INICIAR SESIÓN',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                 )),

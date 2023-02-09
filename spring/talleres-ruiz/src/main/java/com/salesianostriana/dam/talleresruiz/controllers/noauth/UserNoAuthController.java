@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.talleresruiz.controllers.noauth;
 
-import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.CrearUser;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
@@ -25,12 +24,12 @@ public class UserNoAuthController {
 
     private final UserService userService;
     private final ClienteService clienteService;
-    private final ClienteDto clienteDto;
+    //private final ClienteDto clienteDto;
 
     @PostMapping("/register")
     public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody CrearUser createUser) {
         User user = userService.add(createUser.toUserCliente(createUser));
-        ClienteDto newCliente = clienteDto.of(clienteService.add(createUser.toCliente(createUser), user));
+        ClienteDto newCliente = ClienteDto.of(clienteService.add(createUser.toCliente(createUser), user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

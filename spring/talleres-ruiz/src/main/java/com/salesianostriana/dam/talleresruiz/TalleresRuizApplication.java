@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
         license = @License(name = "Licencia de Talleres-Ruiz")
 )
 )
-@EnableJpaAuditing
+//@EnableJpaAuditing
 public class TalleresRuizApplication {
 
     public static void main(String[] args) {

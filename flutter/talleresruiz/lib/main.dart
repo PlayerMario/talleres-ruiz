@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talleresruiz/crear_cliente/widgets/crear_cliente_screen.dart';
 import 'package:talleresruiz/home/home.dart';
 
 void main() {
@@ -8,9 +9,7 @@ void main() {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
-        //'/cita': (context) => const (),
-        //'/cliente': (context) => const (),
-        //'/mecanico': (context) => const (),
+        '/crear-cliente': (context) => CrearClienteScreen(),
       }
     )
   );

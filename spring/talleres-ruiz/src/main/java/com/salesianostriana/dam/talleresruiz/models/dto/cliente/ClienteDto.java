@@ -26,13 +26,13 @@ public class ClienteDto {
     private LocalDate fechaNacimiento;
     private String email;
     private String tlf;
-    private List<String> roles;
+    //private List<String> roles;
     private String vehiculo;
 
-    public ClienteDto of(Cliente cliente) {
-        cliente.getUsuario().getRoles().forEach(rol -> {
+    public static ClienteDto of(Cliente cliente) {
+        /*cliente.getUsuario().getRoles().forEach(rol -> {
             roles.add(rol.name());
-        });
+        });*/
 
         return ClienteDto.builder()
                 .id(cliente.getId())
@@ -42,7 +42,7 @@ public class ClienteDto {
                 .fechaNacimiento(cliente.getUsuario().getFechaNacimiento())
                 .email(cliente.getUsuario().getEmail())
                 .tlf(cliente.getUsuario().getTlf())
-                .roles(roles)
+                //.roles(roles)
                 .vehiculo(cliente.getMatricula() + "-" + cliente.getVehiculo())
                 .build();
     }
