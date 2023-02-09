@@ -1,13 +1,14 @@
 package com.salesianostriana.dam.talleresruiz.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "cliente")
@@ -26,22 +27,13 @@ import java.util.List;
 public class Cliente {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID id;
 
-    private String dni;
-
-    @Column(name = "nombre")
-    private String nombreCompleto;
-
-    //private User user;
-
-    @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
-
-    private String email;
-
-    private String tlf;
+    @MapsId
+    @JsonIgnore
+    @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_CLIENTE_USER"))
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private User usuario;
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @Builder.Default
@@ -54,17 +46,6 @@ public class Cliente {
     @JsonIgnore
     public static String hiddenFields = "id";
 
-
-    // HELPERS CLIENTE-CITA
-    public void agregarCita(Cita cita) {
-        cita.setCliente(this);
-        citas.add(cita);
-    }
-
-    public void borrarCita(Cita cita) {
-        this.citas.remove(cita);
-        cita.setCliente(null);
-    }
 
     // MÉTODOS AUXILIARES
     @PreRemove

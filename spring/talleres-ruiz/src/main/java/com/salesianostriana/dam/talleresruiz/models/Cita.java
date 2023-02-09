@@ -7,9 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "cita")
@@ -19,6 +17,12 @@ import java.util.Map;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
+@NamedEntityGraph(
+        name = "cita-con-chat",
+        attributeNodes = {
+                @NamedAttributeNode(value = "chat")
+        }
+)
 public class Cita {
 
     @Id
@@ -47,11 +51,31 @@ public class Cita {
     @Builder.Default
     private List<String> servicios = new ArrayList<>();
 
-    @ElementCollection
+    @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private Map<String, String> comentarios = new HashMap<>();
+    private List<Mensaje> chat = new ArrayList<>();
 
     @JsonIgnore
     public static String hiddenFields = "id";
+
+
+    // HELPERS CITA-CLIENTE
+    public void agregarCliente(Cliente cliente) {
+        this.cliente = cliente;
+        cliente.getCitas().add(this);
+    }
+
+    public void borrarCliente(Cliente cliente) {
+        this.cliente = null;
+        cliente.getCitas().remove(this);
+    }
+
+    // MÉTODOS AUXILIARES
+    @PreRemove
+    public void setNullCitas() {
+        chat.forEach(chat -> {
+            chat.setCita(null);
+        });
+    }
 
 }

@@ -1,11 +1,12 @@
 package com.salesianostriana.dam.talleresruiz.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "mecanico")
@@ -18,22 +19,13 @@ import java.time.LocalDate;
 public class Mecanico {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID id;
 
-    private String dni;
-
-    @Column(name = "nombre")
-    private String nombreCompleto;
-
-    //private User user;
-
-    @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
-
-    private String email;
-
-    private String tlf;
+    @MapsId
+    @JsonIgnore
+    @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_MECANICO_USER"))
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private User usuario;
 
     @JsonIgnore
     public static String hiddenFields = "id";

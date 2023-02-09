@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.models;
+package com.salesianostriana.dam.talleresruiz.models.user;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,9 +10,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Set;
+import java.util.EnumSet;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,17 @@ public class User implements UserDetails {
 
     private String password;
 
+    private String dni;
+
+    private String nombre;
+
+    @Column(name = "fecha_nacimiento")
+    private LocalDate fechaNacimiento;
+
+    private String email;
+
+    private String tlf;
+
     private String avatar;
 
     @Builder.Default
@@ -57,8 +69,8 @@ public class User implements UserDetails {
     @Builder.Default
     private boolean enabled = true;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<UserRole> roles;
+    @Convert(converter = RolesConverter.class)
+    private EnumSet<Roles> roles;
 
     @CreatedDate
     private LocalDateTime createdAt;
