@@ -19,9 +19,10 @@ import java.util.UUID;
 public class Mecanico {
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
-    @MapsId
+    @MapsId("id")
     @JsonIgnore
     @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_MECANICO_USER"))
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

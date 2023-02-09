@@ -29,7 +29,7 @@ public class Cliente {
     @Id
     private UUID id;
 
-    @MapsId
+    //@MapsId("user_entity_id")
     @JsonIgnore
     @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_CLIENTE_USER"))
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

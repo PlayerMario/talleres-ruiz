@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing
 @OpenAPIDefinition(info =
 @Info(
         description = "API de gestión de citas de un taller de automoción.",
@@ -19,6 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
         license = @License(name = "Licencia de Talleres-Ruiz")
 )
 )
+@EnableJpaAuditing
 public class TalleresRuizApplication {
 
     public static void main(String[] args) {

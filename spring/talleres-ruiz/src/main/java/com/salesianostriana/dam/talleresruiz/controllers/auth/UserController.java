@@ -1,6 +1,6 @@
-package com.salesianostriana.dam.talleresruiz.controllers;
+package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
-import com.salesianostriana.dam.talleresruiz.services.UserService;
+import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

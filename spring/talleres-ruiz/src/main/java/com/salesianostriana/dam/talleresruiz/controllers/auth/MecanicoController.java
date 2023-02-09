@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.controllers;
+package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
 import com.salesianostriana.dam.talleresruiz.services.MecanicoService;
 import io.swagger.v3.oas.annotations.tags.Tag;

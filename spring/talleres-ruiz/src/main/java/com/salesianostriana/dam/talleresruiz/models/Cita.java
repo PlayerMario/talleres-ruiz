@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,7 +39,8 @@ public class Cita {
     private Cliente cliente;
 
     @Column(name = "fecha_hora")
-    private LocalDateTime fechaHora;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime fechaHora = LocalDateTime.now();
 
     private String estado;
 

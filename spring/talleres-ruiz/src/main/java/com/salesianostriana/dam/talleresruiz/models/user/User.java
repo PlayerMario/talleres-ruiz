@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.models.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
@@ -52,6 +53,7 @@ public class User implements UserDetails {
     private String nombre;
 
     @Column(name = "fecha_nacimiento")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaNacimiento;
 
     private String email;
@@ -73,9 +75,11 @@ public class User implements UserDetails {
     private EnumSet<Roles> roles;
 
     @CreatedDate
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime createdAt;
 
     @Builder.Default
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime lastPasswordChangeAt = LocalDateTime.now();
 
 

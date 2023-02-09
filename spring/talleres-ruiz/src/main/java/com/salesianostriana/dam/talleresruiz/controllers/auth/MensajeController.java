@@ -1,6 +1,6 @@
-package com.salesianostriana.dam.talleresruiz.controllers;
+package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
-import com.salesianostriana.dam.talleresruiz.services.ClienteService;
+import com.salesianostriana.dam.talleresruiz.services.MensajeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/mensaje")
 @RequiredArgsConstructor
-@Tag(name = "Cliente", description = "Controlador para la gestión de clientes")
-public class ClienteController {
+@Tag(name = "Mensaje", description = "Controlador para la gestión de mensajes")
+public class MensajeController {
 
-    private final ClienteService service;
+    private final MensajeService service;
 
 }
