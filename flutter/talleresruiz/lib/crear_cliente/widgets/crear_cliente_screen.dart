@@ -9,7 +9,6 @@ class CrearClienteScreen extends StatelessWidget {
   final passwordVerify = TextEditingController();
   final dni = TextEditingController();
   final nombre = TextEditingController();
-  final fechaNacimiento = TextEditingController();
   final email = TextEditingController();
   final tlf = TextEditingController();
   final vehiculo = TextEditingController();
@@ -94,16 +93,6 @@ class CrearClienteScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
-                controller: fechaNacimiento,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Fecha de nacimiento',
-                    hintText: 'Introduzca su fecha de nacimiento'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: TextField(
                 controller: email,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -156,7 +145,6 @@ class CrearClienteScreen extends StatelessWidget {
                       passwordVerify.text,
                       dni.text,
                       nombre.text,
-                      fechaNacimiento.text,
                       email.text,
                       tlf.text,
                       vehiculo.text,

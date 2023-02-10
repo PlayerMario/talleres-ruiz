@@ -11,7 +11,7 @@ class CrearClienteFetched extends CrearClienteEvent {
   const CrearClienteFetched(
       this.username,
       this.password,
-      this.passwordVerify,
+      this.verifyPassword,
       this.dni,
       this.nombre,
       this.fechaNacimiento,
@@ -21,10 +21,9 @@ class CrearClienteFetched extends CrearClienteEvent {
       this.matricula);
   final String username;
   final String password;
-  final String passwordVerify;
+  final String verifyPassword;
   final String dni;
   final String nombre;
-  //final DateTime fechaNacimiento;
   final String fechaNacimiento;
   final String email;
   final String tlf;

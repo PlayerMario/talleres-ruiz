@@ -52,15 +52,14 @@ public class User implements UserDetails {
 
     private String nombre;
 
-    @Column(name = "fecha_nacimiento")
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate fechaNacimiento;
-
     private String email;
 
     private String tlf;
 
     private String avatar;
+
+    @Convert(converter = RolesConverter.class)
+    private EnumSet<Roles> roles;
 
     @Builder.Default
     private boolean accountNonExpired = true;
@@ -70,14 +69,9 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     @Builder.Default
     private boolean enabled = true;
-
-    @Convert(converter = RolesConverter.class)
-    private EnumSet<Roles> roles;
-
     @CreatedDate
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime createdAt;
-
+    private LocalDateTime createdAt = LocalDateTime.now();
     @Builder.Default
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime lastPasswordChangeAt = LocalDateTime.now();

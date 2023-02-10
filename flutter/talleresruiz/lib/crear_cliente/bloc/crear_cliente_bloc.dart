@@ -17,10 +17,9 @@ class CrearClienteBloc extends Bloc<CrearClienteEvent, CrearClienteState> {
         final clienteCreado = await buscarClienteCreado(
             event.username,
             event.password,
-            event.passwordVerify,
+            event.verifyPassword,
             event.dni,
             event.nombre,
-            event.fechaNacimiento,
             event.email,
             event.tlf,
             event.vehiculo,

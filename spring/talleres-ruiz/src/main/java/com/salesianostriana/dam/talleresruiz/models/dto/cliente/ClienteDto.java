@@ -23,7 +23,6 @@ public class ClienteDto {
     private String nombre;
     private String username;
     private String dni;
-    private LocalDate fechaNacimiento;
     private String email;
     private String tlf;
     //private List<String> roles;
@@ -35,11 +34,10 @@ public class ClienteDto {
         });*/
 
         return ClienteDto.builder()
-                .id(cliente.getId())
+                .id(cliente.getUsuario().getId())
                 .nombre(cliente.getUsuario().getNombre())
                 .username(cliente.getUsuario().getUsername())
                 .dni(cliente.getUsuario().getDni())
-                .fechaNacimiento(cliente.getUsuario().getFechaNacimiento())
                 .email(cliente.getUsuario().getEmail())
                 .tlf(cliente.getUsuario().getTlf())
                 //.roles(roles)

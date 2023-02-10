@@ -39,10 +39,6 @@ public class CrearUser {
     @NotEmpty(message = "{nuevoUsuario.nombre.notempty}")
     private String nombre;
 
-    @NotEmpty(message = "{nuevoUsuario.fechanacimiento.notempty}")
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate fechaNacimiento;
-
     @Email(message = "{nuevoUsuario.email.email}")
     @NotEmpty(message = "{nuevoUsuario.email.notempty}")
     @UniqueEmail(message = "{nuevoUsuario.email.uniqueemail}")
@@ -65,7 +61,6 @@ public class CrearUser {
                 .password(dto.password)
                 .dni(dto.dni)
                 .nombre(dto.nombre)
-                .fechaNacimiento(dto.fechaNacimiento)
                 .email(dto.email)
                 .tlf(dto.tlf)
                 .avatar("https://robohash.org/" + dto.username)

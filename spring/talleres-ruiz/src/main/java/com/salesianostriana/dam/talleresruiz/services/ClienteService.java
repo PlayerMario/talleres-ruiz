@@ -20,7 +20,7 @@ public class ClienteService {
     }
 
     public Cliente add(Cliente cliente, User user) {
-        cliente.setId(user.getId());
+        //cliente.setId(user.getId());
         cliente.setUsuario(user);
         return repository.save(cliente);
     }

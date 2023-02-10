@@ -3,7 +3,6 @@ class CrearCliente {
   String? nombre;
   String? username;
   String? dni;
-  //DateTime? fechaNacimiento;
   String? fechaNacimiento;
   String? email;
   String? tlf;
