@@ -32,13 +32,13 @@ public class Cliente {
 
     @MapsId
     @JsonIgnore
-    @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_CLIENTE_USER"), columnDefinition = "uuid")
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_CLIENTE_USER"), columnDefinition = "uuid")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private User usuario;
 
     @JsonIgnore
-    @Builder.Default
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Cita> citas = new ArrayList<>();
 
     private String vehiculo;
@@ -53,6 +53,9 @@ public class Cliente {
     @PreRemove
     public void setNullCitas() {
         citas.forEach(cita -> {
+            cita.getChat().forEach(mensaje -> {
+                mensaje.setAutor(null);
+            });
             cita.setCliente(null);
         });
     }

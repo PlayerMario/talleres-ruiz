@@ -3,12 +3,14 @@ package com.salesianostriana.dam.talleresruiz.services;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.ClienteRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.cliente.ClienteSpecificationBuilder;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteria;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteriaExtractor;
+import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,7 @@ import java.util.UUID;
 public class ClienteService {
 
     private final ClienteRepository repository;
+    private final UserService userService;
     private final ClienteDtoConverter converter;
 
     public List<Cliente> findAll() {
@@ -51,6 +54,23 @@ public class ClienteService {
     public Cliente add(Cliente cliente, User user) {
         cliente.setUsuario(user);
         return repository.save(cliente);
+    }
+
+    public Cliente edit(UUID id, ClienteEdit edit) {
+        return repository.findById(id)
+                .map(cliente -> {
+                    cliente.setUsuario(userService.editUserCliente(cliente.getId(), edit));
+                    cliente.setVehiculo(edit.getVehiculo());
+                    cliente.setMatricula(edit.getMatricula());
+                    return repository.save(cliente);
+                }).orElseThrow(() ->
+                        new EntityNotFoundException("No se encuentra al usuario con ID: " + id));
+    }
+
+    public void delete(UUID id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        }
     }
 
     public boolean existsMatricula(String matricula) {

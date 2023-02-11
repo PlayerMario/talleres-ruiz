@@ -1,11 +1,13 @@
 package com.salesianostriana.dam.talleresruiz.services.user;
 
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,4 +52,18 @@ public class UserService {
     public boolean existsDNI(String dni) {
         return repository.existsByDni(dni);
     }
+
+    public User editUserCliente(UUID id, ClienteEdit edit) {
+        return repository.findById(id)
+                .map(user -> {
+                    user.setDni(edit.getDni());
+                    user.setNombre(edit.getNombre());
+                    user.setEmail(edit.getEmail());
+                    user.setTlf(edit.getTlf());
+                    return repository.save(user);
+                }).orElseThrow(() ->
+                        new EntityNotFoundException("No se encuentra al usuario con ID: " + id));
+
+    }
+
 }

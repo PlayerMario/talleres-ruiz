@@ -2,19 +2,13 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cliente;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.salesianostriana.dam.talleresruiz.models.Cita;
-import com.salesianostriana.dam.talleresruiz.models.Cliente;
-import com.salesianostriana.dam.talleresruiz.models.user.Roles;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -42,6 +36,6 @@ public class ClienteDto {
     @JsonView(ClienteViews.Master.class)
     private String vehiculo;
     @JsonView(ClienteViews.MostrarDetalles.class)
-    private List<Cita> citas;
+    private List<CitaDto> citas;
 
 }

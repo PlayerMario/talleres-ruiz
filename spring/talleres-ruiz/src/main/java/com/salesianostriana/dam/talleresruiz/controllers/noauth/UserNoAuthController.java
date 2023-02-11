@@ -5,7 +5,7 @@ import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
-import com.salesianostriana.dam.talleresruiz.models.dto.user.CrearUser;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserLogin;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserToken;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
@@ -92,7 +92,7 @@ public class UserNoAuthController {
     })
     @PostMapping("/register")
     @JsonView(ClienteViews.Master.class)
-    public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody CrearUser createUser) {
+    public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody ClienteCreate createUser) {
         User user = userService.add(createUser.toUserCliente(createUser));
         ClienteDto newCliente = converter.of(clienteService.add(createUser.toCliente(createUser), user));
         URI newURI = ServletUriComponentsBuilder

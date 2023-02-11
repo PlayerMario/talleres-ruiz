@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.talleresruiz.models.dto.cliente;
 
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ClienteDtoConverter {
                 .avatar(cliente.getUsuario().getAvatar())
                 .roles(roles)
                 .vehiculo(cliente.getMatricula() + "-" + cliente.getVehiculo())
-                .citas(cliente.getCitas())
+                .citas(cliente.getCitas().stream().map(CitaDtoConverter::toClienteDetalles).toList())
                 .build();
     }
 

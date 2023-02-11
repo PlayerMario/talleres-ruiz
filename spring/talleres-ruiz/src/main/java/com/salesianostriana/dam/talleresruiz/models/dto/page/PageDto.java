@@ -12,15 +12,15 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PageDto<T> {
 
-    @JsonView(PageViews.Master.class)
+    @JsonView({ClienteViews.Master.class})
     private List<T> content;
-    @JsonView(PageViews.Master.class)
+    @JsonView({ClienteViews.Master.class})
     private Long totalElements;
-    @JsonView(PageViews.Master.class)
+    @JsonView({ClienteViews.Master.class})
     private int totalPages;
-    @JsonView(PageViews.Master.class)
+    @JsonView({ClienteViews.Master.class})
     private int number;
-    @JsonView(PageViews.Master.class)
+    @JsonView({ClienteViews.Master.class})
     private int size;
 
     public PageDto(Page<T> page) {

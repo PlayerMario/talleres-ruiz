@@ -31,7 +31,7 @@ public class Mensaje {
 
     @ManyToOne
     @CreatedBy
-    @JoinColumn(name = "user_username", foreignKey = @ForeignKey(name = "FK_MENSAJE_USER"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_MENSAJE_USER"))
     private User autor;
 
     @Builder.Default

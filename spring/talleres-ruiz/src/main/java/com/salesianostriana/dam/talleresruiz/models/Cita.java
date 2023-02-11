@@ -6,7 +6,8 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +39,11 @@ public class Cita {
     @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name = "FK_CITA_CLIENTE"))
     private Cliente cliente;
 
-    @Column(name = "fecha_hora")
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime fechaHora = LocalDateTime.now();
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate fecha = LocalDate.now();
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime hora = LocalTime.now();
 
     private String estado;
 

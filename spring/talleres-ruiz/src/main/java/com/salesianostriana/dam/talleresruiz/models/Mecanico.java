@@ -24,7 +24,7 @@ public class Mecanico {
 
     @MapsId
     @JsonIgnore
-    @JoinColumn(name = "user_entity_id", foreignKey = @ForeignKey(name = "FK_MECANICO_USER"), columnDefinition = "uuid")
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_MECANICO_USER"), columnDefinition = "uuid")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private User usuario;
 
