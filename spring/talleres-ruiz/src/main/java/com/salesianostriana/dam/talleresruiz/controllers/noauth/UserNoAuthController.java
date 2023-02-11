@@ -1,8 +1,10 @@
 package com.salesianostriana.dam.talleresruiz.controllers.noauth;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.CrearUser;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserLogin;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserToken;
@@ -40,7 +42,7 @@ public class UserNoAuthController {
 
     private final UserService userService;
     private final ClienteService clienteService;
-    private final ClienteDtoConverter clienteDto;
+    private final ClienteDtoConverter converter;
     private final AuthenticationManager authManager;
     private final JwtProvider tokenProvider;
 
@@ -53,17 +55,13 @@ public class UserNoAuthController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
-                                                    "id": "c0a80180-8640-1a2e-8186-400a3b860000",
-                                                    "nombre": "Mario Ruiz",
+                                                    "nombre": "Mario Ruiz López",
                                                     "username": "playermario",
                                                     "dni": "11111111A",
                                                     "email": "m@m.com",
                                                     "tlf": "111 222 333",
                                                     "avatar": "https://robohash.org/playermario",
-                                                    "roles": [
-                                                        "CLIENTE"
-                                                    ],
-                                                    "vehiculo": "1111AAA-Ford Fiesta"
+                                                    "vehiculo": "1111AAA-Renault Clio"
                                                 }
                                             """
                             )}
@@ -93,9 +91,10 @@ public class UserNoAuthController {
                     )})
     })
     @PostMapping("/register")
+    @JsonView(ClienteViews.Master.class)
     public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody CrearUser createUser) {
         User user = userService.add(createUser.toUserCliente(createUser));
-        ClienteDto newCliente = clienteDto.of(clienteService.add(createUser.toCliente(createUser), user));
+        ClienteDto newCliente = converter.of(clienteService.add(createUser.toCliente(createUser), user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

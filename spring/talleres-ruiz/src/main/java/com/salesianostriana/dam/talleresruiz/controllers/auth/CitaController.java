@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@RequestMapping("/cita")
+@RequestMapping("/auth/cita")
 @RequiredArgsConstructor
 @Tag(name = "Cita", description = "Controlador para la gestión de citas")
 public class CitaController {

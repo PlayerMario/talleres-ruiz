@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@RequestMapping("/mensaje")
+@RequestMapping("/auth/mensaje")
 @RequiredArgsConstructor
 @Tag(name = "Mensaje", description = "Controlador para la gestión de mensajes")
 public class MensajeController {

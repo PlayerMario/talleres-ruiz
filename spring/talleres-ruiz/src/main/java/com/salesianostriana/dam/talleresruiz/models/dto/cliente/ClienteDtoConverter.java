@@ -25,6 +25,7 @@ public class ClienteDtoConverter {
                 .avatar(cliente.getUsuario().getAvatar())
                 .roles(roles)
                 .vehiculo(cliente.getMatricula() + "-" + cliente.getVehiculo())
+                .citas(cliente.getCitas())
                 .build();
     }
 

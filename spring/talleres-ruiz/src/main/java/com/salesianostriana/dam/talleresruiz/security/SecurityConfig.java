@@ -81,7 +81,8 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web -> web.ignoring().antMatchers("/h2-console/**", "/prueba/**", "/noauth/user/**"));
+        // CAMBIAR EL /AUTH PARA PONERLO EN EL ANTERIOR BIEN
+        return (web -> web.ignoring().antMatchers("/h2-console/**", "/prueba/**", "/noauth/user/**", "/auth/**"));
     }
 
 

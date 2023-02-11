@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@RequestMapping("/mecanico")
+@RequestMapping("/auth/mecanico")
 @RequiredArgsConstructor
 @Tag(name = "Mecánico", description = "Controlador para la gestión de mecánicos")
 public class MecanicoController {
