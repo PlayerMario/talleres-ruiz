@@ -1,11 +1,15 @@
-package com.salesianostriana.dam.talleresruiz.error;
+package com.salesianostriana.dam.talleresruiz.errors;
 
-import com.salesianostriana.dam.talleresruiz.error.model.impl.ApiErrorImpl;
-import com.salesianostriana.dam.talleresruiz.error.model.impl.ApiValidationSubError;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.JwtTokenException;
+import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
+import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiValidationSubError;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +31,7 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
         return buildApiError(ex.getMessage(), request, status);
     }
 
-
+    // MANEJO ERRORES VALIDACIÓN
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleNotFoundException(EntityNotFoundException exception, WebRequest request) {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
@@ -61,6 +65,29 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
         return buildApiErrorWithSubErrors("Error en la validación, compruebe la lista", request, status, ex.getAllErrors());
     }
 
+
+    // MANEJO ERRORES TOKEN
+    @ExceptionHandler({ AuthenticationException.class, UsernameNotFoundException.class })
+    public ResponseEntity<?> handleAuthenticationException(WebRequest request) {
+        return buildApiError("Usuario y/o contraseña incorrecta", request, HttpStatus.UNAUTHORIZED);
+
+    }
+
+    @ExceptionHandler({ AccessDeniedException.class })
+    public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+        return /*ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(*/buildApiError(ex.getMessage(), request, HttpStatus.FORBIDDEN);
+
+    }
+
+    @ExceptionHandler({JwtTokenException.class})
+    public ResponseEntity<?> handleTokenException(JwtTokenException ex, WebRequest request) {
+        return /*ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(*/buildApiError(ex.getMessage(), request, HttpStatus.FORBIDDEN);
+    }
+
+
+    // CONSTRUCTORES DE ERRORES
     private final ResponseEntity<Object> buildApiError(String message, WebRequest request, HttpStatus status) {
         return ResponseEntity
                 .status(status)

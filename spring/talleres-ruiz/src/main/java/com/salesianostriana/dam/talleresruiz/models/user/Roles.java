@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public enum Roles {
 
-    ADMIN, MEC, USER;
+    ADMIN, MEC, CLIENTE;
 
     public static boolean contains(String text) {
         try {

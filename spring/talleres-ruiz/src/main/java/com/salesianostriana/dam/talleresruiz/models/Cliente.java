@@ -36,8 +36,9 @@ public class Cliente {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private User usuario;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @JsonIgnore
     @Builder.Default
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Cita> citas = new ArrayList<>();
 
     private String vehiculo;

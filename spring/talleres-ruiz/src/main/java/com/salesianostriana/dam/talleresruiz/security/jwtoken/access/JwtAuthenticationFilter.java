@@ -1,7 +1,7 @@
-package com.salesianostriana.dam.talleresruiz.security.jwt.access;
+package com.salesianostriana.dam.talleresruiz.security.jwtoken.access;
 
 import com.salesianostriana.dam.talleresruiz.models.user.User;
-import com.salesianostriana.dam.talleresruiz.security.errorhandling.JwtTokenException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.JwtTokenException;
 import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;

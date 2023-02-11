@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.security.errorhandling;
+package com.salesianostriana.dam.talleresruiz.security.jwtoken.errorhandling;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,5 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         resolver.resolveException(request, response, null, accessDeniedException);
-
     }
 }

@@ -1,8 +1,8 @@
-package com.salesianostriana.dam.talleresruiz.security.jwt.access;
+package com.salesianostriana.dam.talleresruiz.security.jwtoken.access;
 
 
 import com.salesianostriana.dam.talleresruiz.models.user.User;
-import com.salesianostriana.dam.talleresruiz.security.errorhandling.JwtTokenException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.JwtTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
@@ -25,32 +25,23 @@ public class JwtProvider {
     public static final String TOKEN_TYPE = "JWT";
     public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
-
     @Value("${jwt.secret}")
     private String jwtSecret;
-
     @Value("${jwt.duration}")
-    //private int jwtLifeInDays;
     private int jwtLifeInMinutes;
-
     private JwtParser jwtParser;
-
     private SecretKey secretKey;
 
     @PostConstruct
     public void init() {
-
         secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
-
         jwtParser = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build();
     }
 
     public String generateToken(Authentication authentication) {
-
         User user = (User) authentication.getPrincipal();
-
         return generateToken(user);
 
     }
@@ -60,12 +51,10 @@ public class JwtProvider {
                 Date.from(
                         LocalDateTime
                                 .now()
-                                //.plusDays(jwtLifeInDays)
                                 .plusMinutes(jwtLifeInMinutes)
                                 .atZone(ZoneId.systemDefault())
                                 .toInstant()
                 );
-
         return Jwts.builder()
                 .setHeaderParam("typ", TOKEN_TYPE)
                 .setSubject(user.getId().toString())
@@ -73,7 +62,6 @@ public class JwtProvider {
                 .setExpiration(tokenExpirationDateTime)
                 .signWith(secretKey)
                 .compact();
-
     }
 
     public UUID getUserIdFromJwtToken(String token) {
@@ -83,7 +71,6 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String token) {
-
         try {
             jwtParser.parseClaimsJws(token);
             return true;
@@ -91,8 +78,6 @@ public class JwtProvider {
             log.info("Error con el token: " + ex.getMessage());
             throw new JwtTokenException(ex.getMessage());
         }
-        //return false;
-
     }
 
 }

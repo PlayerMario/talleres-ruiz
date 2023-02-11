@@ -1,9 +1,11 @@
 package com.salesianostriana.dam.talleresruiz.controllers.noauth;
 
-import com.salesianostriana.dam.talleresruiz.models.Cliente;
-import com.salesianostriana.dam.talleresruiz.models.user.User;
-import com.salesianostriana.dam.talleresruiz.repositories.ClienteRepository;
-import com.salesianostriana.dam.talleresruiz.repositories.UserRepository;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.pruebas.UserPruebas;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.pruebas.UserPruebasConverter;
+import com.salesianostriana.dam.talleresruiz.services.ClienteService;
+import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +18,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PruebasController {
 
-    private final UserRepository userRepository;
-    private final ClienteRepository clienteRepository;
+    private final UserService userService;
+    private final ClienteService clienteService;
+    private final UserPruebasConverter userDto;
+    private final ClienteDtoConverter clienteDto;
 
     @GetMapping("/user")
-    public List<User> mostrarUsuarios() {
-        return userRepository.findAll();
+    public List<UserPruebas> mostrarUsuarios() {
+        return userService.findAll().stream().map(userDto::of).toList();
     }
 
     @GetMapping("/cliente")
-    public List<Cliente> mostrarClientes() {
-        return clienteRepository.findAll();
+    public List<ClienteDto> mostrarClientes() {
+        return clienteService.findAll().stream().map(clienteDto::of).toList();
     }
 
 }

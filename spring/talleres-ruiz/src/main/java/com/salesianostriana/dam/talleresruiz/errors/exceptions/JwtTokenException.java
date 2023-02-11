@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.security.errorhandling;
+package com.salesianostriana.dam.talleresruiz.errors.exceptions;
 
 public class JwtTokenException extends RuntimeException {
 

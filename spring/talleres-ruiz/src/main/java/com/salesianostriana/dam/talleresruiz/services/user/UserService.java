@@ -43,4 +43,11 @@ public class UserService {
         return repository.existsByTlf(tlf);
     }
 
+    public boolean existsUsername(String username) {
+        return repository.existsByUsername(username);
+    }
+
+    public boolean existsDNI(String dni) {
+        return repository.existsByDni(dni);
+    }
 }

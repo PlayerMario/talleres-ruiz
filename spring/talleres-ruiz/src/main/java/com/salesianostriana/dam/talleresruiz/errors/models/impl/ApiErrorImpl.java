@@ -1,9 +1,9 @@
-package com.salesianostriana.dam.talleresruiz.error.model.impl;
+package com.salesianostriana.dam.talleresruiz.errors.models.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.salesianostriana.dam.talleresruiz.error.model.ApiError;
-import com.salesianostriana.dam.talleresruiz.error.model.ApiSubError;
+import com.salesianostriana.dam.talleresruiz.errors.models.ApiError;
+import com.salesianostriana.dam.talleresruiz.errors.models.ApiSubError;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

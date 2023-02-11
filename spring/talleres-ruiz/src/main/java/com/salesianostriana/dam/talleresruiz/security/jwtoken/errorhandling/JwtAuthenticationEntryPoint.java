@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.security.errorhandling;
+package com.salesianostriana.dam.talleresruiz.security.jwtoken.errorhandling;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

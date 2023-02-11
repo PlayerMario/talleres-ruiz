@@ -1,7 +1,7 @@
-package com.salesianostriana.dam.talleresruiz.error.model;
+package com.salesianostriana.dam.talleresruiz.errors.models;
 
-import com.salesianostriana.dam.talleresruiz.error.model.impl.ApiErrorImpl;
-import com.salesianostriana.dam.talleresruiz.error.model.impl.ApiValidationSubError;
+import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
+import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiValidationSubError;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 

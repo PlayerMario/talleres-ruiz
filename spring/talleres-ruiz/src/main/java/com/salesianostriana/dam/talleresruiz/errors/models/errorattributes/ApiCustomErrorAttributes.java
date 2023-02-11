@@ -1,7 +1,7 @@
-package com.salesianostriana.dam.talleresruiz.error.model.errorattributes;
+package com.salesianostriana.dam.talleresruiz.errors.models.errorattributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesianostriana.dam.talleresruiz.error.model.ApiError;
+import com.salesianostriana.dam.talleresruiz.errors.models.ApiError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;

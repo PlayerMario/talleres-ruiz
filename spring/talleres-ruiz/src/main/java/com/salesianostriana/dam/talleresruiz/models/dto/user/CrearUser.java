@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 import java.util.EnumSet;
 
 @Data
@@ -24,6 +23,7 @@ import java.util.EnumSet;
 public class CrearUser {
 
     @NotEmpty(message = "{nuevoUsuario.username.notempty}")
+    @UniqueUsername(message = "{nuevoUsuario.username.uniqueusername}")
     private String username;
 
     @NotEmpty(message = "{nuevoUsuario.password.notempty}")
@@ -34,6 +34,7 @@ public class CrearUser {
     private String verifyPassword;
 
     @NotEmpty(message = "{nuevoUsuario.dni.notempty}")
+    @UniqueDNI(message = "{nuevoUsuario.dni.uniquedni}")
     private String dni;
 
     @NotEmpty(message = "{nuevoUsuario.nombre.notempty}")
@@ -64,7 +65,7 @@ public class CrearUser {
                 .email(dto.email)
                 .tlf(dto.tlf)
                 .avatar("https://robohash.org/" + dto.username)
-                .roles(EnumSet.of(Roles.USER))
+                .roles(EnumSet.of(Roles.CLIENTE))
                 .build();
     }
 
