@@ -3,7 +3,6 @@ package com.salesianostriana.dam.talleresruiz.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

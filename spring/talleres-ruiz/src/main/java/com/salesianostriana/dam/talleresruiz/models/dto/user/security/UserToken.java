@@ -1,6 +1,7 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.user;
+package com.salesianostriana.dam.talleresruiz.models.dto.user.security;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;

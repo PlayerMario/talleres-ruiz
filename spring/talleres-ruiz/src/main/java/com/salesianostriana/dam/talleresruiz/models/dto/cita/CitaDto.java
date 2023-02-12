@@ -17,13 +17,13 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CitaDto {
 
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     private String mecanico;
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     private String fechaHora;
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     private List<String> servicios;
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     private String estado;
 
 }

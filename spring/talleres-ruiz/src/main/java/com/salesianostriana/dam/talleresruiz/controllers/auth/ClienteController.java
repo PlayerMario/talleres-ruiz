@@ -3,6 +3,7 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
@@ -54,11 +55,47 @@ public class ClienteController {
                                                             "email": "jj@jj.com",
                                                             "tlf": "675 796 623",
                                                             "avatar": "https://robohash.org/jjml4",
-                                                            "vehiculo": "2014GMD-Fiat Punto"
+                                                            "vehiculo": "2014GMD-Kia Rio"
+                                                        },
+                                                        {
+                                                            "nombre": "Manuel Delgado Hernández",
+                                                            "username": "mdh11",
+                                                            "dni": "29556486K",
+                                                            "email": "manu@manu.com",
+                                                            "tlf": "698 520 147",
+                                                            "avatar": "https://robohash.org/mdh11",
+                                                            "vehiculo": "8520KMM-Opel Astra"
+                                                        },
+                                                        {
+                                                            "nombre": "Francisco Martín Fernández",
+                                                            "username": "fmf14",
+                                                            "dni": "60437101Y",
+                                                            "email": "fran@fran.com",
+                                                            "tlf": "641 785 203",
+                                                            "avatar": "https://robohash.org/fmf14",
+                                                            "vehiculo": "0214HNM-Kia Ceed"
+                                                        },
+                                                        {
+                                                            "nombre": "Irene Salas Murciano",
+                                                            "username": "ism5",
+                                                            "dni": "47017557I",
+                                                            "email": "irene@irene.com",
+                                                            "tlf": "692 014 752",
+                                                            "avatar": "https://robohash.org/ism5",
+                                                            "vehiculo": "5221SCD-Renault Clio"
+                                                        },
+                                                        {
+                                                            "nombre": "Francisco Martín Fernández",
+                                                            "username": "lgm4",
+                                                            "dni": "49655052A",
+                                                            "email": "fran@fran.com",
+                                                            "tlf": "685 027 893",
+                                                            "avatar": "https://robohash.org/lgm4",
+                                                            "vehiculo": "5877FCD-Seat Ibiza"
                                                         }
                                                     ],
-                                                    "totalElements": 1,
-                                                    "totalPages": 1,
+                                                    "totalElements": 8,
+                                                    "totalPages": 2,
                                                     "number": 0,
                                                     "size": 5
                                                 }
@@ -140,7 +177,7 @@ public class ClienteController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al usuario con ID: d182a454-9998-4c82-a622-02d7bafc0379",
+                                                    "message": "No se encuentra al cliente con ID: d182a454-9998-4c82-a622-02d7bafc0379",
                                                     "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379",
                                                     "statusCode": 404,
                                                     "date": "11/02/2023 14:59:58"
@@ -149,10 +186,70 @@ public class ClienteController {
                             )}
                     )})
     })
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     @GetMapping("/{id}")
     public ClienteDto mostrarDetallesCliente(@PathVariable UUID id) {
         return converter.of(service.mostrarClienteConCitas(id));
+    }
+
+    @Operation(summary = "Obtener citas de un cliente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Citas encontradas",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = PageDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "content": [
+                                                        {
+                                                            "mecanico": "Mario Ruiz López",
+                                                            "fechaHora": "2023-01-18 12:00",
+                                                            "servicios": [
+                                                                "Cambio aceite",
+                                                                "Cambio filtro aceite"
+                                                            ],
+                                                            "estado": "Terminado"
+                                                        },
+                                                        {
+                                                            "mecanico": "Alejandro Santos Pacheco",
+                                                            "fechaHora": "2022-05-18 10:00",
+                                                            "servicios": [
+                                                                "Cambio neumáticos",
+                                                                "Cambio filtro aire",
+                                                                "Cambio filtro habitáculo"
+                                                            ],
+                                                            "estado": "Terminado"
+                                                        }
+                                                    ],
+                                                    "totalElements": 2,
+                                                    "totalPages": 1,
+                                                    "number": 0,
+                                                    "size": 5
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Cliente no encontrado o sin citas",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "NOT_FOUND",
+                                                    "message": "No existen citas del cliente",
+                                                    "path": "/auth/cliente/76406075-be67-47f1-9f92-32388c019bb3/citas",
+                                                    "statusCode": 404,
+                                                    "date": "12/02/2023 19:23:03"
+                                                }
+                                            """
+                            )}
+                    )})
+    })
+    @GetMapping("/{id}/citas")
+    public PageDto<CitaDto> mostrarCitasCliente(
+            @PathVariable UUID id,
+            @PageableDefault(size = 5, page = 0) Pageable pageable) {
+        return service.citasCliente(id, pageable);
     }
 
     @Operation(summary = "Modificar un cliente")

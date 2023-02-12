@@ -2,12 +2,12 @@ package com.salesianostriana.dam.talleresruiz.controllers.noauth;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
+import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
-import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteCreate;
-import com.salesianostriana.dam.talleresruiz.models.dto.user.UserLogin;
-import com.salesianostriana.dam.talleresruiz.models.dto.user.UserToken;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserLogin;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserToken;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.security.jwtoken.access.JwtProvider;
 import com.salesianostriana.dam.talleresruiz.services.ClienteService;
@@ -90,18 +90,16 @@ public class UserNoAuthController {
                             )}
                     )})
     })
-    @PostMapping("/register")
     @JsonView(ClienteViews.Master.class)
-    public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody ClienteCreate createUser) {
-        User user = userService.add(createUser.toUserCliente(createUser));
-        ClienteDto newCliente = converter.of(clienteService.add(createUser.toCliente(createUser), user));
+    @PostMapping("/register")
+    public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody ClienteCreate nuevoCliente) {
+        User user = userService.add(nuevoCliente.toUserCliente(nuevoCliente));
+        ClienteDto newCliente = converter.of(clienteService.add(nuevoCliente.toCliente(nuevoCliente), user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(newCliente.getId()).toUri();
-
         return ResponseEntity.created(newURI).body(newCliente);
-
     }
 
 
@@ -169,13 +167,10 @@ public class UserNoAuthController {
     public ResponseEntity<UserToken> login(@Valid @RequestBody UserLogin userLogin) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userLogin.getUsername(), userLogin.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(auth);
         String token = tokenProvider.generateToken(auth);
         User user = (User) auth.getPrincipal();
-
         return ResponseEntity.status(HttpStatus.CREATED).body(UserToken.of(user, token));
-
     }
 
 }

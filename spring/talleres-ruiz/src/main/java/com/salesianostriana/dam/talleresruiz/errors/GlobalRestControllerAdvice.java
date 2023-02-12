@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.talleresruiz.errors;
 
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.JwtTokenException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.OldPasswordEqualException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.PasswordEqualException;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiValidationSubError;
 import org.hibernate.validator.internal.engine.path.PathImpl;
@@ -35,6 +37,11 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleNotFoundException(EntityNotFoundException exception, WebRequest request) {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({PasswordEqualException.class, OldPasswordEqualException.class})
+    public ResponseEntity<?> handleSongPlaylistException(EntityNotFoundException exception, WebRequest request) {
+        return buildApiError(exception.getMessage(), request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})

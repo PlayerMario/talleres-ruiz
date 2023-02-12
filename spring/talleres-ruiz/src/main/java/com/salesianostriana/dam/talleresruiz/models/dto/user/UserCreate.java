@@ -1,6 +1,5 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.cliente;
+package com.salesianostriana.dam.talleresruiz.models.dto.user;
 
-import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.user.Roles;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.validation.annotation.PasswordSegura;
@@ -9,18 +8,20 @@ import com.salesianostriana.dam.talleresruiz.validation.annotation.UniqueUsernam
 import com.salesianostriana.dam.talleresruiz.validation.annotation.VerificarPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.EnumSet;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @VerificarPassword(password = "password", verifyPassword = "verifyPassword", message = "{nuevoCliente.password.verificar}")
-public class ClienteCreate extends ClienteEdit {
+public class UserCreate extends UserEdit {
 
     @NotEmpty(message = "{nuevoCliente.username.notempty}")
     @UniqueUsername(message = "{nuevoCliente.username.uniqueusername}")
@@ -37,8 +38,9 @@ public class ClienteCreate extends ClienteEdit {
     @NotEmpty(message = "{nuevoCliente.password.notempty}")
     private String verifyPassword;
 
-    public User toUserCliente(ClienteCreate dto) {
-        return User.builder()
+
+    public User toUserAdminMec(UserCreate dto, int opcion) {
+        User user = User.builder()
                 .username(dto.username)
                 .password(dto.password)
                 .dni(dto.dni)
@@ -46,15 +48,11 @@ public class ClienteCreate extends ClienteEdit {
                 .email(dto.email)
                 .tlf(dto.tlf)
                 .avatar("https://robohash.org/" + dto.username)
-                .roles(EnumSet.of(Roles.CLIENTE))
                 .build();
+        switch (opcion) {
+            case 1 -> user.setRoles(EnumSet.of(Roles.ADMIN, Roles.MEC));
+            case 2 -> user.setRoles(EnumSet.of(Roles.MEC));
+        }
+        return user;
     }
-
-    public Cliente toCliente(ClienteCreate dto) {
-        return Cliente.builder()
-                .vehiculo(dto.vehiculo)
-                .matricula(dto.matricula)
-                .build();
-    }
-
 }

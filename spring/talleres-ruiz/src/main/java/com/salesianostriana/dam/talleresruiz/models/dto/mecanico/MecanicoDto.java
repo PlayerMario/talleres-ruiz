@@ -1,16 +1,12 @@
 package com.salesianostriana.dam.talleresruiz.models.dto.mecanico;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-/*@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder*/
-public class MecanicoDto {
-
-
-
-}
+@EqualsAndHashCode(callSuper = true)
+@Data
+@SuperBuilder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class MecanicoDto extends UserDto {}

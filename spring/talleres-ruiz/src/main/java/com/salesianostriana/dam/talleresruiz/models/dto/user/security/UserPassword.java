@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.user;
+package com.salesianostriana.dam.talleresruiz.models.dto.user.security;
 
 import com.salesianostriana.dam.talleresruiz.validation.annotation.PasswordSegura;
 import com.salesianostriana.dam.talleresruiz.validation.annotation.VerificarPassword;
@@ -17,12 +17,10 @@ import javax.validation.constraints.NotEmpty;
 public class UserPassword {
 
     @NotEmpty(message = "{nuevoCliente.password.notempty}")
-    //@PasswordNotEqual -> HACER ESTO EN EL MÉTODO DEL SERVICE DONDE SE HAGA EL CAMBIO, Y QUE ESTÉ ANOTADO CON ESTE @,
-    // PARA PODER USAR EL ID DEL USUARIO, AQUÍ NO SE PODRÍA
     private String oldPassword;
+    
     @NotEmpty(message = "{nuevoCliente.password.notempty}")
     @PasswordSegura(message = "{nuevoCliente.password.passwordsegura}")
-    //ANOTAR PARA QUE ESTA CONTRASEÑA SEA DISTINTA QUE LA ANTIGUA
     private String newPassword;
 
     @NotEmpty(message = "{nuevoCliente.password.notempty}")

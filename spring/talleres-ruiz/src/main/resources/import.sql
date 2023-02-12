@@ -9,6 +9,8 @@ insert into user_entity (id, username, password, dni, nombre, email, tlf, avatar
 insert into user_entity (id, username, password, dni, nombre, email, tlf, avatar, roles, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) values ('6ed05011-ab90-4051-84bd-7587e747b96f', 'cca15', '{bcrypt}$2y$10$kjD9AdtyXZqkzS7ZllH1puJ9VLTjaOK/XyKhgSjk2WcAUVG2zy1si', '58199969P', 'Cristina Coloma Asencio', 'cris@cris.com', '630 853 478', 'https://robohash.org/cca15', 'CLIENTE', 'true', 'true', 'true', 'true', '2023-02-10 00:00:00', '2023-02-10 00:00:00');
 insert into user_entity (id, username, password, dni, nombre, email, tlf, avatar, roles, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) values ('f7d699b1-d7fd-4408-990a-5287b3229597', 'mrb23', '{bcrypt}$2y$10$GSNDbHlp0yv1g7BzKIcJz.nHfyfrykWn3t4hh3GP28ja5n6RwkGXy', '37595174M', 'Manuel Ruiz Benavente', 'lolo@lolo.com', '661 120 518', 'https://robohash.org/mrb23', 'CLIENTE', 'true', 'true', 'true', 'true', '2023-02-10 00:00:00', '2023-02-10 00:00:00');
 insert into user_entity (id, username, password, dni, nombre, email, tlf, avatar, roles, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) values ('8183cd78-6800-4b73-bdb7-049210af25da', 'rls11', '{bcrypt}$2y$10$Jd2CX/UmpGeVQQ33Urbcye1X0gNBTS08d2c9w2B1YnuxYocrry2M6', '10756805Y', 'Rosario López Saez', 'rosario@rosario.com', '620 182 022', 'https://robohash.org/rls11', 'CLIENTE', 'true', 'true', 'true', 'true', '2023-02-10 00:00:00', '2023-02-10 00:00:00');
+insert into user_entity (id, username, password, dni, nombre, email, tlf, avatar, roles, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) values ('76406075-be67-47f1-9f92-32388c019bb3', 'cpl20', '{bcrypt}$2y$10$Wu4v2DSon5fbGpXFucn5RufLwYnSB3jF1DGivY8bE4Zrkc3/FEkqC', '58741025G', 'Cecilia Pérez Lóbo', 'ceci@ceci.com', '698 100 202', 'https://robohash.org/cpl20', 'CLIENTE', 'true', 'true', 'true', 'true', '2023-02-10 00:00:00', '2023-02-10 00:00:00');
+
 
 
 insert into mecanico (user_id) values ('3e380d54-861c-4809-bb84-bd32bab42c2e') -- mrl26 / admin1234
@@ -90,9 +92,15 @@ insert into mensaje (id, fecha_hora, mensaje, user_id, cita_id) values (25, '202
 
 
 insert into cliente (user_id, vehiculo, matricula) values ('6ed05011-ab90-4051-84bd-7587e747b96f', 'Volkswagen Polo', '8520VVG') -- cca15 / cca15
+insert into cita (id, mecanico_id, cliente_id, fecha, hora, estado) values (26, '3e380d54-861c-4809-bb84-bd32bab42c2e', '6ed05011-ab90-4051-84bd-7587e747b96f', CURRENT_DATE(), CURRENT_TIME(), 'Trámite')
 
 
-insert into cliente (user_id, vehiculo, matricula) values ('f7d699b1-d7fd-4408-990a-5287b3229597', 'Toyota CH-R', '7456BDX') -- mrb23 / mrb23
+insert into cliente (user_id, vehiculo, matricula) values ('f7d699b1-d7fd-4408-990a-5287b3229597', 'Toyota C-HR', '7456BDX') -- mrb23 / mrb23
+insert into cita (id, mecanico_id, cliente_id, fecha, hora, estado) values (27, '17f920ca-57ac-4053-933c-7d5a6c9cd328', 'f7d699b1-d7fd-4408-990a-5287b3229597', CURRENT_DATE(), CURRENT_TIME(), 'Trámite')
 
 
 insert into cliente (user_id, vehiculo, matricula) values ('8183cd78-6800-4b73-bdb7-049210af25da', 'Seat Ibiza', '9965FCD') -- rls11 / rls11
+insert into cita (id, mecanico_id, cliente_id, fecha, hora, estado) values (28, '43dc49e5-7cb2-461a-8ed4-e0f36c696b73', '8183cd78-6800-4b73-bdb7-049210af25da', CURRENT_DATE(), CURRENT_TIME(), 'Trámite')
+
+
+insert into cliente (user_id, vehiculo, matricula) values ('76406075-be67-47f1-9f92-32388c019bb3', 'Opel Corsa', '5554CDD') -- cpl20 / cpl20

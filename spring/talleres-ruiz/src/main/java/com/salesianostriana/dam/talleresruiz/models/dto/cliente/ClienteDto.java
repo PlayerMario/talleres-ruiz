@@ -3,39 +3,26 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cliente;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import java.util.List;
-import java.util.UUID;
+import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ClienteDto {
+public class ClienteDto extends UserDto {
 
-    @JsonView(ClienteViews.MostrarDetalles.class)
-    private UUID id;
-    @JsonView(ClienteViews.Master.class)
-    private String nombre;
-    @JsonView(ClienteViews.Master.class)
-    private String username;
-    @JsonView(ClienteViews.Master.class)
-    private String dni;
-    @JsonView(ClienteViews.Master.class)
-    private String email;
-    @JsonView(ClienteViews.Master.class)
-    private String tlf;
-    @JsonView(ClienteViews.Master.class)
-    private String avatar;
-    @JsonView(ClienteViews.MostrarDetalles.class)
-    private List<String> roles;
     @JsonView(ClienteViews.Master.class)
     private String vehiculo;
-    @JsonView(ClienteViews.MostrarDetalles.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     private List<CitaDto> citas;
 
 }

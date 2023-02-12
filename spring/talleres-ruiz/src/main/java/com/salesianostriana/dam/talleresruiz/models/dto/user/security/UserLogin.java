@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.user;
+package com.salesianostriana.dam.talleresruiz.models.dto.user.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
