@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -47,6 +49,10 @@ public class CitaService {
                 new EntityNotFoundException("No se encuentra la cita con ID: " + id));
     }
 
+    public Cita add(Cita cita) {
+        return repository.save(cita);
+    }
+
     public void setearNullMecanico(Mecanico mecanico) {
         repository.findByMecanico(mecanico).forEach(cita -> {
             cita.setMecanico(null);
@@ -68,6 +74,14 @@ public class CitaService {
     public Cita mostrarCitaConChat(Long id) {
         return repository.findByIdChat(id).orElseThrow(() ->
                 new EntityNotFoundException("No se encuentra la cita con ID: " + id));
+    }
+
+    public boolean validarFechaHora(LocalDateTime fechaHora) {
+        LocalTime horaCita = LocalTime.of(fechaHora.getHour(), fechaHora.getMinute());
+        return fechaHora.getDayOfWeek().getValue() != 6
+                && fechaHora.getDayOfWeek().getValue() != 7
+                && horaCita.isBefore(LocalTime.of(7, 30))
+                && horaCita.isAfter(LocalTime.of(15, 30));
     }
 
 }

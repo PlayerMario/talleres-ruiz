@@ -2,6 +2,7 @@ package com.salesianostriana.dam.talleresruiz.repositories;
 
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

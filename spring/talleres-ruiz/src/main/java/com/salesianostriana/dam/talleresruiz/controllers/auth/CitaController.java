@@ -2,9 +2,7 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
-import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
-import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaViews;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.services.CitaService;
@@ -19,9 +17,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.UUID;
 
 @Validated
@@ -32,6 +34,7 @@ import java.util.UUID;
 public class CitaController {
 
     private final CitaService service;
+    private final CitaCreateMecanicoConverter citaCreateMecanicoConverter;
 
 
     @Operation(summary = "Obtener listado de citas")
@@ -168,4 +171,54 @@ public class CitaController {
         return CitaDtoConverter.ofDetails(service.mostrarCitaConChat(id));
     }
 
+    @Operation(summary = "Crear nueva cita")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cita creada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CitaDto.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "mecanico": "Mario Ruiz López",
+                                                    "cliente": "Manuel Delgado Hernández",
+                                                    "vehiculo": "Opel Astra-8520KMM",
+                                                    "fechaHora": "13-02-2023 16:00"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Cuerpo para la creación aportado inválido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "BAD_REQUEST",
+                                                    "message": "Error en la validación, compruebe la lista",
+                                                    "path": "/auth/cita/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "statusCode": 400,
+                                                    "date": "13/02/2023 12:51:39",
+                                                    "subErrors": [
+                                                        {
+                                                            "object": "citaCreateMecanico",
+                                                            "message": "No se encuentra el nombre de usuario",
+                                                            "field": "usernameCliente",
+                                                            "rejectedValue": "mdh111"
+                                                        }
+                                                    ]
+                                                }
+                                            """
+                            )}
+                    )})
+    })
+    @JsonView(CitaViews.Master.class)
+    @PostMapping("/{id}")
+    public ResponseEntity<CitaDto> crearCitaMec(@PathVariable UUID id, @Valid @RequestBody CitaCreateMecanico citaCreate) {
+        CitaDto newCita = CitaDtoConverter.of(service.add(citaCreateMecanicoConverter.toCita(id, citaCreate)));
+        URI newURI = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newCita.getId()).toUri();
+        return ResponseEntity.created(newURI).body(newCita);
+    }
 }

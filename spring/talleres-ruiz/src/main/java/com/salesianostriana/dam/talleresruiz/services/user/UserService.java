@@ -7,6 +7,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserPasswo
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ import java.util.UUID;
 public class UserService {
 
     private final PasswordEncoder passwordEncoder;
-
     private final UserRepository repository;
+
 
     public List<User> findAll() {
         return repository.findAll();
@@ -37,8 +38,9 @@ public class UserService {
         return repository.save(user);
     }
 
-    public Optional<User> findByUsername(String username) {
-        return repository.findFirstByUsername(username);
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        return repository.findFirstByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("No se encuentra al usuario: " + username));
     }
 
     public boolean existsEmail(String email) {

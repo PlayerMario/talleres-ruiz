@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +40,9 @@ public class Cita {
     @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name = "FK_CITA_CLIENTE"))
     private Cliente cliente;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate fecha = LocalDate.now();
-
-    @JsonFormat(pattern = "HH:mm")
-    private LocalTime hora = LocalTime.now();
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+    private LocalDateTime fechaHora;
+    //private LocalDate fecha = LocalDate.now();
 
     private String estado;
 
@@ -62,6 +61,14 @@ public class Cita {
 
     @JsonIgnore
     public static String hiddenFields = "id";
+
+
+    // CONSTRUCTORES
+    public Cita(Mecanico mecanico, Cliente cliente, LocalDateTime fechaHora) {
+        this.mecanico = mecanico;
+        this.cliente = cliente;
+        this.fechaHora = fechaHora;
+    }
 
 
     // HELPERS CITA-CLIENTE

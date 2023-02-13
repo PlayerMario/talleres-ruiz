@@ -14,7 +14,7 @@ public class CitaDtoConverter {
                 .mecanico(cita.getMecanico().getUsuario().getNombre())
                 .cliente(cita.getCliente().getUsuario().getNombre())
                 .vehiculo(cita.getCliente().getVehiculo() + "-" + cita.getCliente().getMatricula())
-                .fechaHora(cita.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " " + cita.getHora())
+                .fechaHora(cita.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
                 .estado(cita.getEstado())
                 .build();
     }
@@ -25,7 +25,7 @@ public class CitaDtoConverter {
                 .mecanico(cita.getMecanico().getUsuario().getNombre())
                 .cliente(cita.getCliente().getUsuario().getNombre())
                 .vehiculo(cita.getCliente().getVehiculo() + "-" + cita.getCliente().getMatricula())
-                .fechaHora(cita.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " " + cita.getHora())
+                .fechaHora(cita.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
                 .servicios(cita.getServicios())
                 .estado(cita.getEstado())
                 .imgVehiculo(cita.getImgVehiculo())
@@ -36,7 +36,7 @@ public class CitaDtoConverter {
     public static CitaDto toClienteDetalles(Cita cita) {
         return CitaDto.builder()
                 .mecanico(cita.getMecanico().getUsuario().getNombre())
-                .fechaHora(cita.getFecha() + " " + cita.getHora())
+                .fechaHora(cita.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
                 .servicios(cita.getServicios())
                 .estado(cita.getEstado())
                 .build();
