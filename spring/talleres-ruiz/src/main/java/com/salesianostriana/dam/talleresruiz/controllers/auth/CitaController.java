@@ -2,10 +2,15 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
+import com.salesianostriana.dam.talleresruiz.models.Cita;
+import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.services.CitaService;
+import com.salesianostriana.dam.talleresruiz.services.MecanicoService;
+import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,7 +39,9 @@ import java.util.UUID;
 public class CitaController {
 
     private final CitaService service;
-    private final CitaCreateMecanicoConverter citaCreateMecanicoConverter;
+    private final MecanicoService mecanicoService;
+    private final CitaConverter citaCreateMecanicoConverter;
+    private final UserService userService;
 
 
     @Operation(summary = "Obtener listado de citas")
@@ -182,7 +189,8 @@ public class CitaController {
                                                     "mecanico": "Mario Ruiz López",
                                                     "cliente": "Manuel Delgado Hernández",
                                                     "vehiculo": "Opel Astra-8520KMM",
-                                                    "fechaHora": "13-02-2023 16:00"
+                                                    "fechaHora": "13-02-2023 15:00",
+                                                    "estado": "Aceptada"
                                                 }
                                             """
                             )}
@@ -212,13 +220,114 @@ public class CitaController {
                     )})
     })
     @JsonView(CitaViews.Master.class)
-    @PostMapping("/{id}")
+    @PostMapping("/mecanico/{id}")
     public ResponseEntity<CitaDto> crearCitaMec(@PathVariable UUID id, @Valid @RequestBody CitaCreateMecanico citaCreate) {
+        mecanicoService.comprobarDisponibilidad(id, citaCreate.getFechaHora());
         CitaDto newCita = CitaDtoConverter.of(service.add(citaCreateMecanicoConverter.toCita(id, citaCreate)));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(newCita.getId()).toUri();
         return ResponseEntity.created(newURI).body(newCita);
+    }
+
+    @Operation(summary = "Modificar una cita")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cita modificada",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = CitaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "id": 27,
+                                                    "mecanico": "Mario Ruiz López",
+                                                    "cliente": "Manuel Ruiz Benavente",
+                                                    "vehiculo": "Toyota C-HR-7456BDX",
+                                                    "fechaHora": "13-02-2023 15:00",
+                                                    "servicios": [
+                                                        "Cambio aceite",
+                                                        "Cambio filtro aceite",
+                                                        "Cambio filtro aire",
+                                                        "Cambio filtro habitáculos",
+                                                        "Cambio filtro combustible",
+                                                        "Cambio distribución"
+                                                    ],
+                                                    "estado": "Terminada",
+                                                    "imgVehiculo": [],
+                                                    "chat": []
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Cuerpo para la modificación aportado inválido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "BAD_REQUEST",
+                                                    "message": "El mecánico asignado tiene ocupada ese día y hora",
+                                                    "path": "/auth/cita/mec/27",
+                                                    "statusCode": 400,
+                                                    "date": "13/02/2023 17:42:43"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Cita no encontrada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "NOT_FOUND",
+                                                    "message": "No se encuentra la cita con ID: 270",
+                                                    "path": "/auth/cita/mec/270",
+                                                    "statusCode": 404,
+                                                    "date": "13/02/2023 17:43:33"
+                                                }
+                                            """
+                            )}
+                    )})
+    })
+    @JsonView(CitaViews.DetallesCita.class)
+    @PutMapping("/mecanico/{id}")
+    public CitaDto modificarCita(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit) {
+        UUID idMecanico = userService.findByUsername(edit.getUsernameMecanico()).getId();
+        mecanicoService.comprobarDisponibilidad(idMecanico, edit.getFechaHora());
+        return CitaDtoConverter.ofDetails(service.edit(id, edit, mecanicoService.findById(idMecanico)));
+    }
+
+    @Operation(summary = "Eliminar una cita, buscada por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Cita eliminada correctamente, sin contenido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Cita.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {}
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "ID de la cita aportación inválido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "BAD_REQUEST",
+                                                    "message": "No se puede cancelar una cita en proceso de realización o ya terminada",
+                                                    "path": "/auth/cita/10",
+                                                    "statusCode": 400,
+                                                    "date": "13/02/2023 16:54:07"
+                                                }
+                                            """
+                            )}
+                    )})
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> cancelarCita(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

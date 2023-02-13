@@ -1,11 +1,14 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
+import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
+import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.MecanicoRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.mecanico.MecanicoSpecificationBuilder;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteria;
@@ -18,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +33,7 @@ public class MecanicoService {
     private final MecanicoDtoConverter converter;
     private final UserService userService;
     private final CitaService citaService;
+    private final CitaRepository citaRepository;
     private final MensajeService mensajeService;
 
     public List<Mecanico> findAll() {
@@ -67,8 +72,8 @@ public class MecanicoService {
     }
 
     public void delete(UUID id) {
-        Mecanico mec = this.findById(id);
         if (repository.existsById(id)) {
+            Mecanico mec = this.findById(id);
             citaService.setearNullMecanico(mec);
             mensajeService.setearNullAutor(mec.getUsuario());
             repository.deleteById(id);
@@ -84,6 +89,13 @@ public class MecanicoService {
         Page<MecanicoDto> resultDto = this.findAll(spec, pageable).map(converter::of);
 
         return new PageDto<MecanicoDto>(resultDto);
+    }
+
+    public void comprobarDisponibilidad(UUID id, LocalDateTime fechaHora) {
+        List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(this.findById(id), fechaHora);
+        if (!citas.isEmpty()) {
+            throw new MecanicoNoDisponible();
+        }
     }
 
 }

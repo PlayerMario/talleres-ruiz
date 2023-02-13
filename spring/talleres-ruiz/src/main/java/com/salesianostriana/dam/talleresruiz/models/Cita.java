@@ -64,10 +64,18 @@ public class Cita {
 
 
     // CONSTRUCTORES
-    public Cita(Mecanico mecanico, Cliente cliente, LocalDateTime fechaHora) {
+    public Cita(Mecanico mecanico, Cliente cliente, LocalDateTime fechaHora, String estado) {
         this.mecanico = mecanico;
         this.cliente = cliente;
         this.fechaHora = fechaHora;
+        this.estado = estado;
+    }
+
+    public Cita(Mecanico mecanico, LocalDateTime fechaHora, String estado, List<String> servicios) {
+        this.mecanico = mecanico;
+        this.fechaHora = fechaHora;
+        this.estado = estado;
+        this.servicios = servicios;
     }
 
 
