@@ -33,6 +33,11 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public User findByIdCheck(UUID id) {
+        return repository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("No se encuentra al usuario con ID: " + id));
+    }
+
     public User add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);

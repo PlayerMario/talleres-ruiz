@@ -24,10 +24,10 @@ public class CitaDto {
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String mecanico;
 
-    @JsonView({CitaViews.Master.class})
+    @JsonView(CitaViews.Master.class)
     private String cliente;
 
-    @JsonView({CitaViews.Master.class})
+    @JsonView(CitaViews.Master.class)
     private String vehiculo;
 
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
@@ -39,7 +39,7 @@ public class CitaDto {
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String estado;
 
-    @JsonView(CitaViews.DetallesCita.class)
+    @JsonView({CitaViews.DetallesCita.class, CitaViews.NuevaCitaCliente.class})
     private List<String> imgVehiculo;
 
     @JsonView(CitaViews.DetallesCita.class)

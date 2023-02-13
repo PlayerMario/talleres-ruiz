@@ -1,5 +1,8 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.ClienteNoDisponible;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
+import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
@@ -8,6 +11,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConver
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
+import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.ClienteRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.cliente.ClienteSpecificationBuilder;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteria;
@@ -22,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,6 +37,7 @@ public class ClienteService {
     private final ClienteRepository repository;
     private final UserService userService;
     private final ClienteDtoConverter converter;
+    private final CitaRepository citaRepository;
 
     public List<Cliente> findAll() {
         List<Cliente> result = repository.findAll();
@@ -107,4 +113,10 @@ public class ClienteService {
         return new PageDto<CitaDto>(resultDto);
     }
 
+    public void comprobarDisponibilidad(UUID id, LocalDateTime fechaHora) {
+        List<Cita> citas = citaRepository.findDistinctByClienteAndFechaHora(this.findById(id), fechaHora);
+        if (!citas.isEmpty()) {
+            throw new ClienteNoDisponible();
+        }
+    }
 }

@@ -9,12 +9,14 @@ import com.salesianostriana.dam.talleresruiz.validation.annotation.UniqueUsernam
 import com.salesianostriana.dam.talleresruiz.validation.annotation.VerificarPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.EnumSet;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

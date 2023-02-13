@@ -1,9 +1,10 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.CitaNoCancelable;
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.*;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
+import com.salesianostriana.dam.talleresruiz.models.Mensaje;
+import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaCreateCliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaEditMecanico;
@@ -23,6 +24,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -59,6 +61,9 @@ public class CitaService {
     public Cita edit(Long id, CitaEditMecanico edit, Mecanico mecanico) {
         return repository.findById(id)
                 .map(cita -> {
+                    if (Objects.equals(cita.getEstado(), "Proceso") || Objects.equals(cita.getEstado(), "Terminada")) {
+                        throw new CitaNoModificable();
+                    }
                     cita.setMecanico(mecanico);
                     cita.setFechaHora(edit.getFechaHora());
                     cita.setEstado(edit.getEstado());
@@ -66,6 +71,23 @@ public class CitaService {
                     return repository.save(cita);
                 }).orElseThrow(() ->
                         new EntityNotFoundException("No se encuentra la cita con ID: " + id));
+    }
+
+    public Cita editCliente(UUID idCliente, Long idCita, CitaCreateCliente edit) {
+        return repository.findById(idCita)
+                .map(cita -> {
+                    if (cita.getCliente().getId() != idCliente) {
+                        throw new CitaNoCliente();
+                    } else if (Objects.equals(cita.getEstado(), "Proceso") || Objects.equals(cita.getEstado(), "Terminada")) {
+                        throw new CitaNoModificable();
+                    } else if (Objects.equals(cita.getEstado(), "Aceptada")) {
+                        cita.setEstado("Trámite");
+                    }
+                    cita.setFechaHora(edit.getFechaHora());
+                    cita.setImgVehiculo(edit.getImgVehiculo());
+                    return repository.save(cita);
+                }).orElseThrow(() ->
+                        new EntityNotFoundException("No se encuentra la cita con ID: " + idCita));
     }
 
     public void delete(Long id) {
@@ -110,4 +132,13 @@ public class CitaService {
                 && !horaCita.isAfter(LocalTime.of(15, 30));
     }
 
+    public void comprobarEstadoAutor(Long idCita, UUID idAutor) {
+        Cita cita = this.findById(idCita);
+        if (!cita.getCliente().getId().equals(idAutor) && !cita.getMecanico().getId().equals(idAutor)) {
+            throw new MensajeNoAutor();
+        }
+        if (cita.getEstado().equalsIgnoreCase("Terminada")) {
+            throw new CitaNoModificable();
+        }
+    }
 }

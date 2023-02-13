@@ -29,7 +29,7 @@ public class MensajeDto {
     public static MensajeDto of(Mensaje mensaje) {
         return MensajeDto.builder()
                 .autor(mensaje.getAutor().getNombre())
-                .fechaHora(mensaje.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")))
+                .fechaHora(mensaje.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
                 .mensaje(mensaje.getMensaje())
                 .build();
     }

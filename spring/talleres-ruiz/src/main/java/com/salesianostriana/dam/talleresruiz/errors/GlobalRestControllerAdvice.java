@@ -37,7 +37,7 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({PasswordEqualException.class, OldPasswordEqualException.class, MecanicoNoDisponible.class, CitaNoCancelable.class})
+    @ExceptionHandler({PasswordEqualException.class, OldPasswordEqualException.class, MecanicoNoDisponible.class, ClienteNoDisponible.class, CitaNoCancelable.class, CitaNoModificable.class, CitaNoCliente.class, MensajeNoAutor.class})
     public ResponseEntity<?> handleSongPlaylistException(EntityNotFoundException exception, WebRequest request) {
         return buildApiError(exception.getMessage(), request, HttpStatus.BAD_REQUEST);
     }
@@ -72,13 +72,13 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
 
 
     // MANEJO ERRORES TOKEN
-    @ExceptionHandler({ AuthenticationException.class, UsernameNotFoundException.class })
+    @ExceptionHandler({AuthenticationException.class, UsernameNotFoundException.class})
     public ResponseEntity<?> handleAuthenticationException(WebRequest request) {
         return buildApiError("Usuario y/o contraseña incorrecta", request, HttpStatus.UNAUTHORIZED);
 
     }
 
-    @ExceptionHandler({ AccessDeniedException.class })
+    @ExceptionHandler({AccessDeniedException.class})
     public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
         return /*ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(*/buildApiError(ex.getMessage(), request, HttpStatus.FORBIDDEN);

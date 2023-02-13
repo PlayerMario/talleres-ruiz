@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.*;
@@ -27,6 +28,7 @@ public class Mensaje {
     private String mensaje;
 
     @ManyToOne
+    @JoinColumn(name = "cita_id", foreignKey = @ForeignKey(name = "FK_MENSAJE_CITA"))
     private Cita cita;
 
     @ManyToOne
@@ -36,10 +38,19 @@ public class Mensaje {
 
     @Builder.Default
     @Column(name = "fecha_hora")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHora = LocalDateTime.now();
 
     @JsonIgnore
     public static String hiddenFields = "id";
+
+
+    // CONSTRUCTOR
+    public Mensaje(String mensaje, Cita cita, User autor) {
+        this.mensaje = mensaje;
+        this.cita = cita;
+        this.autor = autor;
+    }
 
 
     // HELPERS MENSAJE-CITA

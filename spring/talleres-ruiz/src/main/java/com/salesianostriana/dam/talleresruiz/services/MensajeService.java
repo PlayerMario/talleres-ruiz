@@ -6,22 +6,14 @@ import com.salesianostriana.dam.talleresruiz.repositories.MensajeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class MensajeService {
 
     private final MensajeRepository repository;
 
-    public List<Mensaje> findAll() {
-        List<Mensaje> result = repository.findAll();
-        if (result.isEmpty()) {
-            throw new EntityNotFoundException("No existen mensajes");
-        }
-        return result;
+    public Mensaje add(Mensaje mensaje) {
+        return repository.save(mensaje);
     }
 
     public void setearNullAutor(User user) {

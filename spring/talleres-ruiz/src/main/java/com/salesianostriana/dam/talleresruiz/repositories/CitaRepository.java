@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.talleresruiz.repositories;
 
 import com.salesianostriana.dam.talleresruiz.models.Cita;
+import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,6 @@ public interface CitaRepository extends JpaRepository<Cita, Long>, JpaSpecificat
     Optional<Cita> findByIdChat(@Param("id") Long id);
 
     List<Cita> findDistinctByMecanicoAndFechaHora(Mecanico mec, LocalDateTime fechaHora);
+
+    List<Cita> findDistinctByClienteAndFechaHora(Cliente cliente, LocalDateTime fechaHora);
 }

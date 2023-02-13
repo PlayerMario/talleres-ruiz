@@ -42,7 +42,6 @@ public class Cita {
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHora;
-    //private LocalDate fecha = LocalDate.now();
 
     private String estado;
 
@@ -71,12 +70,20 @@ public class Cita {
         this.estado = estado;
     }
 
-    public Cita(Mecanico mecanico, LocalDateTime fechaHora, String estado, List<String> servicios) {
+    public Cita(Mecanico mecanico, Cliente cliente, LocalDateTime fechaHora, String estado, List<String> imgVehiculo) {
+        this.mecanico = mecanico;
+        this.cliente = cliente;
+        this.fechaHora = fechaHora;
+        this.estado = estado;
+        this.imgVehiculo = imgVehiculo;
+    }
+
+    /*public Cita(Mecanico mecanico, LocalDateTime fechaHora, String estado, List<String> servicios) {
         this.mecanico = mecanico;
         this.fechaHora = fechaHora;
         this.estado = estado;
         this.servicios = servicios;
-    }
+    }*/
 
 
     // HELPERS CITA-CLIENTE
