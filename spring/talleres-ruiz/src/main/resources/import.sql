@@ -104,3 +104,5 @@ insert into cita (id, mecanico_id, cliente_id, fecha, hora, estado) values (28, 
 
 
 insert into cliente (user_id, vehiculo, matricula) values ('76406075-be67-47f1-9f92-32388c019bb3', 'Opel Corsa', '5554CDD') -- cpl20 / cpl20
+
+ALTER SEQUENCE hibernate_sequence RESTART WITH 1000;

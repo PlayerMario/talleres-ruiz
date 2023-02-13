@@ -2,9 +2,7 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
-import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
-import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserCreate;

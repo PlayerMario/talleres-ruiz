@@ -3,6 +3,7 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cita;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
+import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,31 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CitaDto {
 
-    @JsonView(ClienteViews.DetallesClientes.class)
+    @JsonView(CitaViews.DetallesCita.class)
+    private Long id;
+
+    @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String mecanico;
-    @JsonView(ClienteViews.DetallesClientes.class)
+
+    @JsonView({CitaViews.Master.class})
+    private String cliente;
+
+    @JsonView({CitaViews.Master.class})
+    private String vehiculo;
+
+    @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String fechaHora;
-    @JsonView(ClienteViews.DetallesClientes.class)
+
+    @JsonView({ClienteViews.DetallesClientes.class, CitaViews.DetallesCita.class})
     private List<String> servicios;
-    @JsonView(ClienteViews.DetallesClientes.class)
+
+    @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String estado;
+
+    @JsonView(CitaViews.DetallesCita.class)
+    private List<String> imgVehiculo;
+
+    @JsonView(CitaViews.DetallesCita.class)
+    private List<MensajeDto> chat;
 
 }
