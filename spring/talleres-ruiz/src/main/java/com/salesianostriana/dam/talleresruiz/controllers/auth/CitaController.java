@@ -8,6 +8,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.cita.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.services.CitaService;
 import com.salesianostriana.dam.talleresruiz.services.ClienteService;
 import com.salesianostriana.dam.talleresruiz.services.MecanicoService;
@@ -25,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -277,13 +280,44 @@ public class CitaController {
                                                 }
                                             """
                             )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cita/cliente",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:24:58"
+                                                }
+                                            """
+                            )}
                     )})
     })
     @JsonView(CitaViews.NuevaCitaCliente.class)
-    @PostMapping("/cliente/{id}")
-    public ResponseEntity<CitaDto> crearCitaCliente(@PathVariable UUID id, @Valid @RequestBody CitaCreateCliente citaCreate) {
-        clienteService.comprobarDisponibilidad(id, citaCreate.getFechaHora());
-        CitaDto newCita = CitaDtoConverter.ofNuevaCliente(service.add(citaConverter.toCitaCliente(id, citaCreate)));
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/cliente")
+    public ResponseEntity<CitaDto> crearCitaCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateCliente citaCreate) {
+        clienteService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
+        CitaDto newCita = CitaDtoConverter.ofNuevaCliente(service.add(citaConverter.toCitaCliente(usuario.getId(), citaCreate)));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -474,6 +508,36 @@ public class CitaController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cita/cliente",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:24:58"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Cita no encontrada",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -491,10 +555,11 @@ public class CitaController {
                     )})
     })
     @JsonView(CitaViews.NuevaCitaCliente.class)
-    @PutMapping("/cliente/{idCliente}/{idCita}")
-    public CitaDto modificarCitaCliente(@PathVariable UUID idCliente, @PathVariable Long idCita, @Valid @RequestBody CitaCreateCliente edit) {
-        clienteService.comprobarDisponibilidad(idCliente, edit.getFechaHora());
-        return CitaDtoConverter.ofNuevaCliente(service.editCliente(idCliente, idCita, edit));
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("/cliente/{id}")
+    public CitaDto modificarCitaCliente(@AuthenticationPrincipal User usuario, @PathVariable Long id, @Valid @RequestBody CitaCreateCliente edit) {
+        clienteService.comprobarDisponibilidadModif(usuario.getId(), id, edit.getFechaHora());
+        return CitaDtoConverter.ofNuevaCliente(service.editCliente(usuario.getId(), id, edit));
     }
 
     @Operation(summary = "Eliminar una cita, buscada por su ID")

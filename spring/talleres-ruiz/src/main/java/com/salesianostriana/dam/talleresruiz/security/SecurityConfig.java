@@ -37,8 +37,8 @@ public class SecurityConfig {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         AuthenticationManager authenticationManager =
-            authenticationManagerBuilder.authenticationProvider(authenticationProvider())
-                    .build();
+                authenticationManagerBuilder.authenticationProvider(authenticationProvider())
+                        .build();
 
         return authenticationManager;
 
@@ -60,17 +60,17 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf().disable()
-                        .exceptionHandling()
-                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                .accessDeniedHandler(jwtAccessDeniedHandler)
-                        .and()
-                                .sessionManagement()
-                                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        .and()
-                                .authorizeRequests()
-                                //.antMatchers("/note/**").hasRole("USER")
-                                //.antMatchers("/auth/register/admin").hasRole("ADMIN")
-                                .anyRequest().authenticated();
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/user").hasAnyRole("ADMIN", "MEC", "CLIENTE")
+                .antMatchers("/auth/cliente/me/**", "/auth/cita/cliente/**").hasRole("CLIENTE")
+                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.headers().frameOptions().disable();
@@ -82,7 +82,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         // CAMBIAR EL /AUTH PARA PONERLO EN EL ANTERIOR BIEN
-        return (web -> web.ignoring().antMatchers("/h2-console/**", "/prueba/**", "/noauth/user/**", "/auth/**"));
+        return (web -> web.ignoring().antMatchers("/h2-console/**", "/noauth/user/**"));
     }
 
 

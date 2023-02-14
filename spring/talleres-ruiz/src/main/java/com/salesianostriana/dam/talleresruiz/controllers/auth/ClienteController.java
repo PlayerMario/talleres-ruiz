@@ -9,6 +9,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConver
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.services.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -22,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -192,6 +195,103 @@ public class ClienteController {
         return converter.of(service.mostrarClienteConCitas(id));
     }
 
+    @Operation(summary = "Obtener detalles de un cliente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Clientes encontrado",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ClienteDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
+                                                    "nombre": "Jose Javier Moriña León",
+                                                    "username": "jjml4",
+                                                    "dni": "52874103V",
+                                                    "email": "jj@jj.com",
+                                                    "tlf": "675 796 623",
+                                                    "avatar": "https://robohash.org/jjml4",
+                                                    "roles": [
+                                                        "CLIENTE"
+                                                    ],
+                                                    "vehiculo": "2014GMD-Kia Rio",
+                                                    "citas": [
+                                                        {
+                                                            "mecanico": "Mario Ruiz López",
+                                                            "fechaHora": "2023-01-18 12:00",
+                                                            "servicios": [
+                                                                "Cambio aceite",
+                                                                "Cambio filtro aceite"
+                                                            ],
+                                                            "estado": "Terminado"
+                                                        },
+                                                        {
+                                                            "mecanico": "Alejandro Santos Pacheco",
+                                                            "fechaHora": "2022-05-18 10:00",
+                                                            "servicios": [
+                                                                "Cambio neumáticos",
+                                                                "Cambio filtro aire",
+                                                                "Cambio filtro habitáculo"
+                                                            ],
+                                                            "estado": "Terminado"
+                                                        }
+                                                    ]
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Cliente no encontrado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "NOT_FOUND",
+                                                    "message": "No se encuentra al cliente con ID: d182a454-9998-4c82-a622-02d7bafc0379",
+                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379",
+                                                    "statusCode": 404,
+                                                    "date": "11/02/2023 14:59:58"
+                                                }
+                                            """
+                            )}
+                    )})
+    })
+    @JsonView(ClienteViews.DetallesClientes.class)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me")
+    public ClienteDto mostrarDetallesMe(@AuthenticationPrincipal User usuario) {
+        return converter.of(service.mostrarClienteConCitas(usuario.getId()));
+    }
+
     @Operation(summary = "Obtener citas de un cliente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Citas encontradas",
@@ -229,6 +329,36 @@ public class ClienteController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Cliente no encontrado o sin citas",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -245,11 +375,13 @@ public class ClienteController {
                             )}
                     )})
     })
-    @GetMapping("/{id}/citas")
+    @JsonView(ClienteViews.DetallesClientes.class)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me/citas")
     public PageDto<CitaDto> mostrarCitasCliente(
-            @PathVariable UUID id,
+            @AuthenticationPrincipal User usuario,
             @PageableDefault(size = 5, page = 0) Pageable pageable) {
-        return service.citasCliente(id, pageable);
+        return service.citasCliente(usuario.getId(), pageable);
     }
 
     @Operation(summary = "Modificar un cliente")
@@ -300,6 +432,36 @@ public class ClienteController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Cliente no encontrado",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -317,9 +479,10 @@ public class ClienteController {
                     )})
     })
     @JsonView(ClienteViews.Master.class)
-    @PutMapping("/{id}")
-    public ClienteDto modificarCliente(@PathVariable UUID id, @Valid @RequestBody ClienteEdit edit) {
-        return converter.of(service.edit(id, edit));
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("/me")
+    public ClienteDto modificarCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody ClienteEdit edit) {
+        return converter.of(service.edit(usuario.getId(), edit));
     }
 
     @Operation(summary = "Eliminar un cliente, buscado por su ID")
@@ -332,8 +495,89 @@ public class ClienteController {
                                                 {}
                                             """
                             )}
-                    )})})
-    @DeleteMapping("/{id}")
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
+    })
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/me")
+    public ResponseEntity<?> borrarClienteMe(@AuthenticationPrincipal User usuario) {
+        service.delete(usuario.getId());
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Eliminar un cliente, buscado por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Cliente eliminado correctamente, sin contenido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Cliente.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {}
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
+    })
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/{id}}")
     public ResponseEntity<?> borrarCliente(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

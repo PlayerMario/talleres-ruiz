@@ -14,15 +14,15 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PageDto<T> {
 
-    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class})
+    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private List<T> content;
-    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class})
+    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private Long totalElements;
-    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class})
+    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private int totalPages;
-    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class})
+    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private int number;
-    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class})
+    @JsonView({ClienteViews.Master.class, MecanicoViews.Master.class, CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private int size;
 
     public PageDto(Page<T> page) {

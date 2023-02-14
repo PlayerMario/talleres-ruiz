@@ -28,6 +28,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -113,10 +115,21 @@ public class ClienteService {
         return new PageDto<CitaDto>(resultDto);
     }
 
-    public void comprobarDisponibilidad(UUID id, LocalDateTime fechaHora) {
-        List<Cita> citas = citaRepository.findDistinctByClienteAndFechaHora(this.findById(id), fechaHora);
+    public void comprobarDisponibilidad(UUID idUs, LocalDateTime fechaHora) {
+        List<Cita> citas = citaRepository.findDistinctByClienteAndFechaHora(this.findById(idUs), fechaHora);
         if (!citas.isEmpty()) {
             throw new ClienteNoDisponible();
+        }
+    }
+
+    public void comprobarDisponibilidadModif(UUID idUs, Long idCita, LocalDateTime fechaHora) {
+        List<Cita> citas = citaRepository.findDistinctByClienteAndFechaHora(this.findById(idUs), fechaHora);
+        if (!citas.isEmpty()) {
+            citas.forEach(cita -> {
+                if (!Objects.equals(cita.getId(), idCita)) {
+                    throw new ClienteNoDisponible();
+                }
+            });
         }
     }
 }
