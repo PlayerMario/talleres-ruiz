@@ -105,6 +105,36 @@ public class ClienteController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "No existen clientes",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -169,6 +199,36 @@ public class ClienteController {
                                                             "estado": "Terminado"
                                                         }
                                                     ]
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
                                                 }
                                             """
                             )}
@@ -577,7 +637,7 @@ public class ClienteController {
                     )}),
     })
     @PreAuthorize("isAuthenticated()")
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarCliente(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/user").hasAnyRole("ADMIN", "MEC", "CLIENTE")
                 .antMatchers("/auth/cliente/me/**", "/auth/cita/cliente/**").hasRole("CLIENTE")
+                .antMatchers("/auth/cliente/", "/auth/cliente/{id}").hasAnyRole("ADMIN", "MEC")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
