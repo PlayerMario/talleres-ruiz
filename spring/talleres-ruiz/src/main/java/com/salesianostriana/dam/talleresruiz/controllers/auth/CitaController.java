@@ -105,6 +105,36 @@ public class CitaController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "No existen citas",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -133,7 +163,7 @@ public class CitaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cita encontrada",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CitaDto.class)),
+                            schema = @Schema(implementation = CitaDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -160,6 +190,36 @@ public class CitaController {
                                                             "mensaje": "Hola, en principio no se lo cambiéis, esperaré a más adelante."
                                                         }
                                                     ]
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
                                                 }
                                             """
                             )}
@@ -225,13 +285,44 @@ public class CitaController {
                                                 }
                                             """
                             )}
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
     })
     @JsonView(CitaViews.Master.class)
-    @PostMapping("/mecanico/{id}")
-    public ResponseEntity<CitaDto> crearCitaMec(@PathVariable UUID id, @Valid @RequestBody CitaCreateMecanico citaCreate) {
-        mecanicoService.comprobarDisponibilidad(id, citaCreate.getFechaHora());
-        CitaDto newCita = CitaDtoConverter.of(service.add(citaConverter.toCitaMecanico(id, citaCreate)));
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/mecanico/me")
+    public ResponseEntity<CitaDto> crearCitaMec(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateMecanico citaCreate) {
+        mecanicoService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
+        CitaDto newCita = CitaDtoConverter.of(service.add(citaConverter.toCitaMecanico(usuario.getId(), citaCreate)));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -329,7 +420,7 @@ public class CitaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Mensaje agregado a la cita",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CitaDto.class)),
+                            schema = @Schema(implementation = CitaDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -381,6 +472,36 @@ public class CitaController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Cita no encontrada",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -398,11 +519,12 @@ public class CitaController {
                     )})
     })
     @JsonView(CitaViews.DetallesCita.class)
-    @PostMapping("/{idCita}/mensaje/{idAutor}")
-    public CitaDto nuevoMensaje(@PathVariable Long idCita, @PathVariable UUID idAutor, @Valid @RequestBody MensajeCreate mensajeCreate) {
-        service.comprobarEstadoAutor(idCita, idAutor);
-        mensajeService.add(mensajeConverter.toMensaje(idCita, idAutor, mensajeCreate));
-        return CitaDtoConverter.ofDetails(service.mostrarCitaConChat(idCita));
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{id}/mensaje")
+    public CitaDto nuevoMensaje(@PathVariable Long id, @AuthenticationPrincipal User usuario, @Valid @RequestBody MensajeCreate mensajeCreate) {
+        service.comprobarEstadoAutor(id, usuario.getId());
+        mensajeService.add(mensajeConverter.toMensaje(id, usuario.getId(), mensajeCreate));
+        return CitaDtoConverter.ofDetails(service.mostrarCitaConChat(id));
     }
 
 
@@ -410,7 +532,7 @@ public class CitaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cita modificada",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CitaDto.class)),
+                            schema = @Schema(implementation = CitaDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -449,6 +571,36 @@ public class CitaController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Cita no encontrada",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -469,7 +621,7 @@ public class CitaController {
     @PutMapping("/mecanico/{id}")
     public CitaDto modificarCitaMec(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit) {
         UUID idMecanico = userService.findByUsername(edit.getUsernameMecanico()).getId();
-        mecanicoService.comprobarDisponibilidad(idMecanico, edit.getFechaHora());
+        mecanicoService.comprobarDisponibilidadModif(idMecanico, id, edit.getFechaHora());
         return CitaDtoConverter.ofDetails(service.edit(id, edit, mecanicoService.findById(idMecanico)));
     }
 
@@ -477,7 +629,7 @@ public class CitaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cita modificada",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CitaDto.class)),
+                            schema = @Schema(implementation = CitaDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -587,7 +739,37 @@ public class CitaController {
                                                 }
                                             """
                             )}
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> cancelarCita(@PathVariable Long id) {

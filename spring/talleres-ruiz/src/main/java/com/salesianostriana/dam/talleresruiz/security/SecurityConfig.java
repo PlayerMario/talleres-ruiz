@@ -68,10 +68,11 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/user/**").hasAnyRole("ADMIN", "MEC", "CLIENTE")
+                .antMatchers("/auth/user/**", "/auth/cita/{id}/mensaje").hasAnyRole("ADMIN", "MEC", "CLIENTE")
                 .antMatchers("/auth/cliente/me/**", "/auth/cita/cliente/**").hasRole("CLIENTE")
-                .antMatchers("/auth/cliente/", "/auth/cliente/{id}", "/auth/mecanico/", "/auth/cita/", "/auth/mecanico/me", "/auth/cita/{id}").hasAnyRole("ADMIN", "MEC")
-                .antMatchers("/auth/mecanico/{id}").hasRole("ADMIN")
+                .antMatchers("/auth/cliente/", "/auth/cliente/{id}", "/auth/mecanico/", "/auth/cita/",
+                        "/auth/mecanico/me", "/auth/cita/{id}", "/auth/cita/mecanico/{id}").hasAnyRole("ADMIN", "MEC")
+                .antMatchers("/auth/mecanico/{id}", "/auth/mecanico/admin", "/auth/mecanico/mec").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -83,8 +84,8 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        // CAMBIAR EL /AUTH PARA PONERLO EN EL ANTERIOR BIEN
-        return (web -> web.ignoring().antMatchers("/h2-console/**", "/noauth/user/**"));
+        return (web -> web.ignoring().antMatchers("/h2-console/**", "/noauth/user/**",
+                "/swagger-talleres-ruiz.html", "/talleres-ruiz", "/swagger-ui/index.html"));
     }
 
 

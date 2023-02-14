@@ -144,7 +144,7 @@ public class MecanicoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Mecánico encontrado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = MecanicoDto.class)),
+                            schema = @Schema(implementation = MecanicoDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -219,7 +219,7 @@ public class MecanicoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Mecánico encontrado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = MecanicoDto.class)),
+                            schema = @Schema(implementation = MecanicoDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -337,7 +337,37 @@ public class MecanicoController {
                                                 }
                                             """
                             )}
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
     })
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @PostMapping("/admin")
@@ -396,7 +426,37 @@ public class MecanicoController {
                                                 }
                                             """
                             )}
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Debe loguearse para poder acceder",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "14/02/2023 08:48:53"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/cliente/me",
+                                                    "statusCode": 403,
+                                                    "date": "14/02/2023 09:00:35"
+                                                }
+                                            """
+                            )}
+                    )}),
     })
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @PostMapping("/mec")
@@ -415,7 +475,7 @@ public class MecanicoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Mecánico modificado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = MecanicoDto.class)),
+                            schema = @Schema(implementation = MecanicoDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -457,6 +517,36 @@ public class MecanicoController {
                                             """
                             )}
                     )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
             @ApiResponse(responseCode = "404", description = "Mecánico no encontrado",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
@@ -489,7 +579,53 @@ public class MecanicoController {
                                                 {}
                                             """
                             )}
-                    )})})
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Cuerpo para la eliminación aportado inválido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "BAD_REQUEST",
+                                                    "message": "No se puede puede borrar un admin",
+                                                    "path": "/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "statusCode": 400,
+                                                    "date": "14/02/2023 17:03:20"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Operación no autorizada",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "UNAUTHORIZED",
+                                                    "message": "Usuario y/o contraseña incorrecta",
+                                                    "path": "/error",
+                                                    "statusCode": 401,
+                                                    "date": "12/02/2023 12:53:44"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "FORBIDDEN",
+                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
+                                                    "path": "/auth/user/changePsw",
+                                                    "statusCode": 403,
+                                                    "date": "12/02/2023 12:12:49"
+                                                }
+                                            """
+                            )}
+                    )}),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarMecanico(@PathVariable UUID id) {
         service.delete(id);

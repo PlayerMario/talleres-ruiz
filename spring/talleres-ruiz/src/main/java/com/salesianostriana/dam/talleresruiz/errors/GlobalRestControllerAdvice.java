@@ -37,7 +37,9 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({PasswordEqualException.class, OldPasswordEqualException.class, MecanicoNoDisponible.class, ClienteNoDisponible.class, CitaNoCancelable.class, CitaNoModificable.class, CitaNoCliente.class, MensajeNoAutor.class})
+    @ExceptionHandler({PasswordEqualException.class, OldPasswordEqualException.class, MecanicoNoDisponible.class,
+            ClienteNoDisponible.class, CitaNoCancelable.class, CitaNoModificable.class, CitaNoCliente.class,
+            MensajeNoAutor.class, BorrarAdminException.class})
     public ResponseEntity<?> handleSongPlaylistException(EntityNotFoundException exception, WebRequest request) {
         return buildApiError(exception.getMessage(), request, HttpStatus.BAD_REQUEST);
     }

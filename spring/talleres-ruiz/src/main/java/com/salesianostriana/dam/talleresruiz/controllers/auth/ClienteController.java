@@ -163,7 +163,7 @@ public class ClienteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Clientes encontrado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ClienteDto.class)),
+                            schema = @Schema(implementation = ClienteDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -259,7 +259,7 @@ public class ClienteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Clientes encontrado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ClienteDto.class)),
+                            schema = @Schema(implementation = ClienteDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -448,7 +448,7 @@ public class ClienteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Clientes modificado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ClienteDto.class)),
+                            schema = @Schema(implementation = ClienteDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
@@ -636,7 +636,6 @@ public class ClienteController {
                             )}
                     )}),
     })
-    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarCliente(@PathVariable UUID id) {
         service.delete(id);

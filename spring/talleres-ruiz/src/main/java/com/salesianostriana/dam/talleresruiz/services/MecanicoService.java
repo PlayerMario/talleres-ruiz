@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.BorrarAdminException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.ClienteNoDisponible;
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
@@ -7,6 +9,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
+import com.salesianostriana.dam.talleresruiz.models.user.Roles;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.MecanicoRepository;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -74,9 +78,13 @@ public class MecanicoService {
     public void delete(UUID id) {
         if (repository.existsById(id)) {
             Mecanico mec = this.findById(id);
-            citaService.setearNullMecanico(mec);
-            mensajeService.setearNullAutor(mec.getUsuario());
-            repository.deleteById(id);
+            if (!mec.getUsuario().getRoles().contains(Roles.ADMIN)) {
+                citaService.setearNullMecanico(mec);
+                mensajeService.setearNullAutor(mec.getUsuario());
+                repository.deleteById(id);
+            } else {
+                throw new BorrarAdminException();
+            }
         }
     }
 
@@ -95,6 +103,17 @@ public class MecanicoService {
         List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(this.findById(id), fechaHora);
         if (!citas.isEmpty()) {
             throw new MecanicoNoDisponible();
+        }
+    }
+
+    public void comprobarDisponibilidadModif(UUID idUs, Long idCita, LocalDateTime fechaHora) {
+        List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(this.findById(idUs), fechaHora);
+        if (!citas.isEmpty()) {
+            citas.forEach(cita -> {
+                if (!Objects.equals(cita.getId(), idCita)) {
+                    throw new ClienteNoDisponible();
+                }
+            });
         }
     }
 
