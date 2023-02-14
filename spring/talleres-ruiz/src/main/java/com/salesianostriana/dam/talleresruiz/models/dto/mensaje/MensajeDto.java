@@ -1,13 +1,13 @@
 package com.salesianostriana.dam.talleresruiz.models.dto.mensaje;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.salesianostriana.dam.talleresruiz.models.Mensaje;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaViews;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Data
@@ -26,12 +26,10 @@ public class MensajeDto {
     private String mensaje;
 
 
-    public static MensajeDto of(Mensaje mensaje) {
-        return MensajeDto.builder()
-                .autor(mensaje.getAutor().getNombre())
-                .fechaHora(mensaje.getFechaHora().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
-                .mensaje(mensaje.getMensaje())
-                .build();
+    public MensajeDto(String autor, LocalDateTime fechaHora, String mensaje) {
+        this.autor = autor;
+        this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.mensaje = mensaje;
     }
 
 }

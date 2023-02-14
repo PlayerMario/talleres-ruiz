@@ -16,8 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +33,7 @@ public class UserController {
 
     @Operation(summary = "Modificar la contraseña de un usuario")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario modificado",
+            @ApiResponse(responseCode = "200", description = "Contraseña del usuario modificada",
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = UserDto.class)),
                             examples = {@ExampleObject(
@@ -114,12 +112,12 @@ public class UserController {
     @JsonView(UserViews.Master.class)
     @PutMapping("/changePsw")
     public UserDto changePsw(@Valid @RequestBody UserPassword userPassword, @AuthenticationPrincipal User usuario) {
-        return UserDto.of(service.editPassword(usuario.getId(), userPassword));
+        return service.generarUserDto(service.editPassword(usuario.getId(), userPassword));
     }
 
-    @Operation(summary = "Modificar la contraseña de un usuario")
+    @Operation(summary = "Modificar el avatar de un usuario")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario modificado",
+            @ApiResponse(responseCode = "200", description = "Avatar del usuario modificado",
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = UserDto.class)),
                             examples = {@ExampleObject(

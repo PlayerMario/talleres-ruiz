@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserViews;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserLogin;
-import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserToken;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.security.jwtoken.access.JwtProvider;
 import com.salesianostriana.dam.talleresruiz.services.ClienteService;
@@ -42,7 +42,6 @@ public class UserNoAuthController {
 
     private final UserService userService;
     private final ClienteService clienteService;
-    private final ClienteDtoConverter converter;
     private final AuthenticationManager authManager;
     private final JwtProvider tokenProvider;
 
@@ -94,7 +93,8 @@ public class UserNoAuthController {
     @PostMapping("/register")
     public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody ClienteCreate nuevoCliente) {
         User user = userService.add(nuevoCliente.toUserCliente(nuevoCliente));
-        ClienteDto newCliente = converter.of(clienteService.add(nuevoCliente.toCliente(nuevoCliente), user));
+        ClienteDto newCliente = clienteService.generarClienteDto(clienteService.add(nuevoCliente
+                .toCliente(nuevoCliente), user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -107,19 +107,15 @@ public class UserNoAuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuario logueado",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserToken.class),
+                            schema = @Schema(implementation = UserDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "nombre": "Mario Ruiz López",
                                                     "username": "mrl26",
                                                     "avatar": "https://robohash.org/mrl26",
-                                                    "nombre": "Mario Ruiz López",
-                                                    "createdAt": "10/02/2023 00:00:00",
-                                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzZTM4MGQ1N
-                                                    C04NjFjLTQ4MDktYmI4NC1iZDMyYmFiNDJjMmUiLCJpYXQiOjE2NzYxMTg5NjIsImV4c
-                                                    CI6MTY3NjExOTAyMn0.l9NXClujUbApqcG-MklktdYdVL6KAvPq2IiSovoAPsgvrrfb1
-                                                    cwVDRnbqLYyH8fP373X7JgW-w_BUeJVgTwpCg"
+                                                    "token": "..."
                                                 }
                                             """
                             )}
@@ -163,14 +159,15 @@ public class UserNoAuthController {
                             )}
                     )})
     })
+    @JsonView(UserViews.Master.class)
     @PostMapping("/login")
-    public ResponseEntity<UserToken> login(@Valid @RequestBody UserLogin userLogin) {
+    public ResponseEntity<UserDto> login(@Valid @RequestBody UserLogin userLogin) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userLogin.getUsername(), userLogin.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(auth);
         String token = tokenProvider.generateToken(auth);
         User user = (User) auth.getPrincipal();
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserToken.of(user, token));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.generarUserDtoToken(user, token));
     }
 
 }

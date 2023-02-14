@@ -2,6 +2,7 @@ package com.salesianostriana.dam.talleresruiz.services.user;
 
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.OldPasswordEqualException;
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.PasswordEqualException;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserPassword;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
@@ -48,6 +49,11 @@ public class UserService {
                 new UsernameNotFoundException("No se encuentra al usuario: " + username));
     }
 
+    public User findByDni(String dni) {
+        return repository.findByDni(dni).orElseThrow(() ->
+                new EntityNotFoundException("No se encuentra al usuario"));
+    }
+
     public boolean existsEmail(String email) {
         return repository.existsByEmail(email);
     }
@@ -56,12 +62,12 @@ public class UserService {
         return repository.existsByTlf(tlf);
     }
 
-    public boolean existsUsername(String username) {
-        return repository.existsByUsername(username);
-    }
-
     public boolean existsDNI(String dni) {
         return repository.existsByDni(dni);
+    }
+
+    public boolean existsUsername(String username) {
+        return repository.existsByUsername(username);
     }
 
     public User editUser(UUID id, UserEdit edit) {
@@ -97,5 +103,14 @@ public class UserService {
         }
     }
 
+    public UserDto generarUserDto(User usuario) {
+        return repository.generarUserDto(usuario.getId());
+    }
+
+    public UserDto generarUserDtoToken(User usuario, String token) {
+        UserDto userDto = repository.generarUserDto(usuario.getId());
+        userDto.setToken(token);
+        return userDto;
+    }
 
 }

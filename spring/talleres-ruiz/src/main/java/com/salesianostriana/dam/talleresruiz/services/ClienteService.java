@@ -1,13 +1,10 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.ClienteNoDisponible;
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
@@ -27,10 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +32,8 @@ public class ClienteService {
 
     private final ClienteRepository repository;
     private final UserService userService;
-    private final ClienteDtoConverter converter;
     private final CitaRepository citaRepository;
+    private final CitaService citaService;
 
     public List<Cliente> findAll() {
         List<Cliente> result = repository.findAll();
@@ -90,12 +84,9 @@ public class ClienteService {
 
     public PageDto<ClienteDto> paginarFiltrarClientes(String search, Pageable pageable) {
         List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
-
         ClienteSpecificationBuilder clienteSpecification = new ClienteSpecificationBuilder(params);
         Specification<Cliente> spec = clienteSpecification.build();
-
-        Page<ClienteDto> resultDto = this.findAll(spec, pageable).map(converter::of);
-
+        Page<ClienteDto> resultDto = this.findAll(spec, pageable).map(this::generarClienteDto);
         return new PageDto<ClienteDto>(resultDto);
     }
 
@@ -107,7 +98,7 @@ public class ClienteService {
 
     public PageDto<CitaDto> citasCliente(UUID id, Pageable pageable) {
         List<CitaDto> citas = this.findById(id).getCitas()
-                .stream().map(CitaDtoConverter::toClienteDetalles).toList();
+                .stream().map(citaService::generarCitaDto).toList();
         if (citas.isEmpty()) {
             throw new EntityNotFoundException("No existen citas del cliente");
         }
@@ -131,5 +122,17 @@ public class ClienteService {
                 }
             });
         }
+    }
+
+    public ClienteDto generarClienteDto(Cliente cliente) {
+        List<String> roles = new ArrayList<>();
+
+        cliente.getUsuario().getRoles().forEach(rol -> {
+            roles.add(rol.name());
+        });
+        ClienteDto clienteDto = repository.generarClienteDto(cliente.getId());
+        clienteDto.setRoles(roles);
+        clienteDto.setCitas(cliente.getCitas().stream().map(citaService::generarCitaDto).toList());
+        return clienteDto;
     }
 }

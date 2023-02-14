@@ -3,13 +3,12 @@ package com.salesianostriana.dam.talleresruiz.services;
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.*;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
-import com.salesianostriana.dam.talleresruiz.models.Mensaje;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaCreateCliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaEditMecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
+import com.salesianostriana.dam.talleresruiz.repositories.MensajeRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.cita.CitaSpecificationBuilder;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteria;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteriaExtractor;
@@ -32,6 +31,7 @@ import java.util.UUID;
 public class CitaService {
 
     private final CitaRepository repository;
+    private final MensajeRepository mensajeRepository;
 
     public List<Cita> findAll() {
         List<Cita> result = repository.findAll();
@@ -113,7 +113,7 @@ public class CitaService {
         CitaSpecificationBuilder citaSpecification = new CitaSpecificationBuilder(params);
         Specification<Cita> spec = citaSpecification.build();
 
-        Page<CitaDto> resultDto = this.findAll(spec, pageable).map(CitaDtoConverter::of);
+        Page<CitaDto> resultDto = this.findAll(spec, pageable).map(this::generarCitaDto);
 
         return new PageDto<CitaDto>(resultDto);
     }
@@ -140,5 +140,35 @@ public class CitaService {
         if (cita.getEstado().equalsIgnoreCase("Terminada")) {
             throw new CitaNoModificable();
         }
+    }
+
+    public CitaDto generarCitaDto(Cita cita) {
+        CitaDto citaDto = repository.generarCitaDto(cita.getId());
+        citaDto.setMecanico(cita.getMecanico() != null ? cita.getMecanico().getUsuario().getNombre() : "Por asignar");
+        if(!cita.getServicios().isEmpty()) {
+            citaDto.setServicios(cita.getServicios());
+        }
+        return citaDto;
+    }
+
+    public CitaDto generarCitaDtoDetails(Cita cita) {
+        CitaDto citaDto = repository.generarCitaDtoDetails(cita.getId());
+        citaDto.setServicios(cita.getServicios());
+        citaDto.setImgVehiculo(cita.getImgVehiculo());
+        if (!cita.getChat().isEmpty()) {
+            citaDto.setChat(mensajeRepository.generarChatDto(cita.getId()));
+        }
+        return citaDto;
+    }
+
+    public CitaDto citaCliente(Cita cita) {
+        CitaDto citaDto = generarCitaDto(cita);
+        if (cita.getMecanico() == null) {
+            citaDto.setMecanico("Por asignar");
+        } else {
+            citaDto.setMecanico(cita.getMecanico().getUsuario().getNombre());
+        }
+        citaDto.setImgVehiculo(cita.getImgVehiculo());
+        return citaDto;
     }
 }

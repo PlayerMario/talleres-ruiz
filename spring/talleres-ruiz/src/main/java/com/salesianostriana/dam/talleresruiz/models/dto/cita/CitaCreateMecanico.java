@@ -2,7 +2,7 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cita;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.salesianostriana.dam.talleresruiz.validation.annotation.CheckCitaDateHour;
-import com.salesianostriana.dam.talleresruiz.validation.annotation.UsernameExists;
+import com.salesianostriana.dam.talleresruiz.validation.annotation.UserDniExists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 @Builder
 public class CitaCreateMecanico {
 
-    @UsernameExists(message = "{citaCreate.usernameCliente.usernameexists}")
-    @NotEmpty(message = "{citaCreate.usernameCliente.notempty}")
-    private String usernameCliente;
+    @UserDniExists(message = "{citaCreate.dni.userdniexists}")
+    @NotEmpty(message = "{citaCreate.dni.notempty}")
+    private String dni;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     @CheckCitaDateHour(message = "{citaCreate.fecha.checkcitadatehour}")

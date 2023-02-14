@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "8cce2fa3-976a-4a47-9204-af1b87fbd8fe",
+		"name": "TalleresRuiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23783353"
+	},
+	"item": [
+		{
+			"name": "NoAuth",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Crear Usuario Cliente",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"playermario\",\r\n    \"password\": \"1aA_aaaaaaa\",\r\n    \"verifyPassword\": \"1aA_aaaaaaa\",\r\n    \"dni\": \"11111111A\",\r\n    \"nombre\": \"Mario Ruiz López\",\r\n    \"email\": \"m@m.com\",\r\n    \"tlf\": \"111 222 333\",\r\n    \"vehiculo\": \"Renault Clio\",\r\n    \"matricula\": \"1111AAA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/noauth/user/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"noauth",
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var json = pm.response.json();\r",
+											"pm.collectionVariables.set(\"token\", json.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"mrl26\",\r\n    \"password\": \"admin1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/noauth/user/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"noauth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Cambiar Contraseña",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"admin1234\",\r\n    \"newPassword\": \"1aA_aaaaaaa\",\r\n    \"verifyNewPassword\": \"1aA_aaaaaaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/user/changePsw",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"user",
+										"changePsw"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cliente",
+					"item": [
+						{
+							"name": "Listado Clientes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalles Me",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Citas Cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/me/citas",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"me",
+										"citas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalles Cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379a",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"d182a454-9998-4c82-a622-2d7bafc0379a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Bartolomé Méndez Zuluaga\",\r\n    \"email\": \"bart@bart.com\",\r\n    \"tlf\": \"777 888 999\",\r\n    \"vehiculo\": \"Ford Mondeo\",\r\n    \"matricula\": \"2036VFH\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar Cliente Me",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar Cliente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379a",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cliente",
+										"d182a454-9998-4c82-a622-2d7bafc0379a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mecánico",
+					"item": [
+						{
+							"name": "Listado Mecánicos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalles Me",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalles Mecánico",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2e",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"3e380d54-861c-4809-bb84-bd32bab42c2e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Usuario Administrador",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"fjqm23\",\r\n    \"password\": \"1aA_aaaaaaa\",\r\n    \"verifyPassword\": \"1aA_aaaaaaa\",\r\n    \"dni\": \"65852014C\",\r\n    \"nombre\": \"Francisco Javier Quirón Martín\",\r\n    \"email\": \"javi@javi.com\",\r\n    \"tlf\": \"690 975 563\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/admin",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Usuario Mecánico",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"icb9\",\r\n    \"password\": \"1aA_aaaaaaa\",\r\n    \"verifyPassword\": \"1aA_aaaaaaa\",\r\n    \"dni\": \"36520148V\",\r\n    \"nombre\": \"Ismael Collado Bernal\",\r\n    \"email\": \"isma@isma.com\",\r\n    \"tlf\": \"643 980 764\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/mec",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"mec"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Mecánico",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Bartolomé Méndez Zuluaga\",\r\n    \"email\": \"bart@bart.com\",\r\n    \"tlf\": \"777 888 999\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2e",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"3e380d54-861c-4809-bb84-bd32bab42c2e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar Mecánico",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/mecanico/43dc49e5-7cb2-461a-8ed4-e0f36c696b73",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"mecanico",
+										"43dc49e5-7cb2-461a-8ed4-e0f36c696b73"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cita",
+					"item": [
+						{
+							"name": "Listado Citas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalles Cita",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/23",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"23"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Cita Vista Mecánico",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dni\": \"29556486K\",\r\n    \"fechaHora\": \"13-02-2023 15:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/mecanico/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"mecanico",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Cita Vista Mecánico",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usernameMecanico\": \"mrl26\",\r\n    \"fechaHora\": \"13-02-2023 15:00\",\r\n    \"estado\": \"Terminada\",\r\n    \"servicios\": [\r\n        \"Cambio aceite\",\r\n        \"Cambio filtro aceite\",\r\n        \"Cambio filtro aire\",\r\n        \"Cambio filtro habitáculos\",\r\n        \"Cambio filtro combustible\",\r\n        \"Cambio distribución\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/mecanico/27",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"mecanico",
+										"27"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Cita Vista Cliente",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fechaHora\": \"13-02-2023 15:00\",\r\n    \"imgVehiculo\": [\r\n        \"https://phantom-marca.unidadeditorial.es/ae9424b2868ca7badbfc52442ed5fefc/resize/1320/f/jpg/assets/multimedia/imagenes/2021/05/10/16206380603818.jpg\",\r\n        \"https://i.ytimg.com/vi/VaVWYF7mZxY/maxresdefault.jpg\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/cliente",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Cita Vista Cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fechaHora\": \"13-02-2023 15:00\",\r\n    \"imgVehiculo\": [\r\n        \"https://i.ytimg.com/vi/VaVWYF7mZxY/maxresdefault.jpg\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/cliente/23",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"cliente",
+										"23"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar Cita",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/23",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"23"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mensaje",
+					"item": [
+						{
+							"name": "Agregar Mensaje Chat",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mensaje\": \"Hay que cambiar las pastillas de freno.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/cita/23/mensaje",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"cita",
+										"23",
+										"mensaje"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

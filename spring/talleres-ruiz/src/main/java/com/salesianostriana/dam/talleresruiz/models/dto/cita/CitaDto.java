@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -44,5 +46,22 @@ public class CitaDto {
 
     @JsonView(CitaViews.DetallesCita.class)
     private List<MensajeDto> chat;
+
+
+    public CitaDto(String cliente, String vehiculo, LocalDateTime fechaHora, String estado) {
+        this.cliente = cliente;
+        this.vehiculo = vehiculo;
+        this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.estado = estado;
+    }
+
+    public CitaDto(Long id, String mecanico, String cliente, String vehiculo, LocalDateTime fechaHora, String estado) {
+        this.id = id;
+        this.mecanico = mecanico;
+        this.cliente = cliente;
+        this.vehiculo = vehiculo;
+        this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.estado = estado;
+    }
 
 }

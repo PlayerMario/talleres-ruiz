@@ -5,7 +5,6 @@ import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
-import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDtoConverter;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
@@ -21,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,7 +39,6 @@ import java.util.UUID;
 public class ClienteController {
 
     private final ClienteService service;
-    private final ClienteDtoConverter converter;
 
 
     @Operation(summary = "Obtener listado de clientes")
@@ -161,7 +160,7 @@ public class ClienteController {
 
     @Operation(summary = "Obtener detalles de un cliente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clientes encontrado",
+            @ApiResponse(responseCode = "200", description = "Cliente encontrado",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ClienteDto.class),
                             examples = {@ExampleObject(
@@ -252,12 +251,12 @@ public class ClienteController {
     @JsonView(ClienteViews.DetallesClientes.class)
     @GetMapping("/{id}")
     public ClienteDto mostrarDetallesCliente(@PathVariable UUID id) {
-        return converter.of(service.mostrarClienteConCitas(id));
+        return service.generarClienteDto(service.mostrarClienteConCitas(id));
     }
 
-    @Operation(summary = "Obtener detalles de un cliente")
+    @Operation(summary = "Obtener detalles del cliente logueado")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Clientes encontrado",
+            @ApiResponse(responseCode = "200", description = "Detalles encontrados",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ClienteDto.class),
                             examples = {@ExampleObject(
@@ -277,22 +276,22 @@ public class ClienteController {
                                                     "citas": [
                                                         {
                                                             "mecanico": "Mario Ruiz López",
-                                                            "fechaHora": "2023-01-18 12:00",
+                                                            "fechaHora": "18-01-2023 12:00",
                                                             "servicios": [
                                                                 "Cambio aceite",
                                                                 "Cambio filtro aceite"
                                                             ],
-                                                            "estado": "Terminado"
+                                                            "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
-                                                            "fechaHora": "2022-05-18 10:00",
+                                                            "fechaHora": "18-05-2022 10:00",
                                                             "servicios": [
                                                                 "Cambio neumáticos",
                                                                 "Cambio filtro aire",
                                                                 "Cambio filtro habitáculo"
                                                             ],
-                                                            "estado": "Terminado"
+                                                            "estado": "Terminada"
                                                         }
                                                     ]
                                                 }
@@ -349,12 +348,12 @@ public class ClienteController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public ClienteDto mostrarDetallesMe(@AuthenticationPrincipal User usuario) {
-        return converter.of(service.mostrarClienteConCitas(usuario.getId()));
+        return service.generarClienteDto(service.mostrarClienteConCitas(usuario.getId()));
     }
 
     @Operation(summary = "Obtener citas de un cliente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Citas encontradas",
+            @ApiResponse(responseCode = "200", description = "Citas del cliente encontradas",
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = PageDto.class)),
                             examples = {@ExampleObject(
@@ -363,22 +362,22 @@ public class ClienteController {
                                                     "content": [
                                                         {
                                                             "mecanico": "Mario Ruiz López",
-                                                            "fechaHora": "2023-01-18 12:00",
+                                                            "fechaHora": "18-01-2023 12:00",
                                                             "servicios": [
                                                                 "Cambio aceite",
                                                                 "Cambio filtro aceite"
                                                             ],
-                                                            "estado": "Terminado"
+                                                            "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
-                                                            "fechaHora": "2022-05-18 10:00",
+                                                            "fechaHora": "18-05-2022 10:00",
                                                             "servicios": [
                                                                 "Cambio neumáticos",
                                                                 "Cambio filtro aire",
                                                                 "Cambio filtro habitáculo"
                                                             ],
-                                                            "estado": "Terminado"
+                                                            "estado": "Terminada"
                                                         }
                                                     ],
                                                     "totalElements": 2,
@@ -440,7 +439,7 @@ public class ClienteController {
     @GetMapping("/me/citas")
     public PageDto<CitaDto> mostrarCitasCliente(
             @AuthenticationPrincipal User usuario,
-            @PageableDefault(size = 5, page = 0) Pageable pageable) {
+            @PageableDefault(size = 5, page = 0, sort = "fechaHora", direction = Sort.Direction.DESC) Pageable pageable) {
         return service.citasCliente(usuario.getId(), pageable);
     }
 
@@ -542,10 +541,10 @@ public class ClienteController {
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/me")
     public ClienteDto modificarCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody ClienteEdit edit) {
-        return converter.of(service.edit(usuario.getId(), edit));
+        return service.generarClienteDto(service.edit(usuario.getId(), edit));
     }
 
-    @Operation(summary = "Eliminar un cliente, buscado por su ID")
+    @Operation(summary = "Eliminar el cliente logueado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Cliente eliminado correctamente, sin contenido",
                     content = {@Content(mediaType = "application/json",

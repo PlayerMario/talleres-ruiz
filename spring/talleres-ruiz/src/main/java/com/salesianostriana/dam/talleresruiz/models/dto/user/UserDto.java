@@ -1,16 +1,13 @@
 package com.salesianostriana.dam.talleresruiz.models.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoViews;
-import com.salesianostriana.dam.talleresruiz.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +18,7 @@ import java.util.UUID;
 public class UserDto {
 
     @JsonView({MecanicoViews.DetallesMecanicos.class, ClienteViews.DetallesClientes.class, UserViews.Master.class})
-    protected UUID id;
+    private UUID id;
 
     @JsonView({MecanicoViews.Master.class, ClienteViews.Master.class, UserViews.Master.class})
     protected String nombre;
@@ -45,17 +42,24 @@ public class UserDto {
     protected List<String> roles;
 
     @JsonView(UserViews.Master.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
-    protected LocalDateTime createdAt;
+    private String token;
 
-    public static UserDto of(User user) {
-        return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .avatar(user.getAvatar())
-                .nombre(user.getNombre())
-                .createdAt(user.getCreatedAt())
-                .build();
+
+    public UserDto(UUID id, String username, String avatar, String nombre) {
+        this.id = id;
+        this.username = username;
+        this.nombre = nombre;
+        this.avatar = avatar;
+    }
+
+    public UserDto(UUID id, String nombre, String username, String dni, String email, String tlf, String avatar) {
+        this.id = id;
+        this.nombre = nombre;
+        this.username = username;
+        this.dni = dni;
+        this.email = email;
+        this.tlf = tlf;
+        this.avatar = avatar;
     }
 
 }

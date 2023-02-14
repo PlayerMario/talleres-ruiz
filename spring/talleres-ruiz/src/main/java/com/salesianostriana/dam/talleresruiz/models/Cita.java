@@ -6,9 +6,7 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,13 +76,6 @@ public class Cita {
         this.imgVehiculo = imgVehiculo;
     }
 
-    /*public Cita(Mecanico mecanico, LocalDateTime fechaHora, String estado, List<String> servicios) {
-        this.mecanico = mecanico;
-        this.fechaHora = fechaHora;
-        this.estado = estado;
-        this.servicios = servicios;
-    }*/
-
 
     // HELPERS CITA-CLIENTE
     public void agregarCliente(Cliente cliente) {
@@ -96,6 +87,7 @@ public class Cita {
         this.cliente = null;
         cliente.getCitas().remove(this);
     }
+
 
     // MÉTODOS AUXILIARES
     @PreRemove

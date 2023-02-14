@@ -40,7 +40,6 @@ import java.util.UUID;
 public class MecanicoController {
 
     private final MecanicoService service;
-    private final MecanicoDtoConverter converter;
     private final UserService userService;
 
 
@@ -212,12 +211,12 @@ public class MecanicoController {
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @GetMapping("/{id}")
     public MecanicoDto mostrarDetallesMecanico(@PathVariable UUID id) {
-        return converter.of(service.findById(id));
+        return service.generarMecanicoDto(service.findById(id));
     }
 
-    @Operation(summary = "Obtener detalles de un mecánico")
+    @Operation(summary = "Obtener detalles del mecánico logueado")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Mecánico encontrado",
+            @ApiResponse(responseCode = "200", description = "Detalles encontrados",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = MecanicoDto.class),
                             examples = {@ExampleObject(
@@ -288,11 +287,11 @@ public class MecanicoController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public MecanicoDto mostrarDetallesMecanicoMe(@AuthenticationPrincipal User usuario) {
-        return converter.of(service.findById(usuario.getId()));
+        return service.generarMecanicoDto(service.findById(usuario.getId()));
     }
 
 
-    @Operation(summary = "Crear nuevo usuario mecánico administrador")
+    @Operation(summary = "Crear nuevo usuario administrador")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Administrador creado",
                     content = {@Content(mediaType = "application/json",
@@ -374,7 +373,7 @@ public class MecanicoController {
     ResponseEntity<MecanicoDto> crearUsuarioMecAdmin(@Valid @RequestBody UserCreate createMecanico) {
         User user = userService.add(createMecanico.toUserAdminMec(createMecanico, 1));
         Mecanico mec = new Mecanico();
-        MecanicoDto newMecanico = converter.of(service.add(mec, user));
+        MecanicoDto newMecanico = service.generarMecanicoDto(service.add(mec, user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -463,7 +462,7 @@ public class MecanicoController {
     ResponseEntity<MecanicoDto> crearUsuarioMec(@Valid @RequestBody UserCreate createMecanico) {
         User user = userService.add(createMecanico.toUserAdminMec(createMecanico, 2));
         Mecanico mec = new Mecanico();
-        MecanicoDto newMecanico = converter.of(service.add(mec, user));
+        MecanicoDto newMecanico = service.generarMecanicoDto(service.add(mec, user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -566,7 +565,7 @@ public class MecanicoController {
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @PutMapping("/{id}")
     public MecanicoDto modificarMecanico(@PathVariable UUID id, @Valid @RequestBody UserEdit edit) {
-        return converter.of(service.edit(id, edit));
+        return service.generarMecanicoDto(service.edit(id, edit));
     }
 
     @Operation(summary = "Eliminar un mecánico, buscado por su ID")

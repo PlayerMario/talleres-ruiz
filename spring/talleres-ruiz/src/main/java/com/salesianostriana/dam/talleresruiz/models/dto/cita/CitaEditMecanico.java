@@ -2,7 +2,7 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cita;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.salesianostriana.dam.talleresruiz.validation.annotation.CheckCitaDateHour;
-import com.salesianostriana.dam.talleresruiz.validation.annotation.UsernameExists;
+import com.salesianostriana.dam.talleresruiz.validation.annotation.UserDniExists;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class CitaEditMecanico {
 
-    @UsernameExists(message = "{citaCreate.usernameCliente.usernameexists}")
+    @UserDniExists(message = "{citaCreate.usernameCliente.usernameexists}")
     @NotEmpty(message = "{citaEdit.idmecanico.notempty}")
     private String usernameMecanico;
 

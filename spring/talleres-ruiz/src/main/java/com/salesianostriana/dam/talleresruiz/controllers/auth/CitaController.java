@@ -3,7 +3,6 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
-import com.salesianostriana.dam.talleresruiz.models.Mensaje;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeDtoConverter;
@@ -24,6 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -65,36 +65,36 @@ public class CitaController {
                                                             "mecanico": "Mario Ruiz López",
                                                             "cliente": "Jose Javier Moriña León",
                                                             "vehiculo": "Kia Rio-2014GMD",
-                                                            "fechaHora": "2023-01-18 12:00",
-                                                            "estado": "Terminado"
+                                                            "fechaHora": "18-01-2023 12:00",
+                                                            "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "cliente": "Jose Javier Moriña León",
                                                             "vehiculo": "Kia Rio-2014GMD",
-                                                            "fechaHora": "2022-05-18 10:00",
-                                                            "estado": "Terminado"
+                                                            "fechaHora": "18-05-2022 10:00",
+                                                            "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Luis Verde Cantero",
                                                             "cliente": "Manuel Delgado Hernández",
                                                             "vehiculo": "Opel Astra-8520KMM",
-                                                            "fechaHora": "2023-03-02 12:00",
-                                                            "estado": "Aceptado"
+                                                            "fechaHora": "02-03-2023 12:00",
+                                                            "estado": "Aceptada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "cliente": "Manuel Delgado Hernández",
                                                             "vehiculo": "Opel Astra-8520KMM",
-                                                            "fechaHora": "2022-11-08 11:00",
+                                                            "fechaHora": "08-11-2022 11:00",
                                                             "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Mario Ruiz López",
                                                             "cliente": "Manuel Delgado Hernández",
                                                             "vehiculo": "Opel Astra-8520KMM",
-                                                            "fechaHora": "2022-01-17 16:00",
-                                                            "estado": "Terminado"
+                                                            "fechaHora": "17-01-2022 15:00",
+                                                            "estado": "Terminada"
                                                         }
                                                     ],
                                                     "totalElements": 12,
@@ -155,7 +155,7 @@ public class CitaController {
     @GetMapping("/")
     public PageDto<CitaDto> listarCitas(
             @RequestParam(value = "search", defaultValue = "") String search,
-            @PageableDefault(size = 5, page = 0) Pageable pageable) {
+            @PageableDefault(size = 5, page = 0, sort = "fechaHora", direction = Sort.Direction.DESC) Pageable pageable) {
         return service.paginarFiltrarCitas(search, pageable);
     }
 
@@ -243,7 +243,7 @@ public class CitaController {
     @JsonView(CitaViews.DetallesCita.class)
     @GetMapping("/{id}")
     public CitaDto mostrarDetallesCita(@PathVariable Long id) {
-        return CitaDtoConverter.ofDetails(service.mostrarCitaConChat(id));
+        return service.generarCitaDtoDetails(service.mostrarCitaConChat(id));
     }
 
     @Operation(summary = "Crear nueva cita en vista mecánico")
@@ -322,7 +322,7 @@ public class CitaController {
     @PostMapping("/mecanico/me")
     public ResponseEntity<CitaDto> crearCitaMec(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateMecanico citaCreate) {
         mecanicoService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
-        CitaDto newCita = CitaDtoConverter.of(service.add(citaConverter.toCitaMecanico(usuario.getId(), citaCreate)));
+        CitaDto newCita = service.generarCitaDto(service.add(citaConverter.toCitaMecanico(usuario.getId(), citaCreate)));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -408,7 +408,7 @@ public class CitaController {
     @PostMapping("/cliente")
     public ResponseEntity<CitaDto> crearCitaCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateCliente citaCreate) {
         clienteService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
-        CitaDto newCita = CitaDtoConverter.ofNuevaCliente(service.add(citaConverter.toCitaCliente(usuario.getId(), citaCreate)));
+        CitaDto newCita = service.citaCliente(service.add(citaConverter.toCitaCliente(usuario.getId(), citaCreate)));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -416,7 +416,7 @@ public class CitaController {
         return ResponseEntity.created(newURI).body(newCita);
     }
 
-    @Operation(summary = "Agregación de mensaje al chat de una cita")
+    @Operation(summary = "Agregar mensaje al chat de una cita")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Mensaje agregado a la cita",
                     content = {@Content(mediaType = "application/json",
@@ -457,7 +457,7 @@ public class CitaController {
                                             """
                             )}
                     )}),
-            @ApiResponse(responseCode = "400", description = "Cuerpo para la agregación aportado inválido",
+            @ApiResponse(responseCode = "400", description = "Cuerpo para la adición aportado inválido",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
                             examples = {@ExampleObject(
@@ -524,11 +524,11 @@ public class CitaController {
     public CitaDto nuevoMensaje(@PathVariable Long id, @AuthenticationPrincipal User usuario, @Valid @RequestBody MensajeCreate mensajeCreate) {
         service.comprobarEstadoAutor(id, usuario.getId());
         mensajeService.add(mensajeConverter.toMensaje(id, usuario.getId(), mensajeCreate));
-        return CitaDtoConverter.ofDetails(service.mostrarCitaConChat(id));
+        return service.generarCitaDtoDetails(service.mostrarCitaConChat(id));
     }
 
 
-    @Operation(summary = "Modificar una cita")
+    @Operation(summary = "Modificar una cita en vista mecánico")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cita modificada",
                     content = {@Content(mediaType = "application/json",
@@ -622,10 +622,10 @@ public class CitaController {
     public CitaDto modificarCitaMec(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit) {
         UUID idMecanico = userService.findByUsername(edit.getUsernameMecanico()).getId();
         mecanicoService.comprobarDisponibilidadModif(idMecanico, id, edit.getFechaHora());
-        return CitaDtoConverter.ofDetails(service.edit(id, edit, mecanicoService.findById(idMecanico)));
+        return service.generarCitaDtoDetails(service.edit(id, edit, mecanicoService.findById(idMecanico)));
     }
 
-    @Operation(summary = "Modificar una cita")
+    @Operation(summary = "Modificar una cita en vista cliente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cita modificada",
                     content = {@Content(mediaType = "application/json",
@@ -711,7 +711,7 @@ public class CitaController {
     @PutMapping("/cliente/{id}")
     public CitaDto modificarCitaCliente(@AuthenticationPrincipal User usuario, @PathVariable Long id, @Valid @RequestBody CitaCreateCliente edit) {
         clienteService.comprobarDisponibilidadModif(usuario.getId(), id, edit.getFechaHora());
-        return CitaDtoConverter.ofNuevaCliente(service.editCliente(usuario.getId(), id, edit));
+        return service.citaCliente(service.editCliente(usuario.getId(), id, edit));
     }
 
     @Operation(summary = "Eliminar una cita, buscada por su ID")
