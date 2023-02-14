@@ -323,11 +323,7 @@ public class CitaController {
     public ResponseEntity<CitaDto> crearCitaMec(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateMecanico citaCreate) {
         mecanicoService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
         CitaDto newCita = service.generarCitaDto(service.add(citaConverter.toCitaMecanico(usuario.getId(), citaCreate)));
-        URI newURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newCita.getId()).toUri();
-        return ResponseEntity.created(newURI).body(newCita);
+        return service.crearCita(newCita);
     }
 
     @Operation(summary = "Crear nueva cita en vista cliente")
@@ -409,11 +405,7 @@ public class CitaController {
     public ResponseEntity<CitaDto> crearCitaCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody CitaCreateCliente citaCreate) {
         clienteService.comprobarDisponibilidad(usuario.getId(), citaCreate.getFechaHora());
         CitaDto newCita = service.citaCliente(service.add(citaConverter.toCitaCliente(usuario.getId(), citaCreate)));
-        URI newURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newCita.getId()).toUri();
-        return ResponseEntity.created(newURI).body(newCita);
+        return service.crearCita(newCita);
     }
 
     @Operation(summary = "Agregar mensaje al chat de una cita")

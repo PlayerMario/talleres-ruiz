@@ -371,14 +371,7 @@ public class MecanicoController {
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @PostMapping("/admin")
     ResponseEntity<MecanicoDto> crearUsuarioMecAdmin(@Valid @RequestBody UserCreate createMecanico) {
-        User user = userService.add(createMecanico.toUserAdminMec(createMecanico, 1));
-        Mecanico mec = new Mecanico();
-        MecanicoDto newMecanico = service.generarMecanicoDto(service.add(mec, user));
-        URI newURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newMecanico.getId()).toUri();
-        return ResponseEntity.created(newURI).body(newMecanico);
+        return service.crearMecanico(createMecanico, 1);
     }
 
     @Operation(summary = "Crear nuevo usuario mecánico")
@@ -460,14 +453,7 @@ public class MecanicoController {
     @JsonView(MecanicoViews.DetallesMecanicos.class)
     @PostMapping("/mec")
     ResponseEntity<MecanicoDto> crearUsuarioMec(@Valid @RequestBody UserCreate createMecanico) {
-        User user = userService.add(createMecanico.toUserAdminMec(createMecanico, 2));
-        Mecanico mec = new Mecanico();
-        MecanicoDto newMecanico = service.generarMecanicoDto(service.add(mec, user));
-        URI newURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newMecanico.getId()).toUri();
-        return ResponseEntity.created(newURI).body(newMecanico);
+        return service.crearMecanico(createMecanico, 2);
     }
 
     @Operation(summary = "Modificar un mecánico")

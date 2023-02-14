@@ -7,6 +7,7 @@ import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.UserCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
 import com.salesianostriana.dam.talleresruiz.models.user.Roles;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
@@ -20,9 +21,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.EntityNotFoundException;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +126,17 @@ public class MecanicoService {
         MecanicoDto mecanicoDto = repository.generarMecanicoDto(mecanico.getId());
         mecanicoDto.setRoles(roles);
         return mecanicoDto;
+    }
+
+    public ResponseEntity<MecanicoDto> crearMecanico(UserCreate create, int opcion) {
+        User user = userService.add(create.toUserAdminMec(create, opcion));
+        Mecanico mec = new Mecanico();
+        MecanicoDto newMecanico = generarMecanicoDto(add(mec, user));
+        URI newURI = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newMecanico.getId()).toUri();
+        return ResponseEntity.created(newURI).body(newMecanico);
     }
 
 }

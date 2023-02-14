@@ -16,10 +16,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -170,5 +173,13 @@ public class CitaService {
         }
         citaDto.setImgVehiculo(cita.getImgVehiculo());
         return citaDto;
+    }
+
+    public ResponseEntity<CitaDto> crearCita(CitaDto citaDto) {
+        URI newURI = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(citaDto.getId()).toUri();
+        return ResponseEntity.created(newURI).body(citaDto);
     }
 }
