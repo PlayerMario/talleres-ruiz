@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../crear_cliente.dart';
-export './crear_cliente_screen.dart';
+import '../../main.dart';
 
 class CrearClienteScreen extends StatelessWidget {
   CrearClienteScreen({super.key});
@@ -167,7 +166,7 @@ class CrearClienteScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // HACERLO CON EL BLOC PARA QUE MUESTRE UNA PANTALLA CON LOS DATOS RECIÉN CREADOS
-                      buscarClienteCreado(
+                      /*buscarClienteCreado(
                           username.text,
                           password.text,
                           passwordVerify.text,
@@ -177,7 +176,7 @@ class CrearClienteScreen extends StatelessWidget {
                           tlf.text,
                           vehiculo.text,
                           matricula.text);
-                      Navigator.pop(context);
+                      Navigator.pop(context);*/
                     },
                     child: const Text(
                       'Crear',
