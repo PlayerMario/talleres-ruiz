@@ -9,7 +9,6 @@ import com.salesianostriana.dam.talleresruiz.models.dto.user.UserCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.services.MecanicoService;
-import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,10 +25,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.UUID;
 
 @Validated
@@ -40,7 +37,6 @@ import java.util.UUID;
 public class MecanicoController {
 
     private final MecanicoService service;
-    private final UserService userService;
 
 
     @Operation(summary = "Obtener listado de mecánicos")
@@ -108,9 +104,9 @@ public class MecanicoController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/mecanico/",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:47:32"
                                                 }
                                             """
                             )}
@@ -185,9 +181,9 @@ public class MecanicoController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:47:52"
                                                 }
                                             """
                             )}
@@ -260,9 +256,9 @@ public class MecanicoController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/mecanico/me",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:48:54"
                                                 }
                                             """
                             )}
@@ -274,8 +270,8 @@ public class MecanicoController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al mecánico con ID: 3e380d54-861c-4809-bb84-0bd32bab42c2",
-                                                    "path": "/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2",
+                                                    "message": "No se encuentra al mecánico",
+                                                    "path": "/auth/mecanico/me",
                                                     "statusCode": 404,
                                                     "date": "12/02/2023 17:04:37"
                                                 }
@@ -360,9 +356,9 @@ public class MecanicoController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/mecanico/admin",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:49:38"
                                                 }
                                             """
                             )}
@@ -442,9 +438,9 @@ public class MecanicoController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/mecanico/mec",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:50:58"
                                                 }
                                             """
                             )}
@@ -524,10 +520,10 @@ public class MecanicoController {
                                     value = """
                                                 {
                                                     "status": "FORBIDDEN",
-                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
-                                                    "path": "/auth/user/changePsw",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/mecanico/3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "statusCode": 403,
-                                                    "date": "12/02/2023 12:12:49"
+                                                    "date": "15/02/2023 19:51:47"
                                                 }
                                             """
                             )}
@@ -602,10 +598,10 @@ public class MecanicoController {
                                     value = """
                                                 {
                                                     "status": "FORBIDDEN",
-                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
-                                                    "path": "/auth/user/changePsw",
+                                                    "message": "Access is denied",
+                                                    "path": "/auth/mecanico/43dc49e5-7cb2-461a-8ed4-e0f36c696b73",
                                                     "statusCode": 403,
-                                                    "date": "12/02/2023 12:12:49"
+                                                    "date": "15/02/2023 19:53:36"
                                                 }
                                             """
                             )}

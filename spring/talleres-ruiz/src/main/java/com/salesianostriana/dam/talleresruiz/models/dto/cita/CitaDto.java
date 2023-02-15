@@ -3,7 +3,7 @@ package com.salesianostriana.dam.talleresruiz.models.dto.cita;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteViews;
-import com.salesianostriana.dam.talleresruiz.models.dto.mensaje.MensajeDto;
+import com.salesianostriana.dam.talleresruiz.models.dto.adjunto.AdjuntoDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,7 +45,7 @@ public class CitaDto {
     private List<String> imgVehiculo;
 
     @JsonView(CitaViews.DetallesCita.class)
-    private List<MensajeDto> chat;
+    private List<AdjuntoDto> chat;
 
 
     public CitaDto(String cliente, String vehiculo, LocalDateTime fechaHora, String estado) {

@@ -32,7 +32,6 @@ public class CitaDtoConverter {
                 .cliente(clienteService.findById(id))
                 .fechaHora(citaCreate.getFechaHora())
                 .estado("Trámite")
-                .imgVehiculo(citaCreate.getImgVehiculo())
                 .build();
     }
 

@@ -68,8 +68,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/user/**", "/auth/cita/{id}/mensaje").hasAnyRole("ADMIN", "MEC", "CLIENTE")
-                .antMatchers("/auth/cliente/me/**", "/auth/cita/cliente/**").hasRole("CLIENTE")
+                .antMatchers("/auth/user/**", "/auth/cita/{id}/mensaje", "/auth/cita/{id}/fichero",
+                        "/auth/fichero/**", "/auth/cita/{idCita}/adjunto/{idAdj}").hasAnyRole("ADMIN", "MEC", "CLIENTE")
+                .antMatchers("/auth/cliente/me/**", "/auth/cita/cliente/**", "/auth/cita/{id}/cliente").hasRole("CLIENTE")
                 .antMatchers("/auth/cliente/", "/auth/cliente/{id}", "/auth/mecanico/", "/auth/cita/",
                         "/auth/mecanico/me", "/auth/cita/{id}", "/auth/cita/mecanico/{id}").hasAnyRole("ADMIN", "MEC")
                 .antMatchers("/auth/mecanico/{id}", "/auth/mecanico/admin", "/auth/mecanico/mec").hasRole("ADMIN")

@@ -5,4 +5,7 @@ public class UserViews {
     public static class Master {
     }
 
+    public static class Token extends Master {
+    }
+
 }

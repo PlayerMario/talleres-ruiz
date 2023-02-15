@@ -159,7 +159,7 @@ public class UserNoAuthController {
                             )}
                     )})
     })
-    @JsonView(UserViews.Master.class)
+    @JsonView(UserViews.Token.class)
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@Valid @RequestBody UserLogin userLogin) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(

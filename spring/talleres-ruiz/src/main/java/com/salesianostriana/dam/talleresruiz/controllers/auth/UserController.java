@@ -16,9 +16,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -42,8 +45,7 @@ public class UserController {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "username": "mrl26",
                                                     "nombre": "Mario Ruiz López",
-                                                    "avatar": "https://robohash.org/mrl26",
-                                                    "createdAt": "10/02/2023 00:00:00"
+                                                    "avatar": "https://robohash.org/mrl26"
                                                 }
                                             """
                             )}
@@ -74,21 +76,6 @@ public class UserController {
                                                     "path": "/error",
                                                     "statusCode": 401,
                                                     "date": "12/02/2023 12:53:44"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "FORBIDDEN",
-                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
-                                                    "path": "/auth/user/changePsw",
-                                                    "statusCode": 403,
-                                                    "date": "12/02/2023 12:12:49"
                                                 }
                                             """
                             )}
@@ -124,25 +111,9 @@ public class UserController {
                                     value = """
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
-                                                    "username": "mrl26",
                                                     "nombre": "Mario Ruiz López",
-                                                    "avatar": "https://robohash.org/mrl26",
-                                                    "createdAt": "10/02/2023 00:00:00"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "400", description = "Cuerpo para la modificación aportado inválido",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "BAD_REQUEST",
-                                                    "message": "La antigua contraseña no coincide con la original",
-                                                    "path": "/auth/user/changePsw",
-                                                    "statusCode": 400,
-                                                    "date": "12/02/2023 12:49:08"
+                                                    "username": "mrl26",
+                                                    "avatar": "Gear_419050.png"
                                                 }
                                             """
                             )}
@@ -158,21 +129,6 @@ public class UserController {
                                                     "path": "/error",
                                                     "statusCode": 401,
                                                     "date": "12/02/2023 12:53:44"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "403", description = "Operación prohibida, es necesario estar logueado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "FORBIDDEN",
-                                                    "message": "JWT expired at 2023-02-12T11:12:49Z...",
-                                                    "path": "/auth/user/changePsw",
-                                                    "statusCode": 403,
-                                                    "date": "12/02/2023 12:12:49"
                                                 }
                                             """
                             )}
@@ -195,8 +151,10 @@ public class UserController {
     })
     @JsonView(UserViews.Master.class)
     @PutMapping("/avatar")
-    public /*UserDto*/void cambiarAvatar(@AuthenticationPrincipal User usuario) {
-
+    public ResponseEntity<UserDto> cambiarAvatar(@AuthenticationPrincipal User usuario, @RequestPart("fichero") MultipartFile fichero) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.generarUserDto(service.cambiarAvatar(usuario, fichero)));
     }
 
 }

@@ -1,18 +1,20 @@
 package com.salesianostriana.dam.talleresruiz.services.user;
 
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.OldPasswordEqualException;
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.PasswordEqualException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.OperacionDenegadaException;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserPassword;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.UserRepository;
+import com.salesianostriana.dam.talleresruiz.services.ficheros.FileSystemStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository repository;
+    private final FileSystemStorageService storageService;
 
 
     public List<User> findAll() {
@@ -95,9 +98,9 @@ public class UserService {
 
     public boolean passwordValidator(User user, UserPassword userPassword) {
         if (passwordEncoder.matches(userPassword.getNewPassword(), user.getPassword())) {
-            throw new PasswordEqualException();
+            throw new OperacionDenegadaException("La nueva contraseña no puede coincidir con la antigua");
         } else if (!passwordEncoder.matches(userPassword.getOldPassword(), user.getPassword())) {
-            throw new OldPasswordEqualException();
+            throw new OperacionDenegadaException("La antigua contraseña no coincide con la original");
         } else {
             return true;
         }
@@ -111,6 +114,19 @@ public class UserService {
         UserDto userDto = repository.generarUserDto(usuario.getId());
         userDto.setToken(token);
         return userDto;
+    }
+
+    @Transactional
+    public User cambiarAvatar(User usuario, MultipartFile fichero) {
+        String nuevoAvatar = storageService.store(fichero);
+        if (usuario.getAvatar().length() > 21
+                && usuario.getAvatar().substring(0, 21).equalsIgnoreCase("https://robohash.org/")) {
+            usuario.setAvatar(nuevoAvatar);
+        } else {
+            storageService.deleteFile(usuario.getAvatar());
+            usuario.setAvatar(nuevoAvatar);
+        }
+        return repository.save(usuario);
     }
 
 }

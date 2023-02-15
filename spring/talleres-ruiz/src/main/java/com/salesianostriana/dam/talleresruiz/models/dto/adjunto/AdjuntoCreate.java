@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.mensaje;
+package com.salesianostriana.dam.talleresruiz.models.dto.adjunto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MensajeCreate {
+public class AdjuntoCreate {
 
     @NotEmpty(message = "{nuevoMensaje.mensaje.notempty}")
-    private String mensaje;
+    private String contenido;
 
 }

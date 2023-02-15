@@ -127,9 +127,9 @@ public class ClienteController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/cliente/",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:36:09"
                                                 }
                                             """
                             )}
@@ -225,9 +225,9 @@ public class ClienteController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:39:36"
                                                 }
                                             """
                             )}
@@ -411,9 +411,9 @@ public class ClienteController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/cliente/me/citas",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:40:59"
                                                 }
                                             """
                             )}
@@ -516,7 +516,7 @@ public class ClienteController {
                                                     "message": "Access is denied",
                                                     "path": "/auth/cliente/me",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:42:32"
                                                 }
                                             """
                             )}
@@ -580,7 +580,7 @@ public class ClienteController {
                                                     "message": "Access is denied",
                                                     "path": "/auth/cliente/me",
                                                     "statusCode": 403,
-                                                    "date": "14/02/2023 09:00:35"
+                                                    "date": "15/02/2023 19:42:58"
                                                 }
                                             """
                             )}
@@ -627,7 +627,7 @@ public class ClienteController {
                                                 {
                                                     "status": "FORBIDDEN",
                                                     "message": "Access is denied",
-                                                    "path": "/auth/cliente/me",
+                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "statusCode": 403,
                                                     "date": "14/02/2023 09:00:35"
                                                 }

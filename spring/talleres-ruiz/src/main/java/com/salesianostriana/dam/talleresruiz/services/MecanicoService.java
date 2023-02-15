@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.BorrarAdminException;
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.ClienteNoDisponible;
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.MecanicoNoDisponible;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.OperacionDenegadaException;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.mecanico.MecanicoDto;
@@ -41,7 +39,7 @@ public class MecanicoService {
     private final UserService userService;
     private final CitaService citaService;
     private final CitaRepository citaRepository;
-    private final MensajeService mensajeService;
+    private final AdjuntoService mensajeService;
 
     public List<Mecanico> findAll() {
         List<Mecanico> result = repository.findAll();
@@ -86,7 +84,7 @@ public class MecanicoService {
                 mensajeService.setearNullAutor(mec.getUsuario());
                 repository.deleteById(id);
             } else {
-                throw new BorrarAdminException();
+                throw new OperacionDenegadaException("No se puede puede borrar un admin");
             }
         }
     }
@@ -102,7 +100,7 @@ public class MecanicoService {
     public void comprobarDisponibilidad(UUID id, LocalDateTime fechaHora) {
         List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(this.findById(id), fechaHora);
         if (!citas.isEmpty()) {
-            throw new MecanicoNoDisponible();
+            throw new OperacionDenegadaException("El mecánico asignado tiene ocupada ese día y hora");
         }
     }
 
@@ -111,7 +109,7 @@ public class MecanicoService {
         if (!citas.isEmpty()) {
             citas.forEach(cita -> {
                 if (!Objects.equals(cita.getId(), idCita)) {
-                    throw new ClienteNoDisponible();
+                    throw new OperacionDenegadaException("Ya tiene una cita asignada para el día y hora elegido");
                 }
             });
         }

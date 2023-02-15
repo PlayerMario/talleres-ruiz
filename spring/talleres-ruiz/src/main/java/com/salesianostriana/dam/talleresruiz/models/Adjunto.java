@@ -11,29 +11,29 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "mensaje")
+@Table(name = "adjunto")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class Mensaje {
+public class Adjunto {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @Lob
-    private String mensaje;
+    private String contenido;
 
     @ManyToOne
-    @JoinColumn(name = "cita_id", foreignKey = @ForeignKey(name = "FK_MENSAJE_CITA"))
+    @JoinColumn(name = "cita_id", foreignKey = @ForeignKey(name = "FK_ADJUNTO_CITA"))
     private Cita cita;
 
     @ManyToOne
     @CreatedBy
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_MENSAJE_USER"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_ADJUNTO_USER"))
     private User autor;
 
     @Builder.Default
@@ -41,15 +41,18 @@ public class Mensaje {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime fechaHora = LocalDateTime.now();
 
+    private boolean fichero;
+
     @JsonIgnore
     public static String hiddenFields = "id";
 
 
     // CONSTRUCTOR
-    public Mensaje(String mensaje, Cita cita, User autor) {
-        this.mensaje = mensaje;
+    public Adjunto(String contenido, Cita cita, User autor, boolean fichero) {
+        this.contenido = contenido;
         this.cita = cita;
         this.autor = autor;
+        this.fichero = fichero;
     }
 
 
@@ -59,7 +62,7 @@ public class Mensaje {
         cita.getChat().add(this);
     }
 
-    public void removeCita(Cita cita) {
+    public void borrarCita(Cita cita) {
         this.cita = null;
         cita.getChat().remove(this);
     }

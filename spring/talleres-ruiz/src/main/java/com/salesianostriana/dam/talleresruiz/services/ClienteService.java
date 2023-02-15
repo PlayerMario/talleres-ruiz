@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.services;
 
-import com.salesianostriana.dam.talleresruiz.errors.exceptions.ClienteNoDisponible;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.OperacionDenegadaException;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
@@ -109,7 +109,7 @@ public class ClienteService {
     public void comprobarDisponibilidad(UUID idUs, LocalDateTime fechaHora) {
         List<Cita> citas = citaRepository.findDistinctByClienteAndFechaHora(this.findById(idUs), fechaHora);
         if (!citas.isEmpty()) {
-            throw new ClienteNoDisponible();
+            throw new OperacionDenegadaException("Ya tiene una cita asignada para el día y hora elegido");
         }
     }
 
@@ -118,7 +118,7 @@ public class ClienteService {
         if (!citas.isEmpty()) {
             citas.forEach(cita -> {
                 if (!Objects.equals(cita.getId(), idCita)) {
-                    throw new ClienteNoDisponible();
+                    throw new OperacionDenegadaException("Ya tiene una cita asignada para el día y hora elegido");
                 }
             });
         }

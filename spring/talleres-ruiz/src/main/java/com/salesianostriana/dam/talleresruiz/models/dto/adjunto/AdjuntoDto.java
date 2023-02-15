@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.talleresruiz.models.dto.mensaje;
+package com.salesianostriana.dam.talleresruiz.models.dto.adjunto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaViews;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MensajeDto {
+public class AdjuntoDto {
 
     @JsonView(CitaViews.DetallesCita.class)
     private String autor;
@@ -23,13 +23,17 @@ public class MensajeDto {
     private String fechaHora;
 
     @JsonView(CitaViews.DetallesCita.class)
-    private String mensaje;
+    private String contenido;
+
+    @JsonView(CitaViews.DetallesCita.class)
+    private boolean fichero;
 
 
-    public MensajeDto(String autor, LocalDateTime fechaHora, String mensaje) {
+    public AdjuntoDto(String autor, LocalDateTime fechaHora, String contenido, boolean fichero) {
         this.autor = autor;
         this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-        this.mensaje = mensaje;
+        this.contenido = contenido;
+        this.fichero = fichero;
     }
 
 }

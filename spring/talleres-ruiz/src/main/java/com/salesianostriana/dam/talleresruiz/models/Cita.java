@@ -43,18 +43,13 @@ public class Cita {
 
     private String estado;
 
-    @Column(name = "img_vehiculo")
-    @ElementCollection
-    @Builder.Default
-    private List<String> imgVehiculo = new ArrayList<>();
-
     @ElementCollection
     @Builder.Default
     private List<String> servicios = new ArrayList<>();
 
     @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Mensaje> chat = new ArrayList<>();
+    private List<Adjunto> chat = new ArrayList<>();
 
     @JsonIgnore
     public static String hiddenFields = "id";
@@ -66,14 +61,6 @@ public class Cita {
         this.cliente = cliente;
         this.fechaHora = fechaHora;
         this.estado = estado;
-    }
-
-    public Cita(Mecanico mecanico, Cliente cliente, LocalDateTime fechaHora, String estado, List<String> imgVehiculo) {
-        this.mecanico = mecanico;
-        this.cliente = cliente;
-        this.fechaHora = fechaHora;
-        this.estado = estado;
-        this.imgVehiculo = imgVehiculo;
     }
 
 
