@@ -21,7 +21,15 @@ class NuevoClienteDetails extends State<NuevoClienteScreen> {
         builder: (context, state) {
       switch (state.status) {
         case CrearClienteStatus.failure:
-          return ErrorData(error: state.clienteCreado);
+          if (state.clienteCreado.subErrors! != null) {
+            return ListView.builder(
+                itemCount: state.clienteCreado.subErrors!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SubErrorData(error: state.clienteCreado.subErrors![index]);
+                });
+          } else {
+            return ErrorScreen(error: state.clienteCreado);
+          }
         case CrearClienteStatus.success:
           return NuevoCliente(cliente: state.clienteCreado!);
         case CrearClienteStatus.initial:

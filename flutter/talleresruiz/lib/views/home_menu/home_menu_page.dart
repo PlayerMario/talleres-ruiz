@@ -10,7 +10,8 @@ class HomeMenu extends StatefulWidget {
 class _HomeMenuPage extends State<HomeMenu> {
   final List<Widget> _paginas = [
     const HomePage(),
-    CrearClienteForm(),
+    const CrearClienteForm(),
+    const LoginForm()
   ];
   int _indices = 0;
 

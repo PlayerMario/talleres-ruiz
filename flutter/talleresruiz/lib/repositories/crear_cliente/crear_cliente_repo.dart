@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../main.dart';
 
-final headers = {"Content-Type": "application/json;charset=UTF-8"};
-final url = Uri.parse('http://localhost:8080/noauth/user/register');
+//final headers = {"Content-Type": "application/json;charset=UTF-8"};
+//final url = Uri.parse('http://localhost:8080/noauth/user/register');
+//final url = Uri.parse('http://10.0.2.2:8080/noauth/user/register');
 
 Future<List<dynamic>> crearCliente(CrearClienteBody cliente) async {
   final crearCliente = {
@@ -19,7 +20,8 @@ Future<List<dynamic>> crearCliente(CrearClienteBody cliente) async {
   };
 
   final response =
-      await http.post(url, headers: headers, body: jsonEncode(crearCliente));
+      await http.post(Uri.parse('$url/noauth/user/register'), headers: headers, body: jsonEncode(crearCliente));
+
   if (response.statusCode == 201) {
     return [CrearClienteResponse.fromJson(jsonDecode(response.body)), true];
   } else {

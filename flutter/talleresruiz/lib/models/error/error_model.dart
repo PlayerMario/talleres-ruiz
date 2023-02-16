@@ -4,16 +4,15 @@ class ErrorResponse {
   String? path;
   int? statusCode;
   String? date;
-  List<SubErrorsResponse>? subErrors;
+  List<SubErrors>? subErrors;
 
-  ErrorResponse({
-    required this.status,
-    required this.message,
-    required this.path,
-    required this.statusCode,
-    required this.date,
-    this.subErrors,
-  });
+  ErrorResponse(
+      {this.status,
+      this.message,
+      this.path,
+      this.statusCode,
+      this.date,
+      this.subErrors});
 
   ErrorResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -21,22 +20,37 @@ class ErrorResponse {
     path = json['path'];
     statusCode = json['statusCode'];
     date = json['date'];
-    if (this.subErrors != null) {
-      json['subErrors'] = this.subErrors!.map((v) => v.toJson()).toList();
+    if (json['subErrors'] != null) {
+      subErrors = <SubErrors>[];
+      json['subErrors'].forEach((v) {
+        subErrors!.add(new SubErrors.fromJson(v));
+      });
     }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    data['path'] = this.path;
+    data['statusCode'] = this.statusCode;
+    data['date'] = this.date;
+    if (this.subErrors != null) {
+      data['subErrors'] = this.subErrors!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
-class SubErrorsResponse {
+class SubErrors {
   String? object;
   String? message;
   String? field;
-  dynamic rejectedValue;
+  String? rejectedValue;
 
-  SubErrorsResponse(
-      {this.object, this.message, this.field, this.rejectedValue});
+  SubErrors({this.object, this.message, this.field, this.rejectedValue});
 
-  SubErrorsResponse.fromJson(Map<String, dynamic> json) {
+  SubErrors.fromJson(Map<String, dynamic> json) {
     object = json['object'];
     message = json['message'];
     field = json['field'];

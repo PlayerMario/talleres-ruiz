@@ -9,5 +9,6 @@ abstract class CrearClienteEvent extends Equatable {
 
 class CrearClienteFetched extends CrearClienteEvent {
   const CrearClienteFetched(this.cliente);
+  
   final CrearClienteBody cliente;
 }

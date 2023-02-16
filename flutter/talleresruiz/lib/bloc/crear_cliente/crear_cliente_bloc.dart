@@ -15,6 +15,7 @@ class CrearClienteBloc extends Bloc<CrearClienteEvent, CrearClienteState> {
       CrearClienteFetched event, Emitter<CrearClienteState> emit) async {
     if (state.status == CrearClienteStatus.initial) {
       final clienteCreado = await crearCliente(event.cliente);
+      
       if (clienteCreado[1]) {
         return emit(state.copyWith(
             status: CrearClienteStatus.success,
