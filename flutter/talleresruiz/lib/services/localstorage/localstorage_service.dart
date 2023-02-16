@@ -9,10 +9,8 @@ class LocalStorageService {
   static Future<LocalStorageService> getInstance() async {
     print("Aquí se entra");
     _preferences = await SharedPreferences.getInstance();
-
     print("Aquí se llega");
     _instance = LocalStorageService();
-
     return _instance;
   }
 

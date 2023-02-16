@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'main.dart';
 export './bloc/bloc.dart';
 export './models/models.dart';
@@ -7,6 +8,9 @@ export './views/views.dart';
 export './widgets/widgets.dart';
 
 void main() {
+  setupAsyncDependencies();
+  configureDependencies();
+
   runApp(MaterialApp(title: 'TALLERES RUIZ', initialRoute: '/', routes: {
     '/': (context) => const HomeMenu(),
     //'/crear-cliente': (context) => CrearClientePage(cliente: dynamic),
