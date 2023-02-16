@@ -18,7 +18,7 @@ class NuevoCliente extends StatelessWidget {
                 child: SizedBox(
                   child: Column(
                     children: [
-                      Image.network('https://robohash.org/${cliente.username}'),
+                      Image.network('http://localhost:8080/auth/fichero/download/${cliente.avatar!}'),
                       Padding(
                           padding: const EdgeInsets.all(15),
                           child: Text(

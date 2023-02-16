@@ -13,14 +13,17 @@ class CrearClienteBloc extends Bloc<CrearClienteEvent, CrearClienteState> {
 
   Future<void> onCrearClienteFetched(
       CrearClienteFetched event, Emitter<CrearClienteState> emit) async {
-    try {
-      if (state.status == CrearClienteStatus.initial) {
-        final clienteCreado = await crearCliente(event.cliente);
+    if (state.status == CrearClienteStatus.initial) {
+      final clienteCreado = await crearCliente(event.cliente);
+      if (clienteCreado[1]) {
         return emit(state.copyWith(
-            status: CrearClienteStatus.success, clienteCreado: clienteCreado));
+            status: CrearClienteStatus.success,
+            clienteCreado: clienteCreado[0]));
+      } else {
+        return emit(state.copyWith(
+            status: CrearClienteStatus.failure,
+            clienteCreado: clienteCreado[0]));
       }
-    } catch (_) {
-      emit(state.copyWith(status: CrearClienteStatus.failure));
     }
   }
 }

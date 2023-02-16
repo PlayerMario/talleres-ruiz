@@ -12,12 +12,13 @@ class ErrorData extends StatelessWidget {
         shadowColor: const Color.fromRGBO(1, 180, 228, 1),
         margin: const EdgeInsets.only(left: 25, top: 25, right: 25),
         elevation: 15,
+        
         child: SingleChildScrollView(
             child: Container(
                 padding: const EdgeInsets.all(20),
                 child: SizedBox(
                   child: Column(
-                    children: [
+                    children: [                      
                       Padding(
                           padding: const EdgeInsets.all(15),
                           child: Text(
@@ -29,7 +30,7 @@ class ErrorData extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.all(15),
                           child: Text(
-                            error.statusCode!,
+                            error.statusCode!.toString(),
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 30),
                             textAlign: TextAlign.center,
@@ -53,11 +54,15 @@ class ErrorData extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.all(15),
                           child: Text(
-                            error.date! as String,
+                            error.date!,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 30),
                             textAlign: TextAlign.center,
                           )),
+                      /*Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: ListView.builder(
+                          )),*/
                     ],
                   ),
                 ))));
