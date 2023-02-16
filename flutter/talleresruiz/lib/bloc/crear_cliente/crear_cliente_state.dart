@@ -7,10 +7,11 @@ class CrearClienteState extends Equatable {
       {this.status = CrearClienteStatus.initial, this.clienteCreado});
 
   final CrearClienteStatus status;
-  final CrearCliente? clienteCreado;
+  //final CrearClienteResponse? clienteCreado;
+  final dynamic clienteCreado;
 
   CrearClienteState copyWith(
-      {CrearClienteStatus? status, CrearCliente? clienteCreado}) {
+      {CrearClienteStatus? status, /*CrearClienteResponse? clienteCreado*/ dynamic clienteCreado}) {
     return CrearClienteState(
         status: status ?? this.status,
         clienteCreado: clienteCreado ?? this.clienteCreado);

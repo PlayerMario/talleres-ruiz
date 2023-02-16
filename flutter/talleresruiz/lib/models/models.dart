@@ -1,1 +1,3 @@
-export './crear_cliente/crear_cliente_model.dart';
+export './crear_cliente/crear_cliente_response.dart';
+export './crear_cliente/crear_cliente_body.dart';
+export './error/error_model.dart';

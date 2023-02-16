@@ -426,7 +426,6 @@ public class CitaController {
                                                         "Cambio filtro combustible"
                                                     ],
                                                     "estado": "Aceptada",
-                                                    "imgVehiculo": [],
                                                     "chat": [
                                                         {
                                                             "autor": "Laura Gordillo Moreno",

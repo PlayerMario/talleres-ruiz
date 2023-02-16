@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../main.dart';
 
-class CrearClienteScreen extends StatelessWidget {
-  CrearClienteScreen({super.key});
-  GlobalKey<FormState> keyForm = GlobalKey();
+class CrearClienteForm extends StatelessWidget {
+  CrearClienteForm({super.key});
   final username = TextEditingController();
   final password = TextEditingController();
   final passwordVerify = TextEditingController();
@@ -73,7 +72,7 @@ class CrearClienteScreen extends StatelessWidget {
                         obscureText: true,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Contraseña',
+                            labelText: 'Verificar Contraseña',
                             hintText: 'Repita su contraseña'),
                       ),
                     )),
@@ -87,7 +86,7 @@ class CrearClienteScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'DNI',
-                            hintText: 'Introduzca su DNI (11111111A)'),
+                            hintText: 'Introduzca su DNI'),
                       ),
                     )),
                 Padding(
@@ -126,7 +125,7 @@ class CrearClienteScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Teléfono',
-                            hintText: 'Introduzca su teléfono (111 222 333)'),
+                            hintText: 'Introduzca su teléfono'),
                       ),
                     )),
                 Padding(
@@ -153,8 +152,7 @@ class CrearClienteScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Matrícula',
-                            hintText:
-                                'Introduzca la matrícula de su vehículo (1111AAA)'),
+                            hintText: 'Introduzca la matrícula de su vehículo'),
                       ),
                     )),
                 Container(
@@ -165,18 +163,20 @@ class CrearClienteScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: ElevatedButton(
                     onPressed: () {
-                      // HACERLO CON EL BLOC PARA QUE MUESTRE UNA PANTALLA CON LOS DATOS RECIÉN CREADOS
-                      /*buscarClienteCreado(
-                          username.text,
-                          password.text,
-                          passwordVerify.text,
-                          dni.text,
-                          nombre.text,
-                          email.text,
-                          tlf.text,
-                          vehiculo.text,
-                          matricula.text);
-                      Navigator.pop(context);*/
+                      CrearClienteBody cliente = CrearClienteBody(
+                          username: username.text,
+                          password: password.text,
+                          verifyPassword: passwordVerify.text,
+                          dni: dni.text,
+                          nombre: nombre.text,
+                          email: email.text,
+                          tlf: tlf.text,
+                          vehiculo: vehiculo.text,
+                          matricula: matricula.text);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CrearClientePage(cliente: cliente);
+                      }));
                     },
                     child: const Text(
                       'Crear',

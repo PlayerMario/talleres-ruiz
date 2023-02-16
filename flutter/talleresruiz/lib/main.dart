@@ -9,7 +9,7 @@ export './widgets/widgets.dart';
 void main() {
   runApp(MaterialApp(title: 'TALLERES RUIZ', initialRoute: '/', routes: {
     '/': (context) => const HomeMenu(),
-    '/crear-cliente': (context) => CrearClienteScreen(),
+    //'/crear-cliente': (context) => CrearClientePage(cliente: dynamic),
   }));
 }
 
