@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 
-class UsuarioLogScreen extends StatefulWidget {
-  const UsuarioLogScreen({Key? key}) : super(key: key);
+class MenuClientePage extends StatefulWidget {
+  const MenuClientePage({Key? key}) : super(key: key);
 
   @override
-  State<UsuarioLogScreen> createState() => MenuPrincipal();
+  State<MenuClientePage> createState() => _MenuClientePage();
 }
 
-class MenuPrincipal extends State<UsuarioLogScreen> {
+class _MenuClientePage extends State<MenuClientePage> {
   @override
   void initState() {
     super.initState();
   }
 
-  @override
+  /*
+    @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       switch (state.status) {
@@ -30,13 +31,18 @@ class MenuPrincipal extends State<UsuarioLogScreen> {
             return ErrorScreen(error: state.userLogin);
           }
         case LoginStatus.success:
-          // A la pantalla de /me cliente, si es cliente a la suya, si es admin a otra
-          // HACE UNA LLAMADA A UN NUEVO BLOC QUE LLEVE A LA PANTALLA
-          print("Login Correcto");
+          if (state.userLogin.roles[0] == "CLIENTE") {
+            print("Login Cliene");
+            return VistaClientePage();
+          } else {
+            print("Login Admin-Mec");
+          }
+
           return Center(child: Text("Logueado ${state.userLogin}"));
         case LoginStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });
   }
+  */
 }
