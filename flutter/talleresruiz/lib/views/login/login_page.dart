@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
+import 'package:talleresruiz/services/authentication/authentication_service.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key, required this.login});
@@ -8,6 +10,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = getIt<JwtAuthenticationService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         appBar: AppBar(
@@ -30,7 +33,9 @@ class LoginPage extends StatelessWidget {
             }),*/
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: BlocProvider(
-          create: (_) => LoginBloc(login: login)..add(LoginFetched(login)),
+          create: (_) =>
+              LoginBloc(login: login, authenticationService: authService)
+                ..add(LoginFetched(login)),
           child: const UsuarioLogScreen(),
         ));
   }

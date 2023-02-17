@@ -8,10 +8,12 @@ import 'package:talleresruiz/services/localstorage/localstorage_service.dart';
 
 abstract class AuthenticationService {
   Future<dynamic> getCurrentUserCliente();
+  //Future<dynamic> getCurrentUserMecanico();
   Future<dynamic> signIn(LoginBody login);
   Future<void> signOut();
 }
 
+@Order(2)
 @singleton
 class JwtAuthenticationService extends AuthenticationService {
   late LoginRepository _loginRepository;
@@ -33,20 +35,50 @@ class JwtAuthenticationService extends AuthenticationService {
     print("Obteniendo datos del cliente...");
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
-      LoginResponse response = await _clienteRepository.getClienteMe();
-      return response;
+      //List<dynamic> response = await _clienteRepository.getClienteMe();
+      /*if (response[1]) {
+        return ClienteMeResponse.fromJson(jsonDecode(response[0].body));
+      } else {
+        return ErrorResponse.fromJson(jsonDecode(response[0].body));
+      }*/
+      dynamic response = await _clienteRepository.getClienteMe();
+      if (response.statusCode == 200) {
+      return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
+    } else {
+      return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
     }
-    return null;
+    }
   }
+
+  /*@override
+  Future<dynamic> getCurrentUserMecanico() async {
+    print("Obteniendo datos del mecánico...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      List<dynamic> response = await _mecanicoRepository.getMecanicoMe();
+      if (response[1]) {
+        return MecnaicoMeResponse.fromJson(jsonDecode(response[0].body));
+      } else {
+        return ErrorResponse.fromJson(jsonDecode(response[0].body));
+      }
+    }
+  }*/
 
   @override
   Future<dynamic> signIn(LoginBody login) async {
-    List<dynamic> response = await _loginRepository.loginUser(login);
-    if (response[1]) {
+    dynamic response = await _loginRepository.loginUser(login);
+    /*if (response[1]) {
       await _localStorageService.saveToDisk('user_token', response[0].token);
-      return LoginResponse.fromJson(jsonDecode(response[0].body));
+      return response[0];
     } else {
-      return ErrorResponse.fromJson(jsonDecode(response[0].body));
+      return response[0];
+    }*/
+    if (response.statusCode == 201) {
+      LoginResponse resp = LoginResponse.fromJson(jsonDecode(response.body));
+      await _localStorageService.saveToDisk('user_token', resp.token);
+      return [resp, true];
+    } else {
+      return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
     }
   }
 

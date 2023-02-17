@@ -20,7 +20,7 @@ class MenuPrincipal extends State<UsuarioLogScreen> {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       switch (state.status) {
         case LoginStatus.failure:
-          if (state.userLogin.subErrors! != null) {
+          if (state.userLogin.subErrors != null) {
             return ListView.builder(
                 itemCount: state.userLogin.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {

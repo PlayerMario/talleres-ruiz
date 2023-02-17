@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import '../../main.dart';
 
+@Order(-1)
 @singleton
 class CrearClienteRepository {
   Future<List<dynamic>> crearCliente(CrearClienteBody cliente) async {
