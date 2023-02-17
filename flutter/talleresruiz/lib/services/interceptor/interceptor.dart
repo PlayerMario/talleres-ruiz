@@ -57,7 +57,7 @@ class Interceptor {
     //var responseJson = response;
     //return responseJson;
     print("GET INTERCEPTOR");
-    return _response(response);
+    return response;
     /*} on SocketException catch (ex) {
       throw FetchDataException('No internet connection: ${ex.message}');
     }*/
@@ -70,13 +70,13 @@ class Interceptor {
     //var responseJson = response;
     //return responseJson;
     print("POST INTERCEPTOR");
-    return _response(response);
+    return response;
     /*} on Exception catch(ex) {
       throw ex;
     }*/
   }
 
-  dynamic _response(http.Response response) {
+  /*dynamic _response(http.Response response) {
     switch (response.statusCode) {
       case 200:
       case 201:
@@ -102,10 +102,10 @@ class Interceptor {
         throw FetchDataException(
             'Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
     }
-  }
+  }*/
 }
 
-class CustomException implements Exception {
+/*class CustomException implements Exception {
   final message;
   final _prefix;
 
@@ -134,7 +134,7 @@ class UnauthorizedException extends CustomException {
 
 class NotFoundException extends CustomException {
   NotFoundException([message]) : super(message, "");
-}
+}*/
 
 class AuthorizationInterceptor implements InterceptorContract {
   late LocalStorageService _localStorageService;

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ClienteMeResponse {
   String? id;
   String? nombre;
@@ -9,6 +11,13 @@ class ClienteMeResponse {
   List<String>? roles;
   String? vehiculo;
   List<Citas>? citas;
+
+  void convertToUtf8() {
+    List<int> utf8Bytes = utf8.encode(nombre!);
+    String utf8Nombre = utf8.decode(utf8Bytes);
+
+    nombre = utf8Nombre;
+  }
 
   ClienteMeResponse(
       {this.id,

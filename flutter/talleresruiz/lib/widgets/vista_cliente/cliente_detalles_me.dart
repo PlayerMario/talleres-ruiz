@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../../main.dart';
 
@@ -9,9 +11,9 @@ class ClienteDetallesMe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(clienteMe.nombre!),
-        Text(clienteMe.username!),
-        Text(clienteMe.dni!)
+        Text(utf8.decode(clienteMe.nombre!.codeUnits)),
+        Text(utf8.decode(clienteMe.username!.codeUnits)),
+        Text(utf8.decode(clienteMe.dni!.codeUnits)),
       ],
     );
   }

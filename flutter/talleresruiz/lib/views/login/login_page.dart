@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
     final authService = getIt<JwtAuthenticationService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
-        appBar: AppBar(
+        /*appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
               "NUEVO USUARIO",
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                     color: Color.fromRGBO(3, 37, 65, 1),
                   ));
             }),*/
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
         body: BlocProvider<LoginBloc>(
           create: (_) =>
               LoginBloc(login: login, authenticationService: authService)
