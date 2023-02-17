@@ -12,7 +12,7 @@ import 'package:talleresruiz/repositories/cliente/cliente_repository.dart'
 import 'package:talleresruiz/repositories/crear_cliente/crear_cliente_repo.dart'
     as _i5;
 import 'package:talleresruiz/repositories/log/log_repo.dart' as _i6;
-import 'package:talleresruiz/services/authentication/authentication_service.dart'
+import 'package:talleresruiz/services/user/user_service.dart'
     as _i7;
 import 'package:talleresruiz/services/interceptor/interceptor.dart' as _i3;
 
@@ -34,7 +34,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i4.ClienteRepository>(_i4.ClienteRepository());
     gh.singleton<_i5.CrearClienteRepository>(_i5.CrearClienteRepository());
     gh.singleton<_i6.LoginRepository>(_i6.LoginRepository());
-    gh.singleton<_i7.JwtAuthenticationService>(_i7.JwtAuthenticationService());
+    gh.singleton<_i7.UserService>(_i7.UserService());
     return this;
   }
 }

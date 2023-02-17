@@ -1,12 +1,11 @@
 import 'package:get_it/get_it.dart';
-import 'package:talleresruiz/services/interceptor/interceptor.dart';
-import '../../main.dart';
+import '../../../main.dart';
 import 'package:flutter/material.dart';
 
-class NuevoCliente extends StatelessWidget {
+class DetallesNuevoCliente extends StatelessWidget {
   late Interceptor _http;
   
-  NuevoCliente({super.key, required this.cliente}) {
+  DetallesNuevoCliente({super.key, required this.cliente}) {
     _http = GetIt.I.get<Interceptor>();
   }
   final CrearClienteResponse cliente;
@@ -91,7 +90,7 @@ class NuevoCliente extends StatelessWidget {
                                         const Color.fromRGBO(43, 45, 66, 1))),
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return const HomeMenu();
+                                return const HomeMenuPage();
                               }));
                             },
                             child: const Text(

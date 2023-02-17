@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../main.dart';
+import '../../../../main.dart';
 
-class MenuClientePage extends StatefulWidget {
-  const MenuClientePage({Key? key}) : super(key: key);
+class ClienteHomePage extends StatefulWidget {
+  const ClienteHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MenuClientePage> createState() => _MenuClientePage();
+  State<ClienteHomePage> createState() => _ClienteHomePage();
 }
 
-class _MenuClientePage extends State<MenuClientePage> {
+class _ClienteHomePage extends State<ClienteHomePage> {
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,7 @@ class _MenuClientePage extends State<MenuClientePage> {
         case VistaClienteStatus.success:
           if (state.clienteMe.roles[0] == "CLIENTE") {
             print("Login Cliene");
-            return ClienteDetallesMe(clienteMe: state.clienteMe);
+            return DetallesClienteLog(clienteMe: state.clienteMe);
           } else {
             print("Login Admin-Mec");
             return Center(child: Text("Logueado ${state.clienteMe}"));

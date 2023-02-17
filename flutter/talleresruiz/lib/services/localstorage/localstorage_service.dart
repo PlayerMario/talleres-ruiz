@@ -7,9 +7,7 @@ class LocalStorageService {
   static late SharedPreferences _preferences;
 
   static Future<LocalStorageService> getInstance() async {
-    print("Aquí se entra");
     _preferences = await SharedPreferences.getInstance();
-    print("Aquí se llega");
     _instance = const LocalStorageService();
     return _instance;
   }

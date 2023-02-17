@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import 'package:talleresruiz/services/authentication/authentication_service.dart';
-import '../../main.dart';
+import 'package:talleresruiz/main.dart';
 
-class VistaClientePage extends StatelessWidget {
-  const VistaClientePage({super.key});
+class ProviderLogin extends StatelessWidget {
+  const ProviderLogin({super.key, required this.login});
+  final LoginBody login;
 
   @override
   Widget build(BuildContext context) {
-    final authService = getIt<JwtAuthenticationService>();
+    final authService = getIt<UserService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
-        appBar: AppBar(
+        /*appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "PANEL DE CLIENTE",
+              "NUEVO USUARIO",
               style: TextStyle(
                 color: Color.fromRGBO(237, 242, 244, 1),
               ),
@@ -30,11 +30,12 @@ class VistaClientePage extends StatelessWidget {
                     color: Color.fromRGBO(3, 37, 65, 1),
                   ));
             }),*/
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        body: BlocProvider(
-          create: (_) => VistaClienteBloc(authenticationService: authService)
-            ..add(VistaClienteFetched()),
-          child: const MenuClientePage(),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
+        body: BlocProvider<LoginBloc>(
+          create: (_) =>
+              LoginBloc(login: login, authenticationService: authService)
+                ..add(LoginFetched(login)),
+          child: const LoginPage(),
         ));
   }
 }

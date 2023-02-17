@@ -1,17 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:talleresruiz/services/authentication/authentication_service.dart';
+import 'package:talleresruiz/services/user/user_service.dart';
 import '../../main.dart';
 
 part './login_event.dart';
 part './login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthenticationService _authenticationService;
+  final UserServiceAbs _authenticationService;
 
   LoginBloc(
       {required LoginBody login,
-      required AuthenticationService authenticationService})
+      required UserServiceAbs authenticationService})
       : assert(authenticationService != null),
       _authenticationService = authenticationService,
         super(const LoginState()) {
@@ -25,8 +25,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginFetched event, Emitter<LoginState> emit) async {
     if (state.status == LoginStatus.initial) {
       //final userLogin = await loginRepo.loginUser(event.login);
-      await Future.delayed(Duration(milliseconds: 500));
-      final userLogin = await _authenticationService.signIn(event.login);
+      await Future.delayed(const Duration(milliseconds: 500));
+      final userLogin = await _authenticationService.login(event.login);
 
       if (userLogin[1]) {
         return emit(state.copyWith(

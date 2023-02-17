@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../main.dart';
+import '../../../../main.dart';
 
-class UsuarioLogPage extends StatefulWidget {
-  const UsuarioLogPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<UsuarioLogPage> createState() => _UsuarioLogPage();
+  State<LoginPage> createState() => _LoginPage();
 }
 
-class _UsuarioLogPage extends State<UsuarioLogPage> {
+class _LoginPage extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
@@ -32,7 +32,7 @@ class _UsuarioLogPage extends State<UsuarioLogPage> {
         case LoginStatus.success:
           if (state.userLogin.roles[0] == "CLIENTE") {
             print("Login Cliene");
-            return VistaClientePage();
+            return ProviderClienteHome();
           } else {
             print("Login Admin-Mec");
           }

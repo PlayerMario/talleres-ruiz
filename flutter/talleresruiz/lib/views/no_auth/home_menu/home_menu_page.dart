@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../main.dart';
+import '../../../main.dart';
 
-class HomeMenu extends StatefulWidget {
-  const HomeMenu({super.key});
+class HomeMenuPage extends StatefulWidget {
+  const HomeMenuPage({super.key});
   @override
-  State<HomeMenu> createState() => _HomeMenuPage();
+  State<HomeMenuPage> createState() => _HomeMenuPage();
 }
 
-class _HomeMenuPage extends State<HomeMenu> {
+class _HomeMenuPage extends State<HomeMenuPage> {
   final List<Widget> _paginas = [
     const HomePage(),
-    const CrearClienteForm(),
-    LoginForm()
+    const FormularioCrearCliente(),
+    FormularioLogin()
   ];
   int _indices = 0;
 

@@ -1,27 +1,26 @@
 import 'dart:convert';
-
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import 'package:talleresruiz/main.dart';
-import 'package:talleresruiz/services/localstorage/localstorage_service.dart';
+import '../../main.dart';
 
-abstract class AuthenticationService {
-  Future<dynamic> getCurrentUserCliente();
-  //Future<dynamic> getCurrentUserMecanico();
-  Future<dynamic> signIn(LoginBody login);
-  Future<void> signOut();
+
+abstract class UserServiceAbs {
+  Future<dynamic> getClienteLogin();
+  //Future<dynamic> getMecanicoLogin();
+  Future<dynamic> login(LoginBody login);
+  Future<void> logout();
 }
 
 @Order(2)
 @singleton
-class JwtAuthenticationService extends AuthenticationService {
+class UserService extends UserServiceAbs {
   late LoginRepository _loginRepository;
   late LocalStorageService _localStorageService;
   late ClienteRepository _clienteRepository;
   //late MecanicoRepository _mecanicoRepository;
 
-  JwtAuthenticationService() {
+  UserService() {
     _loginRepository = getIt<LoginRepository>();
     _clienteRepository = getIt<ClienteRepository>();
     //_mecanicoRepository = getIt<MecanicoRepository>();
@@ -31,7 +30,7 @@ class JwtAuthenticationService extends AuthenticationService {
   }
 
   @override
-  Future<dynamic> getCurrentUserCliente() async {
+  Future<dynamic> getClienteLogin() async {
     print("Obteniendo datos del cliente...");
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
@@ -65,18 +64,12 @@ class JwtAuthenticationService extends AuthenticationService {
   }*/
 
   @override
-  Future<dynamic> signIn(LoginBody login) async {
+  Future<dynamic> login(LoginBody login) async {
     dynamic response = await _loginRepository.loginUser(login);
-    /*if (response[1]) {
-      await _localStorageService.saveToDisk('user_token', response[0].token);
-      return response[0];
-    } else {
-      return response[0];
-    }*/
     if (response.statusCode == 201) {
       LoginResponse resp = LoginResponse.fromJson(jsonDecode(response.body));
-      print("TOKEN ${resp.token}");
       await _localStorageService.saveToDisk("user_token", resp.token);
+      print("Token guardado, logueando...");
       return [resp, true];
     } else {
       return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
@@ -84,7 +77,7 @@ class JwtAuthenticationService extends AuthenticationService {
   }
 
   @override
-  Future<void> signOut() async {
+  Future<void> logout() async {
     print("Borrando token...");
     await _localStorageService.deleteFromDisk("user_token");
   }

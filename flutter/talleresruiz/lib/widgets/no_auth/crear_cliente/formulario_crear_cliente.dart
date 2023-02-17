@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../main.dart';
+import '../../../main.dart';
 
-class CrearClienteForm extends StatefulWidget {
-  const CrearClienteForm({super.key});
+class FormularioCrearCliente extends StatefulWidget {
+  const FormularioCrearCliente({super.key});
   @override
-  State<CrearClienteForm> createState() => _CrearClienteForm();
+  State<FormularioCrearCliente> createState() => _FormularioCrearCliente();
 }
 
-class _CrearClienteForm extends State<CrearClienteForm> {
+class _FormularioCrearCliente extends State<FormularioCrearCliente> {
   final username = TextEditingController();
   final password = TextEditingController();
   final passwordVerify = TextEditingController();
@@ -239,7 +239,7 @@ class _CrearClienteForm extends State<CrearClienteForm> {
                                 matricula: matricula.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return CrearClientePage(cliente: cliente);
+                              return ProviderCrearCliente(cliente: cliente);
                             }));
                           }
                         },

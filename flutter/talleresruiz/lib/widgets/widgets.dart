@@ -1,5 +1,5 @@
-export 'crear_cliente/crear_cliente_form.dart';
-export 'crear_cliente/nuevo_cliente_screen.dart';
-export './error_screen/error_screen.dart';
-export './form_login/login_form.dart';
-export './vista_cliente/cliente_detalles_me.dart';
+export './no_auth/crear_cliente/formulario_crear_cliente.dart';
+export './no_auth/crear_cliente/detalles_nuevo_cliente.dart';
+export './error/error_screen.dart';
+export './no_auth/login/formulario_login.dart';
+export './auth/cliente/detalles_cliente_log.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../main.dart';
+import '../../../main.dart';
 
 class GlobalContext {  
   static late BuildContext ctx;
@@ -12,8 +12,8 @@ class GlobalContext {
   State<LoginForm> createState() => _LoginForm();
 }*/
 
-class LoginForm extends /*State<LoginForm>*/ StatelessWidget {
-  static late LoginForm _instance;
+class FormularioLogin extends /*State<LoginForm>*/ StatelessWidget {
+  static late FormularioLogin _instance;
   final username = TextEditingController();
   final password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -27,7 +27,7 @@ class LoginForm extends /*State<LoginForm>*/ StatelessWidget {
     });
   }
 
-  LoginForm() {
+  FormularioLogin() {
     _instance = this;
   }
 
@@ -105,7 +105,7 @@ class LoginForm extends /*State<LoginForm>*/ StatelessWidget {
                             LoginBody login = LoginBody(username: username.text, password: password.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return LoginPage(login: login);
+                              return ProviderLogin(login: login);
                             }));
                           }
                         },

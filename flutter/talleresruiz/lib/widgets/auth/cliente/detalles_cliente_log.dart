@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../../main.dart';
+import '../../../main.dart';
 
-class ClienteDetallesMe extends StatelessWidget {
-  const ClienteDetallesMe({super.key, required this.clienteMe});
+class DetallesClienteLog extends StatelessWidget {
+  const DetallesClienteLog({super.key, required this.clienteMe});
   final ClienteMeResponse clienteMe;
 
   @override

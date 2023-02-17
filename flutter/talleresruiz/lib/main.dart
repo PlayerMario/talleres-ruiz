@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'main.dart';
 export './bloc/bloc.dart';
@@ -7,14 +6,16 @@ export './models/models.dart';
 export './repositories/repositories.dart';
 export './views/views.dart';
 export './widgets/widgets.dart';
+export './services/services.dart';
 
 void main() {
   setupAsyncDependencies();
   configureDependencies();
 
-  runApp(MaterialApp(title: 'TALLERES RUIZ', initialRoute: '/', routes: {
-    '/': (context) => const HomeMenu()
-  }));
+  runApp(MaterialApp(
+      title: 'TALLERES RUIZ',
+      initialRoute: '/',
+      routes: {'/': (context) => const HomeMenuPage()}));
 }
 
 class HomePage extends StatelessWidget {

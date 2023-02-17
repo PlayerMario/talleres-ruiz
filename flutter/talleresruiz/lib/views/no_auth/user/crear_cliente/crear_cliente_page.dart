@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../main.dart';
+import '../../../../main.dart';
 
-class NuevoClienteScreen extends StatefulWidget {
-  const NuevoClienteScreen({Key? key}) : super(key: key);
+class CrearClientePage extends StatefulWidget {
+  const CrearClientePage({Key? key}) : super(key: key);
 
   @override
-  State<NuevoClienteScreen> createState() => NuevoClienteDetails();
+  State<CrearClientePage> createState() => _CrearClientePage();
 }
 
-class NuevoClienteDetails extends State<NuevoClienteScreen> {
+class _CrearClientePage extends State<CrearClientePage> {
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class NuevoClienteDetails extends State<NuevoClienteScreen> {
             return ErrorScreen(error: state.clienteCreado);
           }
         case CrearClienteStatus.success:
-          return NuevoCliente(cliente: state.clienteCreado!);
+          return DetallesNuevoCliente(cliente: state.clienteCreado!);
         case CrearClienteStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
