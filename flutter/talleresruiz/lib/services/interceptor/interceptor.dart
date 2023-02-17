@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,10 +10,9 @@ import 'package:talleresruiz/services/localstorage/localstorage_service.dart';
 
 import '../../main.dart';
 
-
 class ApiConstants {
-  static String baseUrl = "http://localhost:8080";
-  //static String baseUrl = "http://10.0.2.2:8080";
+  //static String baseUrl = "http://localhost:8080";
+  static String baseUrl = "http://10.0.2.2:8080";
 }
 
 class HeadersApiInterceptor implements InterceptorContract {
@@ -31,7 +28,8 @@ class HeadersApiInterceptor implements InterceptorContract {
   }
 
   @override
-  Future<ResponseData> interceptResponse({required ResponseData data}) async => data;
+  Future<ResponseData> interceptResponse({required ResponseData data}) async =>
+      data;
 }
 
 @Order(-10)
@@ -40,38 +38,45 @@ class Interceptor {
   var _httpClient;
 
   Interceptor() {
-    _httpClient = InterceptedClient.build(interceptors: [HeadersApiInterceptor()]);
+    _httpClient =
+        InterceptedClient.build(interceptors: [HeadersApiInterceptor()]);
   }
 
   Interceptor.withInterceptors(List<InterceptorContract> interceptors) {
-    if (interceptors.where((element) => element is HeadersApiInterceptor).isEmpty) interceptors..add(HeadersApiInterceptor());
+    // El interceptor con los encabezados sobre JSON se añade si no está incluido en la lista
+    if (interceptors
+        .where((element) => element is HeadersApiInterceptor)
+        .isEmpty) interceptors..add(HeadersApiInterceptor());
     _httpClient = InterceptedClient.build(interceptors: interceptors);
   }
 
   Future<dynamic> get(String url) async {
-    try {
-        Uri uri = Uri.parse(ApiConstants.baseUrl + url);
-        final response = await _httpClient.get(uri);
-        var responseJson = response;
-        return responseJson;
-    } on SocketException catch(ex) {
+    //try {
+    Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    final response = await _httpClient.get(uri);
+    //var responseJson = response;
+    //return responseJson;
+    print("GET INTERCEPTOR");
+    return _response(response);
+    /*} on SocketException catch (ex) {
       throw FetchDataException('No internet connection: ${ex.message}');
-    }
+    }*/
   }
 
   Future<dynamic> post(String url, dynamic body) async {
-      try {
-        Uri uri = Uri.parse(ApiConstants.baseUrl + url);
-        final response = await _httpClient.post(uri, body: jsonEncode(body));
-        var responseJson = response;
-        return responseJson;
-    } on Exception catch(ex) {
+    //try {
+    Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    final response = await _httpClient.post(uri, body: jsonEncode(body));
+    //var responseJson = response;
+    //return responseJson;
+    print("POST INTERCEPTOR");
+    return _response(response);
+    /*} on Exception catch(ex) {
       throw ex;
-    }
+    }*/
   }
 
-
-  /*dynamic _response(http.Response response) {
+  dynamic _response(http.Response response) {
     switch (response.statusCode) {
       case 200:
       case 201:
@@ -97,7 +102,7 @@ class Interceptor {
         throw FetchDataException(
             'Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
     }
-  }*/
+  }
 }
 
 class CustomException implements Exception {
@@ -112,8 +117,7 @@ class CustomException implements Exception {
 }
 
 class FetchDataException extends CustomException {
-  FetchDataException([String? message])
-      : super(message, "");
+  FetchDataException([String? message]) : super(message, "");
 }
 
 class BadRequestException extends CustomException {
@@ -121,43 +125,37 @@ class BadRequestException extends CustomException {
 }
 
 class AuthenticationException extends CustomException {
-  AuthenticationException([message]) : super(message,"");
+  AuthenticationException([message]) : super(message, "");
 }
 
-
 class UnauthorizedException extends CustomException {
-  UnauthorizedException([message]) : super(message,"");
+  UnauthorizedException([message]) : super(message, "");
 }
 
 class NotFoundException extends CustomException {
   NotFoundException([message]) : super(message, "");
 }
 
-
-
 class AuthorizationInterceptor implements InterceptorContract {
-
   late LocalStorageService _localStorageService;
 
   AuthorizationInterceptor() {
     //_localStorageService = getIt<LocalStorageService>();
-    GetIt.I.getAsync<LocalStorageService>().then((value) => _localStorageService = value);
-
+    GetIt.I
+        .getAsync<LocalStorageService>()
+        .then((value) => _localStorageService = value);
   }
-
 
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {
-
     try {
-      var token = await _localStorageService.getFromDisk("user_token"); 
-      data.headers["Authorization"] = "Bearer " + token;  
-    } catch(e) {
+      var token = await _localStorageService.getFromDisk("user_token");
+      data.headers["Authorization"] = "Bearer " + token;
+    } catch (e) {
       print(e);
     }
 
     return Future.value(data);
-
   }
 
   @override
@@ -169,12 +167,12 @@ class AuthorizationInterceptor implements InterceptorContract {
     }
     return Future.value(data);
   }
-
 }
+
 @Order(-10)
 @singleton
 class RestAuthenticatedClient extends Interceptor {
-
-  RestAuthenticatedClient() : super.withInterceptors(List.of(<InterceptorContract>[AuthorizationInterceptor()]));
-
+  RestAuthenticatedClient()
+      : super.withInterceptors(
+            List.of(<InterceptorContract>[AuthorizationInterceptor()]));
 }

@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
                   ));
             }),*/
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        body: BlocProvider(
+        body: BlocProvider<LoginBloc>(
           create: (_) =>
               LoginBloc(login: login, authenticationService: authService)
                 ..add(LoginFetched(login)),

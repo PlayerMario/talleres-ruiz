@@ -1,9 +1,17 @@
+import 'package:get_it/get_it.dart';
+import 'package:talleresruiz/services/interceptor/interceptor.dart';
 import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class NuevoCliente extends StatelessWidget {
-  const NuevoCliente({super.key, required this.cliente});
+  late Interceptor _http;
+  
+  NuevoCliente({super.key, required this.cliente}) {
+    _http = GetIt.I.get<Interceptor>();
+  }
   final CrearClienteResponse cliente;
+  //const url = 'http://localhost:8080';
+    final url = 'http://10.0.2.2:8080';
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +33,8 @@ class NuevoCliente extends StatelessWidget {
                             height: 150,
                             child: Image.network(
                               '$url/auth/fichero/download/${cliente.avatar!}',
-                              fit: BoxFit.cover,
-                            ),
+                              fit: BoxFit.cover,),
+                            
                           ),
                           Padding(
                               padding: const EdgeInsets.all(15),

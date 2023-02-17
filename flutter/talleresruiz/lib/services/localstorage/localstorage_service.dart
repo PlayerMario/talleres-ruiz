@@ -10,7 +10,7 @@ class LocalStorageService {
     print("Aquí se entra");
     _preferences = await SharedPreferences.getInstance();
     print("Aquí se llega");
-    _instance = LocalStorageService();
+    _instance = const LocalStorageService();
     return _instance;
   }
 

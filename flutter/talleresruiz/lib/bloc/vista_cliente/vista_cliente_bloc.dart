@@ -18,6 +18,7 @@ class VistaClienteBloc extends Bloc<VistaClienteEvent, VistaClienteState> {
   Future<void> onMostrarClienteMe(
       VistaClienteFetched event, Emitter<VistaClienteState> emit) async {
     if (state.status == VistaClienteStatus.initial) {
+      await Future.delayed(Duration(milliseconds: 500));
       final clienteMe = await _authenticationService.getCurrentUserCliente();
 
       if (clienteMe[1]) {

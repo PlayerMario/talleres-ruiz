@@ -25,6 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginFetched event, Emitter<LoginState> emit) async {
     if (state.status == LoginStatus.initial) {
       //final userLogin = await loginRepo.loginUser(event.login);
+      await Future.delayed(Duration(milliseconds: 500));
       final userLogin = await _authenticationService.signIn(event.login);
 
       if (userLogin[1]) {

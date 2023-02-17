@@ -20,12 +20,12 @@ class LoginRepository {
     //GetIt.I.getAsync<LocalStorageService>().then((value) => _localStorageService = value);
 
     final userLogin = {"username": login.username, "password": login.password};
-    String url = '/noauth/user/login';
+    String url = "/noauth/user/login";
 
     /*final response = await http.post(Uri.parse('$url/noauth/user/login'),
         headers: headers, body: jsonEncode(userLogin));*/
     
-    final response = await _http.post(url, login);
+    var response = await _http.post(url, userLogin);
 
     return response;
     /*if (response.statusCode == 201) {

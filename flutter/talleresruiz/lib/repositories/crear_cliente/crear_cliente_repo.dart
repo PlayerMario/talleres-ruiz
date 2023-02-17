@@ -27,12 +27,15 @@ class CrearClienteRepository {
       "matricula": cliente.matricula
     };
 
-    String url = '/noauth/user/register';
+    //String url = '/noauth/user/register';
+    //const url = 'http://localhost:8080';
+    const url = 'http://10.0.2.2:8080';
+    const headers = {"Content-Type": "application/json;charset=UTF-8"};
 
-    /*final response = await http.post(Uri.parse('$url/noauth/user/register'),
-        headers: headers, body: jsonEncode(crearCliente));*/
+    final response = await http.post(Uri.parse('$url/noauth/user/register'),
+        headers: headers, body: jsonEncode(crearCliente));
     
-    final response = await _http.post(url, cliente);
+    //final response = await _http.post(url, cliente);
 
     if (response.statusCode == 201) {
       return [CrearClienteResponse.fromJson(jsonDecode(response.body)), true];

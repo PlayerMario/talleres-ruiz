@@ -43,10 +43,10 @@ class JwtAuthenticationService extends AuthenticationService {
       }*/
       dynamic response = await _clienteRepository.getClienteMe();
       if (response.statusCode == 200) {
-      return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
-    } else {
-      return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
-    }
+        return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
     }
   }
 
@@ -75,7 +75,8 @@ class JwtAuthenticationService extends AuthenticationService {
     }*/
     if (response.statusCode == 201) {
       LoginResponse resp = LoginResponse.fromJson(jsonDecode(response.body));
-      await _localStorageService.saveToDisk('user_token', resp.token);
+      print("TOKEN ${resp.token}");
+      await _localStorageService.saveToDisk("user_token", resp.token);
       return [resp, true];
     } else {
       return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
