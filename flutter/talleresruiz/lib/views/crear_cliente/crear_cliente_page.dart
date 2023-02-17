@@ -19,7 +19,7 @@ class CrearClientePage extends StatelessWidget {
             leading: Builder(builder: (context) {
               return IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/home');
+                    Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_new,

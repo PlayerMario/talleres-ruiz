@@ -17,6 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -113,6 +114,7 @@ public class UserService {
     public UserDto generarUserDtoToken(User usuario, String token) {
         UserDto userDto = repository.generarUserDto(usuario.getId());
         userDto.setToken(token);
+        userDto.setRoles(usuario.getRoles().stream().map(Objects::toString).toList());
         return userDto;
     }
 

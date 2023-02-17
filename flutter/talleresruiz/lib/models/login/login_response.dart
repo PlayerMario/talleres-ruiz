@@ -3,6 +3,7 @@ class LoginResponse {
   String? nombre;
   String? username;
   String? avatar;
+  List<String>? roles;
   String? token;
 
   LoginResponse({
@@ -10,6 +11,7 @@ class LoginResponse {
     required this.nombre,
     required this.username,
     required this.avatar,
+    required this.roles,
     required this.token,
   });
 
@@ -19,6 +21,7 @@ class LoginResponse {
     username = json['username'];
     avatar = json['avatar'];
     token = json['token'];
+    roles = json['roles'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +30,7 @@ class LoginResponse {
     data['nombre'] = nombre;
     data['username'] = username;
     data['avatar'] = avatar;
+    data['roles'] = roles;
     data['token'] = token;
     return data;
   }

@@ -23,9 +23,8 @@ class NuevoCliente extends StatelessWidget {
                           SizedBox(
                             width: 150,
                             height: 150,
-                            //child: Image.network('http://localhost:8080/auth/fichero/download/${cliente.avatar!}', fit: BoxFit.cover),
                             child: Image.network(
-                              'http://10.0.2.2:8080/auth/fichero/download/${cliente.avatar!}',
+                              '$url/auth/fichero/download/${cliente.avatar!}',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -84,7 +83,7 @@ class NuevoCliente extends StatelessWidget {
                                         const Color.fromRGBO(43, 45, 66, 1))),
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return const HomePage();
+                                return const HomeMenu();
                               }));
                             },
                             child: const Text(

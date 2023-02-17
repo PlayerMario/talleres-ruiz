@@ -38,7 +38,7 @@ public class UserDto {
     @JsonView({MecanicoViews.Master.class, ClienteViews.Master.class, UserViews.Master.class})
     protected String avatar;
 
-    @JsonView({MecanicoViews.DetallesMecanicos.class, ClienteViews.DetallesClientes.class})
+    @JsonView({MecanicoViews.DetallesMecanicos.class, ClienteViews.DetallesClientes.class, UserViews.Token.class})
     protected List<String> roles;
 
     @JsonView(UserViews.Token.class)

@@ -6,6 +6,7 @@ export './models/models.dart';
 export './repositories/repositories.dart';
 export './views/views.dart';
 export './widgets/widgets.dart';
+export './config/const.dart';
 
 void main() {
   setupAsyncDependencies();

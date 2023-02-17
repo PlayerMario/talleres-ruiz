@@ -116,6 +116,10 @@ public class UserNoAuthController {
                                                     "username": "mrl26",
                                                     "avatar": "https://robohash.org/mrl26",
                                                     "token": "..."
+                                                    "roles": [
+                                                            "ADMIN",
+                                                            "MEC"
+                                                            ]
                                                 }
                                             """
                             )}
