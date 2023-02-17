@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart'; 
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talleresruiz/services/localstorage/localstorage_service.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.config.dart';
+import 'package:talleresruiz/services/localstorage/localstorage_service.dart';
 
 
 final getIt = GetIt.instance;

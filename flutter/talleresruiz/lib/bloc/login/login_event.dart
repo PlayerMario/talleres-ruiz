@@ -12,3 +12,7 @@ class LoginFetched extends LoginEvent {
 
   final LoginBody login;
 }
+
+class UserLoggedOut extends LoginEvent {}
+
+class SessionExpiredEvent extends LoginEvent {}

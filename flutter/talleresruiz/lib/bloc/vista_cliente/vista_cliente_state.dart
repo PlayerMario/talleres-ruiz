@@ -3,8 +3,7 @@ part of './vista_cliente_bloc.dart';
 enum VistaClienteStatus { initial, success, failure }
 
 class VistaClienteState extends Equatable {
-  const VistaClienteState(
-      {this.status = VistaClienteStatus.initial, this.clienteMe});
+  const VistaClienteState({this.status = VistaClienteStatus.initial, this.clienteMe});
 
   final VistaClienteStatus status;
   final dynamic clienteMe;

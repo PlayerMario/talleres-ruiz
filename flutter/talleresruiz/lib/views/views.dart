@@ -4,3 +4,4 @@ export './crear_cliente/nuevo_cliente_page.dart';
 export './login/login_page.dart';
 export './login/usuario_log_page.dart';
 export './vista_cliente/vista_cliente_page.dart';
+export './vista_cliente/menu_cliente_page.dart';

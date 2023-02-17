@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 
-class LoginForm extends StatefulWidget {
+class GlobalContext {  
+  static late BuildContext ctx;
+}
+
+/*class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
   @override
   State<LoginForm> createState() => _LoginForm();
-}
+}*/
 
-class _LoginForm extends State<LoginForm> {
+class LoginForm extends /*State<LoginForm>*/ StatelessWidget {
+  static late LoginForm _instance;
   final username = TextEditingController();
   final password = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
+
+  static Route route() {
+    print("Enrutando al login");
+    return MaterialPageRoute<void>(builder: (context) {
+      var authBloc = BlocProvider.of<LoginBloc>(context);
+      authBloc.add(SessionExpiredEvent());
+      return _instance;
+    });
+  }
+
+  LoginForm() {
+    _instance = this;
+  }
 
   @override
   Widget build(BuildContext context) {

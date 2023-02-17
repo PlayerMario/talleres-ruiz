@@ -15,34 +15,32 @@ class _MenuClientePage extends State<MenuClientePage> {
     super.initState();
   }
 
-  /*
-    @override
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+    return BlocBuilder<VistaClienteBloc, VistaClienteState>(
+        builder: (context, state) {
       switch (state.status) {
-        case LoginStatus.failure:
-          if (state.userLogin.subErrors != null) {
+        case VistaClienteStatus.failure:
+          if (state.clienteMe.subErrors != null) {
             return ListView.builder(
-                itemCount: state.userLogin.subErrors!.length,
+                itemCount: state.clienteMe.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SubErrorData(error: state.userLogin.subErrors![index]);
+                  return SubErrorData(error: state.clienteMe.subErrors![index]);
                 });
           } else {
-            return ErrorScreen(error: state.userLogin);
+            return ErrorScreen(error: state.clienteMe);
           }
-        case LoginStatus.success:
-          if (state.userLogin.roles[0] == "CLIENTE") {
+        case VistaClienteStatus.success:
+          if (state.clienteMe.roles[0] == "CLIENTE") {
             print("Login Cliene");
-            return VistaClientePage();
+            return ClienteDetallesMe(clienteMe: state.clienteMe);
           } else {
             print("Login Admin-Mec");
+            return Center(child: Text("Logueado ${state.clienteMe}"));
           }
-
-          return Center(child: Text("Logueado ${state.userLogin}"));
-        case LoginStatus.initial:
+        case VistaClienteStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });
   }
-  */
 }
