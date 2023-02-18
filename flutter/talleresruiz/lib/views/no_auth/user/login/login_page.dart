@@ -17,9 +17,9 @@ class _LoginPage extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+    return BlocBuilder<UserLoginBloc, UserLoginState>(builder: (context, state) {
       switch (state.status) {
-        case LoginStatus.failure:
+        case UserLoginStatus.failure:
           if (state.userLogin.subErrors != null) {
             return ListView.builder(
                 itemCount: state.userLogin.subErrors!.length,
@@ -29,7 +29,7 @@ class _LoginPage extends State<LoginPage> {
           } else {
             return ErrorScreen(error: state.userLogin);
           }
-        case LoginStatus.success:
+        case UserLoginStatus.success:
           if (state.userLogin.roles[0] == "CLIENTE") {
             print("Login Cliene");
             return ProviderClienteHome();
@@ -38,7 +38,7 @@ class _LoginPage extends State<LoginPage> {
           }
 
           return Center(child: Text("Logueado ${state.userLogin}"));
-        case LoginStatus.initial:
+        case UserLoginStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

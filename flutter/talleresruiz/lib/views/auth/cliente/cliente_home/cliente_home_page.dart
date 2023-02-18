@@ -17,10 +17,10 @@ class _ClienteHomePage extends State<ClienteHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VistaClienteBloc, VistaClienteState>(
+    return BlocBuilder<ClienteHomeBloc, ClienteHomeState>(
         builder: (context, state) {
       switch (state.status) {
-        case VistaClienteStatus.failure:
+        case ClienteHomeStatus.failure:
           if (state.clienteMe.subErrors != null) {
             return ListView.builder(
                 itemCount: state.clienteMe.subErrors!.length,
@@ -30,7 +30,7 @@ class _ClienteHomePage extends State<ClienteHomePage> {
           } else {
             return ErrorScreen(error: state.clienteMe);
           }
-        case VistaClienteStatus.success:
+        case ClienteHomeStatus.success:
           if (state.clienteMe.roles[0] == "CLIENTE") {
             print("Login Cliene");
             return DetallesClienteLog(clienteMe: state.clienteMe);
@@ -38,7 +38,7 @@ class _ClienteHomePage extends State<ClienteHomePage> {
             print("Login Admin-Mec");
             return Center(child: Text("Logueado ${state.clienteMe}"));
           }
-        case VistaClienteStatus.initial:
+        case ClienteHomeStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

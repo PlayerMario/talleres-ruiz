@@ -21,8 +21,8 @@ class FormularioLogin extends /*State<LoginForm>*/ StatelessWidget {
   static Route route() {
     print("Enrutando al login");
     return MaterialPageRoute<void>(builder: (context) {
-      var authBloc = BlocProvider.of<LoginBloc>(context);
-      authBloc.add(SessionExpiredEvent());
+      var authBloc = BlocProvider.of<UserLoginBloc>(context);
+      authBloc.add(UserSessionExpired());
       return _instance;
     });
   }
@@ -102,7 +102,7 @@ class FormularioLogin extends /*State<LoginForm>*/ StatelessWidget {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            LoginBody login = LoginBody(username: username.text, password: password.text);
+                            UserLoginBody login = UserLoginBody(username: username.text, password: password.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return ProviderLogin(login: login);

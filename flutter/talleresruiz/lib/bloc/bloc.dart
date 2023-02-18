@@ -1,3 +1,3 @@
-export './crear_cliente/crear_cliente_bloc.dart';
-export './login/login_bloc.dart';
-export './vista_cliente/vista_cliente_bloc.dart';
+export './cliente/cliente_crear/cliente_crear_bloc.dart';
+export './cliente/cliente_home/cliente_home_bloc.dart';
+export './user/user_login/user_login_bloc.dart';

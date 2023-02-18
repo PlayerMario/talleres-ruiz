@@ -6,30 +6,30 @@ import '../../main.dart';
 
 
 abstract class UserServiceAbs {
-  Future<dynamic> getClienteLogin();
+  //Future<dynamic> getClienteLogin();
   //Future<dynamic> getMecanicoLogin();
-  Future<dynamic> login(LoginBody login);
+  Future<dynamic> login(UserLoginBody login);
   Future<void> logout();
 }
 
 @Order(2)
 @singleton
 class UserService extends UserServiceAbs {
-  late LoginRepository _loginRepository;
+  late UserRepository _userRepository;
   late LocalStorageService _localStorageService;
-  late ClienteRepository _clienteRepository;
+  //late ClienteRepository _clienteRepository;
   //late MecanicoRepository _mecanicoRepository;
 
   UserService() {
-    _loginRepository = getIt<LoginRepository>();
-    _clienteRepository = getIt<ClienteRepository>();
+    _userRepository = getIt<UserRepository>();
+    //_clienteRepository = getIt<ClienteRepository>();
     //_mecanicoRepository = getIt<MecanicoRepository>();
     GetIt.I
         .getAsync<LocalStorageService>()
         .then((value) => _localStorageService = value);
   }
 
-  @override
+  /*@override
   Future<dynamic> getClienteLogin() async {
     print("Obteniendo datos del cliente...");
     String? token = _localStorageService.getFromDisk("user_token");
@@ -47,7 +47,7 @@ class UserService extends UserServiceAbs {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }
     }
-  }
+  }*/
 
   /*@override
   Future<dynamic> getCurrentUserMecanico() async {
@@ -64,8 +64,8 @@ class UserService extends UserServiceAbs {
   }*/
 
   @override
-  Future<dynamic> login(LoginBody login) async {
-    dynamic response = await _loginRepository.loginUser(login);
+  Future<dynamic> login(UserLoginBody login) async {
+    dynamic response = await _userRepository.loginUser(login);
     if (response.statusCode == 201) {
       LoginResponse resp = LoginResponse.fromJson(jsonDecode(response.body));
       await _localStorageService.saveToDisk("user_token", resp.token);

@@ -9,7 +9,7 @@ class ProviderClienteHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authService = getIt<UserService>();
+    final clienteService = getIt<ClienteService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         appBar: AppBar(
@@ -32,8 +32,8 @@ class ProviderClienteHome extends StatelessWidget {
             }),*/
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: BlocProvider(
-          create: (_) => VistaClienteBloc(authenticationService: authService)
-            ..add(VistaClienteFetched()),
+          create: (_) => ClienteHomeBloc(clienteService: clienteService)
+            ..add(ClienteHomeFetched()),
           child: const ClienteHomePage(),
         ));
   }

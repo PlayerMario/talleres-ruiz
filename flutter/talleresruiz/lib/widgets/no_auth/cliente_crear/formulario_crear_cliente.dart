@@ -227,7 +227,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            CrearClienteBody cliente = CrearClienteBody(
+                            ClienteCrearBody cliente = ClienteCrearBody(
                                 username: username.text,
                                 password: password.text,
                                 verifyPassword: passwordVerify.text,

@@ -5,7 +5,7 @@ import 'package:talleresruiz/main.dart';
 
 class ProviderLogin extends StatelessWidget {
   const ProviderLogin({super.key, required this.login});
-  final LoginBody login;
+  final UserLoginBody login;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,10 @@ class ProviderLogin extends StatelessWidget {
                   ));
             }),*/
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
-        body: BlocProvider<LoginBloc>(
+        body: BlocProvider<UserLoginBloc>(
           create: (_) =>
-              LoginBloc(login: login, authenticationService: authService)
-                ..add(LoginFetched(login)),
+              UserLoginBloc(login: login, userService: authService)
+                ..add(UserLoginFetched(login)),
           child: const LoginPage(),
         ));
   }

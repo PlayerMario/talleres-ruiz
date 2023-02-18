@@ -8,13 +8,13 @@ import '../../main.dart';
 @Order(-1)
 @singleton
 class CrearClienteRepository {
-  late Interceptor _http;
+  /*late Interceptor _http;
 
   CrearClienteRepository() {
     _http = GetIt.I.get<Interceptor>();
-  }
+  }*/
 
-  Future<List<dynamic>> crearCliente(CrearClienteBody cliente) async {
+  /*Future<List<dynamic>> crearCliente(CrearClienteBody cliente) async {
     final crearCliente = {
       "username": cliente.username,
       "password": cliente.password,
@@ -42,5 +42,5 @@ class CrearClienteRepository {
     } else {
       return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
     }
-  }
+  }*/
 }

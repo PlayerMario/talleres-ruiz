@@ -15,6 +15,36 @@ class ClienteRepository {
     _http = getIt<RestAuthenticatedClient>();
   }
 
+  Future<List<dynamic>> crearCliente(ClienteCrearBody cliente) async {
+    final crearCliente = {
+      "username": cliente.username,
+      "password": cliente.password,
+      "verifyPassword": cliente.verifyPassword,
+      "dni": cliente.dni,
+      "nombre": cliente.nombre,
+      "email": cliente.email,
+      "tlf": cliente.tlf,
+      "vehiculo": cliente.vehiculo,
+      "matricula": cliente.matricula
+    };
+
+    //String url = '/noauth/user/register';
+    //const url = 'http://localhost:8080';
+    //const url = 'http://10.0.2.2:8080';
+    //const headers = {"Content-Type": "application/json;charset=UTF-8"};
+
+    final response = await http.post(Uri.parse('$baseUrl/noauth/user/register'),
+        headers: headers, body: jsonEncode(crearCliente));
+    
+    //final response = await _http.post(url, cliente);
+
+    if (response.statusCode == 201) {
+      return [ClienteCrearResponse.fromJson(jsonDecode(response.body)), true];
+    } else {
+      return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+    }
+  }
+
   Future<dynamic> getClienteMe() async {
     String url = "/auth/cliente/me";
     var response = await _http.get(url);

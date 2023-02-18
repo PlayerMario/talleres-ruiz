@@ -17,10 +17,10 @@ class _CrearClientePage extends State<CrearClientePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CrearClienteBloc, CrearClienteState>(
+    return BlocBuilder<ClienteCrearBloc, ClienteCrearState>(
         builder: (context, state) {
       switch (state.status) {
-        case CrearClienteStatus.failure:
+        case ClienteCrearStatus.failure:
           if (state.clienteCreado.subErrors! != null) {
             return ListView.builder(
                 itemCount: state.clienteCreado.subErrors!.length,
@@ -30,9 +30,9 @@ class _CrearClientePage extends State<CrearClientePage> {
           } else {
             return ErrorScreen(error: state.clienteCreado);
           }
-        case CrearClienteStatus.success:
+        case ClienteCrearStatus.success:
           return DetallesNuevoCliente(cliente: state.clienteCreado!);
-        case CrearClienteStatus.initial:
+        case ClienteCrearStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

@@ -1,4 +1,4 @@
-class CrearClienteResponse {
+class ClienteCrearResponse {
   String? nombre;
   String? username;
   String? dni;
@@ -7,7 +7,7 @@ class CrearClienteResponse {
   String? avatar;
   String? vehiculo;
 
-  CrearClienteResponse({
+  ClienteCrearResponse({
     required this.nombre,
     required this.username,
     required this.dni,
@@ -17,7 +17,7 @@ class CrearClienteResponse {
     required this.vehiculo,
   });
 
-  CrearClienteResponse.fromJson(Map<String, dynamic> json) {
+  ClienteCrearResponse.fromJson(Map<String, dynamic> json) {
     nombre = json['nombre'];
     username = json['username'];
     dni = json['dni'];

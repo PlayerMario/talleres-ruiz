@@ -8,15 +8,15 @@ import '../../services/localstorage/localstorage_service.dart';
 
 @Order(-1)
 @singleton
-class LoginRepository {
+class UserRepository {
   //late LocalStorageService _localStorageService;
   late Interceptor _http;
 
-  LoginRepository() {
+  UserRepository() {
     _http = GetIt.I.get<Interceptor>();
   }
 
-  /*Future<List<dynamic>>*/Future<dynamic> loginUser(LoginBody login) async {
+  /*Future<List<dynamic>>*/Future<dynamic> loginUser(UserLoginBody login) async {
     //GetIt.I.getAsync<LocalStorageService>().then((value) => _localStorageService = value);
 
     final userLogin = {"username": login.username, "password": login.password};

@@ -1,4 +1,4 @@
-class CrearClienteBody {
+class ClienteCrearBody {
   String? username;
   String? password;
   String? verifyPassword;
@@ -9,7 +9,7 @@ class CrearClienteBody {
   String? vehiculo;
   String? matricula;
 
-  CrearClienteBody({
+  ClienteCrearBody({
     required this.username,
     required this.password,
     required this.verifyPassword,
@@ -21,7 +21,7 @@ class CrearClienteBody {
     required this.matricula,
   });
 
-  CrearClienteBody.fromJson(Map<String, dynamic> json) {
+  ClienteCrearBody.fromJson(Map<String, dynamic> json) {
     username = json['username'];
     password = json['password'];
     verifyPassword = json['verifyPassword'];

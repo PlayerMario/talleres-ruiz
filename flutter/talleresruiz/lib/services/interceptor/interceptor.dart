@@ -5,10 +5,10 @@ import 'package:http_interceptor/http_interceptor.dart';
 import 'package:injectable/injectable.dart';
 import '../../main.dart';
 
-class ApiConstants {
+/*class ApiConstants {
   //static String baseUrl = "http://localhost:8080";
   static String baseUrl = "http://10.0.2.2:8080";
-}
+}*/
 
 class HeadersApiInterceptor implements InterceptorContract {
   @override
@@ -45,13 +45,15 @@ class Interceptor {
   }
 
   Future<dynamic> get(String url) async {
-    Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    //Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    Uri uri = Uri.parse(baseUrl + url);
     final response = await _httpClient.get(uri);
     return response;
   }
 
   Future<dynamic> post(String url, dynamic body) async {
-    Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    //Uri uri = Uri.parse(ApiConstants.baseUrl + url);
+    Uri uri = Uri.parse(baseUrl + url);
     final response = await _httpClient.post(uri, body: jsonEncode(body));
     return response;
   }

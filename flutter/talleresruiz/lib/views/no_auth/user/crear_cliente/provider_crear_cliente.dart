@@ -4,13 +4,13 @@ import 'package:talleresruiz/main.dart';
 
 class ProviderCrearCliente extends StatelessWidget {
   const ProviderCrearCliente({super.key, required this.cliente});
-  final CrearClienteBody cliente;
+  final ClienteCrearBody cliente;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
-        appBar: AppBar(
+        /*appBar: AppBar(
           automaticallyImplyLeading: false,
             title: const Text(
               "NUEVO USUARIO",
@@ -26,10 +26,10 @@ class ProviderCrearCliente extends StatelessWidget {
                     color: Color.fromRGBO(3, 37, 65, 1),
                   ));
             }),
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
         body: BlocProvider(
-          create: (_) => CrearClienteBloc(cliente: cliente)
-            ..add(CrearClienteFetched(cliente)),
+          create: (_) => ClienteCrearBloc(cliente: cliente)
+            ..add(ClienteCrearFetched(cliente)),
           child: const CrearClientePage(),
         ));
   }
