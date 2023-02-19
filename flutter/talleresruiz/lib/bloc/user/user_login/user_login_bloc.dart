@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:http/retry.dart';
 import '../../../main.dart';
 
 part './user_login_event.dart';
@@ -9,13 +10,13 @@ class UserLoginBloc extends Bloc<UserLoginEvent, UserLoginState> {
   final UserServiceAbs _userService;
 
   UserLoginBloc(
-      {required UserLoginBody login,
-      required UserServiceAbs userService})
+      {required UserLoginBody login, required UserServiceAbs userService})
       : assert(userService != null),
-      _userService = userService,
+        _userService = userService,
         super(const UserLoginState()) {
     //loginRepo = GetIt.I.get<LoginRepository>();
     on<UserLoginFetched>(onUserLogin);
+    on<UserLogoutFetched>(onUserLogout);
   }
 
   //late LoginRepository loginRepo;
@@ -35,5 +36,10 @@ class UserLoginBloc extends Bloc<UserLoginEvent, UserLoginState> {
             status: UserLoginStatus.failure, userLogin: userLogin[0]));
       }
     }
+  }
+
+  onUserLogout(UserLogoutFetched event, Emitter<UserLoginState> emit) async {
+    await _userService.logout();
+    emit(UserLogoutState());
   }
 }

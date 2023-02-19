@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../main.dart';
-
 
 abstract class UserServiceAbs {
   //Future<dynamic> getClienteLogin();
@@ -79,6 +79,6 @@ class UserService extends UserServiceAbs {
   @override
   Future<void> logout() async {
     print("Borrando token...");
-    await _localStorageService.deleteFromDisk("user_token");
+    await _localStorageService.deleteFromDisk("user_token");    
   }
 }

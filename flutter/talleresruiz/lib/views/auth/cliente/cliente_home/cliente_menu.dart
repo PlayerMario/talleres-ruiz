@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../main.dart';
 
 class ClienteMenu extends StatefulWidget {
@@ -26,12 +27,13 @@ class _ClienteMenu extends State<ClienteMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserLoginBloc>(context);
     List<Widget> paginas = [
       DetallesClienteLog(clienteMe: widget.clienteMe),
       const ProviderClienteCitas(),
-      FormularioLogin()
+      const NuevaCitaCliente()
     ];
-    
+
     return Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -90,7 +92,14 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  //Navigator.pushNamed(context, '/');
+                  userBloc.add(UserLogoutFetched());
+                  /*Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const HomeMenuPage();
+                  }));*/
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) {
+                    return const HomeMenuPage();
+                  }), (route) => false);
                 },
               ),
               ListTile(

@@ -16,3 +16,5 @@ class UserLoginState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class UserLogoutState extends UserLoginState {}

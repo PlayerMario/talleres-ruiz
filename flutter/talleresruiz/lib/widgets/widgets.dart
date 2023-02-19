@@ -9,3 +9,4 @@ export './auth/cita/cita_detalles/detalles_cita.dart';
 export './auth/adjunto/adjuntos_cita.dart';
 export './auth/adjunto/detalles_chat.dart';
 export './auth/adjunto/nuevo_adjunto.dart';
+export './auth/cita/nueva_cita/nueva_cita_cliente.dart';
