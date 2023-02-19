@@ -47,7 +47,6 @@ public class ClienteCreate extends ClienteEdit {
                 .nombre(dto.nombre)
                 .email(dto.email)
                 .tlf(dto.tlf)
-                //.avatar("https://robohash.org/" + dto.username)
                 .avatar("user.png")
                 .roles(EnumSet.of(Roles.CLIENTE))
                 .build();

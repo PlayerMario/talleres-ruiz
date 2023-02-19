@@ -12,7 +12,7 @@ class ProviderClienteHome extends StatelessWidget {
     final clienteService = getIt<ClienteService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
-        appBar: AppBar(
+        /*appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
               "PANEL DE CLIENTE",
@@ -30,7 +30,7 @@ class ProviderClienteHome extends StatelessWidget {
                     color: Color.fromRGBO(3, 37, 65, 1),
                   ));
             }),*/
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
         body: BlocProvider(
           create: (_) => ClienteHomeBloc(clienteService: clienteService)
             ..add(ClienteHomeFetched()),

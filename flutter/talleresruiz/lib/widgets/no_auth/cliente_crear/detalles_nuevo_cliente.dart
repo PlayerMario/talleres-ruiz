@@ -1,3 +1,4 @@
+import 'dart:convert';
 import '../../../main.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.nombre!,
+                                    utf8.decode(cliente.nombre!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
@@ -62,7 +63,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.username!,
+                                    utf8.decode(cliente.username!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
@@ -71,7 +72,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.dni!,
+                                    utf8.decode(cliente.dni!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
@@ -80,7 +81,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.email!,
+                                    utf8.decode(cliente.email!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
@@ -89,7 +90,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.tlf!,
+                                    utf8.decode(cliente.tlf!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
@@ -98,7 +99,7 @@ class DetallesNuevoCliente extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Text(
-                                    cliente.vehiculo!,
+                                    utf8.decode(cliente.vehiculo!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),

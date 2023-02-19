@@ -172,11 +172,6 @@ public class CitaController {
                                                     "cliente": "Laura Gordillo Moreno",
                                                     "vehiculo": "5877FCD-Seat Ibiza",
                                                     "fechaHora": "30-03-2023 10:30",
-                                                    "servicios": [
-                                                        "Cambio aceite",
-                                                        "Cambio filtro aceite",
-                                                        "Cambio filtro combustible"
-                                                    ],
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
@@ -352,17 +347,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "BAD_REQUEST",
-                                                    "message": "Error en la validación, compruebe la lista",
-                                                    "path": "/auth/cita/cliente/f7d699b1-d7fd-4408-990a-5287b3229597",
+                                                    "message": "Ya tiene una cita asignada para el día y hora elegido",
+                                                    "path": "/auth/cita/cliente",
                                                     "statusCode": 400,
-                                                    "date": "13/02/2023 19:18:59",
-                                                    "subErrors": [
-                                                        {
-                                                            "object": "citaCreateCliente",
-                                                            "message": "Al menos debe introducir la imagen del cuenta kilómetros",
-                                                            "field": "imgVehiculo"
-                                                        }
-                                                    ]
+                                                    "date": "19/02/2023 12:31:27"
                                                 }
                                             """
                             )}
@@ -420,11 +408,6 @@ public class CitaController {
                                                     "cliente": "Laura Gordillo Moreno",
                                                     "vehiculo": "Seat Ibiza-5877FCD",
                                                     "fechaHora": "30-03-2023 10:30",
-                                                    "servicios": [
-                                                        "Cambio aceite",
-                                                        "Cambio filtro aceite",
-                                                        "Cambio filtro combustible"
-                                                    ],
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
@@ -530,11 +513,6 @@ public class CitaController {
                                                     "cliente": "Laura Gordillo Moreno",
                                                     "vehiculo": "5877FCD-Seat Ibiza",
                                                     "fechaHora": "30-03-2023 10:30",
-                                                    "servicios": [
-                                                        "Cambio aceite",
-                                                        "Cambio filtro aceite",
-                                                        "Cambio filtro combustible"
-                                                    ],
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
@@ -652,14 +630,6 @@ public class CitaController {
                                                     "cliente": "Cristina Coloma Asencio",
                                                     "vehiculo": "8520VVG-Volkswagen Polo",
                                                     "fechaHora": "13-02-2023 15:00",
-                                                    "servicios": [
-                                                        "Cambio aceite",
-                                                        "Cambio filtro aceite",
-                                                        "Cambio filtro aire",
-                                                        "Cambio filtro habitáculos",
-                                                        "Cambio filtro combustible",
-                                                        "Cambio distribución"
-                                                    ],
                                                     "estado": "Terminada"
                                                 }
                                             """
@@ -962,11 +932,6 @@ public class CitaController {
                                                     "cliente": "Laura Gordillo Moreno",
                                                     "vehiculo": "5877FCD-Seat Ibiza",
                                                     "fechaHora": "30-03-2023 10:30",
-                                                    "servicios": [
-                                                        "Cambio aceite",
-                                                        "Cambio filtro aceite",
-                                                        "Cambio filtro combustible"
-                                                    ],
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {

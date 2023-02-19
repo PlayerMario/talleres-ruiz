@@ -510,7 +510,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"dni\": \"29556486K\",\r\n    \"fechaHora\": \"13-02-2023 15:00\"\r\n}",
+									"raw": "{\r\n    \"dniCliente\": \"29556486K\",\r\n    \"fechaHora\": \"13-02-2023 15:00\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -539,7 +539,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"usernameMecanico\": \"mrl26\",\r\n    \"fechaHora\": \"13-02-2023 15:00\",\r\n    \"estado\": \"Terminada\",\r\n    \"servicios\": [\r\n        \"Cambio aceite\",\r\n        \"Cambio filtro aceite\",\r\n        \"Cambio filtro aire\",\r\n        \"Cambio filtro habitáculos\",\r\n        \"Cambio filtro combustible\",\r\n        \"Cambio distribución\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"usernameMecanico\": \"mrl26\",\r\n    \"fechaHora\": \"13-02-2023 15:00\",\r\n    \"estado\": \"Terminada\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

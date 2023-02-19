@@ -15,6 +15,6 @@ public class CitaCreateMecanico extends CitaCreateCliente {
 
     @UserDniExists(message = "{citaCreate.dni.userdniexists}")
     @NotEmpty(message = "{citaCreate.dni.notempty}")
-    private String dni;
+    private String dniCliente;
 
 }

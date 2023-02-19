@@ -21,15 +21,10 @@ insert into mecanico (user_id) values ('43dc49e5-7cb2-461a-8ed4-e0f36c696b73') -
 insert into cliente (user_id, vehiculo, matricula) values ('d182a454-9998-4c82-a622-2d7bafc0379a', 'Kia Rio', '2014GMD') -- jjml4 / cli1234
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (1, '3e380d54-861c-4809-bb84-bd32bab42c2e', 'd182a454-9998-4c82-a622-2d7bafc0379a', '2023-1-18 12:00', 'Terminada')
-insert into cita_servicios (cita_id, servicios) values (1, 'Cambio aceite')
-insert into cita_servicios (cita_id, servicios) values (1, 'Cambio filtro aceite')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (2, '2023-1-18 14:10', 'Hola buenas, hemos visto que también necesitaría un cambio de pastillas de freno.', '3e380d54-861c-4809-bb84-bd32bab42c2e', 1, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (3, '2023-1-18 14:30', 'Hola, en principio no se lo cambiéis, esperaré a más adelante.', 'd182a454-9998-4c82-a622-2d7bafc0379a', 1, false)
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (4, '17f920ca-57ac-4053-933c-7d5a6c9cd328', 'd182a454-9998-4c82-a622-2d7bafc0379a', '2022-5-18 10:00', 'Terminada')
-insert into cita_servicios (cita_id, servicios) values (4, 'Cambio neumáticos')
-insert into cita_servicios (cita_id, servicios) values (4, 'Cambio filtro aire')
-insert into cita_servicios (cita_id, servicios) values (4, 'Cambio filtro habitáculo')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (5, '2022-5-18 11:00', 'Hola, vamos a tardar un poco más de la cuenta por un fallo de logística.', '17f920ca-57ac-4053-933c-7d5a6c9cd328', 4, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (6, '2022-5-18 11:05', 'Sin problemas.', 'd182a454-9998-4c82-a622-2d7bafc0379a', 4, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (7, '2022-5-18 11:10', 'Perfecto, muchas gracias.', '17f920ca-57ac-4053-933c-7d5a6c9cd328', 4, false)
@@ -38,30 +33,20 @@ insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) value
 insert into cliente (user_id, vehiculo, matricula) values ('c2cac01b-0bc0-4748-ab28-956190e4ab7a', 'Opel Astra', '8520KMM') -- mdh11 / mdh11
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (8, '43dc49e5-7cb2-461a-8ed4-e0f36c696b73', 'c2cac01b-0bc0-4748-ab28-956190e4ab7a', '2023-3-2 12:00', 'Aceptada')
-insert into cita_servicios (cita_id, servicios) values (8, 'Cambio pastillas de freno')
 insert into adjunto (id, fecha_hora, mensaje, user_id, cita_id, fichero) values (9, '2023-2-25 14:00', 'Hemos pedido las piezas, en cuanto llegue, puede traer el coche.', '43dc49e5-7cb2-461a-8ed4-e0f36c696b73', 8, false)
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (10, '17f920ca-57ac-4053-933c-7d5a6c9cd328', 'c2cac01b-0bc0-4748-ab28-956190e4ab7a', '2022-11-8 11:00', 'Terminada')
-insert into cita_servicios (cita_id, servicios) values (10, 'Cambio filtro aceite')
-insert into cita_servicios (cita_id, servicios) values (10, 'Cambio aceite')
-insert into cita_servicios (cita_id, servicios) values (10, 'Cambio amortiguación')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (11, '2022-11-7 19:00', 'Acabo de recordar que cuando frenaba en seco, se notaba un golpe en la zona trasera.', 'c2cac01b-0bc0-4748-ab28-956190e4ab7a', 10, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (12, '2022-11-8 11:30', 'Es de la amortiguación, hay que cambiarla.', '17f920ca-57ac-4053-933c-7d5a6c9cd328', 10, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (13, '2022-11-8 11:33', 'Vale, cambiadla por favor.', 'c2cac01b-0bc0-4748-ab28-956190e4ab7a', 10, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (14, '2022-11-8 11:42', 'Pedida la pieza, en cuanto llegue lo cambiamos.', '17f920ca-57ac-4053-933c-7d5a6c9cd328', 10, false)
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (15, '3e380d54-861c-4809-bb84-bd32bab42c2e', 'c2cac01b-0bc0-4748-ab28-956190e4ab7a', '2022-1-17 15:00', 'Terminada')
-insert into cita_servicios (cita_id, servicios) values (15, 'Cambio filtro aire')
-insert into cita_servicios (cita_id, servicios) values (15, 'Cambio filtro habitáculo')
-insert into cita_servicios (cita_id, servicios) values (15, 'Cambio filtro combustible')
-insert into cita_servicios (cita_id, servicios) values (15, 'Revisión de niveles')
 
 
 insert into cliente (user_id, vehiculo, matricula) values ('bc2a6f6e-b4b9-40d1-ab90-fe9d78ae414e', 'Kia Ceed', '0214HNM') -- fmf14 / fmf14
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (16, '3e380d54-861c-4809-bb84-bd32bab42c2e', 'bc2a6f6e-b4b9-40d1-ab90-fe9d78ae414e', '2023-2-1 13:30', 'Aceptada')
-insert into cita_servicios (cita_id, servicios) values (16, 'Cambio aceite')
-insert into cita_servicios (cita_id, servicios) values (16, 'Cambio filtro aceite')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (17, '2023-1-12 16:30', 'Las ruedas están algo desgastadas, ¿podéis echarle un vistazo?', 'bc2a6f6e-b4b9-40d1-ab90-fe9d78ae414e', 16, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (18, '2023-1-13 9:00', 'En cuanto venga lo miramos.', '3e380d54-861c-4809-bb84-bd32bab42c2e', 16, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (19, '2023-1-12 16:30', 'No es necesario, aún aguantan un tiempo más.', '3e380d54-861c-4809-bb84-bd32bab42c2e', 16, false)
@@ -70,23 +55,14 @@ insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) value
 insert into cliente (user_id, vehiculo, matricula) values ('1240bad9-5055-43ca-a640-75cd1f59c493', 'Renault Clio', '5221SCD') -- ism5 / ism5
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (20, '43dc49e5-7cb2-461a-8ed4-e0f36c696b73', '1240bad9-5055-43ca-a640-75cd1f59c493', '2023-3-6 14:00', 'Aceptada')
-insert into cita_servicios (cita_id, servicios) values (20, 'Cambio aceite')
-insert into cita_servicios (cita_id, servicios) values (20, 'Cambio filtro aceite')
-insert into cita_servicios (cita_id, servicios) values (20, 'Cambio filtro aire')
-insert into cita_servicios (cita_id, servicios) values (20, 'Cambio filtro habitáculo')
-insert into cita_servicios (cita_id, servicios) values (20, 'Cambio filtro combustible')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (21, '2022-2-23', 'Si está todo bien, hacemos revisión completa.', '43dc49e5-7cb2-461a-8ed4-e0f36c696b73', 20, false)
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (22, '17f920ca-57ac-4053-933c-7d5a6c9cd328', '1240bad9-5055-43ca-a640-75cd1f59c493', '2022-4-27 12:30', 'Terminada')
-insert into cita_servicios (cita_id, servicios) values (22, 'Cambio distribución')
 
 
 insert into cliente (user_id, vehiculo, matricula) values ('72b1385c-4a6f-4a43-9539-d04c154c7b71', 'Seat Ibiza', '5877FCD') -- lgm4 / lgm4
 
 insert into cita (id, mecanico_id, cliente_id, fecha_hora, estado) values (23, '3e380d54-861c-4809-bb84-bd32bab42c2e', '72b1385c-4a6f-4a43-9539-d04c154c7b71', '2023-3-30 10:30', 'Aceptada')
-insert into cita_servicios (cita_id, servicios) values (23, 'Cambio aceite')
-insert into cita_servicios (cita_id, servicios) values (23, 'Cambio filtro aceite')
-insert into cita_servicios (cita_id, servicios) values (23, 'Cambio filtro combustible')
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (24, '2022-2-20 16:35', 'Cuando freno chirría un poco.', '72b1385c-4a6f-4a43-9539-d04c154c7b71', 23, false)
 insert into adjunto (id, fecha_hora, contenido, user_id, cita_id, fichero) values (25, '2022-2-20 17:40', 'Le echamos un vistazo y te decimos con lo que sea.', '3e380d54-861c-4809-bb84-bd32bab42c2e', 23, false)
 

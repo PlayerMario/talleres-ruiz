@@ -35,14 +35,8 @@ public class CitaDto {
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String fechaHora;
 
-    @JsonView({ClienteViews.DetallesClientes.class, CitaViews.DetallesCita.class})
-    private List<String> servicios;
-
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private String estado;
-
-    @JsonView({CitaViews.DetallesCita.class, CitaViews.NuevaCitaCliente.class})
-    private List<String> imgVehiculo;
 
     @JsonView(CitaViews.DetallesCita.class)
     private List<AdjuntoDto> chat;

@@ -8,6 +8,7 @@ export './views/views.dart';
 export './widgets/widgets.dart';
 export './services/services.dart';
 export './config/config.dart';
+export './utils/utilidades.dart';
 
 void main() {
   setupAsyncDependencies();

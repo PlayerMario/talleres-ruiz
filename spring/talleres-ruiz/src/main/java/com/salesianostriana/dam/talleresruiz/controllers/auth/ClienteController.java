@@ -181,20 +181,11 @@ public class ClienteController {
                                                         {
                                                             "mecanico": "Mario Ruiz López",
                                                             "fechaHora": "2023-01-18 12:00",
-                                                            "servicios": [
-                                                                "Cambio aceite",
-                                                                "Cambio filtro aceite"
-                                                            ],
                                                             "estado": "Terminado"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "fechaHora": "2022-05-18 10:00",
-                                                            "servicios": [
-                                                                "Cambio neumáticos",
-                                                                "Cambio filtro aire",
-                                                                "Cambio filtro habitáculo"
-                                                            ],
                                                             "estado": "Terminado"
                                                         }
                                                     ]
@@ -277,20 +268,11 @@ public class ClienteController {
                                                         {
                                                             "mecanico": "Mario Ruiz López",
                                                             "fechaHora": "18-01-2023 12:00",
-                                                            "servicios": [
-                                                                "Cambio aceite",
-                                                                "Cambio filtro aceite"
-                                                            ],
                                                             "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "fechaHora": "18-05-2022 10:00",
-                                                            "servicios": [
-                                                                "Cambio neumáticos",
-                                                                "Cambio filtro aire",
-                                                                "Cambio filtro habitáculo"
-                                                            ],
                                                             "estado": "Terminada"
                                                         }
                                                     ]
@@ -363,20 +345,11 @@ public class ClienteController {
                                                         {
                                                             "mecanico": "Mario Ruiz López",
                                                             "fechaHora": "18-01-2023 12:00",
-                                                            "servicios": [
-                                                                "Cambio aceite",
-                                                                "Cambio filtro aceite"
-                                                            ],
                                                             "estado": "Terminada"
                                                         },
                                                         {
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "fechaHora": "18-05-2022 10:00",
-                                                            "servicios": [
-                                                                "Cambio neumáticos",
-                                                                "Cambio filtro aire",
-                                                                "Cambio filtro habitáculo"
-                                                            ],
                                                             "estado": "Terminada"
                                                         }
                                                     ],

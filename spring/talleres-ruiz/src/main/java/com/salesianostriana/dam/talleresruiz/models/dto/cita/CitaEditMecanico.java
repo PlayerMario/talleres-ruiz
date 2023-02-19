@@ -27,7 +27,4 @@ public class CitaEditMecanico {
     @NotEmpty(message = "{citaEdit.estado.notempty}")
     private String estado;
 
-    @NotEmpty(message = "{citaEdit.servicios.notempty}")
-    private List<String> servicios;
-
 }

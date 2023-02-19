@@ -74,7 +74,6 @@ public class CitaService {
                     cita.setMecanico(mecanico);
                     cita.setFechaHora(edit.getFechaHora());
                     cita.setEstado(edit.getEstado());
-                    cita.setServicios(edit.getServicios());
                     return repository.save(cita);
                 }).orElseThrow(() ->
                         new EntityNotFoundException("No se encuentra la cita con ID: " + id));
@@ -177,15 +176,11 @@ public class CitaService {
     public CitaDto generarCitaDto(Cita cita) {
         CitaDto citaDto = repository.generarCitaDto(cita.getId());
         citaDto.setMecanico(cita.getMecanico() != null ? cita.getMecanico().getUsuario().getNombre() : "Por asignar");
-        if (!cita.getServicios().isEmpty()) {
-            citaDto.setServicios(cita.getServicios());
-        }
         return citaDto;
     }
 
     public CitaDto generarCitaDtoDetails(Cita cita) {
         CitaDto citaDto = repository.generarCitaDtoDetails(cita.getId());
-        citaDto.setServicios(cita.getServicios());
         if (!cita.getChat().isEmpty()) {
             citaDto.setChat(adjuntoRepository.generarChatDto(cita.getId()));
         }

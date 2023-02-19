@@ -20,7 +20,7 @@ public class CitaDtoConverter {
     public Cita toCitaMecanico(UUID id, CitaCreateMecanico citaCreate) {
         return Cita.builder()
                 .mecanico(mecanicoService.findById(id))
-                .cliente(clienteService.findById(userService.findByDni(citaCreate.getDni()).getId()))
+                .cliente(clienteService.findById(userService.findByDni(citaCreate.getDniCliente()).getId()))
                 .fechaHora(citaCreate.getFechaHora())
                 .estado("Aceptada")
                 .build();

@@ -33,7 +33,8 @@ class _ClienteHomePage extends State<ClienteHomePage> {
         case ClienteHomeStatus.success:
           if (state.clienteMe.roles[0] == "CLIENTE") {
             print("Login Cliene");
-            return DetallesClienteLog(clienteMe: state.clienteMe);
+            //return DetallesClienteLog(clienteMe: state.clienteMe);
+            return ClienteMenu(clienteMe: state.clienteMe);
           } else {
             print("Login Admin-Mec");
             return Center(child: Text("Logueado ${state.clienteMe}"));

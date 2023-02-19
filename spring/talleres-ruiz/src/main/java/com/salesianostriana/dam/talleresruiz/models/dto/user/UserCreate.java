@@ -47,7 +47,7 @@ public class UserCreate extends UserEdit {
                 .nombre(dto.nombre)
                 .email(dto.email)
                 .tlf(dto.tlf)
-                .avatar("https://robohash.org/" + dto.username)
+                .avatar("user.png")
                 .build();
         switch (opcion) {
             case 1 -> user.setRoles(EnumSet.of(Roles.ADMIN, Roles.MEC));

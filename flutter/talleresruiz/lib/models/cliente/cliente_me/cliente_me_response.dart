@@ -70,15 +70,13 @@ class ClienteMeResponse {
 class Citas {
   String? mecanico;
   String? fechaHora;
-  List<String>? servicios;
   String? estado;
 
-  Citas({this.mecanico, this.fechaHora, this.servicios, this.estado});
+  Citas({this.mecanico, this.fechaHora, this.estado});
 
   Citas.fromJson(Map<String, dynamic> json) {
     mecanico = json['mecanico'];
     fechaHora = json['fechaHora'];
-    servicios = json['servicios'].cast<String>();
     estado = json['estado'];
   }
 
@@ -86,7 +84,6 @@ class Citas {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['mecanico'] = this.mecanico;
     data['fechaHora'] = this.fechaHora;
-    data['servicios'] = this.servicios;
     data['estado'] = this.estado;
     return data;
   }

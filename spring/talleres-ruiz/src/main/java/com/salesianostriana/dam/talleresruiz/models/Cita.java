@@ -43,10 +43,6 @@ public class Cita {
 
     private String estado;
 
-    @ElementCollection
-    @Builder.Default
-    private List<String> servicios = new ArrayList<>();
-
     @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Adjunto> chat = new ArrayList<>();
