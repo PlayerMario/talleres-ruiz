@@ -6,7 +6,7 @@ import '../../main.dart';
 
 abstract class ClienteServiceAbs {
   Future<dynamic> getClienteLogin();
-  Future<dynamic> getClienteCitas(int page);
+  Future<dynamic> getClienteCitas([int page = 0]);
 }
 
 @Order(2)
@@ -39,7 +39,7 @@ class ClienteService extends ClienteServiceAbs {
   }
 
   @override
-  Future<dynamic> getClienteCitas(int page) async {
+  Future<dynamic> getClienteCitas([int page = 0]) async {
     print("Obteniendo citas del cliente...");
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {

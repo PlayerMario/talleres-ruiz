@@ -57,7 +57,7 @@ class ClienteRepository {
     }*/
   }
 
-  Future<dynamic> getClienteCitas(int page) async {
+  Future<dynamic> getClienteCitas([int page=0]) async {
     String url = "/auth/cliente/me/citas?page=$page";
     var response = await _http.get(url);
     return response;

@@ -24,29 +24,34 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
         builder: (context, state) {
       switch (state.status) {
         case ClienteCitasStatus.failure:
-          if (state.clienteCitas.subErrors != null) {
+          /*if (state.clienteCitas.subErrors != null) {
             return ListView.builder(
                 itemCount: state.clienteCitas.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return SubErrorData(
                       error: state.clienteCitas.subErrors![index]);
                 });
-          } else {
+          } else {*/
             return ErrorScreen(error: state.clienteCitas);
-          }
+          //}
         case ClienteCitasStatus.success:
-          if (state.clienteCitas.content.isEmpty) {
+          //if (state.clienteCitas.content.isEmpty) {
+          if (state.clienteCitas.isEmpty) {
             return ErrorScreen(error: state.clienteCitas);
           } else {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return index >= state.clienteCitas.content.length
+                //return index >= state.clienteCitas.content.length
+                return index >= state.clienteCitas.length
                     ? const BottomLoader()
-                    : CitaListItem(cita: state.clienteCitas.content[index]);
+                    //: CitaListItem(cita: state.clienteCitas.content[index]);
+                    : CitaListItem(cita: state.clienteCitas[index]);
               },
               itemCount: state.hasReachedMax
-                  ? state.clienteCitas.content.length
-                  : state.clienteCitas.content.length + 1,
+                  //? state.clienteCitas.content.length
+                  ? state.clienteCitas.length
+                  //: state.clienteCitas.content.length + 1,
+                  : state.clienteCitas.length + 1,
               controller: scrollController,
             );
           }

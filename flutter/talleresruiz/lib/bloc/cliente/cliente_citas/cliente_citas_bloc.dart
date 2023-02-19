@@ -8,7 +8,7 @@ part './cliente_citas_event.dart';
 part './cliente_citas_state.dart';
 
 const throttleDuration = Duration(milliseconds: 1000);
-int newPage = 0;
+//int newPage = 0;
 
 EventTransformer<E> throttleDroppable<E>(Duration duration) {
   return (events, mapper) {
@@ -32,16 +32,16 @@ class ClienteCitasBloc extends Bloc<ClienteCitasEvent, ClienteCitasState> {
     if (state.hasReachedMax) return;
 
     if (state.status == ClienteCitasStatus.initial) {
-      newPage += 1;
+      //newPage += 1;
 
       await Future.delayed(const Duration(milliseconds: 500));
 
-      final clienteCitas = await _clienteService.getClienteCitas(newPage);
+      final clienteCitas = await _clienteService.getClienteCitas();
 
       if (clienteCitas[1]) {
         return emit(state.copyWith(
             status: ClienteCitasStatus.success,
-            clienteCitas: clienteCitas[0],
+            clienteCitas: clienteCitas[0].content,
             hasReachedMax: false));
       } else {
         return emit(state.copyWith(
@@ -51,13 +51,9 @@ class ClienteCitasBloc extends Bloc<ClienteCitasEvent, ClienteCitasState> {
 
     await Future.delayed(const Duration(milliseconds: 500));
 
-    final clienteCitas = await _clienteService.getClienteCitas(newPage);
-    clienteCitas.content!.isEmpty
+    final clienteCitas = await _clienteService.getClienteCitas(/*newPage*/state.clienteCitas[0].content.length);
+    clienteCitas[0].content.isEmpty
         ? emit(state.copyWith(hasReachedMax: true))
-        : emit(state.copyWith(
-            status: ClienteCitasStatus.success,
-            clienteCitas: List.of(state.clienteCitas)
-              ..addAll(clienteCitas.content!),
-            hasReachedMax: false));
+        : emit(state.copyWith(status: ClienteCitasStatus.success, clienteCitas: List.of(state.clienteCitas[0].content)..addAll(clienteCitas[0].content), hasReachedMax: false));
   }
 }

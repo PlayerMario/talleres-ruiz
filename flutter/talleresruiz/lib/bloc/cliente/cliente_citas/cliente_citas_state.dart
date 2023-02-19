@@ -15,8 +15,8 @@ class ClienteCitasState extends Equatable {
   ClienteCitasState copyWith(
       {ClienteCitasStatus? status,
       dynamic clienteCitas,
-      bool? hasReachedMax,
-      int? page}) {
+      bool? hasReachedMax/*,
+      int? page*/}) {
     return ClienteCitasState(
         status: status ?? this.status,
         clienteCitas: clienteCitas ?? this.clienteCitas,
@@ -25,9 +25,9 @@ class ClienteCitasState extends Equatable {
 
   /*@override
   String toString() {
-    return '''ClienteCitasState { status: $status, hasReachedMax: $hasReachedMax, clienteCitas: ${clienteCitas.content.length} }''';
+    return '''ClienteCitasState { status: $status, hasReachedMax: $hasReachedMax, clienteCitas: $clienteCitas }''';
   }*/
 
   @override
-  List<Object> get props => [/*status, clienteCitas, hasReachedMax*/];
+  List<Object> get props => [/*status, clienteCitas!, hasReachedMax*/];
 }
