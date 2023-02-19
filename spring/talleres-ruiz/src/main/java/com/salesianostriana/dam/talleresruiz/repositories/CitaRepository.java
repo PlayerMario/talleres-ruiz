@@ -32,7 +32,7 @@ public interface CitaRepository extends JpaRepository<Cita, Long>, JpaSpecificat
 
     @Query("""
                  SELECT new com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto(
-                     usuario.nombre, cliente.matricula ||'-'|| cliente.vehiculo, cita.fechaHora, cita.estado
+                     cita.id, usuario.nombre, cliente.matricula ||'-'|| cliente.vehiculo, cita.fechaHora, cita.estado
                  )
                  FROM Cita cita LEFT JOIN cita.cliente cliente LEFT JOIN cliente.usuario usuario
                  WHERE cita.id = :id

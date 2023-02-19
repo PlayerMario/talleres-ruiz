@@ -4,3 +4,4 @@ export './error/error_response.dart';
 export './user/user_login/user_login_body.dart';
 export './user/user_login/user_login_response.dart';
 export './cliente/cliente_me/cliente_me_response.dart';
+export './cliente/cliente_citas/cliente_citas_response.dart';

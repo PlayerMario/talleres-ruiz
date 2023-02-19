@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../main.dart';
+
 class ClienteMeResponse {
   String? id;
   String? nombre;
@@ -67,7 +69,7 @@ class ClienteMeResponse {
   }
 }
 
-class Citas {
+/*class Citas {
   String? mecanico;
   String? fechaHora;
   String? estado;
@@ -87,4 +89,4 @@ class Citas {
     data['estado'] = this.estado;
     return data;
   }
-}
+}*/

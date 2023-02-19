@@ -343,11 +343,13 @@ public class ClienteController {
                                                 {
                                                     "content": [
                                                         {
+                                                            "id": 1,
                                                             "mecanico": "Mario Ruiz López",
                                                             "fechaHora": "18-01-2023 12:00",
                                                             "estado": "Terminada"
                                                         },
                                                         {
+                                                            "id": 4,
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "fechaHora": "18-05-2022 10:00",
                                                             "estado": "Terminada"

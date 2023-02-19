@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:talleresruiz/views/auth/cliente/cliente_home/prueba.dart';
 import '../../../../main.dart';
 
 class ClienteMenu extends StatefulWidget {
@@ -30,7 +28,7 @@ class _ClienteMenu extends State<ClienteMenu> {
   Widget build(BuildContext context) {
     List<Widget> paginas = [
       DetallesClienteLog(clienteMe: widget.clienteMe),
-      Prueba(),
+      const ProviderClienteCitas(),
       FormularioLogin()
     ];
     

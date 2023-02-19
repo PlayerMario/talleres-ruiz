@@ -35,7 +35,7 @@ class ClienteRepository {
 
     final response = await http.post(Uri.parse('$baseUrl/noauth/user/register'),
         headers: headers, body: jsonEncode(crearCliente));
-    
+
     //final response = await _http.post(url, cliente);
 
     if (response.statusCode == 201) {
@@ -55,5 +55,11 @@ class ClienteRepository {
     } else {
       return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
     }*/
+  }
+
+  Future<dynamic> getClienteCitas(int page) async {
+    String url = "/auth/cliente/me/citas?page=$page";
+    var response = await _http.get(url);
+    return response;
   }
 }

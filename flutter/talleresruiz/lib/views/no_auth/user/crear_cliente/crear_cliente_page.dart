@@ -28,7 +28,7 @@ class _CrearClientePage extends State<CrearClientePage> {
                   return SubErrorData(error: state.clienteCreado.subErrors![index]);
                 });
           } else {
-            return ErrorScreen(error: state.clienteCreado);
+            return ErrorScreenAppBar(error: state.clienteCreado);
           }
         case ClienteCrearStatus.success:
           return DetallesNuevoCliente(cliente: state.clienteCreado!);

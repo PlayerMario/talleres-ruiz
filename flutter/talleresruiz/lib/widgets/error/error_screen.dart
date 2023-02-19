@@ -9,7 +9,7 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
               "ERROR",
@@ -27,12 +27,12 @@ class ErrorScreen extends StatelessWidget {
                     color: Color.fromRGBO(237, 242, 244, 1),
                   ));
             }),
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        body: Card(
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
+        body: Center(child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             shadowColor: const Color.fromRGBO(43, 45, 66, 1),
-            margin: const EdgeInsets.only(left: 45, top: 25, right: 25),
+            //margin: const EdgeInsets.only(left: 50, top: 25, right: 25),
             elevation: 10,
             child: SingleChildScrollView(
                 child: Container(
@@ -59,7 +59,7 @@ class ErrorScreen extends StatelessWidget {
                               )),
                         ],
                       ),
-                    )))));
+                    ))))));
   }
 }
 

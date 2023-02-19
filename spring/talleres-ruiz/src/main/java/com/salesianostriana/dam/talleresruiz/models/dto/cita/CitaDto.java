@@ -20,7 +20,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CitaDto {
 
-    @JsonView(CitaViews.DetallesCita.class)
+    @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
     private Long id;
 
     @JsonView({CitaViews.Master.class, ClienteViews.DetallesClientes.class})
@@ -42,7 +42,8 @@ public class CitaDto {
     private List<AdjuntoDto> chat;
 
 
-    public CitaDto(String cliente, String vehiculo, LocalDateTime fechaHora, String estado) {
+    public CitaDto(Long id, String cliente, String vehiculo, LocalDateTime fechaHora, String estado) {
+        this.id = id;
         this.cliente = cliente;
         this.vehiculo = vehiculo;
         this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));

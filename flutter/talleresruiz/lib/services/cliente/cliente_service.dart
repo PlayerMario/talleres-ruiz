@@ -6,6 +6,7 @@ import '../../main.dart';
 
 abstract class ClienteServiceAbs {
   Future<dynamic> getClienteLogin();
+  Future<dynamic> getClienteCitas(int page);
 }
 
 @Order(2)
@@ -32,6 +33,24 @@ class ClienteService extends ClienteServiceAbs {
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> getClienteCitas(int page) async {
+    print("Obteniendo citas del cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _clienteRepository.getClienteCitas(page);
+      if (response.statusCode == 200) {
+        return [ClienteCitasResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
     }
   }
 }

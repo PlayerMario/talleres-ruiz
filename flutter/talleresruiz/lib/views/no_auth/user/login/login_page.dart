@@ -27,7 +27,7 @@ class _LoginPage extends State<LoginPage> {
                   return SubErrorData(error: state.userLogin.subErrors![index]);
                 });
           } else {
-            return ErrorScreen(error: state.userLogin);
+            return ErrorScreenAppBar(error: state.userLogin);
           }
         case UserLoginStatus.success:
           if (state.userLogin.roles[0] == "CLIENTE") {

@@ -28,7 +28,7 @@ class _ClienteHomePage extends State<ClienteHomePage> {
                   return SubErrorData(error: state.clienteMe.subErrors![index]);
                 });
           } else {
-            return ErrorScreen(error: state.clienteMe);
+            return ErrorScreenAppBar(error: state.clienteMe);
           }
         case ClienteHomeStatus.success:
           if (state.clienteMe.roles[0] == "CLIENTE") {

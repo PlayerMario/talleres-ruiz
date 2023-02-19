@@ -55,7 +55,7 @@ class CitaListItem extends StatelessWidget {
               ],
             )),
         onPressed: () {
-          print("A DETALLES DE LA CITA");
+          print("A DETALLES DE LA CITA ${cita!.id}");
         },
       );
     } else {

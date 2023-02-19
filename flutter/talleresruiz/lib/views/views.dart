@@ -5,6 +5,6 @@ export './no_auth/user/login/provider_login.dart';
 export './no_auth/user/login/login_page.dart';
 export './auth/cliente/cliente_home/provider_cliente_home.dart';
 export './auth/cliente/cliente_home/cliente_home_page.dart';
-export './auth/cliente/cliente_home/detalles_cliente_log.dart';
 export './auth/cliente/cliente_home/cliente_menu.dart';
 export './auth/cliente/cliente_citas/provider_cliente_citas.dart';
+export './auth/cliente/cliente_citas/cliente_citas_page.dart';
