@@ -5,3 +5,4 @@ export './user/user_login/user_login_body.dart';
 export './user/user_login/user_login_response.dart';
 export './cliente/cliente_me/cliente_me_response.dart';
 export './cliente/cliente_citas/cliente_citas_response.dart';
+export './cita/cita_detalles/cita_detalles_response.dart';

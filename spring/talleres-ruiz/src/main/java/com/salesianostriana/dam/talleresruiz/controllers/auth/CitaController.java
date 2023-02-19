@@ -175,12 +175,14 @@ public class CitaController {
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
+                                                            "id": 24,
                                                             "autor": "Laura Gordillo Moreno",
                                                             "fechaHora": "20-02-2022 16:35",
                                                             "contenido": "Cuando freno chirría un poco.",
                                                             "fichero": false
                                                         },
                                                         {
+                                                            "id": 25,
                                                             "autor": "Mario Ruiz López",
                                                             "fechaHora": "20-02-2022 17:40",
                                                             "contenido": "Le echamos un vistazo y te decimos con lo que sea.",
@@ -238,9 +240,10 @@ public class CitaController {
                     )})
     })
     @JsonView(CitaViews.DetallesCita.class)
-    @GetMapping("/{id}")
-    public CitaDto mostrarDetallesCita(@PathVariable Long id) {
-        return service.generarCitaDtoDetails(service.mostrarCitaConChat(id));
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{idCita}")
+    public CitaDto mostrarDetallesCita(@AuthenticationPrincipal User usuario, @PathVariable Long idCita) {
+        return service.generarCitaDtoDetails(service.mostrarCitaConChat(usuario.getId(), idCita));
     }
 
     @Operation(summary = "Crear nueva cita en vista mecánico")
@@ -497,7 +500,7 @@ public class CitaController {
     public CitaDto nuevoMensaje(@PathVariable Long id, @AuthenticationPrincipal User usuario, @Valid @RequestBody AdjuntoCreate mensajeCreate) {
         service.comprobarEstadoAutor(id, usuario.getId(), 1);
         adjuntoService.add(adjuntoConverter.toAdjuntoMensaje(id, usuario.getId(), mensajeCreate));
-        return service.generarCitaDtoDetails(service.mostrarCitaConChat(id));
+        return service.generarCitaDtoDetails(service.mostrarCitaConChat(usuario.getId(), id));
     }
 
     @Operation(summary = "Agregar fichero/s al chat de una cita")
@@ -613,7 +616,7 @@ public class CitaController {
         Arrays.stream(ficheros).forEach(fichero -> {
             adjuntoService.add(adjuntoConverter.toAdjuntoFichero(id, usuario.getId(), fichero));
         });
-        return service.generarCitaDtoDetails(service.mostrarCitaConChat(id));
+        return service.generarCitaDtoDetails(service.mostrarCitaConChat(usuario.getId(), id));
     }
 
 

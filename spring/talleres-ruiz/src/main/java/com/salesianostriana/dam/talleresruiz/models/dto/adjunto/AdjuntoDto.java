@@ -17,6 +17,9 @@ import java.time.format.DateTimeFormatter;
 public class AdjuntoDto {
 
     @JsonView(CitaViews.DetallesCita.class)
+    private Long id;
+
+    @JsonView(CitaViews.DetallesCita.class)
     private String autor;
 
     @JsonView(CitaViews.DetallesCita.class)
@@ -29,7 +32,8 @@ public class AdjuntoDto {
     private boolean fichero;
 
 
-    public AdjuntoDto(String autor, LocalDateTime fechaHora, String contenido, boolean fichero) {
+    public AdjuntoDto(Long id, String autor, LocalDateTime fechaHora, String contenido, boolean fichero) {
+        this.id = id;
         this.autor = autor;
         this.fechaHora = fechaHora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.contenido = contenido;

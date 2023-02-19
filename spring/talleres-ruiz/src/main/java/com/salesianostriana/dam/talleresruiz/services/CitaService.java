@@ -8,6 +8,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaCreateCliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaEditMecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
+import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.AdjuntoRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.cita.CitaSpecificationBuilder;
@@ -148,9 +149,16 @@ public class CitaService {
     }
 
     @Transactional
-    public Cita mostrarCitaConChat(Long id) {
-        return repository.findByIdChat(id).orElseThrow(() ->
-                new EntityNotFoundException("No se encuentra la cita con ID: " + id));
+    public Cita mostrarCitaConChat(UUID idUsuario, Long idCita) {
+        Cita cita = repository.findByIdChat(idCita).orElseThrow(() ->
+                new EntityNotFoundException("No se encuentra la cita con ID: " + idCita));
+        if(cita.getCliente().getId().equals(idUsuario) || cita.getMecanico().getId().equals(idUsuario)) {
+            return cita;
+        } else {
+            throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
+        }
+        /*return repository.findByIdChat(id).orElseThrow(() ->
+                new EntityNotFoundException("No se encuentra la cita con ID: " + id));*/
     }
 
     public boolean validarFechaHora(LocalDateTime fechaHora) {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import '../../../../main.dart';
+import '../../../../../main.dart';
 
-class ProviderLogin extends StatelessWidget {
-  const ProviderLogin({super.key, required this.login});
-  final UserLoginBody login;
+class ProviderDetallesCita extends StatelessWidget {
+  const ProviderDetallesCita({super.key, required this.id});
+  final int id;
 
   @override
   Widget build(BuildContext context) {
-    final authService = getIt<UserService>();
+    final citaService = getIt<CitaService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         /*appBar: AppBar(
@@ -31,11 +31,11 @@ class ProviderLogin extends StatelessWidget {
                   ));
             }),*/
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
-        body: BlocProvider<UserLoginBloc>(
+        body: BlocProvider<CitaDetallesBloc>(
           create: (_) =>
-              UserLoginBloc(login: login, userService: authService)
-                ..add(UserLoginFetched(login)),
-          child: const LoginPage(),
+              CitaDetallesBloc(id: id, citaService: citaService)
+                ..add(CitaDetallesFetched(id)),
+          child: const CitaDetallesPage(),
         ));
   }
 }

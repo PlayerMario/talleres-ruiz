@@ -137,7 +137,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.nombre!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -145,7 +147,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.username!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -153,7 +157,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.dni!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -161,7 +167,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.email!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -169,7 +177,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.tlf!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -177,7 +187,9 @@ class DetallesClienteLog extends StatelessWidget {
                             child: Text(
                               utf8.decode(clienteMe.vehiculo!.codeUnits),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
                             )),
                       ],

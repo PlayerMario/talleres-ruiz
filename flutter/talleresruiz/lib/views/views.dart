@@ -8,3 +8,6 @@ export './auth/cliente/cliente_home/cliente_home_page.dart';
 export './auth/cliente/cliente_home/cliente_menu.dart';
 export './auth/cliente/cliente_citas/provider_cliente_citas.dart';
 export './auth/cliente/cliente_citas/cliente_citas_page.dart';
+export './auth/cita/cita_detalles/provider_detalles_cita.dart';
+export './auth/cita/cita_detalles/cita_detalles_page.dart';
+export './auth/cita/cita_detalles/cita_menu.dart';

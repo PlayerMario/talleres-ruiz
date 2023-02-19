@@ -1,9 +1,7 @@
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import 'package:talleresruiz/services/interceptor/interceptor.dart';
 import '../../main.dart';
 
 @Order(-1)
@@ -57,7 +55,7 @@ class ClienteRepository {
     }*/
   }
 
-  Future<dynamic> getClienteCitas([int page=0]) async {
+  Future<dynamic> getClienteCitas([int page = 0]) async {
     String url = "/auth/cliente/me/citas?page=$page";
     var response = await _http.get(url);
     return response;
