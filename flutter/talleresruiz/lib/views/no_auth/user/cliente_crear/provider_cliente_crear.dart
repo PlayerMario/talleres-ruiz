@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/main.dart';
 
-class ProviderCrearCliente extends StatelessWidget {
-  const ProviderCrearCliente({super.key, required this.cliente});
+class ProviderClienteCrear extends StatelessWidget {
+  const ProviderClienteCrear({super.key, required this.cliente});
   final ClienteCrearBody cliente;
 
   @override
@@ -30,7 +30,7 @@ class ProviderCrearCliente extends StatelessWidget {
         body: BlocProvider(
           create: (_) => ClienteCrearBloc(cliente: cliente)
             ..add(ClienteCrearFetched(cliente)),
-          child: const CrearClientePage(),
+          child: const ClienteCrearPage(),
         ));
   }
 }

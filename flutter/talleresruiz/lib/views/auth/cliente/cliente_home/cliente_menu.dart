@@ -72,7 +72,23 @@ class _ClienteMenu extends State<ClienteMenu> {
               ListTile(
                 title: const Center(
                     child: Text(
-                  'Editar perfil',
+                  'Editar datos usuario',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color.fromRGBO(43, 45, 66, 1)),
+                )),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FormularioEditarCliente(cliente: widget.clienteMe);
+                  }));
+                  //Navigator.pushNamed(context, '/');
+                },
+              ),
+              ListTile(
+                title: const Center(
+                    child: Text(
+                  'Cambiar contraseña',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -91,7 +107,7 @@ class _ClienteMenu extends State<ClienteMenu> {
                       fontSize: 20,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
-                onTap: () {
+                onTap: () {                  
                   userBloc.add(UserLogoutFetched());
                   /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const HomeMenuPage();

@@ -1,6 +1,6 @@
 export './no_auth/home_menu/home_menu_page.dart';
-export './no_auth/user/crear_cliente/provider_crear_cliente.dart';
-export './no_auth/user/crear_cliente/crear_cliente_page.dart';
+export 'no_auth/user/cliente_crear/provider_cliente_crear.dart';
+export './no_auth/user/cliente_crear/cliente_crear_page.dart';
 export './no_auth/user/login/provider_login.dart';
 export './no_auth/user/login/login_page.dart';
 export './auth/cliente/cliente_home/provider_cliente_home.dart';
@@ -13,3 +13,5 @@ export './auth/cita/cita_detalles/cita_detalles_page.dart';
 export './auth/cita/cita_detalles/cita_menu.dart';
 export './auth/cita/cita_crear/cliente/provider_nueva_cita_cliente.dart';
 export './auth/cita/cita_crear/cliente/cita_crear_cliente_page.dart';
+export './auth/cliente/cliente_editar/cliente_editar_page.dart';
+export './auth/cliente/cliente_editar/provider_cliente_editar.dart';

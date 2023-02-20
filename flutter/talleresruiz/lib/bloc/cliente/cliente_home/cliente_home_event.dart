@@ -6,3 +6,12 @@ abstract class ClienteHomeEvent extends Equatable {
 }
 
 class ClienteHomeFetched extends ClienteHomeEvent {}
+
+class ClienteEditarFetched extends ClienteHomeEvent {
+  ClienteEditarFetched(this.cliente);
+  
+  final ClienteEditarBody cliente;
+
+  /*@override
+  List<Object> get props => [cliente];*/
+}

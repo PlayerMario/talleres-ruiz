@@ -1,29 +1,52 @@
+import 'dart:convert';
+import '../../../../../main.dart';
 import 'package:flutter/material.dart';
-import '../../../main.dart';
 
-class FormularioCrearCliente extends StatefulWidget {
-  const FormularioCrearCliente({super.key});
+class FormularioEditarCliente extends StatefulWidget {
+  const FormularioEditarCliente({super.key, required this.cliente});
+  final ClienteMeResponse cliente;
+
   @override
-  State<FormularioCrearCliente> createState() => _FormularioCrearCliente();
+  State<FormularioEditarCliente> createState() => _FormularioEditarCliente();
 }
 
-class _FormularioCrearCliente extends State<FormularioCrearCliente> {
-  final username = TextEditingController();
-  final password = TextEditingController();
-  final passwordVerify = TextEditingController();
-  final dni = TextEditingController();
-  final nombre = TextEditingController();
-  final email = TextEditingController();
-  final tlf = TextEditingController();
-  final vehiculo = TextEditingController();
-  final matricula = TextEditingController();
-
+class _FormularioEditarCliente extends State<FormularioEditarCliente> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final nombre = TextEditingController(
+        text: utf8.decode(widget.cliente.nombre!.codeUnits));
+    final email = TextEditingController(
+        text: utf8.decode(widget.cliente.email!.codeUnits));
+    final tlf =
+        TextEditingController(text: utf8.decode(widget.cliente.tlf!.codeUnits));
+    final vehiculo = TextEditingController(
+        text: utf8.decode(widget.cliente.vehiculo!.split('-')[1].codeUnits));
+    final matricula = TextEditingController(
+        text: utf8.decode(widget.cliente.vehiculo!.split('-')[0].codeUnits));
+
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "MODIFICAR USUARIO",
+              style: TextStyle(
+                color: Color.fromRGBO(237, 242, 244, 1),
+              ),
+            ),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color.fromRGBO(237, 242, 244, 1),
+                  ));
+            }),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: SingleChildScrollView(
           child: Container(
               margin: const EdgeInsets.all(20.0),
@@ -46,85 +69,8 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                         child: SizedBox(
                           width: 350,
                           child: TextFormField(
-                            controller: username,
-                            keyboardType: TextInputType.name,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Usuario',
-                                hintText: 'Introduzca su nombre de usuario'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'El nombre de usuario es obligatorio';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            controller: password,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Contraseña',
-                                hintText: 'Introduzca su contraseña'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'La contraseña es obligatoria';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            controller: passwordVerify,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Verificar Contraseña',
-                                hintText: 'Repita su contraseña'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Debe verificar su contraseña';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            controller: dni,
-                            keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'DNI',
-                                hintText: 'Introduzca su DNI'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'El DNI es obligatorio';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
                             controller: nombre,
+                            //initialValue: widget.cliente.nombre!,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -144,6 +90,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: email,
+                            //initialValue: widget.cliente.email!,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -163,6 +110,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: tlf,
+                            //initialValue: widget.cliente.tlf!,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -182,6 +130,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: vehiculo,
+                            //initialValue: widget.cliente.vehiculo!.split('-')[0],
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -202,6 +151,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: matricula,
+                            //initialValue: widget.cliente.vehiculo!.split('-')[1],
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -227,11 +177,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ClienteCrearBody cliente = ClienteCrearBody(
-                                username: username.text,
-                                password: password.text,
-                                verifyPassword: passwordVerify.text,
-                                dni: dni.text,
+                            ClienteEditarBody cliente = ClienteEditarBody(
                                 nombre: nombre.text,
                                 email: email.text,
                                 tlf: tlf.text,
@@ -239,12 +185,12 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                                 matricula: matricula.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderClienteCrear(cliente: cliente);
+                              return ProviderClienteEditar(cliente: cliente);
                             }));
                           }
                         },
                         child: const Text(
-                          'Crear',
+                          'Modificar',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),

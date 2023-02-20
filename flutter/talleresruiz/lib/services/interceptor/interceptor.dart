@@ -57,6 +57,12 @@ class Interceptor {
     final response = await _httpClient.post(uri, body: jsonEncode(body));
     return response;
   }
+
+  Future<dynamic> put(String url, dynamic body) async {
+    Uri uri = Uri.parse(baseUrl + url);
+    final response = await _httpClient.put(uri, body: jsonEncode(body));
+    return response;
+  }
 }
 
 class AuthorizationInterceptor implements InterceptorContract {

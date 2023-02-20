@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../main.dart';
 
-class CrearClientePage extends StatefulWidget {
-  const CrearClientePage({Key? key}) : super(key: key);
+class ClienteCrearPage extends StatefulWidget {
+  const ClienteCrearPage({Key? key}) : super(key: key);
 
   @override
-  State<CrearClientePage> createState() => _CrearClientePage();
+  State<ClienteCrearPage> createState() => _ClienteCrearPage();
 }
 
-class _CrearClientePage extends State<CrearClientePage> {
+class _ClienteCrearPage extends State<ClienteCrearPage> {
   @override
   void initState() {
     super.initState();

@@ -14,13 +14,6 @@ class ClienteMeResponse {
   String? vehiculo;
   List<Citas>? citas;
 
-  void convertToUtf8() {
-    List<int> utf8Bytes = utf8.encode(nombre!);
-    String utf8Nombre = utf8.decode(utf8Bytes);
-
-    nombre = utf8Nombre;
-  }
-
   ClienteMeResponse(
       {this.id,
       this.nombre,

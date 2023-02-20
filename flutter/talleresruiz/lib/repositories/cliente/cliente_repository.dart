@@ -60,4 +60,17 @@ class ClienteRepository {
     var response = await _http.get(url);
     return response;
   }
+
+  Future<dynamic> putCliente(ClienteEditarBody cliente) async {
+    final editarCliente = {
+      "nombre": cliente.nombre,
+      "email": cliente.email,
+      "tlf": cliente.tlf,
+      "vehiculo": cliente.vehiculo,
+      "matricula": cliente.matricula
+    };
+    String url = "/auth/cliente/me";
+    var response = await _http.put(url, editarCliente);
+    return response;
+  }
 }
