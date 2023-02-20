@@ -14,7 +14,6 @@ class UserLoginBloc extends Bloc<UserLoginEvent, UserLoginState> {
       : assert(userService != null),
         _userService = userService,
         super(const UserLoginState()) {
-    //loginRepo = GetIt.I.get<LoginRepository>();
     on<UserLoginFetched>(onUserLogin);
     on<UserLogoutFetched>(onUserLogout);
   }

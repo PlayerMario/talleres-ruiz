@@ -8,3 +8,5 @@ export './cliente/cliente_citas/cliente_citas_response.dart';
 export './cita/cita_detalles/cita_detalles_response.dart';
 export './cita/cita_crear/cita_crear_cliente_body.dart';
 export './cliente/cliente_editar/cliente_editar_body.dart';
+export './user/user_editar_pswd/user_editar_pswd_body.dart';
+export './user/user_editar_pswd/user_editar_pswd_response.dart';

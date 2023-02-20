@@ -22,7 +22,7 @@ class _ClienteEditarPage extends State<ClienteEditarPage> {
         builder: (context, state) {
       switch (state.status) {
         case ClienteHomeStatus.failure:
-          if (state.clienteMe.subErrors! != null) {
+          if (state.clienteMe.subErrors != null) {
             return ListView.builder(
                 itemCount: state.clienteMe.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {

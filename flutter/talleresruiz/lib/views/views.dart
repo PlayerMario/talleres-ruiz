@@ -16,3 +16,5 @@ export './auth/cita/cita_crear/cliente/cita_crear_cliente_page.dart';
 export './auth/cliente/cliente_editar/cliente_editar_page.dart';
 export './auth/cliente/cliente_editar/provider_cliente_editar.dart';
 export './auth/cita/cita_editar/cliente/provider_editar_cita_cliente.dart';
+export './auth/user/user_editar_pswd/provider_user_editar_pswd.dart';
+export './auth/user/user_editar_pswd/user_editar_pswd_page.dart';

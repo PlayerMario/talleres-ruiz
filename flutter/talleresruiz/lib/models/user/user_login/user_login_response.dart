@@ -1,4 +1,4 @@
-class LoginResponse {
+class UserLoginResponse {
   String? id;
   String? nombre;
   String? username;
@@ -6,7 +6,7 @@ class LoginResponse {
   List<String>? roles;
   String? token;
 
-  LoginResponse({
+  UserLoginResponse({
     required this.id,
     required this.nombre,
     required this.username,
@@ -15,7 +15,7 @@ class LoginResponse {
     required this.token,
   });
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  UserLoginResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nombre = json['nombre'];
     username = json['username'];

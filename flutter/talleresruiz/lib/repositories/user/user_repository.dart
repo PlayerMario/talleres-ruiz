@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/services/interceptor/interceptor.dart';
 import '../../main.dart';
 import '../../services/localstorage/localstorage_service.dart';
@@ -11,29 +12,28 @@ import '../../services/localstorage/localstorage_service.dart';
 class UserRepository {
   //late LocalStorageService _localStorageService;
   late Interceptor _http;
+  late RestAuthenticatedClient _httpAuth;
 
   UserRepository() {
     _http = GetIt.I.get<Interceptor>();
+    _httpAuth = getIt<RestAuthenticatedClient>();
   }
 
-  /*Future<List<dynamic>>*/Future<dynamic> loginUser(UserLoginBody login) async {
-    //GetIt.I.getAsync<LocalStorageService>().then((value) => _localStorageService = value);
-
+  Future<dynamic> loginUser(UserLoginBody login) async {
     final userLogin = {"username": login.username, "password": login.password};
     String url = "/noauth/user/login";
-
-    /*final response = await http.post(Uri.parse('$url/noauth/user/login'),
-        headers: headers, body: jsonEncode(userLogin));*/
-    
     var response = await _http.post(url, userLogin);
-
     return response;
-    /*if (response.statusCode == 201) {
-      LoginResponse resp = LoginResponse.fromJson(jsonDecode(response.body));
-      //await _localStorageService.saveToDisk('user_token', resp.token);
-      return [resp, true];
-    } else {
-      return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
-    }*/
+  }
+
+  Future<dynamic> putPswd(UserEditarPswdBody pswd) async {
+    final userPswd = {
+      "oldPassword": pswd.oldPassword,
+      "newPassword": pswd.newPassword,
+      "verifyNewPassword": pswd.verifyNewPassword
+    };
+    String url = "/auth/user/changePsw";
+    var response = await _httpAuth.put(url, userPswd);
+    return response;
   }
 }

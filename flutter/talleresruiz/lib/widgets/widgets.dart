@@ -12,3 +12,4 @@ export './auth/adjunto/nuevo_adjunto.dart';
 export './auth/cita/cita_nueva/cita_nueva_cliente.dart';
 export './auth/cliente/cliente_editar/formulario_editar_cliente.dart';
 export './auth/cita/cita_editar/cita_editar_cliente.dart';
+export './auth/user/user_editar_pswd/formulario_editar_pswd.dart';

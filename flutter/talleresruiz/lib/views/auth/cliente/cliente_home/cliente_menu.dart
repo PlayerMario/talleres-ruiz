@@ -95,6 +95,9 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const FormularioEditarPswd();
+                  }));
                   //Navigator.pushNamed(context, '/');
                 },
               ),

@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:talleresruiz/repositories/cita/cita_repository.dart' as _i4;
 import 'package:talleresruiz/repositories/cliente/cliente_repository.dart'
     as _i5;
-import 'package:talleresruiz/repositories/user/user_repo.dart' as _i6;
+import 'package:talleresruiz/repositories/user/user_repository.dart' as _i6;
 import 'package:talleresruiz/services/cita/cita_service.dart' as _i7;
 import 'package:talleresruiz/services/cliente/cliente_service.dart' as _i8;
 import 'package:talleresruiz/services/interceptor/interceptor.dart' as _i3;
