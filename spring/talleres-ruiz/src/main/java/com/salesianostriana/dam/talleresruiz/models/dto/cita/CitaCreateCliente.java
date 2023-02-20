@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class CitaCreateCliente {
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    // Para que funcione con flutter:
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
     @CheckCitaDateHour(message = "{citaCreate.fecha.checkcitadatehour}")
     private LocalDateTime fechaHora;
