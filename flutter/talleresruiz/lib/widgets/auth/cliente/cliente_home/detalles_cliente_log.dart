@@ -21,93 +21,10 @@ class DetallesClienteLog extends StatelessWidget {
 
   final ClienteMeResponse clienteMe;
 
-  /*final List<Widget> _paginas = [
-    const HomePage(),
-    const FormularioCrearCliente(),
-    FormularioLogin()
-  ];
-  int _indices = 0;*/
-
   @override
   Widget build(BuildContext context) {
     Citas? ultimaCita = obtenerUltimaCitas(clienteMe.citas!);
     return Scaffold(
-        /*appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: const Text(
-              "PANEL DE CLIENTE",
-              style: TextStyle(
-                color: Color.fromRGBO(237, 242, 244, 1),
-              ),
-            ),
-            leading: Builder(builder: (context) {
-              return IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  icon: const Icon(
-                    Icons.menu_sharp,
-                    color: Color.fromRGBO(237, 242, 244, 1),
-                  ));
-            }),
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              const SizedBox(
-                height: 150,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(43, 45, 66, 1),
-                  ),
-                  child: Center(
-                      child: Icon(Icons.car_repair,
-                          color: Color.fromRGBO(237, 242, 244, 1), size: 35)),
-                ),
-              ),
-              ListTile(
-                title: const Center(
-                    child: Text(
-                  'Editar perfil',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromRGBO(43, 45, 66, 1)),
-                )),
-                onTap: () {
-                  //Navigator.pushNamed(context, '/');
-                },
-              ),
-              ListTile(
-                title: const Center(
-                    child: Text(
-                  'Cerrar sesión',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromRGBO(43, 45, 66, 1)),
-                )),
-                onTap: () {
-                  //Navigator.pushNamed(context, '/');
-                },
-              ),
-              ListTile(
-                title: const Center(
-                    child: Text(
-                  'Eliminar usuario',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromRGBO(43, 45, 66, 1)),
-                )),
-                onTap: () {
-                  //Navigator.pushNamed(context, '/');
-                },
-              ),
-            ],
-          ),
-        ),*/
         body: Center(
             child: Column(
       children: [
@@ -204,40 +121,8 @@ class DetallesClienteLog extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           CitaListItem(cita: ultimaCita)
-        ]),
-        /*IndexedStack(
-              index: _indices,
-              children: _paginas,
-            )*/
+        ])
       ],
-    )) /*,
-        bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1),
-            unselectedItemColor: const Color.fromRGBO(237, 242, 244, 1),
-            selectedItemColor: const Color.fromRGBO(227, 1, 15, 1),
-            selectedIconTheme:
-                const IconThemeData(color: Color.fromRGBO(227, 1, 15, 1)),
-            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-            items: const [
-              BottomNavigationBarItem(
-                  icon:
-                      Icon(Icons.home, color: Color.fromRGBO(237, 242, 244, 1)),
-                  label: 'Inicio'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.list_alt_rounded,
-                      color: Color.fromRGBO(237, 242, 244, 1)),
-                  label: 'Mis Citas'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.post_add_rounded,
-                      color: Color.fromRGBO(237, 242, 244, 1)),
-                  label: 'Nueva Cita'),
-            ],
-            currentIndex: _indices,
-            onTap: (int index) {
-              setState(() {
-                _indices = index;
-              });
-            })*/
-        );
+    )));
   }
 }

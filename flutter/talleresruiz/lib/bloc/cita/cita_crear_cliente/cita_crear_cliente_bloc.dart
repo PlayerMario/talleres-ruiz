@@ -13,7 +13,7 @@ class CitaCrearClienteBloc
   CitaCrearClienteBloc(
       {required CitaCrearClienteBody citaCliente,
       required CitaServiceAbs citaService})
-      : assert(citaCliente != null),
+      : assert(citaService != null),
         _citaService = citaService,
         super(const CitaCrearClienteState()) {
     on<CitaCrearClienteFetched>(onCitaCrearCliente);

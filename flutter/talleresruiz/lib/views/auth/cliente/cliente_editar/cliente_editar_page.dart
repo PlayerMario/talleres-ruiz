@@ -32,12 +32,11 @@ class _ClienteEditarPage extends State<ClienteEditarPage> {
             return ErrorScreenAppBar(error: state.clienteMe);
           }
         case ClienteHomeStatus.success:
-        return ClienteMenu(clienteMe: state.clienteMe);
-          //return MostrarClienteModif(cliente: state.clienteMe);
+          return ClienteMenu(clienteMe: state.clienteMe);
+        //return MostrarClienteModif(cliente: state.clienteMe);
         case ClienteHomeStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });
   }
-
 }

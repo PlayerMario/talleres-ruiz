@@ -45,14 +45,12 @@ class Interceptor {
   }
 
   Future<dynamic> get(String url) async {
-    //Uri uri = Uri.parse(ApiConstants.baseUrl + url);
     Uri uri = Uri.parse(baseUrl + url);
     final response = await _httpClient.get(uri);
     return response;
   }
 
   Future<dynamic> post(String url, dynamic body) async {
-    //Uri uri = Uri.parse(ApiConstants.baseUrl + url);
     Uri uri = Uri.parse(baseUrl + url);
     final response = await _httpClient.post(uri, body: jsonEncode(body));
     return response;
@@ -61,6 +59,12 @@ class Interceptor {
   Future<dynamic> put(String url, dynamic body) async {
     Uri uri = Uri.parse(baseUrl + url);
     final response = await _httpClient.put(uri, body: jsonEncode(body));
+    return response;
+  }
+
+  Future<dynamic> delete(String url) async {
+    Uri uri = Uri.parse(baseUrl + url);
+    final response = await _httpClient.delete(uri);
     return response;
   }
 }

@@ -73,4 +73,10 @@ class ClienteRepository {
     var response = await _http.put(url, editarCliente);
     return response;
   }
+
+  Future<dynamic> delCliente() async {
+    String url = "/auth/cliente/me";
+    var response = await _http.delete(url);
+    return response;
+  }
 }

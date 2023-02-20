@@ -11,23 +11,11 @@ class ClienteMenu extends StatefulWidget {
 }
 
 class _ClienteMenu extends State<ClienteMenu> {
-  //_DetallesClienteLog({super.key, required this.clienteMe});
-  //final ClienteMeResponse clienteMe;
-  //_ClienteMenu({required this.clienteMe});
-
-  /*static ClienteMeResponse clienteMe;
-  final List<Widget> _paginas = [
-    DetallesClienteLog(clienteMe: clienteMe),
-    const FormularioCrearCliente(),
-    FormularioLogin()
-  ];
-  int _indices = 0;*/
-
   int indices = 0;
 
   @override
   Widget build(BuildContext context) {
-    //final userBloc = BlocProvider.of<UserLoginBloc>(context);
+    final clienteBloc = BlocProvider.of<ClienteHomeBloc>(context);
     List<Widget> paginas = [
       DetallesClienteLog(clienteMe: widget.clienteMe),
       const ProviderClienteCitas(),
@@ -82,7 +70,6 @@ class _ClienteMenu extends State<ClienteMenu> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FormularioEditarCliente(cliente: widget.clienteMe);
                   }));
-                  //Navigator.pushNamed(context, '/');
                 },
               ),
               ListTile(
@@ -98,7 +85,6 @@ class _ClienteMenu extends State<ClienteMenu> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const FormularioEditarPswd();
                   }));
-                  //Navigator.pushNamed(context, '/');
                 },
               ),
               ListTile(
@@ -111,12 +97,7 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  /*BlocProvider.of<UserLoginBloc>(context)
-                      .add(UserLogoutFetched());*/
-                  //userBloc.add(UserLogoutFetched());
-                  /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const HomeMenuPage();
-                  }));*/
+                  clienteBloc.add(ClienteLogoutFetched());
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {
                     return const HomeMenuPage();
@@ -133,7 +114,10 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  //Navigator.pushNamed(context, '/');
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) {
+                    return const ProviderClienteBorrar();
+                  }), (route) => false);
                 },
               ),
             ],

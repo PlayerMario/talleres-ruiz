@@ -15,3 +15,5 @@ class ClienteEditarFetched extends ClienteHomeEvent {
   /*@override
   List<Object> get props => [cliente];*/
 }
+
+class ClienteLogoutFetched extends ClienteHomeEvent {}

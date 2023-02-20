@@ -8,6 +8,7 @@ abstract class CitaServiceAbs {
   Future<dynamic> getDetallesCita(int id);
   Future<dynamic> postCrearCitaCliente(CitaCrearClienteBody citaCrearCliente);
   Future<dynamic> putCitaCliente(int id, CitaCrearClienteBody citaEditar);
+  Future<dynamic> delCitaCliente(int id);
 }
 
 @Order(2)
@@ -65,6 +66,22 @@ class CitaService extends CitaServiceAbs {
       dynamic response = await _citaRepository.putCitaCliente(id, citaEditar);
       if (response.statusCode == 200) {
         return [CitaDetallesResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> delCitaCliente(int id) async {
+    print("Borrando cita del cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _citaRepository.delCitaCliente(id);
+      if (response.statusCode == 204) {
+        return [null, true];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

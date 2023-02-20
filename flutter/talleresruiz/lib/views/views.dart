@@ -18,3 +18,5 @@ export './auth/cliente/cliente_editar/provider_cliente_editar.dart';
 export './auth/cita/cita_editar/cliente/provider_editar_cita_cliente.dart';
 export './auth/user/user_editar_pswd/provider_user_editar_pswd.dart';
 export './auth/user/user_editar_pswd/user_editar_pswd_page.dart';
+export './auth/cliente/cliente_borrar/cliente_borrar_page.dart';
+export './auth/cliente/cliente_borrar/provider_cliente_borrar.dart';

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../main.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ class DetallesCita extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final citaBloc = BlocProvider.of<CitaDetallesBloc>(context);
     return Scaffold(
         body: Center(
             child: Column(children: [
@@ -86,9 +89,18 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CitaEditarCliente(cita: citaDetalles,);
-                }));
+                if (citaDetalles.estado! != "Terminada" &&
+                    citaDetalles.estado! != "Proceso") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CitaEditarCliente(
+                      cita: citaDetalles,
+                    );
+                  }));
+                } else {
+                  showSnackbar(
+                      "No se puede modificar una cita terminada o en proceso",
+                      context);
+                }
               })),
       Card(
           margin:
@@ -105,12 +117,23 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                /*Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return ProviderCancelarCita(
-                                          id: citaDetalles.id!);
-                                    }));*/
+                if (citaDetalles.estado! != 'Terminada' &&
+                    citaDetalles.estado! != 'Proceso') {
+                  citaBloc.add(CitaBorrarClienteFetched(citaDetalles.id!));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const ProviderClienteHome();
+                  }));
+                } else {
+                  showSnackbar(
+                      "No se puede eliminar una cita terminada o en proceso",
+                      context);
+                }
               }))
     ])));
+  }
+
+  void showSnackbar(String msg, BuildContext context) {
+    final snack = SnackBar(content: Text(msg));
+    ScaffoldMessenger.of(context).showSnackBar(snack);
   }
 }

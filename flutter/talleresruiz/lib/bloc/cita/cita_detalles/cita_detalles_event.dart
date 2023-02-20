@@ -12,3 +12,9 @@ class CitaDetallesFetched extends CitaDetallesEvent {
 
   final int id;
 }
+
+class CitaBorrarClienteFetched extends CitaDetallesEvent {
+  const CitaBorrarClienteFetched(this.id);
+
+  final int id;
+}

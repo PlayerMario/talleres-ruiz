@@ -17,6 +17,7 @@ class _ClienteHomePage extends State<ClienteHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    UserService userService;
     return BlocBuilder<ClienteHomeBloc, ClienteHomeState>(
         builder: (context, state) {
       switch (state.status) {

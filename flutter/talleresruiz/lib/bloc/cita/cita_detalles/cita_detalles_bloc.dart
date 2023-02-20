@@ -13,6 +13,7 @@ class CitaDetallesBloc extends Bloc<CitaDetallesEvent, CitaDetallesState> {
         _citaService = citaService,
         super(const CitaDetallesState()) {
     on<CitaDetallesFetched>(onCitaDetalles);
+    on<CitaBorrarClienteFetched>(onCitaBorrarCliente);
   }
 
   Future<void> onCitaDetalles(
@@ -29,5 +30,11 @@ class CitaDetallesBloc extends Bloc<CitaDetallesEvent, CitaDetallesState> {
             status: CitaDetallesStatus.failure, citaDetalles: citaDetalles[0]));
       }
     }
+  }
+
+  Future<void> onCitaBorrarCliente(CitaBorrarClienteFetched event,
+      Emitter<CitaDetallesState> emit) async {
+      await _citaService.delCitaCliente(event.id);
+      emit(const CitaDetallesState());
   }
 }

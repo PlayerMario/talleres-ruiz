@@ -5,9 +5,11 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../main.dart';
 
 abstract class ClienteServiceAbs {
+  Future<dynamic> clienteLogout();
   Future<dynamic> getClienteLogin();
   Future<dynamic> getClienteCitas([int page = 0]);
   Future<dynamic> putCliente(ClienteEditarBody cliente);
+  Future<dynamic> delCliente();
 }
 
 @Order(2)
@@ -21,6 +23,12 @@ class ClienteService extends ClienteServiceAbs {
     GetIt.I
         .getAsync<LocalStorageService>()
         .then((value) => _localStorageService = value);
+  }
+
+  @override
+  Future<dynamic> clienteLogout() async {
+    print("Borrando token...");
+    await _localStorageService.deleteFromDisk("user_token");
   }
 
   @override
@@ -64,6 +72,23 @@ class ClienteService extends ClienteServiceAbs {
       if (response.statusCode == 200) {
         return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
         //return [ClienteCrearResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> delCliente() async {
+    print("Borrando cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _clienteRepository.delCliente();
+      if (response.statusCode == 204) {
+        _localStorageService.deleteFromDisk("user_token");
+        return [null, true];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

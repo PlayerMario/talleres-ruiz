@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 import '../../../main.dart';
 
@@ -10,12 +9,14 @@ part './cliente_home_state.dart';
 class ClienteHomeBloc extends Bloc<ClienteHomeEvent, ClienteHomeState> {
   final ClienteServiceAbs _clienteService;
 
-  ClienteHomeBloc({required ClienteServiceAbs clienteService, ClienteEditarBody? cliente})
+  ClienteHomeBloc(
+      {required ClienteServiceAbs clienteService, ClienteEditarBody? cliente})
       : assert(clienteService != null),
         _clienteService = clienteService,
         super(const ClienteHomeState()) {
     on<ClienteHomeFetched>(onMostrarClienteMe);
     on<ClienteEditarFetched>(onEditarCliente);
+    on<ClienteLogoutFetched>(onLogoutCliente);
   }
 
   Future<void> onMostrarClienteMe(
@@ -42,13 +43,17 @@ class ClienteHomeBloc extends Bloc<ClienteHomeEvent, ClienteHomeState> {
 
       if (clienteEditado[1]) {
         return emit(state.copyWith(
-            clienteMe: clienteEditado[0],
-            status: ClienteHomeStatus.success));
+            clienteMe: clienteEditado[0], status: ClienteHomeStatus.success));
       } else {
         return emit(state.copyWith(
-            clienteMe: clienteEditado[0],
-            status: ClienteHomeStatus.failure));
+            clienteMe: clienteEditado[0], status: ClienteHomeStatus.failure));
       }
     }
+  }
+
+  Future<void> onLogoutCliente(
+      ClienteLogoutFetched event, Emitter<ClienteHomeState> emit) async {
+    await _clienteService.clienteLogout();
+    emit(const ClienteHomeState());
   }
 }
