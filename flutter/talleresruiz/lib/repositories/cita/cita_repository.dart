@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import 'package:talleresruiz/services/interceptor/interceptor.dart';
 import '../../main.dart';
 
 @Order(-1)
@@ -16,5 +15,13 @@ class CitaRepository {
     String url = "/auth/cita/$id";
     var respone = await _http.get(url);
     return respone;
+  }
+
+  Future<dynamic> postCrearCitaCliente(
+      CitaCrearClienteBody crearCitaCliente) async {
+    final crearCita = {"fechaHora": crearCitaCliente.fechaHora};
+    String url = "/auth/cita/cliente";
+    var response = await _http.post(url, crearCita);
+    return response;
   }
 }

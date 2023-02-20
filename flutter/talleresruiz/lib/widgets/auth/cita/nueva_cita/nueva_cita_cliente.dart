@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../main.dart';
 import 'package:date_field/date_field.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class NuevaCitaCliente extends StatefulWidget {
   const NuevaCitaCliente({super.key});
@@ -10,13 +11,14 @@ class NuevaCitaCliente extends StatefulWidget {
 }
 
 class _NuevaCitaCliente extends State<NuevaCitaCliente> {
-  /*fechaHora = TextEditingController();*/
+  late DateTime fechaHora;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    DateTime fechaHora;
+    //DateTime fechaHora;
+    //initializeDateFormatting('es');
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         body: SingleChildScrollView(
@@ -50,15 +52,18 @@ class _NuevaCitaCliente extends State<NuevaCitaCliente> {
                             ),
                             use24hFormat: true,
                             initialDatePickerMode: DatePickerMode.day,
-                            initialDate: DateTime.now(),                            
-                            dateFormat: DateFormat("dd-MM-yyyy HH:mm"),
+                            initialDate: DateTime.now(),
+                            //dateFormat: DateFormat("dd-MM-yyyy HH:mm", 'es'),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(DateTime.now().year + 1),
                             mode: DateTimeFieldPickerMode.dateAndTime,
                             autovalidateMode: AutovalidateMode.always,
-                            /*validator: (e) => (e?.day ?? 0) == 1
-                                ? 'Please not the first day'
-                                : null,*/
+                            /*validator: (value) {
+                              if (value!.toIso8601String().isEmpty) {
+                                return 'La fecha y hora es obligatoria';
+                              }
+                              return null;
+                            },*/
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
@@ -78,12 +83,12 @@ class _NuevaCitaCliente extends State<NuevaCitaCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            /*ClienteCrearBody cliente = ClienteCrearBody(
-                                fechaHora: fechaHora);
+                            CitaCrearClienteBody cita = CitaCrearClienteBody(
+                                fechaHora: fechaHora.toIso8601String());
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderCrearCliente(cliente: cliente);
-                            }));*/
+                              return ProviderNuevaCitaCliente(cita: cita);
+                            }));
                           }
                         },
                         child: const Text(

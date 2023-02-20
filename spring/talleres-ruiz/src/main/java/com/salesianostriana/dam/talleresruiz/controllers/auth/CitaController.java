@@ -334,6 +334,7 @@ public class CitaController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
+                                                    "id": 1000,
                                                     "mecanico": "Por asignar",
                                                     "cliente": "Jose Javier Moriña León",
                                                     "vehiculo": "2014GMD-Kia Rio",

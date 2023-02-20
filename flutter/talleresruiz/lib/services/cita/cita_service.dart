@@ -6,6 +6,7 @@ import '../../main.dart';
 
 abstract class CitaServiceAbs {
   Future<dynamic> getDetallesCita(int id);
+  Future<dynamic> postCrearCitaCliente(CitaCrearClienteBody citaCrearCliente);
 }
 
 @Order(2)
@@ -29,6 +30,27 @@ class CitaService extends CitaServiceAbs {
       dynamic response = await _citaRepository.getDetallesCita(id);
       if (response.statusCode == 200) {
         return [CitaDetallesResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> postCrearCitaCliente(
+      CitaCrearClienteBody citaCrearCliente) async {
+    print("Creando nueva cita para cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response =
+          await _citaRepository.postCrearCitaCliente(citaCrearCliente);
+      if (response.statusCode == 201) {
+        return [
+          CitaDetallesResponse.fromJson(jsonDecode(response.body)),
+          true
+        ];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

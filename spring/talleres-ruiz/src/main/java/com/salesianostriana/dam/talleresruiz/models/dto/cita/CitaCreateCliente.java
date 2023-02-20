@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 public class CitaCreateCliente {
 
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
     @CheckCitaDateHour(message = "{citaCreate.fecha.checkcitadatehour}")
     private LocalDateTime fechaHora;
 
