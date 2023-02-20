@@ -4,13 +4,13 @@ import '../../../../main.dart';
 import 'package:date_field/date_field.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-class NuevaCitaCliente extends StatefulWidget {
-  const NuevaCitaCliente({super.key});
+class CitaNuevaCliente extends StatefulWidget {
+  const CitaNuevaCliente({super.key});
   @override
-  State<NuevaCitaCliente> createState() => _NuevaCitaCliente();
+  State<CitaNuevaCliente> createState() => _CitaNuevaCliente();
 }
 
-class _NuevaCitaCliente extends State<NuevaCitaCliente> {
+class _CitaNuevaCliente extends State<CitaNuevaCliente> {
   late DateTime fechaHora;
 
   final _formKey = GlobalKey<FormState>();

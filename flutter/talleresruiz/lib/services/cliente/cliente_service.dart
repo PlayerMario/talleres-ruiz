@@ -62,7 +62,8 @@ class ClienteService extends ClienteServiceAbs {
     if (token != null) {
       dynamic response = await _clienteRepository.putCliente(cliente);
       if (response.statusCode == 200) {
-        return [ClienteCrearResponse.fromJson(jsonDecode(response.body)), true];
+        return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
+        //return [ClienteCrearResponse.fromJson(jsonDecode(response.body)), true];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

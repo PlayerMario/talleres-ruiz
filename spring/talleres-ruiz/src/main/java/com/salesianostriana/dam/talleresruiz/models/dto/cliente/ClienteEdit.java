@@ -21,7 +21,7 @@ public class ClienteEdit extends UserEdit {
     protected String vehiculo;
 
     @NotBlank(message = "{nuevoCliente.matricula.notblank}")
-    @UniqueMatricula(message = "{nuevoCliente.matricula.uniquematricula}")
+    //@UniqueMatricula(message = "{nuevoCliente.matricula.uniquematricula}")
     protected String matricula;
 
 }

@@ -426,13 +426,31 @@ public class ClienteController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
+                                                    "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "nombre": "Bartolomé Méndez Zuluaga",
                                                     "username": "jjml4",
-                                                    "dni": "22222222A",
+                                                    "dni": "52874103V",
                                                     "email": "bart@bart.com",
                                                     "tlf": "777 888 999",
-                                                    "avatar": "https://robohash.org/jjml4",
-                                                    "vehiculo": "2036VFH-Ford Mondeo"
+                                                    "avatar": "user.png",
+                                                    "roles": [
+                                                        "CLIENTE"
+                                                    ],
+                                                    "vehiculo": "2036VFH-Ford Mondeo",
+                                                    "citas": [
+                                                        {
+                                                            "id": 1,
+                                                            "mecanico": "Mario Ruiz López",
+                                                            "fechaHora": "18-01-2023 12:00",
+                                                            "estado": "Terminada"
+                                                        },
+                                                        {
+                                                            "id": 4,
+                                                            "mecanico": "Alejandro Santos Pacheco",
+                                                            "fechaHora": "18-05-2022 10:00",
+                                                            "estado": "Terminada"
+                                                        }
+                                                    ]
                                                 }
                                             """
                             )}
@@ -445,21 +463,15 @@ public class ClienteController {
                                                 {
                                                     "status": "BAD_REQUEST",
                                                     "message": "Error en la validación, compruebe la lista",
-                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379a",
+                                                    "path": "/auth/cliente/me",
                                                     "statusCode": 400,
-                                                    "date": "11/02/2023 20:54:23",
+                                                    "date": "20/02/2023 16:05:11",
                                                     "subErrors": [
                                                         {
                                                             "object": "clienteEdit",
-                                                            "message": "La matrícula ya existe",
-                                                            "field": "matricula",
-                                                            "rejectedValue": "2036VFH"
-                                                        },
-                                                        {
-                                                            "object": "clienteEdit",
-                                                            "message": "El DNI ya existe",
-                                                            "field": "dni",
-                                                            "rejectedValue": "22222222A"
+                                                            "message": "El email no puede estar vacío",
+                                                            "field": "email",
+                                                            "rejectedValue": ""
                                                         }
                                                     ]
                                                 }
@@ -503,8 +515,8 @@ public class ClienteController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al usuario con ID: d182a454-9998-4c82-a622-02d7bafc0379",
-                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379",
+                                                    "message": "No se encuentra al usuario",
+                                                    "path": "/auth/cliente/me",
                                                     "statusCode": 404,
                                                     "date": "11/02/2023 14:59:58"
                                                 }
@@ -512,7 +524,7 @@ public class ClienteController {
                             )}
                     )})
     })
-    @JsonView(ClienteViews.Master.class)
+    @JsonView(ClienteViews.DetallesClientes.class)
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/me")
     public ClienteDto modificarCliente(@AuthenticationPrincipal User usuario, @Valid @RequestBody ClienteEdit edit) {

@@ -86,11 +86,9 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                /*Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return ProviderModificarCita(
-                                          id: citaDetalles.id!);
-                                    }));*/
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CitaEditarCliente(cita: citaDetalles,);
+                }));
               })),
       Card(
           margin:

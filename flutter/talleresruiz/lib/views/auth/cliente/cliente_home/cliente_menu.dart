@@ -27,11 +27,11 @@ class _ClienteMenu extends State<ClienteMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserLoginBloc>(context);
+    //final userBloc = BlocProvider.of<UserLoginBloc>(context);
     List<Widget> paginas = [
       DetallesClienteLog(clienteMe: widget.clienteMe),
       const ProviderClienteCitas(),
-      const NuevaCitaCliente()
+      const CitaNuevaCliente()
     ];
 
     return Scaffold(
@@ -107,8 +107,10 @@ class _ClienteMenu extends State<ClienteMenu> {
                       fontSize: 20,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
-                onTap: () {                  
-                  userBloc.add(UserLogoutFetched());
+                onTap: () {
+                  /*BlocProvider.of<UserLoginBloc>(context)
+                      .add(UserLogoutFetched());*/
+                  //userBloc.add(UserLogoutFetched());
                   /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const HomeMenuPage();
                   }));*/

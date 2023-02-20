@@ -21,11 +21,11 @@ public class UserEdit {
 
     @Email(message = "{nuevoCliente.email.email}")
     @NotEmpty(message = "{nuevoCliente.email.notempty}")
-    @UniqueEmail(message = "{nuevoCliente.email.uniqueemail}")
+    //@UniqueEmail(message = "{nuevoCliente.email.uniqueemail}")
     protected String email;
 
     @NotEmpty(message = "{nuevoCliente.tlf.notempty}")
-    @UniqueTlf(message = "{nuevoCliente.tlf.uniquetlf}")
+    //@UniqueTlf(message = "{nuevoCliente.tlf.uniquetlf}")
     protected String tlf;
 
 }

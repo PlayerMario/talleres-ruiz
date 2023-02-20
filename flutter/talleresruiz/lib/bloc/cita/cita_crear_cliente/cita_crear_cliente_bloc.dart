@@ -17,6 +17,7 @@ class CitaCrearClienteBloc
         _citaService = citaService,
         super(const CitaCrearClienteState()) {
     on<CitaCrearClienteFetched>(onCitaCrearCliente);
+    on<CitaEditarClienteFetched>(onCitaEditarCliente);
   }
 
   Future<void> onCitaCrearCliente(CitaCrearClienteFetched event,
@@ -33,6 +34,24 @@ class CitaCrearClienteBloc
         return emit(state.copyWith(
             status: CitaCrearClienteStatus.failure,
             citaClienteCreada: citaClienteCreada[0]));
+      }
+    }
+  }
+
+  Future<void> onCitaEditarCliente(CitaEditarClienteFetched event,
+      Emitter<CitaCrearClienteState> emit) async {
+    if (state.status == CitaCrearClienteStatus.initial) {
+      final citaClienteEditada =
+          await _citaService.putCitaCliente(event.id, event.cita);
+
+      if (citaClienteEditada[1]) {
+        return emit(state.copyWith(
+            status: CitaCrearClienteStatus.success,
+            citaClienteCreada: citaClienteEditada[0]));
+      } else {
+        return emit(state.copyWith(
+            status: CitaCrearClienteStatus.failure,
+            citaClienteCreada: citaClienteEditada[0]));
       }
     }
   }

@@ -12,3 +12,10 @@ class CitaCrearClienteFetched extends CitaCrearClienteEvent {
 
   final CitaCrearClienteBody cita;
 }
+
+class CitaEditarClienteFetched extends CitaCrearClienteEvent {
+  const CitaEditarClienteFetched(this.cita, this.id);
+
+  final CitaCrearClienteBody cita;
+  final int id;
+}

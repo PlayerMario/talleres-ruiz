@@ -21,16 +21,16 @@ class _CitaCrearClientePage extends State<CitaCrearClientePage> {
         builder: (context, state) {
       switch (state.status) {
         case CitaCrearClienteStatus.failure:
-          /*if (state.citaClienteCreada.subErrors! != null) {
+          if (state.citaClienteCreada.subErrors != null) {
             return ListView.builder(
                 itemCount: state.citaClienteCreada.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return SubErrorData(
                       error: state.citaClienteCreada.subErrors![index]);
                 });
-          } else {*/
+          } else {
             return ErrorScreenAppBar(error: state.citaClienteCreada);
-          //}
+          }
         case CitaCrearClienteStatus.success:
             return ProviderDetallesCita(id: state.citaClienteCreada!.id!);
           //return const ProviderClienteHome();

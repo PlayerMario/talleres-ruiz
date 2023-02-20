@@ -32,7 +32,10 @@ class _CitaMenu extends State<CitaMenu> {
             leading: Builder(builder: (context) {
               return IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ProviderClienteHome();
+                    }));
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_new,

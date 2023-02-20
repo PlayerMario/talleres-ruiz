@@ -24,4 +24,12 @@ class CitaRepository {
     var response = await _http.post(url, crearCita);
     return response;
   }
+
+  Future<dynamic> putCitaCliente(
+      int id, CitaCrearClienteBody editarCitaCliente) async {
+    final editarCita = {"fechaHora": editarCitaCliente.fechaHora};
+    String url = "/auth/cita/$id/cliente";
+    var respone = await _http.put(url, editarCita);
+    return respone;
+  }
 }

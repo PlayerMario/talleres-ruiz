@@ -15,3 +15,4 @@ export './auth/cita/cita_crear/cliente/provider_nueva_cita_cliente.dart';
 export './auth/cita/cita_crear/cliente/cita_crear_cliente_page.dart';
 export './auth/cliente/cliente_editar/cliente_editar_page.dart';
 export './auth/cliente/cliente_editar/provider_cliente_editar.dart';
+export './auth/cita/cita_editar/cliente/provider_editar_cita_cliente.dart';
