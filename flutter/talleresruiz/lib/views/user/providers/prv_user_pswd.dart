@@ -4,8 +4,10 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
 
 class ProviderUserEditarPswd extends StatelessWidget {
-  const ProviderUserEditarPswd({super.key, required this.pswd});
+  const ProviderUserEditarPswd(
+      {super.key, required this.pswd, required this.rol});
   final UserEditarPswdBody pswd;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class ProviderUserEditarPswd extends StatelessWidget {
         body: BlocProvider(
           create: (_) => UserBloc(userService: userService)
             ..add(EventUserEditarPswd(pswd)),
-          child: const UserEditarPswdPage(),
+          child: UserEditarPswdPage(rol: rol),
         ));
   }
 }

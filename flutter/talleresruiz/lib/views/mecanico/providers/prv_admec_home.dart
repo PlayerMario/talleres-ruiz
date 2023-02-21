@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../../main.dart';
 
-class ProviderClienteHome extends StatelessWidget {
-  const ProviderClienteHome({super.key});
+class ProviderAdMecHome extends StatelessWidget {
+  const ProviderAdMecHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final clienteService = getIt<ClienteService>();
+    final adMecService = getIt<AdMecService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         body: BlocProvider(
-          create: (_) => ClienteBloc(clienteService: clienteService)
-            ..add(EventClienteHome()),
-          child: const ClienteHomePage(),
+          create: (_) =>
+              AdMecBloc(adMecService: adMecService)..add(EventAdMecHome()),
+          child: const AdMecHomePage(),
         ));
   }
 }

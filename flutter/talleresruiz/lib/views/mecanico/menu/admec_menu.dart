@@ -1,32 +1,34 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
-class ClienteMenu extends StatefulWidget {
-  const ClienteMenu({super.key, required this.clienteMe});
-  final ClienteMeResponse clienteMe;
+class AdMecMenu extends StatefulWidget {
+  const AdMecMenu({super.key, required this.mecanicoMe});
+  final MecanicoMeResponse mecanicoMe;
 
   @override
-  State<ClienteMenu> createState() => _ClienteMenu(/*clienteMe: clienteMe*/);
+  State<AdMecMenu> createState() => _AdMecMenu();
 }
 
-class _ClienteMenu extends State<ClienteMenu> {
+class _AdMecMenu extends State<AdMecMenu> {
   int indices = 0;
 
   @override
   Widget build(BuildContext context) {
-    final clienteBloc = BlocProvider.of<ClienteBloc>(context);
+    final admecBloc = BlocProvider.of<AdMecBloc>(context);
+
     List<Widget> paginas = [
-      DetallesClienteLog(clienteMe: widget.clienteMe),
-      const ProviderClienteCitas(),
-      const CitaNuevaCliente()
+      DetallesAddMecLog(mecanicoMe: widget.mecanicoMe),
+      const AdMecMenuPrincipal(),
+      //const CitaNuevaAdMec()*/
     ];
 
     return Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "PANEL DE CLIENTE",
+              "PANEL DE TRABAJADOR",
               style: TextStyle(
                 color: Color.fromRGBO(237, 242, 244, 1),
               ),
@@ -67,9 +69,9 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FormularioEditarCliente(cliente: widget.clienteMe);
-                  }));
+                  }));*/
                 },
               ),
               ListTile(
@@ -84,8 +86,7 @@ class _ClienteMenu extends State<ClienteMenu> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FormularioEditarPswd(
-                      rol: widget.clienteMe.roles![0],
-                    );
+                        rol: widget.mecanicoMe.roles![0]);
                   }));
                 },
               ),
@@ -99,26 +100,10 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  clienteBloc.add(EventLogoutCliente());
+                  admecBloc.add(EventLogoutAdMec());
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {
                     return const HomeMenuPage();
-                  }), (route) => false);
-                },
-              ),
-              ListTile(
-                title: const Center(
-                    child: Text(
-                  'Eliminar usuario',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromRGBO(43, 45, 66, 1)),
-                )),
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) {
-                    return const ProviderClienteBorrar();
                   }), (route) => false);
                 },
               ),
@@ -144,7 +129,7 @@ class _ClienteMenu extends State<ClienteMenu> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.list_alt_rounded,
                       color: Color.fromRGBO(237, 242, 244, 1)),
-                  label: 'Mis Citas'),
+                  label: 'Citas'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.post_add_rounded,
                       color: Color.fromRGBO(237, 242, 244, 1)),

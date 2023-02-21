@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../main.dart';
 
-class DetallesClienteLog extends StatelessWidget {
-  const DetallesClienteLog({super.key, required this.clienteMe});
-  final ClienteMeResponse clienteMe;
+class DetallesAddMecLog extends StatelessWidget {
+  const DetallesAddMecLog({super.key, required this.mecanicoMe});
+  final MecanicoMeResponse mecanicoMe;
 
   @override
   Widget build(BuildContext context) {
-    Citas? ultimaCita = obtenerUltimaCitas(clienteMe.citas!);
     return Scaffold(
         body: Center(
             child: Column(
@@ -30,14 +29,14 @@ class DetallesClienteLog extends StatelessWidget {
                           width: 125,
                           height: 125,
                           child: Image.network(
-                            '$baseUrl/auth/fichero/download/${clienteMe.avatar!}',
+                            '$baseUrl/auth/fichero/download/${mecanicoMe.avatar!}',
                             fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                             padding: const EdgeInsets.only(top: 15, bottom: 15),
                             child: Text(
-                              utf8.decode(clienteMe.nombre!.codeUnits),
+                              utf8.decode(mecanicoMe.nombre!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -47,7 +46,7 @@ class DetallesClienteLog extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(bottom: 15),
                             child: Text(
-                              utf8.decode(clienteMe.username!.codeUnits),
+                              utf8.decode(mecanicoMe.username!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -57,7 +56,7 @@ class DetallesClienteLog extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(bottom: 15),
                             child: Text(
-                              utf8.decode(clienteMe.dni!.codeUnits),
+                              utf8.decode(mecanicoMe.dni!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -67,7 +66,7 @@ class DetallesClienteLog extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(bottom: 15),
                             child: Text(
-                              utf8.decode(clienteMe.email!.codeUnits),
+                              utf8.decode(mecanicoMe.email!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -77,36 +76,15 @@ class DetallesClienteLog extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(bottom: 15),
                             child: Text(
-                              utf8.decode(clienteMe.tlf!.codeUnits),
+                              utf8.decode(mecanicoMe.tlf!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: Color.fromRGBO(43, 45, 66, 1)),
                               textAlign: TextAlign.center,
-                            )),
-                        Padding(
-                            padding: const EdgeInsets.only(bottom: 0),
-                            child: Text(
-                              utf8.decode(clienteMe.vehiculo!.codeUnits),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
-                              textAlign: TextAlign.center,
-                            )),
+                            ))
                       ],
-                    ))))),
-        Column(children: [
-          const Text(
-            "PRÓXIMA CITA:",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Color.fromRGBO(43, 45, 66, 1)),
-            textAlign: TextAlign.center,
-          ),
-          CitaListItem(cita: ultimaCita)
-        ])
+                    )))))
       ],
     )));
   }

@@ -31,13 +31,7 @@ class _ClienteHomePage extends State<ClienteHomePage> {
             return ErrorScreenAppBar(error: state.response);
           }
         case ClienteStatus.success:
-          if (state.response.roles[0] == "CLIENTE") {
-            print("Login Cliene");
-            return ClienteMenu(clienteMe: state.response);
-          } else {
-            print("Login Admin-Mec");
-            return Center(child: Text("Logueado ${state.response}"));
-          }
+          return ClienteMenu(clienteMe: state.response);
         case ClienteStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

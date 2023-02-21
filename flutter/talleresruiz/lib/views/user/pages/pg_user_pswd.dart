@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class UserEditarPswdPage extends StatefulWidget {
-  const UserEditarPswdPage({Key? key}) : super(key: key);
+  const UserEditarPswdPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<UserEditarPswdPage> createState() => _UserEditarPswdPage();
@@ -30,7 +31,11 @@ class _UserEditarPswdPage extends State<UserEditarPswdPage> {
             return ErrorScreenAppBar(error: state.response);
           }
         case UserStatus.success:
-          return const ProviderClienteHome();
+          if (widget.rol == "CLIENTE") {
+            return const ProviderClienteHome();
+          } else {
+            return const ProviderAdMecHome();
+          }
         case UserStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

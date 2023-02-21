@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 
 class FormularioEditarPswd extends StatefulWidget {
-  const FormularioEditarPswd({super.key});
+  const FormularioEditarPswd({super.key, required this.rol});
+  final String rol;
+
   @override
   State<FormularioEditarPswd> createState() => _FormularioEditarPswd();
 }
@@ -18,6 +20,25 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "CAMBIAR CONTRASEÑA",
+              style: TextStyle(
+                color: Color.fromRGBO(237, 242, 244, 1),
+              ),
+            ),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color.fromRGBO(237, 242, 244, 1),
+                  ));
+            }),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: SingleChildScrollView(
           child: Container(
               margin: const EdgeInsets.all(20.0),
@@ -114,6 +135,7 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                                 MaterialPageRoute(builder: (context) {
                               return ProviderUserEditarPswd(
                                 pswd: newPswd,
+                                rol: widget.rol,
                               );
                             }));
                           }

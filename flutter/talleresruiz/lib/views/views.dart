@@ -1,4 +1,4 @@
-export 'home/home_menu_page.dart';
+export 'home/pages/pg_home_menu.dart';
 export 'cliente/providers/prv_cliente_crear.dart';
 export 'cliente/pages/pg_cliente_crear.dart';
 export 'user/providers/prv_login.dart';
@@ -20,3 +20,6 @@ export 'user/providers/prv_user_pswd.dart';
 export 'user/pages/pg_user_pswd.dart';
 export 'cliente/pages/pg_cliente_borrar.dart';
 export 'cliente/providers/prv_cliente_borrar.dart';
+export 'mecanico/menu/admec_menu.dart';
+export 'mecanico/pages/pg_admec_home.dart';
+export 'mecanico/providers/prv_admec_home.dart';
