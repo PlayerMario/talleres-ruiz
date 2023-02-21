@@ -28,7 +28,7 @@ class MenuListaAdMec extends StatelessWidget {
                   )),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClientesListar();
+                  return const ProviderClientesListar(/*newPage: 0*/);
                 }));
               })),
       Card(

@@ -11,9 +11,29 @@ class ProviderClientesListar extends StatelessWidget {
     final clienteService = getIt<ClienteService>();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "LISTAS CLIENTES",
+              style: TextStyle(
+                color: Color.fromRGBO(237, 242, 244, 1),
+              ),
+            ),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color.fromRGBO(237, 242, 244, 1),
+                  ));
+            }),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: BlocProvider(
-          create: (_) => ClienteBloc(clienteService: clienteService)
-            ..add(EventListarClientes()),
+          create: (_) =>
+              ListasClienteBloc(clienteService: clienteService, newPage: 0)
+                ..add(EventListaClientes()),
           child: const ClienteListarPage(),
         ));
   }

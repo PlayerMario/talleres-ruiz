@@ -13,8 +13,8 @@ class ProviderClienteCitas extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         body: BlocProvider(
-          create: (_) => ClienteBloc(clienteService: clienteService)
-            ..add(EventCitasCliente()),
+          create: (_) => ListasCitaBloc(clienteService: clienteService)
+            ..add(EventListaCitasCliente()),
           child: const ClienteCitasPage(),
         ));
   }

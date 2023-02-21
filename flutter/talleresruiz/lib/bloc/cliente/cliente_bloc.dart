@@ -1,20 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:get_it/get_it.dart';
-import 'package:stream_transform/stream_transform.dart';
-
 import '../../../main.dart';
 
 part './cliente_event.dart';
 part './cliente_state.dart';
-
-const throttleDuration = Duration(milliseconds: 1000);
-EventTransformer<E> throttleDroppable<E>(Duration duration) {
-  return (events, mapper) {
-    return droppable<E>().call(events.throttle(duration), mapper);
-  };
-}
 
 class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
   final ClienteServiceAbs _clienteService;
@@ -26,10 +16,6 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
         super(const ClienteState()) {
     _clienteRepo = GetIt.I.get<ClienteRepository>();
     on<EventClienteHome>(onMostrarClienteMe);
-    on<EventCitasCliente>(onClienteCitas,
-        transformer: throttleDroppable(throttleDuration));
-    on<EventListarClientes>(onListarClientes,
-        transformer: throttleDroppable(throttleDuration));
     on<EventCrearCliente>(onCrearCliente);
     on<EventEditarCliente>(onEditarCliente);
     on<EventBorrarCliente>(onBorrarCliente);
@@ -50,68 +36,6 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
             response: clienteMe[0], status: ClienteStatus.failure));
       }
     }
-  }
-
-  Future<void> onClienteCitas(
-      EventCitasCliente event, Emitter<ClienteState> emit) async {
-    if (state.hasReachedMax) return;
-    if (state.status == ClienteStatus.initial) {
-      await Future.delayed(const Duration(milliseconds: 500));
-      final clienteCitas = await _clienteService.getClienteCitas();
-
-      if (clienteCitas[1]) {
-        return emit(state.copyWith(
-            status: ClienteStatus.success,
-            response: clienteCitas[0].content,
-            hasReachedMax: false));
-      } else {
-        return emit(state.copyWith(
-            status: ClienteStatus.failure, response: clienteCitas[0]));
-      }
-    }
-
-    await Future.delayed(const Duration(milliseconds: 500));
-    final clienteCitas =
-        await _clienteService.getClienteCitas(state.response[0].content.length);
-
-    clienteCitas[0].content.isEmpty
-        ? emit(state.copyWith(hasReachedMax: true))
-        : emit(state.copyWith(
-            status: ClienteStatus.success,
-            response: List.of(state.response[0].content)
-              ..addAll(clienteCitas[0].content),
-            hasReachedMax: false));
-  }
-
-  Future<void> onListarClientes(
-      EventListarClientes event, Emitter<ClienteState> emit) async {
-    if (state.hasReachedMax) return;
-    if (state.status == ClienteStatus.initial) {
-      await Future.delayed(const Duration(milliseconds: 500));
-      final listaClientes = await _clienteService.getListaClientes();
-
-      if (listaClientes[1]) {
-        return emit(state.copyWith(
-            status: ClienteStatus.success,
-            response: listaClientes[0].content,
-            hasReachedMax: false));
-      } else {
-        return emit(state.copyWith(
-            status: ClienteStatus.failure, response: listaClientes[0]));
-      }
-    }
-
-    await Future.delayed(const Duration(milliseconds: 500));
-    final listaClientes =
-        await _clienteService.getClienteCitas(state.response[0].content.length);
-
-    listaClientes[0].content.isEmpty
-        ? emit(state.copyWith(hasReachedMax: true))
-        : emit(state.copyWith(
-            status: ClienteStatus.success,
-            response: List.of(state.response[0].content)
-              ..addAll(listaClientes[0].content),
-            hasReachedMax: false));
   }
 
   Future<void> onCrearCliente(

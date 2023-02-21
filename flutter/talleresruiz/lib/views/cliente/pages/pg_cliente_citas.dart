@@ -20,13 +20,16 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ClienteBloc, ClienteState>(builder: (context, state) {
+    return BlocBuilder<ListasCitaBloc, ListasCitaState>(
+        builder: (context, state) {
       switch (state.status) {
-        case ClienteStatus.failure:
-          return ErrorScreen(error: state.response);
-        case ClienteStatus.success:
+        case ListasCitaStatus.failure:
+          return const Text("Error");
+        //return ErrorScreen(error: state.response);
+        case ListasCitaStatus.success:
           if (state.response.isEmpty) {
-            return ErrorScreen(error: state.response);
+            //return ErrorScreen(error: state.response);
+            return const Text("No hay clientes");
           } else {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -40,7 +43,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
               controller: scrollController,
             );
           }
-        case ClienteStatus.initial:
+        case ListasCitaStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });
@@ -55,7 +58,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
   }
 
   void onScroll() {
-    if (_isBottom) context.read<ClienteBloc>().add(EventCitasCliente());
+    if (_isBottom) context.read<ListasCitaBloc>().add(EventListaCitasCliente());
   }
 
   bool get _isBottom {

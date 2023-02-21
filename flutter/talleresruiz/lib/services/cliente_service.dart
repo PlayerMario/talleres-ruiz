@@ -66,7 +66,7 @@ class ClienteService extends ClienteServiceAbs {
 
   @override
   Future<dynamic> getListaClientes([int page = 0]) async {
-    print("Obteniendo lsita de clientes...");
+    print("Obteniendo lista de clientes...");
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
       dynamic response = await _clienteRepository.getListaClientes(page);
