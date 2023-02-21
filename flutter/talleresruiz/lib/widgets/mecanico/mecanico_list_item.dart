@@ -55,7 +55,7 @@ class MecanicoListItem extends StatelessWidget {
           print("Detalles del usuario ${mecanico!.id}");
           if (rol == "ADMIN") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProviderDetallesMecanico(id: mecanico!.id!);
+              return ProviderDetallesMecanico(id: mecanico!.id!, rol: rol);
             }));
           } else {
             showSnackbar(

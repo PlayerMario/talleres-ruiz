@@ -19,7 +19,7 @@ class _AdMecMenu extends State<AdMecMenu> {
 
     List<Widget> paginas = [
       DetallesAddMecLog(mecanicoMe: widget.mecanicoMe),
-      //const CitaNuevaAdMec()*/
+      CitaNuevaAdMec(rol: widget.mecanicoMe.roles![0]),
       MenuListaAdMec(rol: widget.mecanicoMe.roles![0]),
     ];
 
@@ -69,9 +69,12 @@ class _AdMecMenu extends State<AdMecMenu> {
                 )),
                 onTap: () {
                   if (widget.mecanicoMe.roles![0] == "ADMIN") {
-                    /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return FormularioEditarCliente(cliente: widget.clienteMe);
-                  }));*/
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return FormularioEditarAdMec(
+                          mecanico: widget.mecanicoMe,
+                          id: widget.mecanicoMe.id!);
+                    }));
                   } else {
                     showSnackbar("Sólo un ADMIN puede acceder", context);
                   }

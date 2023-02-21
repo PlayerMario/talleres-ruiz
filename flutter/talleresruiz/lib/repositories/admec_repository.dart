@@ -48,4 +48,15 @@ class AdMecRepository {
     var response = await _http.post(url, crearAdMec);
     return response;
   }
+
+  Future<dynamic> editarAdMec(AdMecEditarBody adMec, String id) async {
+    final editAdMec = {
+      "nombre": adMec.nombre,
+      "email": adMec.email,
+      "tlf": adMec.tlf,
+    };
+    String url = "/auth/mecanico/$id";
+    var response = await _http.put(url, editAdMec);
+    return response;
+  }
 }

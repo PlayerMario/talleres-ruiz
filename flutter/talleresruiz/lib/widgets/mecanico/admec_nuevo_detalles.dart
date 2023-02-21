@@ -12,7 +12,7 @@ class DetallesNuevoAdMec extends StatelessWidget {
         appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "NUEVO TRABAJADOR",
+              "INFORMACIÓN TRABAJADOR",
               style: TextStyle(
                 color: Color.fromRGBO(237, 242, 244, 1),
               ),

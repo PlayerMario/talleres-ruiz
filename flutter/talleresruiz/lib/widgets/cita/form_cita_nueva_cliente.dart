@@ -85,7 +85,9 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                         },
                         child: const Text(
                           'Pedir cita',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 20),
                         ),
                       ),
                     ),

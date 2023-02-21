@@ -14,6 +14,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
         super(const CitaState()) {
     on<EventCitaDetalles>(onCitaDetalles);
     on<EventCrearCitaCliente>(onCitaCrearCliente);
+    on<EventCrearCitaAdMec>(onCitaCrearAdMec);
     on<EventEditarCitaCliente>(onCitaEditarCliente);
     on<EventBorrarCitaCliente>(onCitaBorrarCliente);
   }
@@ -39,6 +40,22 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
     if (state.status == CitaStatus.initial) {
       final citaClienteCreada =
           await _citaService.postCrearCitaCliente(event.cita);
+
+      if (citaClienteCreada[1]) {
+        return emit(state.copyWith(
+            status: CitaStatus.success, response: citaClienteCreada[0]));
+      } else {
+        return emit(state.copyWith(
+            status: CitaStatus.failure, response: citaClienteCreada[0]));
+      }
+    }
+  }
+
+  Future<void> onCitaCrearAdMec(
+      EventCrearCitaAdMec event, Emitter<CitaState> emit) async {
+    if (state.status == CitaStatus.initial) {
+      final citaClienteCreada =
+          await _citaService.postCrearCitaAdMec(event.cita);
 
       if (citaClienteCreada[1]) {
         return emit(state.copyWith(

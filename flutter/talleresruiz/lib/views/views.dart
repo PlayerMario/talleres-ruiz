@@ -36,3 +36,6 @@ export 'mecanico/pages/pg_mecanico_detalles.dart';
 export 'mecanico/menu/admec_menu_trbj.dart';
 export 'mecanico/providers/prv_admec_crear.dart';
 export 'mecanico/pages/pg_admec_crear.dart';
+export 'cita/providers/prv_nueva_cita_admec.dart';
+export 'mecanico/providers/prv_admec_editar.dart';
+export 'mecanico/pages/pg_admec_editar.dart';

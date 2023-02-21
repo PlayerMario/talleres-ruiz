@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
-class MecanicoDetallesPage extends StatefulWidget {
-  const MecanicoDetallesPage({super.key, required this.rol});
-  final String rol;
+class AdMecEditarPage extends StatefulWidget {
+  const AdMecEditarPage({Key? key}) : super(key: key);
 
   @override
-  State<MecanicoDetallesPage> createState() => _MecanicoDetallesPage();
+  State<AdMecEditarPage> createState() => _AdMecEditarPage();
 }
 
-class _MecanicoDetallesPage extends State<MecanicoDetallesPage> {
+class _AdMecEditarPage extends State<AdMecEditarPage> {
   @override
   void initState() {
     super.initState();
@@ -31,7 +30,7 @@ class _MecanicoDetallesPage extends State<MecanicoDetallesPage> {
             return ErrorScreenAppBar(error: state.response);
           }
         case AdMecStatus.success:
-          return DetallesMecanico(mecanico: state.response, rol: widget.rol);
+          return DetallesNuevoAdMec(adMec: state.response);
         case AdMecStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

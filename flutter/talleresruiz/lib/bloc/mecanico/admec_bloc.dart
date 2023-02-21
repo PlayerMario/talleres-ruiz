@@ -16,6 +16,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
     on<EventAdMecHome>(onMostrarAdMecMe);
     on<EventDetallesMecanico>(onDetallesMecanico);
     on<EventCrearAdMec>(onCrearAdMec);
+    on<EventEditarAdMec>(onEditarAdMec);
     on<EventLogoutAdMec>(onLogoutAdMec);
   }
 
@@ -54,9 +55,23 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
   Future<void> onCrearAdMec(
       EventCrearAdMec event, Emitter<AdMecState> emit) async {
     if (state.status == AdMecStatus.initial) {
-      // EN FUNCIÓN DE LA OPCIÓN SE HACE UNA PETICIÓN U OTRA
       final adMecCreado =
           await _adMecService.crearAdMec(event.adMec, event.opcion);
+      if (adMecCreado[1]) {
+        return emit(state.copyWith(
+            status: AdMecStatus.success, response: adMecCreado[0]));
+      } else {
+        return emit(state.copyWith(
+            status: AdMecStatus.failure, response: adMecCreado[0]));
+      }
+    }
+  }
+
+  Future<void> onEditarAdMec(
+      EventEditarAdMec event, Emitter<AdMecState> emit) async {
+    if (state.status == AdMecStatus.initial) {
+      final adMecCreado =
+          await _adMecService.editarAdMec(event.adMec, event.id);
       if (adMecCreado[1]) {
         return emit(state.copyWith(
             status: AdMecStatus.success, response: adMecCreado[0]));

@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
 
-class ProviderDetallesMecanico extends StatelessWidget {
-  const ProviderDetallesMecanico(
-      {super.key, required this.id, required this.rol});
+class ProviderAdMecEditar extends StatelessWidget {
+  const ProviderAdMecEditar({super.key, required this.adMec, required this.id});
+  final AdMecEditarBody adMec;
   final String id;
-  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +15,8 @@ class ProviderDetallesMecanico extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         body: BlocProvider(
           create: (_) => AdMecBloc(adMecService: adMecService)
-            ..add(EventDetallesMecanico(id)),
-          child: MecanicoDetallesPage(rol: rol),
+            ..add(EventEditarAdMec(adMec, id)),
+          child: const AdMecEditarPage(),
         ));
   }
 }

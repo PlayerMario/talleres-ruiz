@@ -33,6 +33,16 @@ class CitaRepository {
     return response;
   }
 
+  Future<dynamic> postCrearCitaAdMec(CitaCrearAdMecBody citaCrearAdMec) async {
+    final crearCita = {
+      "dniCliente": citaCrearAdMec.dni,
+      "fechaHora": citaCrearAdMec.fechaHora
+    };
+    String url = "/auth/cita/mecanico/me";
+    var response = await _http.post(url, crearCita);
+    return response;
+  }
+
   Future<dynamic> putCitaCliente(
       int id, CitaCrearClienteBody editarCitaCliente) async {
     final editarCita = {"fechaHora": editarCitaCliente.fechaHora};

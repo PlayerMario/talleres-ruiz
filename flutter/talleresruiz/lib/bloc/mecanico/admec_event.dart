@@ -22,4 +22,11 @@ class EventCrearAdMec extends AdMecEvent {
   final int opcion;
 }
 
+class EventEditarAdMec extends AdMecEvent {
+  const EventEditarAdMec(this.adMec, this.id);
+
+  final AdMecEditarBody adMec;
+  final String id;
+}
+
 class EventLogoutAdMec extends AdMecEvent {}

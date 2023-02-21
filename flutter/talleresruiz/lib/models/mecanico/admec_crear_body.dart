@@ -27,3 +27,21 @@ class AdMecCrearBody {
     tlf = json['tlf'];
   }
 }
+
+class AdMecEditarBody {
+  String? nombre;
+  String? email;
+  String? tlf;
+
+  AdMecEditarBody({
+    required this.nombre,
+    required this.email,
+    required this.tlf,
+  });
+
+  AdMecEditarBody.fromJson(Map<String, dynamic> json) {
+    nombre = json['nombre'];
+    email = json['email'];
+    tlf = json['tlf'];
+  }
+}

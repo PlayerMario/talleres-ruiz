@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:talleresruiz/bloc/cliente/cliente_bloc.dart';
 import '../../../main.dart';
 
 class ClienteEditarPage extends StatefulWidget {
