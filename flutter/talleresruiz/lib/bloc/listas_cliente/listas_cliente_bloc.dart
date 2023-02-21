@@ -8,7 +8,7 @@ import '../../../main.dart';
 part 'listas_cliente_state.dart';
 part 'listas_cliente_event.dart';
 
-const throttleDurationCliente = Duration(milliseconds: 1000);
+const throttleDurationCliente = Duration(milliseconds: 1500);
 EventTransformer<E> throttleDroppableCliente<E>(Duration duration) {
   return (events, mapper) {
     return droppable<E>().call(events.throttle(duration), mapper);
@@ -17,10 +17,10 @@ EventTransformer<E> throttleDroppableCliente<E>(Duration duration) {
 
 class ListasClienteBloc extends Bloc<ListasClienteEvent, ListasClienteState> {
   final ClienteServiceAbs _clienteService;
-  int newPage;
+  int nextPage;
 
   ListasClienteBloc(
-      {required ClienteServiceAbs clienteService, required this.newPage})
+      {required ClienteServiceAbs clienteService, required this.nextPage})
       : assert(clienteService != null),
         _clienteService = clienteService,
         super(const ListasClienteState()) {
@@ -34,34 +34,35 @@ class ListasClienteBloc extends Bloc<ListasClienteEvent, ListasClienteState> {
     if (state.status == ListasClienteStatus.initial) {
       final listaClientes = await _clienteService.getListaClientes();
 
-      if (listaClientes[1]) {
+      if (listaClientes[1] && listaClientes[0].totalPages > 1) {
         return emit(state.copyWith(
             status: ListasClienteStatus.success,
-            //response: listaClientes[0].content,
-            response: listaClientes[0],
+            response: listaClientes[0].content,
             hasReachedMax: false));
+      } else if (listaClientes[1] && listaClientes[0].totalPages == 1) {
+        return emit(state.copyWith(
+            status: ListasClienteStatus.success,
+            response: listaClientes[0].content,
+            hasReachedMax: true));
       } else {
         return emit(state.copyWith(
-            status: ListasClienteStatus.failure, response: listaClientes[0]));
+            status: ListasClienteStatus.failure, error: listaClientes[0]));
       }
     }
 
-    newPage += 1;
-    final listaClientes = await _clienteService.getListaClientes(newPage);
+    nextPage += 1;
+    final listaClientes = await _clienteService.getListaClientes(nextPage);
 
-    if (listaClientes[1]) {
-      List<dynamic> listado = state.response!.content!;
-      if (newPage < state.response!.totalPages!) {
-        listado.addAll(listaClientes[0].content);
+    if (listaClientes[1] && nextPage < listaClientes[0].totalPages) {
+      if (nextPage < listaClientes[0].totalPages - 1) {
         emit(state.copyWith(
             status: ListasClienteStatus.success,
-            response: listado,
+            response: List.of(state.response)..addAll(listaClientes[0].content),
             hasReachedMax: false));
-      } else if (newPage == state.response!.totalPages!) {
+      } else if (nextPage == listaClientes[0].totalPages - 1) {
         emit(state.copyWith(
             status: ListasClienteStatus.success,
-            response: List.of(state.response!.content!)
-              ..addAll(listaClientes[0].content!),
+            response: List.of(state.response)..addAll(listaClientes[0].content),
             hasReachedMax: true));
       }
     } else {

@@ -32,7 +32,7 @@ class ProviderClientesListar extends StatelessWidget {
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: BlocProvider(
           create: (_) =>
-              ListasClienteBloc(clienteService: clienteService, newPage: 0)
+              ListasClienteBloc(clienteService: clienteService, nextPage: 0)
                 ..add(EventListaClientes()),
           child: const ClienteListarPage(),
         ));

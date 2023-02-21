@@ -20,8 +20,8 @@ class _AdMecMenu extends State<AdMecMenu> {
 
     List<Widget> paginas = [
       DetallesAddMecLog(mecanicoMe: widget.mecanicoMe),
-      const MenuListaAdMec(),
       //const CitaNuevaAdMec()*/
+      const MenuListaAdMec(),
     ];
 
     return Scaffold(
@@ -127,13 +127,13 @@ class _AdMecMenu extends State<AdMecMenu> {
                       Icon(Icons.home, color: Color.fromRGBO(237, 242, 244, 1)),
                   label: 'Inicio'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.list_alt_rounded,
-                      color: Color.fromRGBO(237, 242, 244, 1)),
-                  label: 'Citas'),
-              BottomNavigationBarItem(
                   icon: Icon(Icons.post_add_rounded,
                       color: Color.fromRGBO(237, 242, 244, 1)),
                   label: 'Nueva Cita'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.menu_rounded,
+                      color: Color.fromRGBO(237, 242, 244, 1)),
+                  label: 'Menú')
             ],
             currentIndex: indices,
             onTap: (int index) {

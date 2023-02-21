@@ -24,29 +24,28 @@ class _ClienteListarPage extends State<ClienteListarPage> {
         builder: (context, state) {
       switch (state.status) {
         case ListasClienteStatus.failure:
-          return const Text("Error");
-        /*if (state.response.subErrors != null) {
+          if (state.error.subErrors != null) {
             return ListView.builder(
-                itemCount: state.response.subErrors!.length,
+                itemCount: state.error.subErrors!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SubErrorData(error: state.response.subErrors![index]);
+                  return SubErrorData(error: state.error.subErrors![index]);
                 });
           } else {
-            return ErrorScreenAppBar(error: state.response);
-          }*/
+            return ErrorScreenAppBar(error: state.error);
+          }
         case ListasClienteStatus.success:
-          if (state.response.content.isEmpty) {
-            return ErrorScreen(error: state.response);
+          if (state.response.isEmpty) {
+            return ErrorScreen(error: state.error);
           } else {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return index >= state.response.content.length
+                return index >= state.response.length
                     ? const BottomLoader()
-                    : ClienteListItem(cliente: state.response.content[index]);
+                    : ClienteListItem(cliente: state.response[index]);
               },
               itemCount: state.hasReachedMax
-                  ? state.response.content.length
-                  : state.response.content.length + 1,
+                  ? state.response.length
+                  : state.response.length + 1,
               controller: scrollController,
             );
           }
@@ -65,46 +64,15 @@ class _ClienteListarPage extends State<ClienteListarPage> {
   }
 
   void onScroll() {
-    if (_isBottom) context.read<ListasClienteBloc>().add(EventListaClientes());
+    if (_isBottom && !context.read<ListasClienteBloc>().state.hasReachedMax) {
+      context.read<ListasClienteBloc>().add(EventListaClientes());
+    }
   }
 
   bool get _isBottom {
     if (!scrollController.hasClients) return false;
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.offset;
-    return currentScroll >= (maxScroll * 0.90);
+    return currentScroll >= (maxScroll * 0.85);
   }
 }
-
-/**
- * @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ListasClienteBloc, ListasClienteState>(
-        builder: (context, state) {
-      switch (state.status) {
-        case ListasClienteStatus.failure:
-          if (state.response.subErrors != null) {
-            return ListView.builder(
-                itemCount: state.response.subErrors!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SubErrorData(error: state.response.subErrors![index]);
-                });
-          } else {
-            return ErrorScreenAppBar(error: state.response);
-          }
-        case ListasClienteStatus.success:
-          if (state.response.isEmpty) {
-            return ErrorScreen(error: state.response);
-          } else {
-            return ListView.builder(
-                itemCount: state.response.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ClienteListItem(cliente: state.response[index]);
-                });
-          }
-        case ListasClienteStatus.initial:
-          return const Center(child: CircularProgressIndicator());
-      }
-    });
-  }
- */

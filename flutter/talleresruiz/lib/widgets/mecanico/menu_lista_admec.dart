@@ -14,61 +14,61 @@ class MenuListaAdMec extends StatelessWidget {
             child: Column(children: [
       Card(
           margin:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
               child: const Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(30),
                   child: Text(
-                    "Clientes",
+                    "CLIENTE",
                     style: TextStyle(
-                        fontSize: 16, color: Color.fromRGBO(237, 242, 244, 1)),
+                        fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClientesListar(/*newPage: 0*/);
+                  return const ProviderClientesListar();
                 }));
               })),
       Card(
           margin:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
               child: const Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(30),
                   child: Text(
-                    "Mecánicos",
+                    "MECÁNICOS",
                     style: TextStyle(
-                        fontSize: 16, color: Color.fromRGBO(237, 242, 244, 1)),
+                        fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
                 /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClienteHome();
+                  return const ProviderClientesListar();
                 }));*/
               })),
       Card(
           margin:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
               child: const Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(30),
                   child: Text(
-                    "Citas",
+                    "CITAS",
                     style: TextStyle(
-                        fontSize: 16, color: Color.fromRGBO(237, 242, 244, 1)),
+                        fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
                 /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClienteHome();
+                  return const ProviderClientesListar();
                 }));*/
-              }))
+              })),
     ])));
   }
 }

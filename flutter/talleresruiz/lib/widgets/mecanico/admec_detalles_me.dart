@@ -21,7 +21,7 @@ class DetallesAddMecLog extends StatelessWidget {
             elevation: 5,
             child: SingleChildScrollView(
                 child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(40),
                     child: SizedBox(
                         child: Column(
                       children: [

@@ -24,12 +24,18 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
         builder: (context, state) {
       switch (state.status) {
         case ListasCitaStatus.failure:
-          return const Text("Error");
-        //return ErrorScreen(error: state.response);
+          if (state.error.subErrors != null) {
+            return ListView.builder(
+                itemCount: state.error.subErrors!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SubErrorData(error: state.error.subErrors![index]);
+                });
+          } else {
+            return ErrorScreenAppBar(error: state.error);
+          }
         case ListasCitaStatus.success:
           if (state.response.isEmpty) {
-            //return ErrorScreen(error: state.response);
-            return const Text("No hay clientes");
+            return ErrorScreen(error: state.error);
           } else {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -65,6 +71,6 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
     if (!scrollController.hasClients) return false;
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.offset;
-    return currentScroll >= (maxScroll * 0.80);
+    return currentScroll >= (maxScroll * 0.85);
   }
 }

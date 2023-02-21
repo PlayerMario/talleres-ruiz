@@ -13,7 +13,8 @@ class CitaListItem extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           shadowColor: const Color.fromRGBO(43, 45, 66, 1),
-          margin: const EdgeInsets.only(left: 25, top: 20, right: 25),
+          margin:
+              const EdgeInsets.only(left: 50, top: 20, right: 50, bottom: 20),
           elevation: 15,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -80,21 +81,6 @@ class CitaListItem extends StatelessWidget {
                                 color: Color.fromRGBO(237, 242, 244, 1)),
                             textAlign: TextAlign.center,
                           ))))));
-      /*return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        child: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Text(
-              "Sin citas recientes",
-              style: TextStyle(
-                  fontSize: 17, color: Color.fromRGBO(237, 242, 244, 1)),
-              textAlign: TextAlign.center,
-            )),
-        onPressed: () {
-          print("A DETALLES DE LA CITA");
-        },
-      );*/
     }
   }
 }

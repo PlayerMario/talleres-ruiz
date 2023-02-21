@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
       body: Container(
+        margin: const EdgeInsets.all(30),
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/logo.png'),

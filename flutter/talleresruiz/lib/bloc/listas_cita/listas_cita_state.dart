@@ -6,19 +6,23 @@ class ListasCitaState extends Equatable {
   const ListasCitaState(
       {this.status = ListasCitaStatus.initial,
       this.response = const <Citas>[],
+      this.error,
       this.hasReachedMax = false});
 
   final ListasCitaStatus status;
   final List<Citas> response;
+  final dynamic error;
   final bool hasReachedMax;
 
   ListasCitaState copyWith(
       {ListasCitaStatus? status,
       List<Citas>? response,
+      dynamic error,
       bool? hasReachedMax}) {
     return ListasCitaState(
         status: status ?? this.status,
         response: response ?? this.response,
+        error: error ?? this.error,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax);
   }
 
