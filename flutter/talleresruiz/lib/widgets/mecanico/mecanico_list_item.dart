@@ -2,9 +2,9 @@ import 'dart:convert';
 import '../../main.dart';
 import 'package:flutter/material.dart';
 
-class ClienteListItem extends StatelessWidget {
-  const ClienteListItem({super.key, required this.cliente});
-  final ClienteListaResponse? cliente;
+class MecanicoListItem extends StatelessWidget {
+  const MecanicoListItem({super.key, required this.mecanico});
+  final MecanicoListaResponse? mecanico;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ClienteListItem extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      utf8.decode(cliente!.nombre!.codeUnits),
+                      utf8.decode(mecanico!.nombre!.codeUnits),
                       style: const TextStyle(
                           fontSize: 16,
                           color: Color.fromRGBO(237, 242, 244, 1)),
@@ -32,7 +32,7 @@ class ClienteListItem extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      utf8.decode(cliente!.email!.codeUnits),
+                      utf8.decode(mecanico!.email!.codeUnits),
                       style: const TextStyle(
                           fontSize: 16,
                           color: Color.fromRGBO(237, 242, 244, 1)),
@@ -41,7 +41,7 @@ class ClienteListItem extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      utf8.decode(cliente!.tlf!.codeUnits),
+                      utf8.decode(mecanico!.tlf!.codeUnits),
                       style: const TextStyle(
                           fontSize: 16,
                           color: Color.fromRGBO(237, 242, 244, 1)),
@@ -50,7 +50,7 @@ class ClienteListItem extends StatelessWidget {
               ],
             )),
         onPressed: () {
-          print("Detalles del usuario ${cliente!.id}");
+          print("Detalles del usuario ${mecanico!.id}");
           /*Navigator.push(context, MaterialPageRoute(builder: (context) {
               return ProviderDetallesCita(id: cliente!.id);
             }));*/

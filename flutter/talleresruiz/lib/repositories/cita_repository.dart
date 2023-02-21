@@ -13,6 +13,12 @@ class CitaRepository {
     _http = getIt<RestAuthenticatedClient>();
   }
 
+  Future<dynamic> getListaCitas([int page = 0]) async {
+    String url = "/auth/cita/?page=$page";
+    var response = await _http.get(url);
+    return response;
+  }
+
   Future<dynamic> getDetallesCita(int id) async {
     String url = "/auth/cita/$id";
     var respone = await _http.get(url);

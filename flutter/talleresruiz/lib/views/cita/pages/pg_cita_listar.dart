@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:talleresruiz/main.dart';
+import '../../../main.dart';
 
-class ClienteCitasPage extends StatefulWidget {
-  const ClienteCitasPage({Key? key}) : super(key: key);
+class CitaListarPage extends StatefulWidget {
+  const CitaListarPage({Key? key}) : super(key: key);
 
   @override
-  State<ClienteCitasPage> createState() => _ClienteCitasPage();
+  State<CitaListarPage> createState() => _CitaListarPage();
 }
 
-class _ClienteCitasPage extends State<ClienteCitasPage> {
+class _CitaListarPage extends State<CitaListarPage> {
   final scrollController = ScrollController();
 
   @override
@@ -20,10 +20,10 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListasCitaClienteBloc, ListasCitaClienteState>(
+    return BlocBuilder<ListasCitaBloc, ListasCitaState>(
         builder: (context, state) {
       switch (state.status) {
-        case ListasCitaClienteStatus.failure:
+        case ListasCitaStatus.failure:
           if (state.error.subErrors != null) {
             return ListView.builder(
                 itemCount: state.error.subErrors!.length,
@@ -33,7 +33,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
           } else {
             return ErrorScreenAppBar(error: state.error);
           }
-        case ListasCitaClienteStatus.success:
+        case ListasCitaStatus.success:
           if (state.response.isEmpty) {
             return ErrorScreen(error: state.error);
           } else {
@@ -41,7 +41,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : CitaClienteListItem(cita: state.response[index]);
+                    : CitaListItem(cita: state.response[index]);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length
@@ -49,7 +49,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
               controller: scrollController,
             );
           }
-        case ListasCitaClienteStatus.initial:
+        case ListasCitaStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });
@@ -64,7 +64,9 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
   }
 
   void onScroll() {
-    if (_isBottom) context.read<ListasCitaClienteBloc>().add(EventListaCitasCliente());
+    if (_isBottom && !context.read<ListasCitaBloc>().state.hasReachedMax) {
+      context.read<ListasCitaBloc>().add(EventListaCitas());
+    }
   }
 
   bool get _isBottom {

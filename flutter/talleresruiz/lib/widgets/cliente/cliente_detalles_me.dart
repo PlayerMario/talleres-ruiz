@@ -105,7 +105,7 @@ class DetallesClienteLog extends StatelessWidget {
                 color: Color.fromRGBO(43, 45, 66, 1)),
             textAlign: TextAlign.center,
           ),
-          CitaListItem(cita: ultimaCita)
+          CitaClienteListItem(cita: ultimaCita)
         ])
       ],
     )));

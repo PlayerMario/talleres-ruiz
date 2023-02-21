@@ -13,3 +13,7 @@ export 'user/user_pswd_response.dart';
 export 'mecanico/mecanico_me_response.dart';
 export 'cliente/cliente_listado_response.dart';
 export 'cliente/cliente_lista_response.dart';
+export 'mecanico/mecanico_lista_response.dart';
+export 'mecanico/mecanico_listado_response.dart';
+export 'cita/cita_listado_response.dart';
+export 'cita/cita_lista_response.dart';

@@ -5,18 +5,18 @@ enum ListasCitaStatus { initial, success, failure }
 class ListasCitaState extends Equatable {
   const ListasCitaState(
       {this.status = ListasCitaStatus.initial,
-      this.response = const <Citas>[],
+      this.response = const <CitaListaResponse>[],
       this.error,
       this.hasReachedMax = false});
 
   final ListasCitaStatus status;
-  final List<Citas> response;
+  final List<CitaListaResponse> response;
   final dynamic error;
   final bool hasReachedMax;
 
   ListasCitaState copyWith(
       {ListasCitaStatus? status,
-      List<Citas>? response,
+      List<CitaListaResponse>? response,
       dynamic error,
       bool? hasReachedMax}) {
     return ListasCitaState(

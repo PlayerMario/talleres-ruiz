@@ -16,53 +16,52 @@ EventTransformer<E> throttleDroppableCita<E>(Duration duration) {
 }
 
 class ListasCitaBloc extends Bloc<ListasCitaEvent, ListasCitaState> {
-  final ClienteServiceAbs _clienteService;
+  final CitaServiceAbs _citaService;
   int nextPage;
 
-  ListasCitaBloc(
-      {required ClienteServiceAbs clienteService, required this.nextPage})
-      : assert(clienteService != null),
-        _clienteService = clienteService,
+  ListasCitaBloc({required CitaServiceAbs citaService, required this.nextPage})
+      : assert(citaService != null),
+        _citaService = citaService,
         super(const ListasCitaState()) {
-    on<EventListaCitasCliente>(onClienteCitas,
+    on<EventListaCitas>(onListarCitas,
         transformer: throttleDroppableCita(throttleDurationCita));
   }
 
-  Future<void> onClienteCitas(
-      EventListaCitasCliente event, Emitter<ListasCitaState> emit) async {
+  Future<void> onListarCitas(
+      EventListaCitas event, Emitter<ListasCitaState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == ListasCitaStatus.initial) {
-      final clienteCitas = await _clienteService.getClienteCitas();
+      final listaCitas = await _citaService.getListaCitas();
 
-      if (clienteCitas[1] && clienteCitas[0].totalPages > 1) {
+      if (listaCitas[1] && listaCitas[0].totalPages > 1) {
         return emit(state.copyWith(
             status: ListasCitaStatus.success,
-            response: clienteCitas[0].content,
+            response: listaCitas[0].content,
             hasReachedMax: false));
-      } else if (clienteCitas[1] && clienteCitas[0].totalPages == 1) {
+      } else if (listaCitas[1] && listaCitas[0].totalPages == 1) {
         return emit(state.copyWith(
             status: ListasCitaStatus.success,
-            response: clienteCitas[0].content,
+            response: listaCitas[0].content,
             hasReachedMax: true));
       } else {
         return emit(state.copyWith(
-            status: ListasCitaStatus.failure, error: clienteCitas[0]));
+            status: ListasCitaStatus.failure, error: listaCitas[0]));
       }
     }
 
     nextPage += 1;
-    final clienteCitas = await _clienteService.getClienteCitas(nextPage);
+    final listaCitas = await _citaService.getListaCitas(nextPage);
 
-    if (clienteCitas[1] && nextPage < clienteCitas[0].totalPages) {
-      if (nextPage < clienteCitas[0].totalPages - 1) {
+    if (listaCitas[1] && nextPage < listaCitas[0].totalPages) {
+      if (nextPage < listaCitas[0].totalPages - 1) {
         emit(state.copyWith(
             status: ListasCitaStatus.success,
-            response: List.of(state.response)..addAll(clienteCitas[0].content),
+            response: List.of(state.response)..addAll(listaCitas[0].content),
             hasReachedMax: false));
-      } else if (nextPage == clienteCitas[0].totalPages - 1) {
+      } else if (nextPage == listaCitas[0].totalPages - 1) {
         emit(state.copyWith(
             status: ListasCitaStatus.success,
-            response: List.of(state.response)..addAll(clienteCitas[0].content),
+            response: List.of(state.response)..addAll(listaCitas[0].content),
             hasReachedMax: true));
       }
     } else {

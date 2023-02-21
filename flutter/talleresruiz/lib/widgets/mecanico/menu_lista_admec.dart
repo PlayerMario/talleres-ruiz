@@ -21,7 +21,7 @@ class MenuListaAdMec extends StatelessWidget {
               child: const Padding(
                   padding: EdgeInsets.all(30),
                   child: Text(
-                    "CLIENTE",
+                    "CLIENTES",
                     style: TextStyle(
                         fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
                     textAlign: TextAlign.start,
@@ -46,9 +46,9 @@ class MenuListaAdMec extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClientesListar();
-                }));*/
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ProviderMecanicosListar();
+                }));
               })),
       Card(
           margin:
@@ -65,9 +65,9 @@ class MenuListaAdMec extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderClientesListar();
-                }));*/
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ProviderCitasListar();
+                }));
               })),
     ])));
   }

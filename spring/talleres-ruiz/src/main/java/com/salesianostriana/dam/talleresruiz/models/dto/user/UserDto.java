@@ -17,7 +17,7 @@ import java.util.UUID;
 @SuperBuilder
 public class UserDto {
 
-    @JsonView({MecanicoViews.DetallesMecanicos.class, ClienteViews.Master.class, UserViews.Master.class})
+    @JsonView({MecanicoViews.Master.class, ClienteViews.Master.class, UserViews.Master.class})
     private UUID id;
 
     @JsonView({MecanicoViews.Master.class, ClienteViews.Master.class, UserViews.Master.class})

@@ -5,6 +5,7 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../main.dart';
 
 abstract class CitaServiceAbs {
+  Future<dynamic> getListaCitas([int page = 0]);
   Future<dynamic> getDetallesCita(int id);
   Future<dynamic> postCrearCitaCliente(CitaCrearClienteBody citaCrearCliente);
   Future<dynamic> putCitaCliente(int id, CitaCrearClienteBody citaEditar);
@@ -22,6 +23,22 @@ class CitaService extends CitaServiceAbs {
     GetIt.I
         .getAsync<LocalStorageService>()
         .then((value) => _localStorageService = value);
+  }
+
+  @override
+  Future<dynamic> getListaCitas([int page = 0]) async {
+    print("Obteniendo lista de citas página $page...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _citaRepository.getListaCitas(page);
+      if (response.statusCode == 200) {
+        return [CitaListadoResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
   }
 
   @override

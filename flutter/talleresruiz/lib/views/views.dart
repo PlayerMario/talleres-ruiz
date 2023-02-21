@@ -25,3 +25,7 @@ export 'mecanico/pages/pg_admec_home.dart';
 export 'mecanico/providers/prv_admec_home.dart';
 export 'cliente/providers/prv_cliente_listar.dart';
 export 'cliente/pages/pg_cliente_listar.dart';
+export 'mecanico/providers/prv_mecanico_listar.dart';
+export 'mecanico/pages/pg_admec_listar.dart';
+export 'cita/providers/prv_cita_listar.dart';
+export 'cita/pages/pg_cita_listar.dart';

@@ -7,4 +7,4 @@ abstract class ListasCitaEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class EventListaCitasCliente extends ListasCitaEvent {}
+class EventListaCitas extends ListasCitaEvent {}
