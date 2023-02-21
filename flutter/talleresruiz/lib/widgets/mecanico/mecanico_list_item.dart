@@ -3,8 +3,10 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class MecanicoListItem extends StatelessWidget {
-  const MecanicoListItem({super.key, required this.mecanico});
+  const MecanicoListItem(
+      {super.key, required this.mecanico, required this.rol});
   final MecanicoListaResponse? mecanico;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class MecanicoListItem extends StatelessWidget {
                       textAlign: TextAlign.center,
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 0),
                     child: Text(
                       utf8.decode(mecanico!.tlf!.codeUnits),
                       style: const TextStyle(
@@ -51,11 +53,21 @@ class MecanicoListItem extends StatelessWidget {
             )),
         onPressed: () {
           print("Detalles del usuario ${mecanico!.id}");
-          /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProviderDetallesCita(id: cliente!.id);
-            }));*/
+          if (rol == "ADMIN") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProviderDetallesMecanico(id: mecanico!.id!);
+            }));
+          } else {
+            showSnackbar(
+                "Solo un administrador puede acceder a los detalles", context);
+          }
         },
       ),
     );
+  }
+
+  void showSnackbar(String msg, BuildContext context) {
+    final snack = SnackBar(content: Text(msg));
+    ScaffoldMessenger.of(context).showSnackBar(snack);
   }
 }

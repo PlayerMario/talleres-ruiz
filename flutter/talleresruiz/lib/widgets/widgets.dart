@@ -18,3 +18,4 @@ export 'mecanico/admec_detalles_me.dart';
 export 'cliente/cliente_list_item.dart';
 export 'mecanico/mecanico_list_item.dart';
 export 'cita/cita_list_item.dart';
+export 'mecanico/mecanico_detalles.dart';

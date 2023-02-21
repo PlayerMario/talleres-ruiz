@@ -9,9 +9,11 @@ abstract class ClienteEvent extends Equatable {
 
 class EventClienteHome extends ClienteEvent {}
 
-/*class EventCitasCliente extends ClienteEvent {}
+class EventDetallesCliente extends ClienteEvent {
+  const EventDetallesCliente(this.id);
 
-class EventListarClientes extends ClienteEvent {}*/
+  final String id;
+}
 
 class EventCrearCliente extends ClienteEvent {
   const EventCrearCliente(this.cliente);
@@ -28,18 +30,3 @@ class EventEditarCliente extends ClienteEvent {
 class EventBorrarCliente extends ClienteEvent {}
 
 class EventLogoutCliente extends ClienteEvent {}
-
-
-
-/**
- * 
- * part of 'cliente_citas_bloc.dart';
-
-abstract class ClienteCitasEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
-
-class ClienteCitasFetched extends ClienteCitasEvent {}
-
- */

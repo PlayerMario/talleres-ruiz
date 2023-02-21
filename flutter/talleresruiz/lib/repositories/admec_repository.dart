@@ -19,6 +19,12 @@ class AdMecRepository {
     return response;
   }
 
+    Future<dynamic> getDetallesMecanico(String id) async {
+    String url = "/auth/mecanico/$id";
+    var response = await _http.get(url);
+    return response;
+  }
+
   Future<dynamic> getListaMecanicos([int page = 0]) async {
     String url = "/auth/mecanico/?page=$page";
     var response = await _http.get(url);

@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class CitaListarPage extends StatefulWidget {
-  const CitaListarPage({Key? key}) : super(key: key);
+  const CitaListarPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<CitaListarPage> createState() => _CitaListarPage();
@@ -41,7 +42,8 @@ class _CitaListarPage extends State<CitaListarPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : CitaListItem(cita: state.response[index]);
+                    : CitaListItem(
+                        cita: state.response[index], rol: widget.rol);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length

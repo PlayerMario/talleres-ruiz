@@ -21,7 +21,7 @@ class _AdMecMenu extends State<AdMecMenu> {
     List<Widget> paginas = [
       DetallesAddMecLog(mecanicoMe: widget.mecanicoMe),
       //const CitaNuevaAdMec()*/
-      const MenuListaAdMec(),
+      MenuListaAdMec(rol: widget.mecanicoMe.roles![0]),
     ];
 
     return Scaffold(

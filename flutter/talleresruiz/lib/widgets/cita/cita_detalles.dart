@@ -5,8 +5,9 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class DetallesCita extends StatelessWidget {
-  DetallesCita({super.key, required this.citaDetalles});
+  DetallesCita({super.key, required this.citaDetalles, required this.rol});
   CitaDetallesResponse citaDetalles;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class DetallesCita extends StatelessWidget {
           margin:
               const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 40),
           elevation: 5,
+          color: const Color.fromRGBO(43, 45, 66, 1),
           child: SingleChildScrollView(
               child: Container(
                   padding: const EdgeInsets.all(20),
@@ -33,8 +35,9 @@ class DetallesCita extends StatelessWidget {
                               ? "Mecánico: \n${utf8.decode(citaDetalles.mecanico!.codeUnits)}"
                               : "Mecánico: \nSin asignar",
                           style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Color.fromRGBO(43, 45, 66, 1)),
+                              color: Color.fromRGBO(237, 242, 244, 1)),
                           textAlign: TextAlign.center,
                         )),
                     Padding(
@@ -42,8 +45,9 @@ class DetallesCita extends StatelessWidget {
                         child: Text(
                           "Cliente: \n${utf8.decode(citaDetalles.cliente!.codeUnits)}",
                           style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Color.fromRGBO(43, 45, 66, 1)),
+                              color: Color.fromRGBO(237, 242, 244, 1)),
                           textAlign: TextAlign.center,
                         )),
                     Padding(
@@ -51,8 +55,9 @@ class DetallesCita extends StatelessWidget {
                         child: Text(
                           "Vehículo: \n${utf8.decode(citaDetalles.vehiculo!.codeUnits)}",
                           style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Color.fromRGBO(43, 45, 66, 1)),
+                              color: Color.fromRGBO(237, 242, 244, 1)),
                           textAlign: TextAlign.center,
                         )),
                     Padding(
@@ -60,8 +65,9 @@ class DetallesCita extends StatelessWidget {
                         child: Text(
                           "Fecha y hora: \n${utf8.decode(citaDetalles.fechaHora!.codeUnits)}",
                           style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Color.fromRGBO(43, 45, 66, 1)),
+                              color: Color.fromRGBO(237, 242, 244, 1)),
                           textAlign: TextAlign.center,
                         )),
                     Padding(
@@ -69,8 +75,9 @@ class DetallesCita extends StatelessWidget {
                         child: Text(
                           "Estado: \n${utf8.decode(citaDetalles.estado!.codeUnits)}",
                           style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Color.fromRGBO(43, 45, 66, 1)),
+                              color: Color.fromRGBO(237, 242, 244, 1)),
                           textAlign: TextAlign.center,
                         ))
                   ]))))),
@@ -92,9 +99,7 @@ class DetallesCita extends StatelessWidget {
                 if (citaDetalles.estado! != "Terminada" &&
                     citaDetalles.estado! != "Proceso") {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CitaEditarCliente(
-                      cita: citaDetalles,
-                    );
+                    return CitaEditarCliente(cita: citaDetalles, rol: rol);
                   }));
                 } else {
                   showSnackbar(

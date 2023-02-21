@@ -3,8 +3,9 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class CitaListItem extends StatelessWidget {
-  const CitaListItem({super.key, required this.cita});
+  const CitaListItem({super.key, required this.cita, required this.rol});
   final CitaListaResponse? cita;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +61,9 @@ class CitaListItem extends StatelessWidget {
               )),
           onPressed: () {
             print("A DETALLES DE LA CITA ${cita!.id}");
-            /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProviderDetallesCita(id: cita!.id!);
-            }));*/
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProviderDetallesCita(id: cita!.id!, rol: rol);
+            }));
           },
         ));
   }

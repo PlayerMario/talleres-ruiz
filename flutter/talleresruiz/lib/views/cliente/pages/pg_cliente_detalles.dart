@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
-class CitaDetallesPage extends StatefulWidget {
-  const CitaDetallesPage({super.key, required this.rol});
-  final String rol;
+class ClienteDetallesPage extends StatefulWidget {
+  const ClienteDetallesPage({Key? key}) : super(key: key);
 
   @override
-  State<CitaDetallesPage> createState() => _CitaDetallesPage();
+  State<ClienteDetallesPage> createState() => _ClienteDetallesPage();
 }
 
-class _CitaDetallesPage extends State<CitaDetallesPage> {
+class _ClienteDetallesPage extends State<ClienteDetallesPage> {
   @override
   void initState() {
     super.initState();
@@ -18,9 +17,9 @@ class _CitaDetallesPage extends State<CitaDetallesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CitaBloc, CitaState>(builder: (context, state) {
+    return BlocBuilder<ClienteBloc, ClienteState>(builder: (context, state) {
       switch (state.status) {
-        case CitaStatus.failure:
+        case ClienteStatus.failure:
           if (state.response.subErrors != null) {
             return ListView.builder(
                 itemCount: state.response.subErrors!.length,
@@ -30,9 +29,9 @@ class _CitaDetallesPage extends State<CitaDetallesPage> {
           } else {
             return ErrorScreenAppBar(error: state.response);
           }
-        case CitaStatus.success:
-          return CitaMenu(citaDetalles: state.response, rol: widget.rol);
-        case CitaStatus.initial:
+        case ClienteStatus.success:
+          return DetallesClienteLog(clienteMe: state.response, rol: "MEC");
+        case ClienteStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

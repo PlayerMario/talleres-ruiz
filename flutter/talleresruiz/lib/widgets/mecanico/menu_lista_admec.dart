@@ -5,7 +5,8 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class MenuListaAdMec extends StatelessWidget {
-  const MenuListaAdMec({super.key});
+  const MenuListaAdMec({super.key, required this.rol});
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class MenuListaAdMec extends StatelessWidget {
                   )),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderMecanicosListar();
+                  return ProviderMecanicosListar(rol: rol);
                 }));
               })),
       Card(
@@ -66,7 +67,7 @@ class MenuListaAdMec extends StatelessWidget {
                   )),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ProviderCitasListar();
+                  return ProviderCitasListar(rol: rol);
                 }));
               })),
     ])));

@@ -7,7 +7,7 @@ class ClienteMenu extends StatefulWidget {
   final ClienteMeResponse clienteMe;
 
   @override
-  State<ClienteMenu> createState() => _ClienteMenu(/*clienteMe: clienteMe*/);
+  State<ClienteMenu> createState() => _ClienteMenu();
 }
 
 class _ClienteMenu extends State<ClienteMenu> {
@@ -17,9 +17,12 @@ class _ClienteMenu extends State<ClienteMenu> {
   Widget build(BuildContext context) {
     final clienteBloc = BlocProvider.of<ClienteBloc>(context);
     List<Widget> paginas = [
-      DetallesClienteLog(clienteMe: widget.clienteMe),
-      const ProviderClienteCitas(),
-      const CitaNuevaCliente()
+      DetallesClienteLog(
+        clienteMe: widget.clienteMe,
+        rol: widget.clienteMe.roles![0],
+      ),
+      ProviderClienteCitas(rol: widget.clienteMe.roles![0]),
+      CitaNuevaCliente(rol: widget.clienteMe.roles![0])
     ];
 
     return Scaffold(

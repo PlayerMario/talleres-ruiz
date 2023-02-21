@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class MecanicoListarPage extends StatefulWidget {
-  const MecanicoListarPage({Key? key}) : super(key: key);
+  const MecanicoListarPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<MecanicoListarPage> createState() => _MecanicoListarPage();
@@ -41,7 +42,8 @@ class _MecanicoListarPage extends State<MecanicoListarPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : MecanicoListItem(mecanico: state.response[index]);
+                    : MecanicoListItem(
+                        mecanico: state.response[index], rol: widget.rol);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length

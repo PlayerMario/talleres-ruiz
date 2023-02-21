@@ -4,8 +4,10 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../../main.dart';
 
 class ProviderNuevaCitaCliente extends StatelessWidget {
-  const ProviderNuevaCitaCliente({super.key, required this.cita});
+  const ProviderNuevaCitaCliente(
+      {super.key, required this.cita, required this.rol});
   final CitaCrearClienteBody cita;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class ProviderNuevaCitaCliente extends StatelessWidget {
       body: BlocProvider(
         create: (_) => CitaBloc(citaService: citaService)
           ..add(EventCrearCitaCliente(cita)),
-        child: const CitaCrearClientePage(),
+        child: CitaCrearClientePage(rol: rol),
       ),
     );
   }

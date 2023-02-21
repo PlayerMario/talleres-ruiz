@@ -4,8 +4,9 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../../../main.dart';
 
 class ProviderDetallesCita extends StatelessWidget {
-  const ProviderDetallesCita({super.key, required this.id});
+  const ProviderDetallesCita({super.key, required this.id, required this.rol});
   final int id;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ProviderDetallesCita extends StatelessWidget {
         body: BlocProvider<CitaBloc>(
           create: (_) =>
               CitaBloc(citaService: citaService)..add(EventCitaDetalles(id)),
-          child: const CitaDetallesPage(),
+          child: CitaDetallesPage(rol: rol),
         ));
   }
 }

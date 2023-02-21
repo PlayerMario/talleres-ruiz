@@ -4,8 +4,9 @@ import '../../../main.dart';
 import 'dart:convert';
 
 class CitaEditarCliente extends StatefulWidget {
-  const CitaEditarCliente({super.key, required this.cita});
+  const CitaEditarCliente({super.key, required this.cita, required this.rol});
   final CitaDetallesResponse cita;
+  final String rol;
 
   @override
   State<CitaEditarCliente> createState() => _CitaEditarCliente();
@@ -64,17 +65,6 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                             initialValue: widget.cita.mecanico != null
                                 ? utf8.decode(widget.cita.mecanico!.codeUnits)
                                 : "Sin asignar",
-                            /*keyboardType: TextInputType.name,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Nombre',
-                                hintText: 'Introduzca su nombre completo'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'El nombre del usuario es obligatorio';
-                              }
-                              return null;
-                            },*/
                           ),
                         )),
                     Padding(
@@ -84,19 +74,7 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                           child: TextFormField(
                               readOnly: true,
                               initialValue:
-                                  utf8.decode(widget.cita.cliente!.codeUnits)
-                              /*keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Email',
-                                hintText: 'Introduzca su email'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'El email es obligatorio';
-                              }
-                              return null;
-                            },*/
-                              ),
+                                  utf8.decode(widget.cita.cliente!.codeUnits)),
                         )),
                     Padding(
                         padding: const EdgeInsets.all(15),
@@ -106,17 +84,6 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                             readOnly: true,
                             initialValue:
                                 utf8.decode(widget.cita.vehiculo!.codeUnits),
-                            /*keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Teléfono',
-                                hintText: 'Introduzca su teléfono'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'El teléfono es obligatorio';
-                              }
-                              return null;
-                            },*/
                           ),
                         )),
                     Padding(
@@ -134,19 +101,12 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                             use24hFormat: true,
                             initialDatePickerMode: DatePickerMode.day,
                             initialDate: DateTime.now(),
-                            //dateFormat: DateFormat("dd-MM-yyyy HH:mm", 'es'),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(DateTime.now().year + 1),
                             mode: DateTimeFieldPickerMode.dateAndTime,
                             autovalidateMode: AutovalidateMode.always,
-                            /*validator: (value) {
-                              if (value!.toIso8601String().isEmpty) {
-                                return 'La fecha y hora es obligatoria';
-                              }
-                              return null;
-                            },*/
                             onDateSelected: (value) {
-                              setState(() {                                
+                              setState(() {
                                 fechaHora = value;
                                 print(fechaHora);
                               });
@@ -161,18 +121,6 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                             readOnly: true,
                             initialValue:
                                 utf8.decode(widget.cita.estado!.codeUnits),
-                            /*keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Matrícula',
-                                hintText:
-                                    'Introduzca la matrícula de su vehículo'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'La matrícula del vehículo es obligatoria';
-                              }
-                              return null;
-                            },*/
                           ),
                         )),
                     Container(
@@ -186,17 +134,12 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            /*ClienteEditarBody cliente = ClienteEditarBody(
-                                nombre: nombre.text,
-                                email: email.text,
-                                tlf: tlf.text,
-                                vehiculo: vehiculo.text,
-                                matricula: matricula.text);*/
-                                CitaCrearClienteBody cita = CitaCrearClienteBody(
+                            CitaCrearClienteBody cita = CitaCrearClienteBody(
                                 fechaHora: fechaHora.toIso8601String());
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderEditarCitaCliente(cita: cita, id: widget.cita.id!);
+                              return ProviderEditarCitaCliente(
+                                  cita: cita, id: widget.cita.id!, rol: widget.rol);
                             }));
                           }
                         },

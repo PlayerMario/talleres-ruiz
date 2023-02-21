@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class CitaCrearClientePage extends StatefulWidget {
-  const CitaCrearClientePage({Key? key}) : super(key: key);
+  const CitaCrearClientePage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<CitaCrearClientePage> createState() => _CitaCrearClientePage();
@@ -30,7 +31,7 @@ class _CitaCrearClientePage extends State<CitaCrearClientePage> {
             return ErrorScreenAppBar(error: state.response);
           }
         case CitaStatus.success:
-          return ProviderDetallesCita(id: state.response!.id!);
+          return ProviderDetallesCita(id: state.response!.id!, rol: widget.rol);
         case CitaStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

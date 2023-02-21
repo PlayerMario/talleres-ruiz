@@ -7,6 +7,7 @@ import '../main.dart';
 abstract class ClienteServiceAbs {
   Future<dynamic> clienteLogout();
   Future<dynamic> getClienteLogin();
+  Future<dynamic> getDetallesCliente(String id);
   Future<dynamic> getClienteCitas([int page = 0]);
   Future<dynamic> getListaClientes([int page = 0]);
   Future<dynamic> putCliente(ClienteEditarBody cliente);
@@ -38,6 +39,22 @@ class ClienteService extends ClienteServiceAbs {
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
       dynamic response = await _clienteRepository.getClienteMe();
+      if (response.statusCode == 200) {
+        return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> getDetallesCliente(String id) async {
+    print("Obteniendo detalles del cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _clienteRepository.getDetallesCliente(id);
       if (response.statusCode == 200) {
         return [ClienteMeResponse.fromJson(jsonDecode(response.body)), true];
       } else {

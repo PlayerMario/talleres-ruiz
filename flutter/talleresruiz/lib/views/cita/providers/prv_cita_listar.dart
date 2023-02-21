@@ -4,7 +4,8 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../../main.dart';
 
 class ProviderCitasListar extends StatelessWidget {
-  const ProviderCitasListar({super.key});
+  const ProviderCitasListar({super.key, required this.rol});
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,9 @@ class ProviderCitasListar extends StatelessWidget {
             }),
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: BlocProvider(
-          create: (_) =>
-              ListasCitaBloc(citaService: citaService, nextPage: 0)
-                ..add(EventListaCitas()),
-          child: const CitaListarPage(),
+          create: (_) => ListasCitaBloc(citaService: citaService, nextPage: 0)
+            ..add(EventListaCitas()),
+          child: CitaListarPage(rol: rol),
         ));
   }
 }

@@ -17,8 +17,9 @@ class DetallesAddMecLog extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             shadowColor: const Color.fromRGBO(43, 45, 66, 1),
             margin:
-                const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 40),
+                const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 40),
             elevation: 5,
+            color: const Color.fromRGBO(43, 45, 66, 1),
             child: SingleChildScrollView(
                 child: Container(
                     padding: const EdgeInsets.all(40),
@@ -39,8 +40,8 @@ class DetallesAddMecLog extends StatelessWidget {
                               utf8.decode(mecanicoMe.nombre!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
+                                  fontSize: 20,
+                                  color: Color.fromRGBO(237, 242, 244, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -49,8 +50,8 @@ class DetallesAddMecLog extends StatelessWidget {
                               utf8.decode(mecanicoMe.username!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
+                                  fontSize: 20,
+                                  color: Color.fromRGBO(237, 242, 244, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -59,8 +60,8 @@ class DetallesAddMecLog extends StatelessWidget {
                               utf8.decode(mecanicoMe.dni!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
+                                  fontSize: 20,
+                                  color: Color.fromRGBO(237, 242, 244, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -69,8 +70,8 @@ class DetallesAddMecLog extends StatelessWidget {
                               utf8.decode(mecanicoMe.email!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
+                                  fontSize: 20,
+                                  color: Color.fromRGBO(237, 242, 244, 1)),
                               textAlign: TextAlign.center,
                             )),
                         Padding(
@@ -79,8 +80,8 @@ class DetallesAddMecLog extends StatelessWidget {
                               utf8.decode(mecanicoMe.tlf!.codeUnits),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Color.fromRGBO(43, 45, 66, 1)),
+                                  fontSize: 20,
+                                  color: Color.fromRGBO(237, 242, 244, 1)),
                               textAlign: TextAlign.center,
                             ))
                       ],

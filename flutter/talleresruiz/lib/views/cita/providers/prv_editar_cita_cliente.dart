@@ -5,9 +5,10 @@ import '../../../main.dart';
 
 class ProviderEditarCitaCliente extends StatelessWidget {
   const ProviderEditarCitaCliente(
-      {super.key, required this.cita, required this.id});
+      {super.key, required this.cita, required this.id, required this.rol});
   final CitaCrearClienteBody cita;
   final int id;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ProviderEditarCitaCliente extends StatelessWidget {
       body: BlocProvider(
         create: (_) => CitaBloc(citaService: citaService)
           ..add(EventEditarCitaCliente(cita, id)),
-        child: const CitaCrearClientePage(),
+        child: CitaCrearClientePage(rol: rol),
       ),
     );
   }

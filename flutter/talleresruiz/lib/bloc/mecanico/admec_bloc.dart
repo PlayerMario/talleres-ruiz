@@ -1,8 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:get_it/get_it.dart';
-import 'package:stream_transform/stream_transform.dart';
 
 import '../../../main.dart';
 
@@ -17,6 +14,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
         _adMecService = adMecService,
         super(const AdMecState()) {
     on<EventAdMecHome>(onMostrarAdMecMe);
+    on<EventDetallesMecanico>(onDetallesMecanico);
     on<EventLogoutAdMec>(onLogoutAdMec);
   }
 
@@ -32,6 +30,22 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
       } else {
         return emit(
             state.copyWith(response: adMecMe[0], status: AdMecStatus.failure));
+      }
+    }
+  }
+
+  Future<void> onDetallesMecanico(
+      EventDetallesMecanico event, Emitter<AdMecState> emit) async {
+    if (state.status == AdMecStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      final mecanico = await _adMecService.getDetallesMecanico(event.id);
+
+      if (mecanico[1]) {
+        return emit(
+            state.copyWith(response: mecanico[0], status: AdMecStatus.success));
+      } else {
+        return emit(
+            state.copyWith(response: mecanico[0], status: AdMecStatus.failure));
       }
     }
   }

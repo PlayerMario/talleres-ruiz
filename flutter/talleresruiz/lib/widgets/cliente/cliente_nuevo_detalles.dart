@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 class DetallesNuevoCliente extends StatelessWidget {
   DetallesNuevoCliente({super.key, required this.cliente});
   final ClienteCrearResponse cliente;
-  //const url = 'http://localhost:8080';
-  //final url = 'http://10.0.2.2:8080';
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +33,8 @@ class DetallesNuevoCliente extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 shadowColor: const Color.fromRGBO(43, 45, 66, 1),
-                //margin: const EdgeInsets.only(left: 80, top: 25),
                 elevation: 5,
+                color: const Color.fromRGBO(43, 45, 66, 1),
                 child: SingleChildScrollView(
                     child: Container(
                         padding: const EdgeInsets.all(20),
@@ -57,7 +55,9 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.nombre!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               Padding(
@@ -66,7 +66,9 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.username!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               Padding(
@@ -75,7 +77,9 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.dni!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               Padding(
@@ -84,7 +88,9 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.email!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               Padding(
@@ -93,7 +99,9 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.tlf!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               Padding(
@@ -102,14 +110,17 @@ class DetallesNuevoCliente extends StatelessWidget {
                                     utf8.decode(cliente.vehiculo!.codeUnits),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(237, 242, 244, 1)),
                                     textAlign: TextAlign.center,
                                   )),
                               ElevatedButton(
                                 style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<
-                                            Color>(
-                                        const Color.fromRGBO(43, 45, 66, 1))),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            const Color.fromRGBO(
+                                                237, 242, 244, 1))),
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
@@ -119,7 +130,8 @@ class DetallesNuevoCliente extends StatelessWidget {
                                 child: const Text(
                                   'Volver',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
+                                      color: Color.fromRGBO(43, 45, 66, 1),
+                                      fontSize: 15),
                                 ),
                               )
                             ],

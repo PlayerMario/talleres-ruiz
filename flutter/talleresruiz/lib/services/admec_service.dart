@@ -7,6 +7,7 @@ import '../main.dart';
 abstract class AdMecServiceAbs {
   Future<dynamic> adMecLogout();
   Future<dynamic> getAdMecLogin();
+  Future<dynamic> getDetallesMecanico(String id);
   Future<dynamic> getListaMecanicos([int page = 0]);
 }
 
@@ -35,6 +36,22 @@ class AdMecService extends AdMecServiceAbs {
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
       dynamic response = await _adMecRepository.getAdMecMe();
+      if (response.statusCode == 200) {
+        return [MecanicoMeResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> getDetallesMecanico(String id) async {
+    print("Obteniendo detalles del mecánico...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _adMecRepository.getDetallesMecanico(id);
       if (response.statusCode == 200) {
         return [MecanicoMeResponse.fromJson(jsonDecode(response.body)), true];
       } else {

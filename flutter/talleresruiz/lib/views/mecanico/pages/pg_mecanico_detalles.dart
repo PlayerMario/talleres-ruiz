@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
-class CitaDetallesPage extends StatefulWidget {
-  const CitaDetallesPage({super.key, required this.rol});
-  final String rol;
+class MecanicoDetallesPage extends StatefulWidget {
+  const MecanicoDetallesPage({Key? key}) : super(key: key);
 
   @override
-  State<CitaDetallesPage> createState() => _CitaDetallesPage();
+  State<MecanicoDetallesPage> createState() => _MecanicoDetallesPage();
 }
 
-class _CitaDetallesPage extends State<CitaDetallesPage> {
+class _MecanicoDetallesPage extends State<MecanicoDetallesPage> {
   @override
   void initState() {
     super.initState();
@@ -18,9 +17,9 @@ class _CitaDetallesPage extends State<CitaDetallesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CitaBloc, CitaState>(builder: (context, state) {
+    return BlocBuilder<AdMecBloc, AdMecState>(builder: (context, state) {
       switch (state.status) {
-        case CitaStatus.failure:
+        case AdMecStatus.failure:
           if (state.response.subErrors != null) {
             return ListView.builder(
                 itemCount: state.response.subErrors!.length,
@@ -30,9 +29,9 @@ class _CitaDetallesPage extends State<CitaDetallesPage> {
           } else {
             return ErrorScreenAppBar(error: state.response);
           }
-        case CitaStatus.success:
-          return CitaMenu(citaDetalles: state.response, rol: widget.rol);
-        case CitaStatus.initial:
+        case AdMecStatus.success:
+          return DetallesMecanico(mecanico: state.response);
+        case AdMecStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

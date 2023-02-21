@@ -16,6 +16,7 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
         super(const ClienteState()) {
     _clienteRepo = GetIt.I.get<ClienteRepository>();
     on<EventClienteHome>(onMostrarClienteMe);
+    on<EventDetallesCliente>(onDetallesCliente);
     on<EventCrearCliente>(onCrearCliente);
     on<EventEditarCliente>(onEditarCliente);
     on<EventBorrarCliente>(onBorrarCliente);
@@ -34,6 +35,22 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
       } else {
         return emit(state.copyWith(
             response: clienteMe[0], status: ClienteStatus.failure));
+      }
+    }
+  }
+
+  Future<void> onDetallesCliente(
+      EventDetallesCliente event, Emitter<ClienteState> emit) async {
+    if (state.status == ClienteStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      final cliente = await _clienteService.getDetallesCliente(event.id);
+
+      if (cliente[1]) {
+        return emit(state.copyWith(
+            response: cliente[0], status: ClienteStatus.success));
+      } else {
+        return emit(state.copyWith(
+            response: cliente[0], status: ClienteStatus.failure));
       }
     }
   }

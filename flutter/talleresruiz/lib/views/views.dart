@@ -29,3 +29,7 @@ export 'mecanico/providers/prv_mecanico_listar.dart';
 export 'mecanico/pages/pg_admec_listar.dart';
 export 'cita/providers/prv_cita_listar.dart';
 export 'cita/pages/pg_cita_listar.dart';
+export 'cliente/providers/prv_cliente_detalles.dart';
+export 'cliente/pages/pg_cliente_detalles.dart';
+export 'mecanico/providers/prv_mecanico_detalles.dart';
+export 'mecanico/pages/pg_mecanico_detalles.dart';

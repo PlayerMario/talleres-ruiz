@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:talleresruiz/main.dart';
 
 class CitaMenu extends StatefulWidget {
-  const CitaMenu({super.key, required this.citaDetalles});
+  const CitaMenu({super.key, required this.citaDetalles, required this.rol});
   final CitaDetallesResponse citaDetalles;
+  final String rol;
 
   @override
   State<CitaMenu> createState() => _CitaMenu();
@@ -15,7 +16,7 @@ class _CitaMenu extends State<CitaMenu> {
   @override
   Widget build(BuildContext context) {
     List<Widget> paginas = [
-      DetallesCita(citaDetalles: widget.citaDetalles),
+      DetallesCita(citaDetalles: widget.citaDetalles, rol: widget.rol),
       AdjuntosCita(adjuntos: widget.citaDetalles.chat),
       NuevoAdjunto(),
     ];
@@ -32,10 +33,17 @@ class _CitaMenu extends State<CitaMenu> {
             leading: Builder(builder: (context) {
               return IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const ProviderClienteHome();
-                    }));
+                    if (widget.rol == "CLIENTE") {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const ProviderClienteHome();
+                      }));
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const ProviderAdMecHome();
+                      }));
+                    }
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_new,

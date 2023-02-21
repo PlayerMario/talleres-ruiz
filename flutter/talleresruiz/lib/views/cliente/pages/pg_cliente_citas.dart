@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talleresruiz/main.dart';
 
 class ClienteCitasPage extends StatefulWidget {
-  const ClienteCitasPage({Key? key}) : super(key: key);
+  const ClienteCitasPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<ClienteCitasPage> createState() => _ClienteCitasPage();
@@ -41,7 +42,8 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : CitaClienteListItem(cita: state.response[index]);
+                    : CitaClienteListItem(
+                        cita: state.response[index], rol: widget.rol);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length
@@ -64,7 +66,8 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
   }
 
   void onScroll() {
-    if (_isBottom) context.read<ListasCitaClienteBloc>().add(EventListaCitasCliente());
+    if (_isBottom)
+      context.read<ListasCitaClienteBloc>().add(EventListaCitasCliente());
   }
 
   bool get _isBottom {

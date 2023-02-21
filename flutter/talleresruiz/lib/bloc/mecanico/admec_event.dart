@@ -9,4 +9,10 @@ abstract class AdMecEvent extends Equatable {
 
 class EventAdMecHome extends AdMecEvent {}
 
+class EventDetallesMecanico extends AdMecEvent {
+  const EventDetallesMecanico(this.id);
+
+  final String id;
+}
+
 class EventLogoutAdMec extends AdMecEvent {}

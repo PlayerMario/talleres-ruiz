@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../main.dart';
 import 'package:date_field/date_field.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class CitaNuevaCliente extends StatefulWidget {
-  const CitaNuevaCliente({super.key});
+  const CitaNuevaCliente({super.key, required this.rol});
+  final String rol;
+
   @override
   State<CitaNuevaCliente> createState() => _CitaNuevaCliente();
 }
@@ -17,8 +17,6 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
 
   @override
   Widget build(BuildContext context) {
-    //DateTime fechaHora;
-    //initializeDateFormatting('es');
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         body: SingleChildScrollView(
@@ -53,17 +51,10 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                             use24hFormat: true,
                             initialDatePickerMode: DatePickerMode.day,
                             initialDate: DateTime.now(),
-                            //dateFormat: DateFormat("dd-MM-yyyy HH:mm", 'es'),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(DateTime.now().year + 1),
                             mode: DateTimeFieldPickerMode.dateAndTime,
                             autovalidateMode: AutovalidateMode.always,
-                            /*validator: (value) {
-                              if (value!.toIso8601String().isEmpty) {
-                                return 'La fecha y hora es obligatoria';
-                              }
-                              return null;
-                            },*/
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
@@ -87,7 +78,8 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                                 fechaHora: fechaHora.toIso8601String());
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderNuevaCitaCliente(cita: cita);
+                              return ProviderNuevaCitaCliente(
+                                  cita: cita, rol: widget.rol);
                             }));
                           }
                         },
