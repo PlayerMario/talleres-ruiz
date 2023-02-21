@@ -20,7 +20,7 @@ class _AdMecMenu extends State<AdMecMenu> {
 
     List<Widget> paginas = [
       DetallesAddMecLog(mecanicoMe: widget.mecanicoMe),
-      const AdMecMenuPrincipal(),
+      const MenuListaAdMec(),
       //const CitaNuevaAdMec()*/
     ];
 

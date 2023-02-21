@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:talleresruiz/main.dart';
+import '../../../main.dart';
 
-class ClienteCitasPage extends StatefulWidget {
-  const ClienteCitasPage({Key? key}) : super(key: key);
+class ClienteListarPage extends StatefulWidget {
+  const ClienteListarPage({Key? key}) : super(key: key);
 
   @override
-  State<ClienteCitasPage> createState() => _ClienteCitasPage();
+  State<ClienteListarPage> createState() => _ClienteListarPage();
 }
 
-class _ClienteCitasPage extends State<ClienteCitasPage> {
+class _ClienteListarPage extends State<ClienteListarPage> {
   final scrollController = ScrollController();
 
   @override
@@ -23,7 +23,15 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
     return BlocBuilder<ClienteBloc, ClienteState>(builder: (context, state) {
       switch (state.status) {
         case ClienteStatus.failure:
-          return ErrorScreen(error: state.response);
+          if (state.response.subErrors != null) {
+            return ListView.builder(
+                itemCount: state.response.subErrors!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SubErrorData(error: state.response.subErrors![index]);
+                });
+          } else {
+            return ErrorScreenAppBar(error: state.response);
+          }
         case ClienteStatus.success:
           if (state.response.isEmpty) {
             return ErrorScreen(error: state.response);
@@ -32,7 +40,7 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : CitaListItem(cita: state.response[index]);
+                    : ClienteListItem(cliente: state.response[index]);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length

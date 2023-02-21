@@ -51,52 +51,57 @@ public class ClienteController {
                                                 {
                                                     "content": [
                                                         {
+                                                            "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                             "nombre": "Jose Javier Moriña León",
                                                             "username": "jjml4",
                                                             "dni": "52874103V",
                                                             "email": "jj@jj.com",
                                                             "tlf": "675 796 623",
-                                                            "avatar": "https://robohash.org/jjml4",
+                                                            "avatar": "user.png",
                                                             "vehiculo": "2014GMD-Kia Rio"
                                                         },
                                                         {
+                                                            "id": "c2cac01b-0bc0-4748-ab28-956190e4ab7a",
                                                             "nombre": "Manuel Delgado Hernández",
                                                             "username": "mdh11",
                                                             "dni": "29556486K",
                                                             "email": "manu@manu.com",
                                                             "tlf": "698 520 147",
-                                                            "avatar": "https://robohash.org/mdh11",
+                                                            "avatar": "user.png",
                                                             "vehiculo": "8520KMM-Opel Astra"
                                                         },
                                                         {
+                                                            "id": "bc2a6f6e-b4b9-40d1-ab90-fe9d78ae414e",
                                                             "nombre": "Francisco Martín Fernández",
                                                             "username": "fmf14",
                                                             "dni": "60437101Y",
                                                             "email": "fran@fran.com",
                                                             "tlf": "641 785 203",
-                                                            "avatar": "https://robohash.org/fmf14",
+                                                            "avatar": "user.png",
                                                             "vehiculo": "0214HNM-Kia Ceed"
                                                         },
                                                         {
+                                                            "id": "1240bad9-5055-43ca-a640-75cd1f59c493",
                                                             "nombre": "Irene Salas Murciano",
                                                             "username": "ism5",
                                                             "dni": "47017557I",
                                                             "email": "irene@irene.com",
                                                             "tlf": "692 014 752",
-                                                            "avatar": "https://robohash.org/ism5",
+                                                            "avatar": "user.png",
                                                             "vehiculo": "5221SCD-Renault Clio"
                                                         },
                                                         {
-                                                            "nombre": "Francisco Martín Fernández",
+                                                            "id": "72b1385c-4a6f-4a43-9539-d04c154c7b71",
+                                                            "nombre": "Laura Gordillo Moreno",
                                                             "username": "lgm4",
                                                             "dni": "49655052A",
-                                                            "email": "fran@fran.com",
+                                                            "email": "laura@laura.com",
                                                             "tlf": "685 027 893",
-                                                            "avatar": "https://robohash.org/lgm4",
+                                                            "avatar": "user.png",
                                                             "vehiculo": "5877FCD-Seat Ibiza"
                                                         }
                                                     ],
-                                                    "totalElements": 8,
+                                                    "totalElements": 9,
                                                     "totalPages": 2,
                                                     "number": 0,
                                                     "size": 5

@@ -13,5 +13,6 @@ export 'cita/cita_nueva_cliente.dart';
 export 'cliente/cliente_form_editar.dart';
 export 'cita/cita_editar_cliente.dart';
 export 'user/user_form_pswd.dart';
-export 'mecanico/admec_menu_ppal.dart';
+export 'mecanico/menu_lista_admec.dart';
 export 'mecanico/admec_detalles_me.dart';
+export 'cliente/cliente_list_item.dart';

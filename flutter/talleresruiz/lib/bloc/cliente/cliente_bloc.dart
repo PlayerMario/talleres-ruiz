@@ -28,6 +28,8 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
     on<EventClienteHome>(onMostrarClienteMe);
     on<EventCitasCliente>(onClienteCitas,
         transformer: throttleDroppable(throttleDuration));
+    on<EventListarClientes>(onListarClientes,
+        transformer: throttleDroppable(throttleDuration));
     on<EventCrearCliente>(onCrearCliente);
     on<EventEditarCliente>(onEditarCliente);
     on<EventBorrarCliente>(onBorrarCliente);
@@ -78,6 +80,37 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
             status: ClienteStatus.success,
             response: List.of(state.response[0].content)
               ..addAll(clienteCitas[0].content),
+            hasReachedMax: false));
+  }
+
+  Future<void> onListarClientes(
+      EventListarClientes event, Emitter<ClienteState> emit) async {
+    if (state.hasReachedMax) return;
+    if (state.status == ClienteStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      final listaClientes = await _clienteService.getListaClientes();
+
+      if (listaClientes[1]) {
+        return emit(state.copyWith(
+            status: ClienteStatus.success,
+            response: listaClientes[0].content,
+            hasReachedMax: false));
+      } else {
+        return emit(state.copyWith(
+            status: ClienteStatus.failure, response: listaClientes[0]));
+      }
+    }
+
+    await Future.delayed(const Duration(milliseconds: 500));
+    final listaClientes =
+        await _clienteService.getClienteCitas(state.response[0].content.length);
+
+    listaClientes[0].content.isEmpty
+        ? emit(state.copyWith(hasReachedMax: true))
+        : emit(state.copyWith(
+            status: ClienteStatus.success,
+            response: List.of(state.response[0].content)
+              ..addAll(listaClientes[0].content),
             hasReachedMax: false));
   }
 

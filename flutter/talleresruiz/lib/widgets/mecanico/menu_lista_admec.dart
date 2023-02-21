@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 import 'package:flutter/material.dart';
 
-class AdMecMenuPrincipal extends StatelessWidget {
-  const AdMecMenuPrincipal({super.key});
+class MenuListaAdMec extends StatelessWidget {
+  const MenuListaAdMec({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,9 @@ class AdMecMenuPrincipal extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CitaEditarCliente();
-                }));*/
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ProviderClientesListar();
+                }));
               })),
       Card(
           margin:

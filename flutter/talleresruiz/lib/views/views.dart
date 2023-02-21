@@ -23,3 +23,5 @@ export 'cliente/providers/prv_cliente_borrar.dart';
 export 'mecanico/menu/admec_menu.dart';
 export 'mecanico/pages/pg_admec_home.dart';
 export 'mecanico/providers/prv_admec_home.dart';
+export 'cliente/providers/prv_cliente_listar.dart';
+export 'cliente/pages/pg_cliente_listar.dart';

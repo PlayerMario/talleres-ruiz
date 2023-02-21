@@ -8,6 +8,7 @@ abstract class ClienteServiceAbs {
   Future<dynamic> clienteLogout();
   Future<dynamic> getClienteLogin();
   Future<dynamic> getClienteCitas([int page = 0]);
+  Future<dynamic> getListaClientes([int page = 0]);
   Future<dynamic> putCliente(ClienteEditarBody cliente);
   Future<dynamic> delCliente();
 }
@@ -55,6 +56,25 @@ class ClienteService extends ClienteServiceAbs {
       dynamic response = await _clienteRepository.getClienteCitas(page);
       if (response.statusCode == 200) {
         return [ClienteCitasResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> getListaClientes([int page = 0]) async {
+    print("Obteniendo lsita de clientes...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _clienteRepository.getListaClientes(page);
+      if (response.statusCode == 200) {
+        return [
+          ClienteListadoResponse.fromJson(jsonDecode(response.body)),
+          true
+        ];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

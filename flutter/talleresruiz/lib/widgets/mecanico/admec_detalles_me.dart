@@ -74,7 +74,7 @@ class DetallesAddMecLog extends StatelessWidget {
                               textAlign: TextAlign.center,
                             )),
                         Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
+                            padding: const EdgeInsets.only(bottom: 0),
                             child: Text(
                               utf8.decode(mecanicoMe.tlf!.codeUnits),
                               style: const TextStyle(

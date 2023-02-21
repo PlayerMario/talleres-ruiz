@@ -11,6 +11,8 @@ class EventClienteHome extends ClienteEvent {}
 
 class EventCitasCliente extends ClienteEvent {}
 
+class EventListarClientes extends ClienteEvent {}
+
 class EventCrearCliente extends ClienteEvent {
   const EventCrearCliente(this.cliente);
 
