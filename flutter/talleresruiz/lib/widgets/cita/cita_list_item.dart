@@ -32,8 +32,9 @@ class CitaListItem extends StatelessWidget {
                       )),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        "Cliente: \n${utf8.decode(cita!.cliente!.codeUnits)}",
+                      child: Text(cita!.cliente != null
+                              ? "Cliente: \n${utf8.decode(cita!.cliente!.codeUnits)}"
+                              : "Cliente: \nSin asignar",
                         style: const TextStyle(
                             fontSize: 16,
                             color: Color.fromRGBO(237, 242, 244, 1)),

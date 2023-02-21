@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:intl/intl.dart';
 import '../../main.dart';
+import 'package:flutter/material.dart';
 
 Citas? obtenerUltimaCitas(List<Citas> listadoCitas) {
   DateTime hoy = DateTime.now();
@@ -53,3 +54,8 @@ Citas? obtenerUltimaCitas(List<Citas> listadoCitas) {
     return null;
   }
 }
+
+void showSnackbar(String msg, BuildContext context) {
+    final snack = SnackBar(content: Text(msg));
+    ScaffoldMessenger.of(context).showSnackBar(snack);
+  }

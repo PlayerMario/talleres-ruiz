@@ -153,13 +153,15 @@ public class CitaService {
     public Cita mostrarCitaConChat(UUID idUsuario, Long idCita) {
         Cita cita = repository.findByIdChat(idCita).orElseThrow(() ->
                 new EntityNotFoundException("No se encuentra la cita con ID: " + idCita));
-        if(cita.getCliente().getId().equals(idUsuario) || cita.getMecanico().getId().equals(idUsuario)) {
-            return cita;
+        if (cita.getCliente() != null && cita.getMecanico() != null) {
+            if (cita.getCliente().getId().equals(idUsuario) || cita.getMecanico().getId().equals(idUsuario)) {
+                return cita;
+            } else {
+                throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
+            }
         } else {
-            throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
+            throw new OperacionDenegadaException("No se puede acceder a la cita");
         }
-        /*return repository.findByIdChat(id).orElseThrow(() ->
-                new EntityNotFoundException("No se encuentra la cita con ID: " + id));*/
     }
 
     public boolean validarFechaHora(LocalDateTime fechaHora) {

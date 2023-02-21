@@ -1,6 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../main.dart';
 
@@ -19,7 +17,7 @@ class AdMecRepository {
     return response;
   }
 
-    Future<dynamic> getDetallesMecanico(String id) async {
+  Future<dynamic> getDetallesMecanico(String id) async {
     String url = "/auth/mecanico/$id";
     var response = await _http.get(url);
     return response;
@@ -28,6 +26,26 @@ class AdMecRepository {
   Future<dynamic> getListaMecanicos([int page = 0]) async {
     String url = "/auth/mecanico/?page=$page";
     var response = await _http.get(url);
+    return response;
+  }
+
+  Future<dynamic> crearAdMec(AdMecCrearBody adMec, int opcion) async {
+    final crearAdMec = {
+      "username": adMec.username,
+      "password": adMec.password,
+      "verifyPassword": adMec.verifyPassword,
+      "dni": adMec.dni,
+      "nombre": adMec.nombre,
+      "email": adMec.email,
+      "tlf": adMec.tlf,
+    };
+    String url = "";
+    if (opcion == 1) {
+      url = "/auth/mecanico/admin";
+    } else {
+      url = "/auth/mecanico/mec";
+    }
+    var response = await _http.post(url, crearAdMec);
     return response;
   }
 }

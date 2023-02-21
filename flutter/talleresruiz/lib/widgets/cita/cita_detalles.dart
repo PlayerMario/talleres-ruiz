@@ -42,8 +42,9 @@ class DetallesCita extends StatelessWidget {
                         )),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 15),
-                        child: Text(
-                          "Cliente: \n${utf8.decode(citaDetalles.cliente!.codeUnits)}",
+                        child: Text(citaDetalles.mecanico != null
+                              ? "Cliente: \n${utf8.decode(citaDetalles.cliente!.codeUnits)}"
+                              : "Cliente: \nSin asignar",
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -52,8 +53,9 @@ class DetallesCita extends StatelessWidget {
                         )),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 15),
-                        child: Text(
-                          "Vehículo: \n${utf8.decode(citaDetalles.vehiculo!.codeUnits)}",
+                        child: Text(citaDetalles.vehiculo != null
+                              ? "Vehículo: \n${utf8.decode(citaDetalles.vehiculo!.codeUnits)}"
+                              : "Vehículo: \nSin asignar",
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -135,10 +137,5 @@ class DetallesCita extends StatelessWidget {
                 }
               }))
     ])));
-  }
-
-  void showSnackbar(String msg, BuildContext context) {
-    final snack = SnackBar(content: Text(msg));
-    ScaffoldMessenger.of(context).showSnackBar(snack);
   }
 }

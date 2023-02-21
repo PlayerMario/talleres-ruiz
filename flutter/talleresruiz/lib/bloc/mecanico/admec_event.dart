@@ -15,4 +15,11 @@ class EventDetallesMecanico extends AdMecEvent {
   final String id;
 }
 
+class EventCrearAdMec extends AdMecEvent {
+  const EventCrearAdMec(this.adMec, this.opcion);
+
+  final AdMecCrearBody adMec;
+  final int opcion;
+}
+
 class EventLogoutAdMec extends AdMecEvent {}

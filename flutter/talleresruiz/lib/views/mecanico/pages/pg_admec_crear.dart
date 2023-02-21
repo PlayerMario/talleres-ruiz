@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
-class ClienteCrearPage extends StatefulWidget {
-  const ClienteCrearPage({Key? key}) : super(key: key);
+class AdMecCrearPage extends StatefulWidget {
+  const AdMecCrearPage({Key? key}) : super(key: key);
 
   @override
-  State<ClienteCrearPage> createState() => _ClienteCrearPage();
+  State<AdMecCrearPage> createState() => _AdMecCrearPage();
 }
 
-class _ClienteCrearPage extends State<ClienteCrearPage> {
+class _AdMecCrearPage extends State<AdMecCrearPage> {
   @override
   void initState() {
     super.initState();
@@ -17,9 +17,9 @@ class _ClienteCrearPage extends State<ClienteCrearPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ClienteBloc, ClienteState>(builder: (context, state) {
+    return BlocBuilder<AdMecBloc, AdMecState>(builder: (context, state) {
       switch (state.status) {
-        case ClienteStatus.failure:
+        case AdMecStatus.failure:
           if (state.response.subErrors! != null) {
             return ListView.builder(
                 itemCount: state.response.subErrors!.length,
@@ -29,9 +29,9 @@ class _ClienteCrearPage extends State<ClienteCrearPage> {
           } else {
             return ErrorScreenAppBar(error: state.response);
           }
-        case ClienteStatus.success:
-          return DetallesNuevoCliente(cliente: state.response!);
-        case ClienteStatus.initial:
+        case AdMecStatus.success:
+          return DetallesNuevoAdMec(adMec: state.response);
+        case AdMecStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }
     });

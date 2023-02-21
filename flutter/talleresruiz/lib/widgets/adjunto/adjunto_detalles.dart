@@ -23,7 +23,9 @@ class DetallesChat extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.only(bottom: 25),
                       child: Text(
-                        utf8.decode(chat.autor!.codeUnits),
+                        chat.autor != null
+                            ? utf8.decode(chat.autor!.codeUnits)
+                            : "Mecánico: \nSin asignar",
                         style: const TextStyle(
                             fontSize: 16, color: Color.fromRGBO(43, 45, 66, 1)),
                         textAlign: TextAlign.start,

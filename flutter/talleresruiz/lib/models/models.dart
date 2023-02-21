@@ -17,3 +17,4 @@ export 'mecanico/mecanico_lista_response.dart';
 export 'mecanico/mecanico_listado_response.dart';
 export 'cita/cita_listado_response.dart';
 export 'cita/cita_lista_response.dart';
+export 'mecanico/admec_crear_body.dart';

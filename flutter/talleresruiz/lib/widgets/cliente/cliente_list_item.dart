@@ -39,7 +39,7 @@ class ClienteListItem extends StatelessWidget {
                       textAlign: TextAlign.center,
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 0),
                     child: Text(
                       utf8.decode(cliente!.tlf!.codeUnits),
                       style: const TextStyle(

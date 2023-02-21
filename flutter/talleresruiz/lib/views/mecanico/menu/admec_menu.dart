@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
@@ -69,9 +68,13 @@ class _AdMecMenu extends State<AdMecMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
-                  /*Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  if (widget.mecanicoMe.roles![0] == "ADMIN") {
+                    /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return FormularioEditarCliente(cliente: widget.clienteMe);
                   }));*/
+                  } else {
+                    showSnackbar("Sólo un ADMIN puede acceder", context);
+                  }
                 },
               ),
               ListTile(

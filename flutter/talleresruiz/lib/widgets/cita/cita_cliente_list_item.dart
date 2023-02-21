@@ -26,8 +26,9 @@ class CitaClienteListItem extends StatelessWidget {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          "Mecánico: \n${utf8.decode(cita!.mecanico!.codeUnits)}",
+                        child: Text(cita!.mecanico != null
+                              ? "Mecánico: \n${utf8.decode(cita!.mecanico!.codeUnits)}"
+                              : "Mecánico: \nSin asignar",
                           style: const TextStyle(
                               fontSize: 16,
                               color: Color.fromRGBO(237, 242, 244, 1)),

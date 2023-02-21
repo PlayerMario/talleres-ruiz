@@ -19,3 +19,5 @@ export 'cliente/cliente_list_item.dart';
 export 'mecanico/mecanico_list_item.dart';
 export 'cita/cita_list_item.dart';
 export 'mecanico/mecanico_detalles.dart';
+export 'mecanico/admec_form_crear.dart';
+export 'mecanico/admec_nuevo_detalles.dart';

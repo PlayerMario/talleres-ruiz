@@ -15,6 +15,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
         super(const AdMecState()) {
     on<EventAdMecHome>(onMostrarAdMecMe);
     on<EventDetallesMecanico>(onDetallesMecanico);
+    on<EventCrearAdMec>(onCrearAdMec);
     on<EventLogoutAdMec>(onLogoutAdMec);
   }
 
@@ -46,6 +47,22 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
       } else {
         return emit(
             state.copyWith(response: mecanico[0], status: AdMecStatus.failure));
+      }
+    }
+  }
+
+  Future<void> onCrearAdMec(
+      EventCrearAdMec event, Emitter<AdMecState> emit) async {
+    if (state.status == AdMecStatus.initial) {
+      // EN FUNCIÓN DE LA OPCIÓN SE HACE UNA PETICIÓN U OTRA
+      final adMecCreado =
+          await _adMecService.crearAdMec(event.adMec, event.opcion);
+      if (adMecCreado[1]) {
+        return emit(state.copyWith(
+            status: AdMecStatus.success, response: adMecCreado[0]));
+      } else {
+        return emit(state.copyWith(
+            status: AdMecStatus.failure, response: adMecCreado[0]));
       }
     }
   }

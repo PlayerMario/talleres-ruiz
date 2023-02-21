@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../main.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +12,26 @@ class MenuListaAdMec extends StatelessWidget {
             child: Column(children: [
       Card(
           margin:
-              const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 45, left: 20, right: 20, bottom: 20),
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+              child: const Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Text(
+                    "CITAS",
+                    style: TextStyle(
+                        fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
+                    textAlign: TextAlign.start,
+                  )),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ProviderCitasListar(rol: rol);
+                }));
+              })),
+      Card(
+          margin:
+              const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
@@ -34,7 +50,7 @@ class MenuListaAdMec extends StatelessWidget {
               })),
       Card(
           margin:
-              const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
@@ -53,22 +69,26 @@ class MenuListaAdMec extends StatelessWidget {
               })),
       Card(
           margin:
-              const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
               child: const Padding(
                   padding: EdgeInsets.all(30),
                   child: Text(
-                    "CITAS",
+                    "TRABAJADORES",
                     style: TextStyle(
                         fontSize: 25, color: Color.fromRGBO(237, 242, 244, 1)),
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ProviderCitasListar(rol: rol);
-                }));
+                if (rol == "ADMIN") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const AdMecMenuTrbj();
+                  }));
+                } else {
+                  showSnackbar("Sólo un ADMIN puede acceder", context);
+                }
               })),
     ])));
   }
