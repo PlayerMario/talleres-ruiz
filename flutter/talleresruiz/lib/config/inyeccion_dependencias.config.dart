@@ -11,11 +11,12 @@ import 'package:talleresruiz/repositories/admec_repository.dart' as _i4;
 import 'package:talleresruiz/repositories/cita_repository.dart' as _i5;
 import 'package:talleresruiz/repositories/cliente_repository.dart' as _i6;
 import 'package:talleresruiz/repositories/user_repository.dart' as _i7;
+import 'package:talleresruiz/services/adjunto_service.dart' as _i9;
 import 'package:talleresruiz/services/admec_service.dart' as _i8;
-import 'package:talleresruiz/services/cita_service.dart' as _i9;
-import 'package:talleresruiz/services/cliente_service.dart' as _i10;
+import 'package:talleresruiz/services/cita_service.dart' as _i10;
+import 'package:talleresruiz/services/cliente_service.dart' as _i11;
 import 'package:talleresruiz/services/interceptor.dart' as _i3;
-import 'package:talleresruiz/services/user_service.dart' as _i11;
+import 'package:talleresruiz/services/user_service.dart' as _i12;
 
 /// ignore_for_file: unnecessary_lambdas
 /// ignore_for_file: lines_longer_than_80_chars
@@ -37,9 +38,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i6.ClienteRepository>(_i6.ClienteRepository());
     gh.singleton<_i7.UserRepository>(_i7.UserRepository());
     gh.singleton<_i8.AdMecService>(_i8.AdMecService());
-    gh.singleton<_i9.CitaService>(_i9.CitaService());
-    gh.singleton<_i10.ClienteService>(_i10.ClienteService());
-    gh.singleton<_i11.UserService>(_i11.UserService());
+    gh.singleton<_i9.AdjuntoService>(_i9.AdjuntoService());
+    gh.singleton<_i10.CitaService>(_i10.CitaService());
+    gh.singleton<_i11.ClienteService>(_i11.ClienteService());
+    gh.singleton<_i12.UserService>(_i12.UserService());
     return this;
   }
 }

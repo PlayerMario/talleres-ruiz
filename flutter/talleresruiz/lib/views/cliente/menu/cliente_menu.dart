@@ -66,7 +66,7 @@ class _ClienteMenu extends State<ClienteMenu> {
                   'Editar datos usuario',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
@@ -78,10 +78,27 @@ class _ClienteMenu extends State<ClienteMenu> {
               ListTile(
                 title: const Center(
                     child: Text(
+                  'Cambiar avatar',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color.fromRGBO(43, 45, 66, 1)),
+                )),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CambiarAvatar(
+                      rol: widget.clienteMe.roles![0],
+                    );
+                  }));
+                },
+              ),
+              ListTile(
+                title: const Center(
+                    child: Text(
                   'Cambiar contraseña',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
@@ -92,13 +109,16 @@ class _ClienteMenu extends State<ClienteMenu> {
                   }));
                 },
               ),
+              const SizedBox(
+                height: 30,
+              ),
               ListTile(
                 title: const Center(
                     child: Text(
                   'Cerrar sesión',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
@@ -115,10 +135,13 @@ class _ClienteMenu extends State<ClienteMenu> {
                   'Eliminar usuario',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
+                  showSnackbar("Deja pulsado para darte de baja", context);
+                },
+                onLongPress: () {
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {
                     return const ProviderClienteBorrar();

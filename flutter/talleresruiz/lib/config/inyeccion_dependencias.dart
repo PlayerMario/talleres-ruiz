@@ -16,4 +16,4 @@ void setupAsyncDependencies() {
       () => LocalStorageService.getInstance());
 }
 
-// TERMINAL : flutter packages pub run build_runner build para quitar error de init()
+// TERMINAL : "flutter packages pub run build_runner build" para quitar error de init()

@@ -64,7 +64,7 @@ class _AdMecMenu extends State<AdMecMenu> {
                   'Editar datos usuario',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
@@ -83,10 +83,28 @@ class _AdMecMenu extends State<AdMecMenu> {
               ListTile(
                 title: const Center(
                     child: Text(
+                  'Cambiar avatar',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color.fromRGBO(43, 45, 66, 1)),
+                )),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CambiarAvatar(rol: widget.mecanicoMe.roles![0]);
+                  }));
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ListTile(
+                title: const Center(
+                    child: Text(
                   'Cambiar contraseña',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
@@ -102,7 +120,7 @@ class _AdMecMenu extends State<AdMecMenu> {
                   'Cerrar sesión',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
