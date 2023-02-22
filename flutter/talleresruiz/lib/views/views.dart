@@ -40,3 +40,5 @@ export 'cita/providers/prv_nueva_cita_admec.dart';
 export 'mecanico/providers/prv_admec_editar.dart';
 export 'mecanico/pages/pg_admec_editar.dart';
 export 'cita/providers/prv_editar_cita_admec.dart';
+export 'adjunto/pages/pg_agregar_msj.dart';
+export 'adjunto/providers/prv_agregar_msj.dart';

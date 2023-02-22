@@ -38,7 +38,7 @@ class FormularioLogin extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -54,9 +54,20 @@ class FormularioLogin extends StatelessWidget {
                             controller: username,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Usuario',
-                                hintText: 'Introduzca su nombre de usuario'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su nombre de usuario',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre de usuario es obligatorio';
@@ -74,9 +85,20 @@ class FormularioLogin extends StatelessWidget {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Contraseña',
-                                hintText: 'Introduzca su contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La contraseña es obligatoria';
@@ -86,8 +108,9 @@ class FormularioLogin extends StatelessWidget {
                           ),
                         )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -106,8 +129,8 @@ class FormularioLogin extends StatelessWidget {
                           }
                         },
                         child: const Text(
-                          'Iniciar Sesión',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          'Login',
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

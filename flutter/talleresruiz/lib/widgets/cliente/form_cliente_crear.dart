@@ -33,7 +33,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -49,9 +49,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: username,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Usuario',
-                                hintText: 'Introduzca su nombre de usuario'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el nombre de usuario',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre de usuario es obligatorio';
@@ -69,9 +80,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Contraseña',
-                                hintText: 'Introduzca su contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La contraseña es obligatoria';
@@ -89,9 +111,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Verificar Contraseña',
-                                hintText: 'Repita su contraseña'),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Verificar contraseña',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Repita su contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Debe verificar su contraseña';
@@ -108,9 +141,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: dni,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'DNI',
-                                hintText: 'Introduzca su DNI'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su DNI',
+                                suffixIcon: Icon(
+                                  Icons.format_indent_increase_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El DNI es obligatorio';
@@ -127,9 +171,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: nombre,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Nombre',
-                                hintText: 'Introduzca su nombre completo'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su nombre completo',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre del usuario es obligatorio';
@@ -146,9 +201,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: email,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Email',
-                                hintText: 'Introduzca su email'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su email',
+                                suffixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El email es obligatorio';
@@ -165,9 +231,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: tlf,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Teléfono',
-                                hintText: 'Introduzca su teléfono'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su número de teléfono',
+                                suffixIcon: Icon(
+                                  Icons.phone_enabled_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El teléfono es obligatorio';
@@ -184,10 +261,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: vehiculo,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Vehículo',
-                                hintText:
-                                    'Introduzca la marca y modelo de su vehículo'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la marca y modelo de su vehículo',
+                                suffixIcon: Icon(
+                                  Icons.car_repair_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Los datos del vehículo son obligatorios';
@@ -204,10 +291,20 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                             controller: matricula,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Matrícula',
-                                hintText:
-                                    'Introduzca la matrícula de su vehículo'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la matrícula de su vehículo',
+                                suffixIcon: Icon(
+                                  Icons.car_crash_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La matrícula del vehículo es obligatoria';
@@ -217,8 +314,9 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                           ),
                         )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -245,7 +343,7 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                         },
                         child: const Text(
                           'Crear',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

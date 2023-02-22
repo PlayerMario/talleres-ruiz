@@ -1,29 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:date_field/date_field.dart';
-import '../../../main.dart';
 import 'dart:convert';
+import '../../../main.dart';
+import 'package:flutter/material.dart';
 
-class CitaEditarCliente extends StatefulWidget {
-  const CitaEditarCliente({super.key, required this.cita, required this.rol});
-  final CitaDetallesResponse cita;
-  final String rol;
+class FormularioEditarCliente extends StatefulWidget {
+  const FormularioEditarCliente({super.key, required this.cliente});
+  final ClienteMeResponse cliente;
 
   @override
-  State<CitaEditarCliente> createState() => _CitaEditarCliente();
+  State<FormularioEditarCliente> createState() => _FormularioEditarCliente();
 }
 
-class _CitaEditarCliente extends State<CitaEditarCliente> {
+class _FormularioEditarCliente extends State<FormularioEditarCliente> {
   final _formKey = GlobalKey<FormState>();
-  late DateTime fechaHora;
 
   @override
   Widget build(BuildContext context) {
+    final nombre = TextEditingController(
+        text: utf8.decode(widget.cliente.nombre!.codeUnits));
+    final email = TextEditingController(
+        text: utf8.decode(widget.cliente.email!.codeUnits));
+    final tlf =
+        TextEditingController(text: utf8.decode(widget.cliente.tlf!.codeUnits));
+    final vehiculo = TextEditingController(
+        text: utf8.decode(widget.cliente.vehiculo!.split('-')[1].codeUnits));
+    final matricula = TextEditingController(
+        text: utf8.decode(widget.cliente.vehiculo!.split('-')[0].codeUnits));
+
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "MODIFICAR CITA",
+              "MODIFICAR USUARIO",
               style: TextStyle(
                 color: Color.fromRGBO(237, 242, 244, 1),
               ),
@@ -61,109 +69,28 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                         child: SizedBox(
                           width: 350,
                           child: TextFormField(
+                            controller: nombre,
+                            keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color.fromRGBO(43, 45, 66, 1),
                                         width: 1)),
                                 border: UnderlineInputBorder(),
-                                labelText: 'Mecánico',
+                                labelText: 'Nombre',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca el nombre del mecánico',
+                                hintText: 'Introduzca su nombre completo',
                                 suffixIcon: Icon(
                                   Icons.perm_identity_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
                                   size: 25,
                                 )),
-                            readOnly: true,
-                            initialValue: widget.cita.mecanico != null
-                                ? utf8.decode(widget.cita.mecanico!.codeUnits)
-                                : "Sin asignar",
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                              decoration: const InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Color.fromRGBO(43, 45, 66, 1),
-                                          width: 1)),
-                                  border: UnderlineInputBorder(),
-                                  labelText: 'Cliente',
-                                  labelStyle: TextStyle(
-                                      color: Color.fromRGBO(43, 45, 66, 1)),
-                                  hintText: 'Introduzca el nombre del cliente',
-                                  suffixIcon: Icon(
-                                    Icons.perm_identity_outlined,
-                                    color: Color.fromRGBO(43, 45, 66, 1),
-                                    size: 25,
-                                  )),
-                              readOnly: true,
-                              initialValue:
-                                  utf8.decode(widget.cita.cliente!.codeUnits)),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromRGBO(43, 45, 66, 1),
-                                        width: 1)),
-                                border: UnderlineInputBorder(),
-                                labelText: 'Vehículo',
-                                labelStyle: TextStyle(
-                                    color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca el vehículo del cliente',
-                                suffixIcon: Icon(
-                                  Icons.car_repair_outlined,
-                                  color: Color.fromRGBO(43, 45, 66, 1),
-                                  size: 25,
-                                )),
-                            readOnly: true,
-                            initialValue:
-                                utf8.decode(widget.cita.vehiculo!.codeUnits),
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: DateTimeFormField(
-                            decoration: const InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromRGBO(43, 45, 66, 1),
-                                        width: 1)),
-                                border: UnderlineInputBorder(),
-                                labelText: 'Fecha y hora',
-                                labelStyle: TextStyle(
-                                    color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText:
-                                    'Introduzca la fecha y hora de la cita',
-                                suffixIcon: Icon(
-                                  Icons.calendar_month_outlined,
-                                  color: Color.fromRGBO(43, 45, 66, 1),
-                                  size: 25,
-                                )),
-                            use24hFormat: true,
-                            initialDatePickerMode: DatePickerMode.day,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(DateTime.now().year + 1),
-                            mode: DateTimeFieldPickerMode.dateAndTime,
-                            autovalidateMode: AutovalidateMode.always,
-                            onDateSelected: (value) {
-                              setState(() {
-                                fechaHora = value;
-                                print(fechaHora);
-                              });
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'El nombre del usuario es obligatorio';
+                              }
+                              return null;
                             },
                           ),
                         )),
@@ -172,24 +99,119 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                         child: SizedBox(
                           width: 350,
                           child: TextFormField(
+                            controller: email,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color.fromRGBO(43, 45, 66, 1),
                                         width: 1)),
                                 border: UnderlineInputBorder(),
-                                labelText: 'Estado',
+                                labelText: 'Email',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca el estado de la cita',
+                                hintText: 'Introduzca su email',
                                 suffixIcon: Icon(
-                                  Icons.check_box_outlined,
+                                  Icons.email_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
                                   size: 25,
                                 )),
-                            readOnly: true,
-                            initialValue:
-                                utf8.decode(widget.cita.estado!.codeUnits),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'El email es obligatorio';
+                              }
+                              return null;
+                            },
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: SizedBox(
+                          width: 350,
+                          child: TextFormField(
+                            controller: tlf,                            
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Teléfono',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca su teléfono',
+                                suffixIcon: Icon(
+                                  Icons.phone_enabled_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'El teléfono es obligatorio';
+                              }
+                              return null;
+                            },
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: SizedBox(
+                          width: 350,
+                          child: TextFormField(
+                            controller: vehiculo,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Vehículos',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la marca y modelo de su vehículo',
+                                suffixIcon: Icon(
+                                  Icons.car_repair_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Los datos del vehículo son obligatorios';
+                              }
+                              return null;
+                            },
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: SizedBox(
+                          width: 350,
+                          child: TextFormField(
+                            controller: matricula,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Matrícula',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la matrícula de su vehículo',
+                                suffixIcon: Icon(
+                                  Icons.car_crash_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'La matrícula del vehículo es obligatoria';
+                              }
+                              return null;
+                            },
                           ),
                         )),
                     Container(
@@ -204,14 +226,15 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            CitaCrearClienteBody cita = CitaCrearClienteBody(
-                                fechaHora: fechaHora.toIso8601String());
+                            ClienteEditarBody cliente = ClienteEditarBody(
+                                nombre: nombre.text,
+                                email: email.text,
+                                tlf: tlf.text,
+                                vehiculo: vehiculo.text,
+                                matricula: matricula.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderEditarCitaCliente(
-                                  cita: cita,
-                                  id: widget.cita.id!,
-                                  rol: widget.rol);
+                              return ProviderClienteEditar(cliente: cliente);
                             }));
                           }
                         },

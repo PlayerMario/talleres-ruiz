@@ -18,6 +18,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
     on<EventEditarCitaCliente>(onCitaEditarCliente);
     on<EventEditarCitaAdMec>(onCitaEditarAdMec);
     on<EventBorrarCitaCliente>(onCitaBorrarCliente);
+    on<EventAgregarMsj>(onCitaAgregarMsj);
   }
 
   Future<void> onCitaDetalles(
@@ -104,5 +105,20 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
       EventBorrarCitaCliente event, Emitter<CitaState> emit) async {
     await _citaService.delCitaCliente(event.id);
     emit(const CitaState());
+  }
+
+  Future<void> onCitaAgregarMsj(
+      EventAgregarMsj event, Emitter<CitaState> emit) async {
+    if (state.status == CitaStatus.initial) {
+      final adjuntoMsj = await _citaService.agregarMsj(event.adjunto, event.id);
+
+      if (adjuntoMsj[1]) {
+        return emit(state.copyWith(
+            status: CitaStatus.success, response: adjuntoMsj[0]));
+      } else {
+        return emit(state.copyWith(
+            status: CitaStatus.failure, response: adjuntoMsj[0]));
+      }
+    }
   }
 }

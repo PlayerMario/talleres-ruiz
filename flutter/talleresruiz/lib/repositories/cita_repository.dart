@@ -67,4 +67,11 @@ class CitaRepository {
     var response = await _http.delete(url);
     return response;
   }
+
+  Future<dynamic> agregarMsj(AdjuntoMsjBody adjunto, int id) async {
+    final msj = {"contenido": adjunto.contenido};
+    String url = "/auth/cita/$id/mensaje";
+    var response = await _http.post(url, msj);
+    return response;
+  }
 }

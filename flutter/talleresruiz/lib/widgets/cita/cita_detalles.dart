@@ -13,7 +13,7 @@ class DetallesCita extends StatelessWidget {
   Widget build(BuildContext context) {
     final citaBloc = BlocProvider.of<CitaBloc>(context);
     return Scaffold(
-        body: Center(
+        body: SingleChildScrollView(child: Center(
             child: Column(children: [
       Card(
           shape:
@@ -143,6 +143,6 @@ class DetallesCita extends StatelessWidget {
                       context);
                 }
               }))
-    ])));
+    ]))));
   }
 }

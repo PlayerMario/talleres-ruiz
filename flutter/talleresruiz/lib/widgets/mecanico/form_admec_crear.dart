@@ -33,7 +33,7 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -49,9 +49,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             controller: username,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Usuario',
-                                hintText: 'Introduzca el nombre de usuario'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el nombre de usuario',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre de usuario es obligatorio';
@@ -69,9 +80,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Contraseña',
-                                hintText: 'Introduzca la contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La contraseña es obligatoria';
@@ -89,9 +111,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Verificar Contraseña',
-                                hintText: 'Repita la contraseña'),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Verificar contraseña',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Repita su contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Debe verificar su contraseña';
@@ -108,9 +141,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             controller: dni,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'DNI',
-                                hintText: 'Introduzca el DNI'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el DNI',
+                                suffixIcon: Icon(
+                                  Icons.format_indent_increase_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El DNI es obligatorio';
@@ -127,9 +171,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             controller: nombre,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Nombre',
-                                hintText: 'Introduzca el nombre completo'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el nombre completo',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre del usuario es obligatorio';
@@ -146,9 +201,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             controller: email,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Email',
-                                hintText: 'Introduzca el email'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el email',
+                                suffixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El email es obligatorio';
@@ -165,9 +231,20 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                             controller: tlf,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Teléfono',
-                                hintText: 'Introduzca el teléfono'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el número de teléfono',
+                                suffixIcon: Icon(
+                                  Icons.phone_enabled_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El teléfono es obligatorio';
@@ -177,8 +254,9 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                           ),
                         )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -204,7 +282,7 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                         },
                         child: const Text(
                           'Crear',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

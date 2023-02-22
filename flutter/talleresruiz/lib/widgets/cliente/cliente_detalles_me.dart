@@ -32,7 +32,7 @@ class DetallesClienteLog extends StatelessWidget {
                     ));
               }),
               backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-          body: Center(
+          body: SingleChildScrollView(child: Center(
               child: Column(children: [
             Card(
                 shape: RoundedRectangleBorder(
@@ -119,10 +119,10 @@ class DetallesClienteLog extends StatelessWidget {
                                 )),
                           ],
                         )))))
-          ])));
+          ]))));
     } else {
       return Scaffold(
-          body: Center(
+          body: SingleChildScrollView( child: Center(
               child: Column(
         children: [
           Card(
@@ -222,7 +222,7 @@ class DetallesClienteLog extends StatelessWidget {
             CitaClienteListItem(cita: ultimaCita, rol: clienteMe.roles![0])
           ])
         ],
-      )));
+      ))));
     }
   }
 }

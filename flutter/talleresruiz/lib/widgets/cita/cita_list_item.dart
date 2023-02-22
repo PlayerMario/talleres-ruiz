@@ -12,7 +12,7 @@ class CitaListItem extends StatelessWidget {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         shadowColor: const Color.fromRGBO(43, 45, 66, 1),
-        margin: const EdgeInsets.only(left: 50, top: 20, right: 50, bottom: 20),
+        margin: const EdgeInsets.only(left: 70, top: 20, right: 70, bottom: 20),
         elevation: 15,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(

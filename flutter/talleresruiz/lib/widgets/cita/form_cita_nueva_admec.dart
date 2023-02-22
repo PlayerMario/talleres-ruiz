@@ -29,7 +29,7 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -45,9 +45,20 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                             controller: dni,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'DNI cliente',
-                                hintText: 'Introduzca el DNI del cliente'),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'DNI del cliente',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el DNI del cliente',
+                                suffixIcon: Icon(
+                                  Icons.format_indent_increase_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El DNI es obligatorio';
@@ -62,12 +73,21 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                           width: 350,
                           child: DateTimeFormField(
                             decoration: const InputDecoration(
-                              hintStyle: TextStyle(color: Colors.black45),
-                              errorStyle: TextStyle(color: Colors.redAccent),
-                              border: OutlineInputBorder(),
-                              suffixIcon: Icon(Icons.event_note),
-                              labelText: 'Fecha y hora',
-                            ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
+                                labelText: 'Fecha y hora',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText:
+                                    'Introduzca la fecha y hora de la cita',
+                                suffixIcon: Icon(
+                                  Icons.calendar_month_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             use24hFormat: true,
                             initialDatePickerMode: DatePickerMode.day,
                             initialDate: DateTime.now(),
@@ -84,8 +104,9 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                           ),
                         )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -105,10 +126,10 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                           }
                         },
                         child: const Text(
-                          'Generar cita',
+                          'Generar',
                           style: TextStyle(
                               color: Color.fromRGBO(237, 242, 244, 1),
-                              fontSize: 20),
+                              fontSize: 18),
                         ),
                       ),
                     ),

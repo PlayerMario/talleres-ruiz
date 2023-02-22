@@ -48,7 +48,7 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -65,9 +65,20 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Antigua Contraseña',
-                                hintText: 'Introduzca su antigua contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la antigua contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La antigua contraseña es obligatoria';
@@ -85,9 +96,20 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Nueva Contraseña',
-                                hintText: 'Introduzca su nueva contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca la nueva contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'La contraseña es obligatoria';
@@ -105,9 +127,20 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Verificar Nueva Contraseña',
-                                hintText: 'Repita su nueva contraseña'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Repita la nueva contraseña',
+                                suffixIcon: Icon(
+                                  Icons.password_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Debe verificar su contraseña';
@@ -117,8 +150,9 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                           ),
                         )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -142,7 +176,7 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

@@ -2,29 +2,26 @@ import 'dart:convert';
 import '../../../main.dart';
 import 'package:flutter/material.dart';
 
-class FormularioEditarCliente extends StatefulWidget {
-  const FormularioEditarCliente({super.key, required this.cliente});
-  final ClienteMeResponse cliente;
+class FormularioEditarAdMec extends StatefulWidget {
+  const FormularioEditarAdMec({super.key, required this.mecanico, required this.id});
+  final MecanicoMeResponse mecanico;
+  final String id;
 
   @override
-  State<FormularioEditarCliente> createState() => _FormularioEditarCliente();
+  State<FormularioEditarAdMec> createState() => _FormularioEditarAdMec();
 }
 
-class _FormularioEditarCliente extends State<FormularioEditarCliente> {
+class _FormularioEditarAdMec extends State<FormularioEditarAdMec> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final nombre = TextEditingController(
-        text: utf8.decode(widget.cliente.nombre!.codeUnits));
+        text: utf8.decode(widget.mecanico.nombre!.codeUnits));
     final email = TextEditingController(
-        text: utf8.decode(widget.cliente.email!.codeUnits));
-    final tlf =
-        TextEditingController(text: utf8.decode(widget.cliente.tlf!.codeUnits));
-    final vehiculo = TextEditingController(
-        text: utf8.decode(widget.cliente.vehiculo!.split('-')[1].codeUnits));
-    final matricula = TextEditingController(
-        text: utf8.decode(widget.cliente.vehiculo!.split('-')[0].codeUnits));
+        text: utf8.decode(widget.mecanico.email!.codeUnits));
+    final tlf = TextEditingController(
+        text: utf8.decode(widget.mecanico.tlf!.codeUnits));
 
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
@@ -56,7 +53,7 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Center(
                         child: SizedBox(
                             width: 200,
@@ -70,12 +67,22 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: nombre,
-                            //initialValue: widget.cliente.nombre!,
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Nombre',
-                                hintText: 'Introduzca su nombre completo'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el nombre completo',
+                                suffixIcon: Icon(
+                                  Icons.perm_identity_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El nombre del usuario es obligatorio';
@@ -90,12 +97,22 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: email,
-                            //initialValue: widget.cliente.email!,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Email',
-                                hintText: 'Introduzca su email'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el email',
+                                suffixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El email es obligatorio';
@@ -110,12 +127,22 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                           width: 350,
                           child: TextFormField(
                             controller: tlf,
-                            //initialValue: widget.cliente.tlf!,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(43, 45, 66, 1),
+                                        width: 1)),
+                                border: UnderlineInputBorder(),
                                 labelText: 'Teléfono',
-                                hintText: 'Introduzca su teléfono'),
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(43, 45, 66, 1)),
+                                hintText: 'Introduzca el número de teléfono',
+                                suffixIcon: Icon(
+                                  Icons.phone_enabled_outlined,
+                                  color: Color.fromRGBO(43, 45, 66, 1),
+                                  size: 25,
+                                )),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'El teléfono es obligatorio';
@@ -124,51 +151,10 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                             },
                           ),
                         )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            controller: vehiculo,
-                            //initialValue: widget.cliente.vehiculo!.split('-')[0],
-                            keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Vehículo',
-                                hintText:
-                                    'Introduzca la marca y modelo de su vehículo'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Los datos del vehículo son obligatorios';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SizedBox(
-                          width: 350,
-                          child: TextFormField(
-                            controller: matricula,
-                            //initialValue: widget.cliente.vehiculo!.split('-')[1],
-                            keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Matrícula',
-                                hintText:
-                                    'Introduzca la matrícula de su vehículo'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'La matrícula del vehículo es obligatoria';
-                              }
-                              return null;
-                            },
-                          ),
-                        )),
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: 45,
+                      width: 120,
+                      margin: const EdgeInsets.only(top: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
                       child: ElevatedButton(
@@ -177,21 +163,20 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ClienteEditarBody cliente = ClienteEditarBody(
+                            AdMecEditarBody adMec = AdMecEditarBody(
                                 nombre: nombre.text,
                                 email: email.text,
-                                tlf: tlf.text,
-                                vehiculo: vehiculo.text,
-                                matricula: matricula.text);
+                                tlf: tlf.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderClienteEditar(cliente: cliente);
+                              return ProviderAdMecEditar(
+                                  adMec: adMec, id: widget.id);
                             }));
                           }
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

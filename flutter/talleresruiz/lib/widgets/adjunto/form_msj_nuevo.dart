@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../main.dart';
-import 'package:date_field/date_field.dart';
 
-class CitaNuevaCliente extends StatefulWidget {
-  const CitaNuevaCliente({super.key, required this.rol});
+class FormularioNuevoMensaje extends StatefulWidget {
+  const FormularioNuevoMensaje(
+      {super.key, required this.id, required this.rol});
+  final int id;
   final String rol;
 
   @override
-  State<CitaNuevaCliente> createState() => _CitaNuevaCliente();
+  State<FormularioNuevoMensaje> createState() => _FormularioNuevoMensaje();
 }
 
-class _CitaNuevaCliente extends State<CitaNuevaCliente> {
-  late DateTime fechaHora;
+class _FormularioNuevoMensaje extends State<FormularioNuevoMensaje> {
+  final contenido = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -19,6 +20,25 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "NUEVO MENSAJE",
+              style: TextStyle(
+                color: Color.fromRGBO(237, 242, 244, 1),
+              ),
+            ),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Color.fromRGBO(237, 242, 244, 1),
+                  ));
+            }),
+            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
         body: SingleChildScrollView(
           child: Container(
               margin: const EdgeInsets.all(20.0),
@@ -40,35 +60,31 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                         padding: const EdgeInsets.all(15),
                         child: SizedBox(
                           width: 350,
-                          child: DateTimeFormField(
+                          child: TextFormField(
+                            controller: contenido,
+                            keyboardType: TextInputType.name,
+                            maxLines: 6,
+                            minLines: 1,
                             decoration: const InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color.fromRGBO(43, 45, 66, 1),
                                         width: 1)),
                                 border: UnderlineInputBorder(),
-                                labelText: 'Fecha y hora',
+                                labelText: 'Mensaje',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText:
-                                    'Introduzca la fecha y hora de la cita',
+                                hintText: 'Introduzca el mensaje',
                                 suffixIcon: Icon(
-                                  Icons.calendar_month_outlined,
+                                  Icons.message_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
                                   size: 25,
                                 )),
-                            use24hFormat: true,
-                            initialDatePickerMode: DatePickerMode.day,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(DateTime.now().year + 1),
-                            mode: DateTimeFieldPickerMode.dateAndTime,
-                            autovalidateMode: AutovalidateMode.always,
-                            onDateSelected: (value) {
-                              setState(() {
-                                fechaHora = value;
-                                print(fechaHora);
-                              });
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'El mensaje es obligatorio';
+                              }
+                              return null;
                             },
                           ),
                         )),
@@ -84,20 +100,20 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                                 const Color.fromRGBO(43, 45, 66, 1))),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            CitaCrearClienteBody cita = CitaCrearClienteBody(
-                                fechaHora: fechaHora.toIso8601String());
+                            AdjuntoMsjBody adjunto =
+                                AdjuntoMsjBody(contenido: contenido.text);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return ProviderNuevaCitaCliente(
-                                  cita: cita, rol: widget.rol);
+                              return ProviderMsjAdjuntoCrear(
+                                  adjunto: adjunto,
+                                  id: widget.id,
+                                  rol: widget.rol);
                             }));
                           }
                         },
                         child: const Text(
-                          'Pedir cita',
-                          style: TextStyle(
-                              color: Color.fromRGBO(237, 242, 244, 1),
-                              fontSize: 18),
+                          'Enviar',
+                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
                         ),
                       ),
                     ),

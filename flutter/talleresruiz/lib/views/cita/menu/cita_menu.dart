@@ -18,7 +18,7 @@ class _CitaMenu extends State<CitaMenu> {
     List<Widget> paginas = [
       DetallesCita(citaDetalles: widget.citaDetalles, rol: widget.rol),
       AdjuntosCita(adjuntos: widget.citaDetalles.chat),
-      NuevoAdjunto(),
+      NuevoAdjunto(id: widget.citaDetalles.id!, rol: widget.rol),
     ];
 
     return Scaffold(
