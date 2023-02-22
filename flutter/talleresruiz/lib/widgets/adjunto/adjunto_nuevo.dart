@@ -49,11 +49,9 @@ class NuevoAdjunto extends StatelessWidget {
                       textAlign: TextAlign.start,
                     )),
                 onPressed: () {
-                  /*Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return FormularioNuevoFichero(
-                                          id: id);
-                                    }));*/
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AgregarAdjunto(rol: rol, id: id);
+                  }));
                 })),
       ],
     ))));

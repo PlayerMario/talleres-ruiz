@@ -110,7 +110,7 @@ class _ClienteMenu extends State<ClienteMenu> {
                 },
               ),
               const SizedBox(
-                height: 30,
+                height: 150,
               ),
               ListTile(
                 title: const Center(
@@ -122,6 +122,9 @@ class _ClienteMenu extends State<ClienteMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
+                  showSnackbar("Deja pulsado para cerrar sesión", context);
+                },
+                onLongPress: () {
                   clienteBloc.add(EventLogoutCliente());
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {

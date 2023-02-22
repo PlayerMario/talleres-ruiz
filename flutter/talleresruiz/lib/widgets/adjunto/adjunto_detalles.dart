@@ -33,7 +33,7 @@ class DetallesChat extends StatelessWidget {
                   chat.fichero!
                       ? SizedBox(
                           width: 150,
-                          height: 150,
+                          height: 450,
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 25),
                             child: Image.network(

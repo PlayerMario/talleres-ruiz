@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talleresruiz/main.dart';
-import 'package:http/http.dart' as http;
 
 class CambiarAvatar extends StatefulWidget {
   const CambiarAvatar({super.key, required this.rol});
@@ -88,7 +87,7 @@ class _CambiarAvatar extends State<CambiarAvatar> {
     setState(() {
       if (pickedFile != null) {
         _imagen = File(pickedFile.path);
-        adjuntoService.guardarArchivo(_imagen, context);
+        adjuntoService.cambiarAvatar(_imagen, context);
         //guardarArchivo(_imagen);
       } else {
         print('No se ha seleccionado ningún archivo');

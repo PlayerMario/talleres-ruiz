@@ -94,10 +94,7 @@ class _AdMecMenu extends State<AdMecMenu> {
                     return CambiarAvatar(rol: widget.mecanicoMe.roles![0]);
                   }));
                 },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
+              ),              
               ListTile(
                 title: const Center(
                     child: Text(
@@ -114,6 +111,9 @@ class _AdMecMenu extends State<AdMecMenu> {
                   }));
                 },
               ),
+              const SizedBox(
+                height: 150,
+              ),
               ListTile(
                 title: const Center(
                     child: Text(
@@ -124,6 +124,9 @@ class _AdMecMenu extends State<AdMecMenu> {
                       color: Color.fromRGBO(43, 45, 66, 1)),
                 )),
                 onTap: () {
+                  showSnackbar("Deja pulsado para cerrar sesión", context);
+                },
+                onLongPress: () {
                   admecBloc.add(EventLogoutAdMec());
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {
