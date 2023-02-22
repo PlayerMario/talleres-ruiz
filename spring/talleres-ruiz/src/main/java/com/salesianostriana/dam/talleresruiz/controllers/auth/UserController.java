@@ -150,7 +150,7 @@ public class UserController {
                     )})
     })
     @JsonView(UserViews.Master.class)
-    @PutMapping("/avatar")
+    @PostMapping("/avatar")
     public ResponseEntity<UserDto> cambiarAvatar(@AuthenticationPrincipal User usuario, @RequestPart("fichero") MultipartFile fichero) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

@@ -137,8 +137,7 @@ public class UserService {
     @Transactional
     public User cambiarAvatar(User usuario, MultipartFile fichero) {
         String nuevoAvatar = storageService.store(fichero);
-        if (usuario.getAvatar().length() > 21
-                && usuario.getAvatar().substring(0, 21).equalsIgnoreCase("https://robohash.org/")) {
+        if (Objects.equals(usuario.getAvatar(), "user.png")) {
             usuario.setAvatar(nuevoAvatar);
         } else {
             storageService.deleteFile(usuario.getAvatar());
