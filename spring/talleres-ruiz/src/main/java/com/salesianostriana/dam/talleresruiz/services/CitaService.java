@@ -11,6 +11,7 @@ import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.AdjuntoRepository;
+import com.salesianostriana.dam.talleresruiz.repositories.MecanicoRepository;
 import com.salesianostriana.dam.talleresruiz.search.spec.cita.CitaSpecificationBuilder;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteria;
 import com.salesianostriana.dam.talleresruiz.search.util.SearchCriteriaExtractor;
@@ -41,6 +42,7 @@ public class CitaService {
     private final CitaRepository repository;
     private final AdjuntoRepository adjuntoRepository;
     private final FileSystemStorageService storageService;
+    private final MecanicoRepository mecanicoRepository;
 
     public List<Cita> findAll() {
         List<Cita> result = repository.findAll();
@@ -153,15 +155,15 @@ public class CitaService {
     public Cita mostrarCitaConChat(UUID idUsuario, Long idCita) {
         Cita cita = repository.findByIdChat(idCita).orElseThrow(() ->
                 new EntityNotFoundException("No se encuentra la cita con ID: " + idCita));
-        if (cita.getCliente() != null && cita.getMecanico() != null) {
-            if (cita.getCliente().getId().equals(idUsuario) || cita.getMecanico().getId().equals(idUsuario)) {
-                return cita;
-            } else {
-                throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
-            }
+        //if (cita.getCliente() != null && cita.getMecanico() != null) {
+        if (cita.getCliente().getId().equals(idUsuario) || mecanicoRepository.existsById(idUsuario)/*cita.getMecanico().getId().equals(idUsuario)*/) {
+            return cita;
         } else {
-            throw new OperacionDenegadaException("No se puede acceder a la cita");
+            throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
         }
+        /*} else {
+            throw new OperacionDenegadaException("No se puede acceder a la cita");
+        }*/
     }
 
     public boolean validarFechaHora(LocalDateTime fechaHora) {

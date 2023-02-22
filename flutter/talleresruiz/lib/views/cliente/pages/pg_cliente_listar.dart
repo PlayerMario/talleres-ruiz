@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class ClienteListarPage extends StatefulWidget {
-  const ClienteListarPage({Key? key}) : super(key: key);
+  const ClienteListarPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<ClienteListarPage> createState() => _ClienteListarPage();
@@ -41,7 +42,7 @@ class _ClienteListarPage extends State<ClienteListarPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : ClienteListItem(cliente: state.response[index]);
+                    : ClienteListItem(cliente: state.response[index], rol: widget.rol);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length

@@ -3,8 +3,9 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class ClienteListItem extends StatelessWidget {
-  const ClienteListItem({super.key, required this.cliente});
+  const ClienteListItem({super.key, required this.cliente, required this.rol});
   final ClienteListaResponse? cliente;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class ClienteListItem extends StatelessWidget {
         onPressed: () {
           print("Detalles del usuario ${cliente!.id}");
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProviderDetallesCliente(id: cliente!.id!);
+              return ProviderDetallesCliente(id: cliente!.id!, rol: rol);
             }));
         },
       ),

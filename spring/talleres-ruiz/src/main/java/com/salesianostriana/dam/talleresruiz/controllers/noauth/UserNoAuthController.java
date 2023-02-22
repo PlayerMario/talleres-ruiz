@@ -93,7 +93,7 @@ public class UserNoAuthController {
     @PostMapping("/register")
     public ResponseEntity<ClienteDto> crearUsuarioCliente(@Valid @RequestBody ClienteCreate nuevoCliente) {
         User user = userService.add(nuevoCliente.toUserCliente(nuevoCliente));
-        ClienteDto newCliente = clienteService.generarClienteDto(clienteService.add(nuevoCliente
+        ClienteDto newCliente = clienteService.generarClienteDto(clienteService.addClienteUser(nuevoCliente
                 .toCliente(nuevoCliente), user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -172,6 +172,7 @@ public class UserNoAuthController {
         String token = tokenProvider.generateToken(auth);
         User user = (User) auth.getPrincipal();
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.generarUserDtoToken(user, token));
+        //return userService.login(user, token);
     }
 
 }

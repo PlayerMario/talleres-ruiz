@@ -4,7 +4,8 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../../../main.dart';
 
 class ProviderClientesListar extends StatelessWidget {
-  const ProviderClientesListar({super.key});
+  const ProviderClientesListar({super.key, required this.rol});
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class ProviderClientesListar extends StatelessWidget {
           create: (_) =>
               ListasClienteBloc(clienteService: clienteService, nextPage: 0)
                 ..add(EventListaClientes()),
-          child: const ClienteListarPage(),
+          child: ClienteListarPage(rol: rol),
         ));
   }
 }

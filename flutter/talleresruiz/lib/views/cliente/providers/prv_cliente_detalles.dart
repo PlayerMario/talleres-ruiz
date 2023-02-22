@@ -4,8 +4,9 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
 
 class ProviderDetallesCliente extends StatelessWidget {
-  const ProviderDetallesCliente({super.key, required this.id});
+  const ProviderDetallesCliente({super.key, required this.id, required this.rol});
   final String id;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ProviderDetallesCliente extends StatelessWidget {
         body: BlocProvider(
           create: (_) => ClienteBloc(clienteService: clienteService)
             ..add(EventDetallesCliente(id)),
-          child: const ClienteDetallesPage(),
+          child: ClienteDetallesPage(rol: rol),
         ));
   }
 }

@@ -62,7 +62,11 @@ public class MecanicoService {
                 new EntityNotFoundException("No se encuentra al mecánico con ID: " + id));
     }
 
-    public Mecanico add(Mecanico mecanico, User user) {
+    public Mecanico add(Mecanico mecanico) {
+        return repository.save(mecanico);
+    }
+
+    public Mecanico addMecanicoUser(Mecanico mecanico, User user) {
         mecanico.setUsuario(user);
         return repository.save(mecanico);
     }
@@ -77,7 +81,7 @@ public class MecanicoService {
     }
 
     public void delete(UUID id) {
-        if (repository.existsById(id)) {
+        /*if (repository.existsById(id)) {
             Mecanico mec = this.findById(id);
             if (!mec.getUsuario().getRoles().contains(Roles.ADMIN)) {
                 citaService.setearNullMecanico(mec);
@@ -86,6 +90,13 @@ public class MecanicoService {
             } else {
                 throw new OperacionDenegadaException("No se puede puede borrar un admin");
             }
+        }*/
+        Mecanico mec = this.findById(id);
+        if (!mec.getUsuario().getRoles().contains(Roles.ADMIN)) {
+            mec.getUsuario().setEnabled(false);
+            this.add(mec);
+        } else {
+            throw new OperacionDenegadaException("No se puede puede borrar un admin");
         }
     }
 
@@ -106,8 +117,8 @@ public class MecanicoService {
 
     public void comprobarDisponibilidadModif(Long idCita, LocalDateTime fechaHora) {
         /*
-        * Buscar la cita, mirar el mecánico, coger su id y pasarlo aquí
-        * */
+         * Buscar la cita, mirar el mecánico, coger su id y pasarlo aquí
+         * */
         Mecanico mecanico = citaService.findById(idCita).getMecanico();
         List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(mecanico, fechaHora);
         if (!citas.isEmpty()) {
@@ -133,7 +144,7 @@ public class MecanicoService {
     public ResponseEntity<MecanicoDto> crearMecanico(UserCreate create, int opcion) {
         User user = userService.add(create.toUserAdminMec(create, opcion));
         Mecanico mec = new Mecanico();
-        MecanicoDto newMecanico = generarMecanicoDto(add(mec, user));
+        MecanicoDto newMecanico = generarMecanicoDto(addMecanicoUser(mec, user));
         URI newURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

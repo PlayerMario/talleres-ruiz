@@ -3,11 +3,19 @@ package com.salesianostriana.dam.talleresruiz.services.user;
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.OperacionDenegadaException;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
+import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserLogin;
 import com.salesianostriana.dam.talleresruiz.models.dto.user.security.UserPassword;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.UserRepository;
+import com.salesianostriana.dam.talleresruiz.security.jwtoken.access.JwtProvider;
 import com.salesianostriana.dam.talleresruiz.services.ficheros.FileSystemStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -117,6 +125,14 @@ public class UserService {
         userDto.setRoles(usuario.getRoles().stream().map(Objects::toString).toList());
         return userDto;
     }
+
+    /*public ResponseEntity<UserDto> login(User user, String token) {
+        if (user.isEnabled()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.generarUserDtoToken(user, token));
+        } else {
+            throw new OperacionDenegadaException("El usuario está desactivado.");
+        }
+    }*/
 
     @Transactional
     public User cambiarAvatar(User usuario, MultipartFile fichero) {

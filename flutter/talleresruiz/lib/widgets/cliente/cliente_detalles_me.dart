@@ -12,7 +12,7 @@ class DetallesClienteLog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Citas? ultimaCita = obtenerUltimaCitas(clienteMe.citas!);
-    if (rol == "MEC") {
+    if (rol == "ADMIN" || rol == "MEC") {
       final clienteBloc = BlocProvider.of<ClienteBloc>(context);
       return Scaffold(
           appBar: AppBar(

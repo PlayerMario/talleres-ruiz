@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../main.dart';
 
 class ClienteDetallesPage extends StatefulWidget {
-  const ClienteDetallesPage({Key? key}) : super(key: key);
+  const ClienteDetallesPage({super.key, required this.rol});
+  final String rol;
 
   @override
   State<ClienteDetallesPage> createState() => _ClienteDetallesPage();
@@ -30,7 +31,7 @@ class _ClienteDetallesPage extends State<ClienteDetallesPage> {
             return ErrorScreenAppBar(error: state.response);
           }
         case ClienteStatus.success:
-          return DetallesClienteLog(clienteMe: state.response, rol: "MEC");
+          return DetallesClienteLog(clienteMe: state.response, rol: widget.rol);
         case ClienteStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

@@ -56,7 +56,11 @@ public class ClienteService {
                 new EntityNotFoundException("No se encuentra al cliente con ID: " + id));
     }
 
-    public Cliente add(Cliente cliente, User user) {
+    public Cliente add(Cliente cliente) {
+        return repository.save(cliente);
+    }
+
+    public Cliente addClienteUser(Cliente cliente, User user) {
         cliente.setUsuario(user);
         return repository.save(cliente);
     }
@@ -73,8 +77,15 @@ public class ClienteService {
     }
 
     public void delete(UUID id) {
-        if (repository.existsById(id)) {
+        /*if (repository.existsById(id)) {
             repository.deleteById(id);
+        }*/
+        Cliente cliente = this.findById(id);
+        if (cliente.getCitas().isEmpty()) {
+            repository.deleteById(id);
+        } else {
+            cliente.getUsuario().setEnabled(false);
+            this.add(cliente);
         }
     }
 

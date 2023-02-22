@@ -57,7 +57,7 @@ class MenuListaAdMec extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const ProviderClientesListar();
+                                  return ProviderClientesListar(rol: rol);
                                 }));
                               })),
                       Card(
