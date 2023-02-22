@@ -42,7 +42,8 @@ class DetallesCita extends StatelessWidget {
                         )),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 15),
-                        child: Text(citaDetalles.mecanico != null
+                        child: Text(
+                          citaDetalles.mecanico != null
                               ? "Cliente: \n${utf8.decode(citaDetalles.cliente!.codeUnits)}"
                               : "Cliente: \nSin asignar",
                           style: const TextStyle(
@@ -53,7 +54,8 @@ class DetallesCita extends StatelessWidget {
                         )),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 15),
-                        child: Text(citaDetalles.vehiculo != null
+                        child: Text(
+                          citaDetalles.vehiculo != null
                               ? "Vehículo: \n${utf8.decode(citaDetalles.vehiculo!.codeUnits)}"
                               : "Vehículo: \nSin asignar",
                           style: const TextStyle(
@@ -98,18 +100,20 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                if (citaDetalles.estado! != "Terminada" && citaDetalles.estado! != "Proceso") {
-                  if(rol == "CLIENTE") {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CitaEditarCliente(cita: citaDetalles, rol: rol);}));
-                  } else {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CitaEditarAdMec(cita: citaDetalles, rol: rol);}));
-                  }                  
+                if (rol == "CLIENTE" &&
+                    citaDetalles.estado! != "Terminada" &&
+                    citaDetalles.estado! != "Proceso") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CitaEditarCliente(cita: citaDetalles, rol: rol);
+                  }));
+                } else if ((rol == "ADMIN" || rol == "MEC") &&
+                    citaDetalles.estado! != "Terminada") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CitaEditarAdMec(cita: citaDetalles, rol: rol);
+                  }));
                 } else {
                   showSnackbar(
-                      "No se puede modificar una cita terminada o en proceso",
-                      context);
+                      "No se puede modificar una cita terminada", context);
                 }
               })),
       Card(
@@ -135,7 +139,7 @@ class DetallesCita extends StatelessWidget {
                   }));
                 } else {
                   showSnackbar(
-                      "No se puede eliminar una cita terminada o en proceso",
+                      "No se puede cancelar una cita terminada o en proceso",
                       context);
                 }
               }))

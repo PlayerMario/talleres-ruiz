@@ -70,7 +70,7 @@ public class CitaService {
     public Cita edit(Long id, CitaEditMecanico edit/*, Mecanico mecanico*/) {
         return repository.findById(id)
                 .map(cita -> {
-                    if (Objects.equals(cita.getEstado(), "Proceso") || Objects.equals(cita.getEstado(), "Terminada")) {
+                    if (Objects.equals(cita.getEstado(), "Terminada")) {
                         throw new OperacionDenegadaException("No se puede modificar una cita en este estado");
                     }
                     //cita.setMecanico(mecanico);
@@ -86,7 +86,7 @@ public class CitaService {
                 .map(cita -> {
                     if (cita.getCliente().getId() != idCliente) {
                         throw new OperacionDenegadaException("La cita no pertenece al cliente especificado");
-                    } else if (Objects.equals(cita.getEstado(), "Proceso") || Objects.equals(cita.getEstado(), "Terminada")) {
+                    } else if (Objects.equals(cita.getEstado(), "Terminada")) {
                         throw new OperacionDenegadaException("No se puede modificar una cita en este estado");
                     } else if (Objects.equals(cita.getEstado(), "Aceptada")) {
                         cita.setEstado("Trámite");
