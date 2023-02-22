@@ -67,13 +67,13 @@ public class CitaService {
         return repository.save(cita);
     }
 
-    public Cita edit(Long id, CitaEditMecanico edit, Mecanico mecanico) {
+    public Cita edit(Long id, CitaEditMecanico edit/*, Mecanico mecanico*/) {
         return repository.findById(id)
                 .map(cita -> {
                     if (Objects.equals(cita.getEstado(), "Proceso") || Objects.equals(cita.getEstado(), "Terminada")) {
                         throw new OperacionDenegadaException("No se puede modificar una cita en este estado");
                     }
-                    cita.setMecanico(mecanico);
+                    //cita.setMecanico(mecanico);
                     cita.setFechaHora(edit.getFechaHora());
                     cita.setEstado(edit.getEstado());
                     return repository.save(cita);

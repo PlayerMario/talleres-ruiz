@@ -39,3 +39,4 @@ export 'mecanico/pages/pg_admec_crear.dart';
 export 'cita/providers/prv_nueva_cita_admec.dart';
 export 'mecanico/providers/prv_admec_editar.dart';
 export 'mecanico/pages/pg_admec_editar.dart';
+export 'cita/providers/prv_editar_cita_admec.dart';

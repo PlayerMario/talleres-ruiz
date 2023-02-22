@@ -98,11 +98,14 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                if (citaDetalles.estado! != "Terminada" &&
-                    citaDetalles.estado! != "Proceso") {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CitaEditarCliente(cita: citaDetalles, rol: rol);
-                  }));
+                if (citaDetalles.estado! != "Terminada" && citaDetalles.estado! != "Proceso") {
+                  if(rol == "CLIENTE") {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CitaEditarCliente(cita: citaDetalles, rol: rol);}));
+                  } else {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CitaEditarAdMec(cita: citaDetalles, rol: rol);}));
+                  }                  
                 } else {
                   showSnackbar(
                       "No se puede modificar una cita terminada o en proceso",

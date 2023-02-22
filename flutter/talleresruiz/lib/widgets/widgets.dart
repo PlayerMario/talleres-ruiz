@@ -23,3 +23,4 @@ export 'mecanico/admec_form_crear.dart';
 export 'mecanico/admec_nuevo_detalles.dart';
 export 'cita/form_cita_nueva_admec.dart';
 export 'mecanico/admec_form_editar.dart';
+export 'cita/cita_editar_admec.dart';

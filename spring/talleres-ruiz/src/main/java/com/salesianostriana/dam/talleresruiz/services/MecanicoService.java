@@ -104,8 +104,12 @@ public class MecanicoService {
         }
     }
 
-    public void comprobarDisponibilidadModif(UUID idUs, Long idCita, LocalDateTime fechaHora) {
-        List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(this.findById(idUs), fechaHora);
+    public void comprobarDisponibilidadModif(Long idCita, LocalDateTime fechaHora) {
+        /*
+        * Buscar la cita, mirar el mecánico, coger su id y pasarlo aquí
+        * */
+        Mecanico mecanico = citaService.findById(idCita).getMecanico();
+        List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(mecanico, fechaHora);
         if (!citas.isEmpty()) {
             citas.forEach(cita -> {
                 if (!Objects.equals(cita.getId(), idCita)) {

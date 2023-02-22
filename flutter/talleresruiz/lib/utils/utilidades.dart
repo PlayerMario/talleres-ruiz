@@ -56,6 +56,31 @@ Citas? obtenerUltimaCitas(List<Citas> listadoCitas) {
 }
 
 void showSnackbar(String msg, BuildContext context) {
-    final snack = SnackBar(content: Text(msg));
-    ScaffoldMessenger.of(context).showSnackBar(snack);
-  }
+  final snack = SnackBar(content: Text(msg));
+  ScaffoldMessenger.of(context).showSnackBar(snack);
+}
+
+DateTime convertirFecha(String fechaCita) {
+  List<String> fechaSplit = fechaCita.split('-');
+  List<String> fechaSplit2 = fechaSplit[2].split(' ');
+  //print(fechaSplit);
+  //print(fechaSplit2);
+  fechaSplit[2] = fechaSplit2[0];
+  //print(fechaSplit);
+  fechaSplit.add(fechaSplit2[1]);
+  //print(fechaSplit);
+  List<String> horaSplit = fechaSplit[3].split(':');
+  //print(horaSplit);
+  fechaSplit[3] = horaSplit[0];
+  //print(fechaSplit);
+  fechaSplit.add(horaSplit[1]);
+  //print(fechaSplit);
+  DateTime fecha = DateTime(
+      int.parse(fechaSplit[2]),
+      int.parse(fechaSplit[1]),
+      int.parse(fechaSplit[0]),
+      int.parse(fechaSplit[3]),
+      int.parse(fechaSplit[4]));
+  //print(fecha);
+  return fecha;
+}

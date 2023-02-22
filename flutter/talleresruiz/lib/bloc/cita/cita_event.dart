@@ -32,6 +32,13 @@ class EventEditarCitaCliente extends CitaEvent {
   final int id;
 }
 
+class EventEditarCitaAdMec extends CitaEvent {
+  const EventEditarCitaAdMec(this.cita, this.id);
+
+  final CitaEditarAdMecBody cita;
+  final int id;
+}
+
 class EventBorrarCitaCliente extends CitaEvent {
   const EventBorrarCitaCliente(this.id);
 

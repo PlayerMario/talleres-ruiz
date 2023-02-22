@@ -16,9 +16,9 @@ import java.util.List;
 @Builder
 public class CitaEditMecanico {
 
-    @UserUsernameExists(message = "{citaCreate.usernameMecanico.usernameexists}")
+    /*@UserUsernameExists(message = "{citaCreate.usernameMecanico.usernameexists}")
     @NotEmpty(message = "{citaEdit.idmecanico.notempty}")
-    private String usernameMecanico;
+    private String usernameMecanico;*/
 
     //@JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     // Para que funcione con flutter:

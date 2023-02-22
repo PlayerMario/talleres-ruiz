@@ -703,9 +703,8 @@ public class CitaController {
     @JsonView(CitaViews.DetallesCita.class)
     @PutMapping("/mecanico/{id}")
     public CitaDto modificarCitaMec(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit) {
-        UUID idMecanico = userService.findByUsername(edit.getUsernameMecanico()).getId();
-        mecanicoService.comprobarDisponibilidadModif(idMecanico, id, edit.getFechaHora());
-        return service.generarCitaDtoDetails(service.edit(id, edit, mecanicoService.findById(idMecanico)));
+        mecanicoService.comprobarDisponibilidadModif(id, edit.getFechaHora());
+        return service.generarCitaDtoDetails(service.edit(id, edit));
     }
 
     @Operation(summary = "Modificar una cita en vista cliente")

@@ -32,3 +32,23 @@ class CitaCrearAdMecBody {
     return data;
   }
 }
+
+
+class CitaEditarAdMecBody {
+  String? fechaHora;
+  String? estado;
+
+  CitaEditarAdMecBody({this.fechaHora, this.estado});
+
+  CitaEditarAdMecBody.fromJson(Map<String, dynamic> json) {
+    fechaHora = json['fechaHora'];
+    estado = json['estado'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fechaHora'] = this.fechaHora;
+    data['estado'] = this.estado;
+    return data;
+  }
+}

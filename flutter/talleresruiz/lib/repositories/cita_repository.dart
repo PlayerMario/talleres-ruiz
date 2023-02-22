@@ -51,6 +51,17 @@ class CitaRepository {
     return respone;
   }
 
+  Future<dynamic> putCitaAdMec(
+      int id, CitaEditarAdMecBody editarCitaAdMec) async {
+    final editarCita = {
+      "fechaHora": editarCitaAdMec.fechaHora,
+      "estado": editarCitaAdMec.estado
+    };
+    String url = "/auth/cita/mecanico/$id";
+    var respone = await _http.put(url, editarCita);
+    return respone;
+  }
+
   Future<dynamic> delCitaCliente(int id) async {
     String url = "/auth/cita/$id/cliente";
     var response = await _http.delete(url);
