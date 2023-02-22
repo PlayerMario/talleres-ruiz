@@ -12,6 +12,7 @@ abstract class CitaServiceAbs {
   Future<dynamic> putCitaCliente(int id, CitaCrearClienteBody citaEditar);
   Future<dynamic> putCitaAdMec(int id, CitaEditarAdMecBody citaEditar);
   Future<dynamic> delCitaCliente(int id);
+  Future<dynamic> delCitaAdMec(int id);
   Future<dynamic> agregarMsj(AdjuntoMsjBody adjunto, int id);
 }
 
@@ -134,6 +135,22 @@ class CitaService extends CitaServiceAbs {
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
       dynamic response = await _citaRepository.delCitaCliente(id);
+      if (response.statusCode == 204) {
+        return [null, true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> delCitaAdMec(int id) async {
+    print("Borrando cita del mecánico...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _citaRepository.delCitaAdMec(id);
       if (response.statusCode == 204) {
         return [null, true];
       } else {

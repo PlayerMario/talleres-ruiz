@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 
 class DetallesClienteLog extends StatelessWidget {
@@ -12,6 +13,7 @@ class DetallesClienteLog extends StatelessWidget {
   Widget build(BuildContext context) {
     Citas? ultimaCita = obtenerUltimaCitas(clienteMe.citas!);
     if (rol == "MEC") {
+      final clienteBloc = BlocProvider.of<ClienteBloc>(context);
       return Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -32,8 +34,9 @@ class DetallesClienteLog extends StatelessWidget {
                     ));
               }),
               backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-          body: SingleChildScrollView(child: Center(
-              child: Column(children: [
+          body: SingleChildScrollView(
+              child: Center(
+                  child: Column(children: [
             Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
@@ -118,12 +121,39 @@ class DetallesClienteLog extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 )),
                           ],
-                        )))))
+                        ))))),
+            Card(
+                margin: const EdgeInsets.only(
+                    top: 20, left: 20, right: 20, bottom: 20),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+                    child: const Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Text(
+                          "Eliminar",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Color.fromRGBO(237, 242, 244, 1)),
+                          textAlign: TextAlign.start,
+                        )),
+                    onPressed: () {
+                      if (rol == "ADMIN") {
+                        clienteBloc.add(EventBorrarClienteAdMec(clienteMe.id!));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const ProviderAdMecHome();
+                        }));
+                      } else {
+                        showSnackbar("Sólo puede eliminar un ADMIN", context);
+                      }
+                    })),
           ]))));
     } else {
       return Scaffold(
-          body: SingleChildScrollView( child: Center(
-              child: Column(
+          body: SingleChildScrollView(
+              child: Center(
+                  child: Column(
         children: [
           Card(
               shape: RoundedRectangleBorder(

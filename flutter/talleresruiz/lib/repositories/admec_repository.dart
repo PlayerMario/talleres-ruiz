@@ -59,4 +59,10 @@ class AdMecRepository {
     var response = await _http.put(url, editAdMec);
     return response;
   }
+
+  Future<dynamic> delAdMec(String id) async {
+    String url = "/auth/mecanico/$id";
+    var response = await _http.delete(url);
+    return response;
+  }
 }

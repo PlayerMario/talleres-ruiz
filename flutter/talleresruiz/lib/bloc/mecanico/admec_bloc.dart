@@ -17,6 +17,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
     on<EventDetallesMecanico>(onDetallesMecanico);
     on<EventCrearAdMec>(onCrearAdMec);
     on<EventEditarAdMec>(onEditarAdMec);
+    on<EventBorrarAdMec>(onBorrarAdMec);
     on<EventLogoutAdMec>(onLogoutAdMec);
   }
 
@@ -55,6 +56,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
   Future<void> onCrearAdMec(
       EventCrearAdMec event, Emitter<AdMecState> emit) async {
     if (state.status == AdMecStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final adMecCreado =
           await _adMecService.crearAdMec(event.adMec, event.opcion);
       if (adMecCreado[1]) {
@@ -70,6 +72,7 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
   Future<void> onEditarAdMec(
       EventEditarAdMec event, Emitter<AdMecState> emit) async {
     if (state.status == AdMecStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final adMecCreado =
           await _adMecService.editarAdMec(event.adMec, event.id);
       if (adMecCreado[1]) {
@@ -82,8 +85,16 @@ class AdMecBloc extends Bloc<AdMecEvent, AdMecState> {
     }
   }
 
+  Future<void> onBorrarAdMec(
+      EventBorrarAdMec event, Emitter<AdMecState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    await _adMecService.delAdMec(event.id);
+    emit(const AdMecState());
+  }
+
   Future<void> onLogoutAdMec(
       EventLogoutAdMec event, Emitter<AdMecState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     await _adMecService.adMecLogout();
     emit(const AdMecState());
   }

@@ -29,4 +29,10 @@ class EventEditarAdMec extends AdMecEvent {
   final String id;
 }
 
+class EventBorrarAdMec extends AdMecEvent {
+  const EventBorrarAdMec(this.id);
+
+  final String id;
+}
+
 class EventLogoutAdMec extends AdMecEvent {}

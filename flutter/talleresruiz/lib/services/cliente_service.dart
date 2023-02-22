@@ -12,6 +12,7 @@ abstract class ClienteServiceAbs {
   Future<dynamic> getListaClientes([int page = 0]);
   Future<dynamic> putCliente(ClienteEditarBody cliente);
   Future<dynamic> delCliente();
+  Future<dynamic> delClienteAdMec(String id);
 }
 
 @Order(2)
@@ -123,6 +124,23 @@ class ClienteService extends ClienteServiceAbs {
     String? token = _localStorageService.getFromDisk("user_token");
     if (token != null) {
       dynamic response = await _clienteRepository.delCliente();
+      if (response.statusCode == 204) {
+        _localStorageService.deleteFromDisk("user_token");
+        return [null, true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> delClienteAdMec(String id) async {
+    print("Borrando cliente...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _clienteRepository.delClienteAdMec(id);
       if (response.statusCode == 204) {
         _localStorageService.deleteFromDisk("user_token");
         return [null, true];

@@ -18,6 +18,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
     on<EventEditarCitaCliente>(onCitaEditarCliente);
     on<EventEditarCitaAdMec>(onCitaEditarAdMec);
     on<EventBorrarCitaCliente>(onCitaBorrarCliente);
+    on<EventBorrarCitaAdMec>(onCitaBorrarAdMec);
     on<EventAgregarMsj>(onCitaAgregarMsj);
   }
 
@@ -40,6 +41,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
   Future<void> onCitaCrearCliente(
       EventCrearCitaCliente event, Emitter<CitaState> emit) async {
     if (state.status == CitaStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final citaClienteCreada =
           await _citaService.postCrearCitaCliente(event.cita);
 
@@ -56,6 +58,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
   Future<void> onCitaCrearAdMec(
       EventCrearCitaAdMec event, Emitter<CitaState> emit) async {
     if (state.status == CitaStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final citaClienteCreada =
           await _citaService.postCrearCitaAdMec(event.cita);
 
@@ -72,6 +75,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
   Future<void> onCitaEditarCliente(
       EventEditarCitaCliente event, Emitter<CitaState> emit) async {
     if (state.status == CitaStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final citaClienteEditada =
           await _citaService.putCitaCliente(event.id, event.cita);
 
@@ -88,6 +92,7 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
   Future<void> onCitaEditarAdMec(
       EventEditarCitaAdMec event, Emitter<CitaState> emit) async {
     if (state.status == CitaStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final citaAdMecEditada =
           await _citaService.putCitaAdMec(event.id, event.cita);
 
@@ -103,13 +108,22 @@ class CitaBloc extends Bloc<CitaEvent, CitaState> {
 
   Future<void> onCitaBorrarCliente(
       EventBorrarCitaCliente event, Emitter<CitaState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     await _citaService.delCitaCliente(event.id);
+    emit(const CitaState());
+  }
+
+  Future<void> onCitaBorrarAdMec(
+      EventBorrarCitaAdMec event, Emitter<CitaState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    await _citaService.delCitaAdMec(event.id);
     emit(const CitaState());
   }
 
   Future<void> onCitaAgregarMsj(
       EventAgregarMsj event, Emitter<CitaState> emit) async {
     if (state.status == CitaStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final adjuntoMsj = await _citaService.agregarMsj(event.adjunto, event.id);
 
       if (adjuntoMsj[1]) {

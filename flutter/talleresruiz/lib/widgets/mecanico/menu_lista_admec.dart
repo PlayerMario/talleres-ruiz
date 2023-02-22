@@ -16,7 +16,7 @@ class MenuListaAdMec extends StatelessWidget {
                         child: Column(children: [
                       Card(
                           margin: const EdgeInsets.only(
-                              top: 45, left: 20, right: 20, bottom: 20),
+                              left: 20, right: 20, bottom: 20),
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor:

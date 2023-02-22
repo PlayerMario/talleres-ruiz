@@ -76,4 +76,10 @@ class ClienteRepository {
     var response = await _http.delete(url);
     return response;
   }
+
+  Future<dynamic> delClienteAdMec(String id) async {
+    String url = "/auth/cliente/$id";
+    var response = await _http.delete(url);
+    return response;
+  }
 }

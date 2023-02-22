@@ -13,8 +13,9 @@ class DetallesCita extends StatelessWidget {
   Widget build(BuildContext context) {
     final citaBloc = BlocProvider.of<CitaBloc>(context);
     return Scaffold(
-        body: SingleChildScrollView(child: Center(
-            child: Column(children: [
+        body: SingleChildScrollView(
+            child: Center(
+                child: Column(children: [
       Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -131,11 +132,19 @@ class DetallesCita extends StatelessWidget {
                     textAlign: TextAlign.start,
                   )),
               onPressed: () {
-                if (citaDetalles.estado! != 'Terminada' &&
+                if (rol == "CLIENTE" &&
+                    citaDetalles.estado! != 'Terminada' &&
                     citaDetalles.estado! != 'Proceso') {
                   citaBloc.add(EventBorrarCitaCliente(citaDetalles.id!));
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ProviderClienteHome();
+                  }));
+                } else if ((rol == "ADMIN" || rol == "MEC") &&
+                    citaDetalles.estado! != 'Terminada' &&
+                    citaDetalles.estado! != 'Proceso') {
+                  citaBloc.add(EventBorrarCitaAdMec(citaDetalles.id!));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const ProviderAdMecHome();
                   }));
                 } else {
                   showSnackbar(

@@ -33,6 +33,7 @@ class ListasMecanicoBloc
       EventListaMecanicos event, Emitter<ListasMecanicoState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == ListasMecanicoStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final listaMecanicos = await _adMecService.getListaMecanicos();
 
       if (listaMecanicos[1] && listaMecanicos[0].totalPages > 1) {
@@ -52,6 +53,7 @@ class ListasMecanicoBloc
     }
 
     nextPage += 1;
+    await Future.delayed(const Duration(milliseconds: 500));
     final listaMecanicos = await _adMecService.getListaMecanicos(nextPage);
 
     if (listaMecanicos[1] && nextPage < listaMecanicos[0].totalPages) {

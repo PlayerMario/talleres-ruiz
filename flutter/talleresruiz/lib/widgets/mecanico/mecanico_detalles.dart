@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../main.dart';
 
 class DetallesMecanico extends StatelessWidget {
@@ -10,6 +11,7 @@ class DetallesMecanico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final adMecBloc = BlocProvider.of<AdMecBloc>(context);
     return Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -30,8 +32,9 @@ class DetallesMecanico extends StatelessWidget {
                   ));
             }),
             backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
-        body: Center(
-            child: Column(children: [
+        body: SingleChildScrollView(
+            child: Center(
+                child: Column(children: [
           Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -128,7 +131,7 @@ class DetallesMecanico extends StatelessWidget {
                   child: const Padding(
                       padding: EdgeInsets.all(15),
                       child: Text(
-                        "Modificar cita",
+                        "Modificar",
                         style: TextStyle(
                             fontSize: 16,
                             color: Color.fromRGBO(237, 242, 244, 1)),
@@ -143,9 +146,36 @@ class DetallesMecanico extends StatelessWidget {
                       }));
                     } else {
                       showSnackbar(
-                          "Sólo se puede modificar por un ADMIN", context);
+                          "Sólo puede modificar un ADMIN", context);
                     }
                   })),
-        ])));
+          Card(
+              margin: const EdgeInsets.only(
+                  top: 20, left: 20, right: 20, bottom: 20),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),
+                  child: const Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromRGBO(237, 242, 244, 1)),
+                        textAlign: TextAlign.start,
+                      )),
+                  onPressed: () {
+                    if (rol == "ADMIN") {
+                      adMecBloc.add(EventBorrarAdMec(mecanico.id!));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const ProviderAdMecHome();
+                      }));
+                    } else {
+                      showSnackbar(
+                          "Sólo puede eliminar un ADMIN", context);
+                    }
+                  })),
+        ]))));
   }
 }

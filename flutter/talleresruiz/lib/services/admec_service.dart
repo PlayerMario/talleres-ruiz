@@ -11,6 +11,7 @@ abstract class AdMecServiceAbs {
   Future<dynamic> getListaMecanicos([int page = 0]);
   Future<dynamic> crearAdMec(AdMecCrearBody adMec, int opcion);
   Future<dynamic> editarAdMec(AdMecEditarBody adMec, String id);
+  Future<dynamic> delAdMec(String id);
 }
 
 @Order(2)
@@ -107,6 +108,22 @@ class AdMecService extends AdMecServiceAbs {
       dynamic response = await _adMecRepository.editarAdMec(adMec, id);
       if (response.statusCode == 200) {
         return [MecanicoMeResponse.fromJson(jsonDecode(response.body)), true];
+      } else {
+        return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
+      }
+    } else {
+      return FormularioLogin();
+    }
+  }
+
+  @override
+  Future<dynamic> delAdMec(String id) async {
+    print("Borrando mecánico...");
+    String? token = _localStorageService.getFromDisk("user_token");
+    if (token != null) {
+      dynamic response = await _adMecRepository.delAdMec(id);
+      if (response.statusCode == 204) {
+        return [null, true];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

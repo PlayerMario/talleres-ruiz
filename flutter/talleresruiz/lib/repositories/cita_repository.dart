@@ -68,6 +68,12 @@ class CitaRepository {
     return response;
   }
 
+  Future<dynamic> delCitaAdMec(int id) async {
+    String url = "/auth/cita/$id";
+    var response = await _http.delete(url);
+    return response;
+  }
+
   Future<dynamic> agregarMsj(AdjuntoMsjBody adjunto, int id) async {
     final msj = {"contenido": adjunto.contenido};
     String url = "/auth/cita/$id/mensaje";

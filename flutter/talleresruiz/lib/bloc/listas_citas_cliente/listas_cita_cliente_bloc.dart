@@ -32,6 +32,7 @@ class ListasCitaClienteBloc extends Bloc<ListasCitaClienteEvent, ListasCitaClien
       EventListaCitasCliente event, Emitter<ListasCitaClienteState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == ListasCitaClienteStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final clienteCitas = await _clienteService.getClienteCitas();
 
       if (clienteCitas[1] && clienteCitas[0].totalPages > 1) {
@@ -51,6 +52,7 @@ class ListasCitaClienteBloc extends Bloc<ListasCitaClienteEvent, ListasCitaClien
     }
 
     nextPage += 1;
+    await Future.delayed(const Duration(milliseconds: 500));
     final clienteCitas = await _clienteService.getClienteCitas(nextPage);
 
     if (clienteCitas[1] && nextPage < clienteCitas[0].totalPages) {

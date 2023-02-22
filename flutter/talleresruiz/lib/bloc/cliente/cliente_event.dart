@@ -29,4 +29,10 @@ class EventEditarCliente extends ClienteEvent {
 
 class EventBorrarCliente extends ClienteEvent {}
 
+class EventBorrarClienteAdMec extends ClienteEvent {
+  const EventBorrarClienteAdMec(this.id);
+
+  final String id;
+}
+
 class EventLogoutCliente extends ClienteEvent {}

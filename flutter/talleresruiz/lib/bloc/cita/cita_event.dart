@@ -45,6 +45,12 @@ class EventBorrarCitaCliente extends CitaEvent {
   final int id;
 }
 
+class EventBorrarCitaAdMec extends CitaEvent {
+  const EventBorrarCitaAdMec(this.id);
+
+  final int id;
+}
+
 class EventAgregarMsj extends CitaEvent {
   const EventAgregarMsj(this.adjunto, this.id);
 

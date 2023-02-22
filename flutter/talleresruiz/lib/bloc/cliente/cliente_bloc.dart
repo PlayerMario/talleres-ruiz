@@ -20,6 +20,7 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
     on<EventCrearCliente>(onCrearCliente);
     on<EventEditarCliente>(onEditarCliente);
     on<EventBorrarCliente>(onBorrarCliente);
+    on<EventBorrarClienteAdMec>(onBorrarClienteAdMec);
     on<EventLogoutCliente>(onLogoutCliente);
   }
 
@@ -58,6 +59,7 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
   Future<void> onCrearCliente(
       EventCrearCliente event, Emitter<ClienteState> emit) async {
     if (state.status == ClienteStatus.initial) {
+      await Future.delayed(const Duration(milliseconds: 500));
       final clienteCreado = await _clienteRepo.crearCliente(event.cliente);
 
       if (clienteCreado[1]) {
@@ -102,8 +104,16 @@ class ClienteBloc extends Bloc<ClienteEvent, ClienteState> {
     }
   }
 
+  Future<void> onBorrarClienteAdMec(
+      EventBorrarClienteAdMec event, Emitter<ClienteState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    await _clienteService.delClienteAdMec(event.id);
+    emit(const ClienteState());
+  }
+
   Future<void> onLogoutCliente(
       EventLogoutCliente event, Emitter<ClienteState> emit) async {
+    await Future.delayed(const Duration(milliseconds: 500));
     await _clienteService.clienteLogout();
     emit(const ClienteState());
   }
