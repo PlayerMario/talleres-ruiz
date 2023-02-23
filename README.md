@@ -20,9 +20,9 @@ seguir los siguiente pasos en este orden:
   ejecutemos el proyecto, acceder tanto a la base de datos en PostgreSQL, como a las peticiones de la API-REST, como a pgAdmin4 para hacer consultas.
 - **Ejecución del proyecto spring**: Trar levantar el contenedor, nos quedamos en **IntelliJ IDEA**, y, en la barra superior, en la parte derecha, en los primeros iconos, seleccionamos
   sobre **Current File**, y luego **Edit Configuration**. Al aparecer la nueva ventana, pulsamos, en el menú superior, en el icono **+**, en el desplegable, seleccionamos **Maven**, y 
-  en la opción **Run**, en **Command line**, escribimos **spring-boot:run** y lo seleccionamos en el menú. Pulsamos en **Aplicar** y **Aceptar**. Ahora solo tendremos que pulsar el icono
-  de **Play** junto a **tallere-ruiz spring-boot:run**, y, una vez finalice la ejecución en consola, tendremos el proyecto ejecutado y accesible desde la dirección **http://localhost:8080/** 
-  como ruta raíz.
+  en la opción **Run**, en **Command line**, escribimos **spring-boot:run -Dspring-boot.run.fork=false** y lo seleccionamos en el menú. Si pusiéramos solo **spring-boot:run**, podríamos 
+  tener problemas con el UTF-8 y mostrarse los caracteres como las tildes o la "ñ" mal. Pulsamos en **Aplicar** y **Aceptar**. Ahora solo tendremos que pulsar el icono de **Play** junto 
+  a **tallere-ruiz spring-boot:run**, y, una vez finalice la ejecución en consola, tendremos el proyecto ejecutado y accesible desde la dirección **http://localhost:8080/** como ruta raíz.
 - **Ejecución del proyecto flutter**: Partiendo de la base de que tendremos instalado Flutter en nuestro equipo, una vez ejecutado el proyecto de **spring**, este paso podemos realizarlo 
   tanto en **Visual Studio Code** como en el **terminal** que utilicemos. Si estamos en **VSC**, abrimos la carpeta del proyecto de **flutter**, luego **talleresruiz**, y esta es la que 
   abrimos. Si lo hicieramos en el terminal, tendríamos que buscar este directorio. Una vez abierto, en **VSC** tendremos que abrir un terminal, que podremos hacerlo en el menú superior, 
