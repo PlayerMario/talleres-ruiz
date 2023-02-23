@@ -25,15 +25,28 @@ class _ClienteCitasPage extends State<ClienteCitasPage> {
         builder: (context, state) {
       switch (state.status) {
         case ListasCitaClienteStatus.failure:
-          if (state.error.subErrors != null) {
-            return ListView.builder(
-                itemCount: state.error.subErrors!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SubErrorData(error: state.error.subErrors![index]);
-                });
-          } else {
-            return ErrorScreenAppBar(error: state.error);
-          }
+          return Center(
+              child: Card(
+                  color: const Color.fromRGBO(43, 45, 66, 1),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  shadowColor: const Color.fromRGBO(43, 45, 66, 1),
+                  margin: const EdgeInsets.only(
+                      top: 20, left: 20, right: 20, bottom: 40),
+                  elevation: 5,
+                  child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: const SizedBox(
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 15, bottom: 15),
+                              child: Text(
+                                "Sin citas encontradas",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Color.fromRGBO(237, 242, 244, 1)),
+                                textAlign: TextAlign.center,
+                              ))))));
         case ListasCitaClienteStatus.success:
           if (state.response.isEmpty) {
             return ErrorScreen(error: state.error);
