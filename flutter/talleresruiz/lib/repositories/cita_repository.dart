@@ -80,4 +80,10 @@ class CitaRepository {
     var response = await _http.post(url, msj);
     return response;
   }
+
+  Future<dynamic> delAdjunto(int idCita, int idAdj) async {
+    String url = "/auth/cita/$idCita/adjunto/$idAdj";
+    var response = await _http.delete(url);
+    return response;
+  }
 }

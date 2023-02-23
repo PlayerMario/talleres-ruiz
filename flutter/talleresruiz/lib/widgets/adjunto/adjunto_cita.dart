@@ -2,9 +2,15 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class AdjuntosCita extends StatelessWidget {
-  AdjuntosCita({super.key, required this.adjuntos});
+  AdjuntosCita(
+      {super.key,
+      required this.adjuntos,
+      required this.idCita,
+      required this.rol});
 
-  List<Chat>? adjuntos;
+  final List<Chat>? adjuntos;
+  final int idCita;
+  final String rol;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,8 @@ class AdjuntosCita extends StatelessWidget {
       return ListView.builder(
           itemCount: adjuntos!.length,
           itemBuilder: (BuildContext context, int index) {
-            return DetallesChat(chat: adjuntos![index]);
+            return DetallesChat(
+                chat: adjuntos![index], idCita: idCita, rol: rol);
           });
     } else {
       return Center(

@@ -17,7 +17,10 @@ class _CitaMenu extends State<CitaMenu> {
   Widget build(BuildContext context) {
     List<Widget> paginas = [
       DetallesCita(citaDetalles: widget.citaDetalles, rol: widget.rol),
-      AdjuntosCita(adjuntos: widget.citaDetalles.chat),
+      AdjuntosCita(
+          adjuntos: widget.citaDetalles.chat,
+          idCita: widget.citaDetalles.id!,
+          rol: widget.rol),
       NuevoAdjunto(id: widget.citaDetalles.id!, rol: widget.rol),
     ];
 

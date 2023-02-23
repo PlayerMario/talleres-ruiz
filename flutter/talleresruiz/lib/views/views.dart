@@ -43,3 +43,4 @@ export 'cita/providers/prv_editar_cita_admec.dart';
 export 'adjunto/providers/prv_agregar_msj.dart';
 export 'adjunto/pages/pg_cambiar_avatar.dart';
 export 'adjunto/pages/pg_agregar_adjunto.dart';
+export 'cita/providers/prv_borrar_adjunto.dart';

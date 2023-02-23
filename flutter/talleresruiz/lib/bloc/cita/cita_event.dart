@@ -57,3 +57,10 @@ class EventAgregarMsj extends CitaEvent {
   final AdjuntoMsjBody adjunto;
   final int id;
 }
+
+class EventCitaBorrarAdj extends CitaEvent {
+  const EventCitaBorrarAdj(this.idCita, this.idAdj);
+
+  final int idCita;
+  final int idAdj;
+}
