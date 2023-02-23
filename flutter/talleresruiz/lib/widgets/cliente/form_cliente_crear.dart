@@ -269,7 +269,8 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                                 labelText: 'Vehículo',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca la marca y modelo de su vehículo',
+                                hintText:
+                                    'Introduzca la marca y modelo de su vehículo',
                                 suffixIcon: Icon(
                                   Icons.car_repair_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
@@ -299,7 +300,8 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                                 labelText: 'Matrícula',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca la matrícula de su vehículo',
+                                hintText:
+                                    'Introduzca la matrícula de su vehículo',
                                 suffixIcon: Icon(
                                   Icons.car_crash_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
@@ -343,7 +345,9 @@ class _FormularioCrearCliente extends State<FormularioCrearCliente> {
                         },
                         child: const Text(
                           'Crear',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

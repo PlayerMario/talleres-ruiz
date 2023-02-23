@@ -24,12 +24,12 @@ public interface AdjuntoRepository extends JpaRepository<Adjunto, Long>, JpaSpec
     AdjuntoDto generarMensajeDto(@Param("id") Long id);*/
 
     @Query("""
-                 SELECT new com.salesianostriana.dam.talleresruiz.models.dto.adjunto.AdjuntoDto(
-                    ad.id, autor.nombre, ad.fechaHora, ad.contenido, ad.fichero
-                 )
-                 FROM Cita cita LEFT JOIN cita.chat ad LEFT JOIN ad.autor autor
-                 WHERE cita.id = :id
-           """)
+                  SELECT new com.salesianostriana.dam.talleresruiz.models.dto.adjunto.AdjuntoDto(
+                     ad.id, autor.nombre, ad.fechaHora, ad.contenido, ad.fichero
+                  )
+                  FROM Cita cita LEFT JOIN cita.chat ad LEFT JOIN ad.autor autor
+                  WHERE cita.id = :id
+            """)
     List<AdjuntoDto> generarChatDto(@Param("id") Long id);
 
 }

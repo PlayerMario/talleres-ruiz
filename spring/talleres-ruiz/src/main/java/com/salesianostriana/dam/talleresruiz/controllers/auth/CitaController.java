@@ -12,7 +12,6 @@ import com.salesianostriana.dam.talleresruiz.services.CitaService;
 import com.salesianostriana.dam.talleresruiz.services.ClienteService;
 import com.salesianostriana.dam.talleresruiz.services.MecanicoService;
 import com.salesianostriana.dam.talleresruiz.services.AdjuntoService;
-import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,7 +33,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.Arrays;
-import java.util.UUID;
 
 @Validated
 @RestController
@@ -46,7 +44,6 @@ public class CitaController {
     private final CitaService service;
     private final MecanicoService mecanicoService;
     private final ClienteService clienteService;
-    private final UserService userService;
     private final AdjuntoService adjuntoService;
     private final CitaDtoConverter citaConverter;
     private final AdjuntoDtoConverter adjuntoConverter;
@@ -62,39 +59,44 @@ public class CitaController {
                                                 {
                                                     "content": [
                                                         {
+                                                            "id": 23,
                                                             "mecanico": "Mario Ruiz López",
-                                                            "cliente": "Jose Javier Moriña León",
-                                                            "vehiculo": "Kia Rio-2014GMD",
-                                                            "fechaHora": "18-01-2023 12:00",
-                                                            "estado": "Terminada"
+                                                            "cliente": "Laura Gordillo Moreno",
+                                                            "vehiculo": "5877FCD-Seat Ibiza",
+                                                            "fechaHora": "30-03-2023 10:30",
+                                                            "estado": "Aceptada"
                                                         },
                                                         {
-                                                            "mecanico": "Alejandro Santos Pacheco",
-                                                            "cliente": "Jose Javier Moriña León",
-                                                            "vehiculo": "Kia Rio-2014GMD",
-                                                            "fechaHora": "18-05-2022 10:00",
-                                                            "estado": "Terminada"
+                                                            "id": 20,
+                                                            "mecanico": "Luis Verde Cantero",
+                                                            "cliente": "Irene Salas Murciano",
+                                                            "vehiculo": "5221SCD-Renault Clio",
+                                                            "fechaHora": "06-03-2023 14:00",
+                                                            "estado": "Aceptada"
                                                         },
                                                         {
+                                                            "id": 8,
                                                             "mecanico": "Luis Verde Cantero",
                                                             "cliente": "Manuel Delgado Hernández",
-                                                            "vehiculo": "Opel Astra-8520KMM",
+                                                            "vehiculo": "8520KMM-Opel Astra",
                                                             "fechaHora": "02-03-2023 12:00",
                                                             "estado": "Aceptada"
                                                         },
                                                         {
-                                                            "mecanico": "Alejandro Santos Pacheco",
-                                                            "cliente": "Manuel Delgado Hernández",
-                                                            "vehiculo": "Opel Astra-8520KMM",
-                                                            "fechaHora": "08-11-2022 11:00",
-                                                            "estado": "Terminada"
+                                                            "id": 28,
+                                                            "mecanico": "Luis Verde Cantero",
+                                                            "cliente": "Rosario López Saez",
+                                                            "vehiculo": "9965FCD-Seat Ibiza",
+                                                            "fechaHora": "23-02-2023 18:26",
+                                                            "estado": "Trámite"
                                                         },
                                                         {
-                                                            "mecanico": "Mario Ruiz López",
-                                                            "cliente": "Manuel Delgado Hernández",
-                                                            "vehiculo": "Opel Astra-8520KMM",
-                                                            "fechaHora": "17-01-2022 15:00",
-                                                            "estado": "Terminada"
+                                                            "id": 27,
+                                                            "mecanico": "Alejandro Santos Pacheco",
+                                                            "cliente": "Manuel Ruiz Benavente",
+                                                            "vehiculo": "7456BDX-Toyota C-HR",
+                                                            "fechaHora": "23-02-2023 18:26",
+                                                            "estado": "Trámite"
                                                         }
                                                     ],
                                                     "totalElements": 12,
@@ -254,6 +256,7 @@ public class CitaController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
+                                                    "id": 1000,
                                                     "mecanico": "Mario Ruiz López",
                                                     "cliente": "Manuel Delgado Hernández",
                                                     "vehiculo": "8520KMM-Opel Astra",
@@ -271,15 +274,15 @@ public class CitaController {
                                                 {
                                                     "status": "BAD_REQUEST",
                                                     "message": "Error en la validación, compruebe la lista",
-                                                    "path": "/auth/cita/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "path": "/auth/cita/mecanico/me",
                                                     "statusCode": 400,
-                                                    "date": "13/02/2023 12:51:39",
+                                                    "date": "23/02/2023 18:32:02",
                                                     "subErrors": [
                                                         {
                                                             "object": "citaCreateMecanico",
-                                                            "message": "No se encuentra el nombre de usuario",
-                                                            "field": "usernameCliente",
-                                                            "rejectedValue": "mdh111"
+                                                            "message": "No se encuentra el usuario por su DNI",
+                                                            "field": "dniCliente",
+                                                            "rejectedValue": "29556486fK"
                                                         }
                                                     ]
                                                 }
@@ -334,7 +337,7 @@ public class CitaController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
-                                                    "id": 1000,
+                                                    "id": 1001,
                                                     "mecanico": "Por asignar",
                                                     "cliente": "Jose Javier Moriña León",
                                                     "vehiculo": "2014GMD-Kia Rio",
@@ -410,24 +413,30 @@ public class CitaController {
                                                     "id": 23,
                                                     "mecanico": "Mario Ruiz López",
                                                     "cliente": "Laura Gordillo Moreno",
-                                                    "vehiculo": "Seat Ibiza-5877FCD",
+                                                    "vehiculo": "5877FCD-Seat Ibiza",
                                                     "fechaHora": "30-03-2023 10:30",
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
+                                                            "id": 24,
                                                             "autor": "Laura Gordillo Moreno",
                                                             "fechaHora": "20-02-2022 16:35",
-                                                            "mensaje": "Cuando freno chirría un poco."
+                                                            "contenido": "Cuando freno chirría un poco.",
+                                                            "fichero": false
                                                         },
                                                         {
+                                                            "id": 25,
                                                             "autor": "Mario Ruiz López",
                                                             "fechaHora": "20-02-2022 17:40",
-                                                            "mensaje": "Le echamos un vistazo y te decimos con lo que sea."
+                                                            "contenido": "Le echamos un vistazo y te decimos con lo que sea.",
+                                                            "fichero": false
                                                         },
                                                         {
+                                                            "id": 1002,
                                                             "autor": "Mario Ruiz López",
-                                                            "fechaHora": "13-02-2023 20:49",
-                                                            "mensaje": "Hay que cambiar las pastillas de freno."
+                                                            "fechaHora": "23-02-2023 18:34",
+                                                            "contenido": "Hay que cambiar las pastillas de freno.",
+                                                            "fichero": false
                                                         }
                                                     ]
                                                 }
@@ -486,10 +495,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra la cita con ID: 100",
-                                                    "path": "/auth/cita/100/mensaje/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "message": "No se encuentra la cita con ID: 203",
+                                                    "path": "/auth/cita/203/mensaje",
                                                     "statusCode": 404,
-                                                    "date": "13/02/2023 20:42:02"
+                                                    "date": "23/02/2023 18:33:35"
                                                 }
                                             """
                             )}
@@ -520,27 +529,31 @@ public class CitaController {
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
+                                                            "id": 24,
                                                             "autor": "Laura Gordillo Moreno",
                                                             "fechaHora": "20-02-2022 16:35",
-                                                            "mensaje": "Cuando freno chirría un poco.",
+                                                            "contenido": "Cuando freno chirría un poco.",
                                                             "fichero": false
                                                         },
                                                         {
+                                                            "id": 25,
                                                             "autor": "Mario Ruiz López",
                                                             "fechaHora": "20-02-2022 17:40",
-                                                            "mensaje": "Le echamos un vistazo y te decimos con lo que sea.",
+                                                            "contenido": "Le echamos un vistazo y te decimos con lo que sea.",
                                                             "fichero": false
                                                         },
                                                         {
+                                                            "id": 1002,
                                                             "autor": "Mario Ruiz López",
-                                                            "fechaHora": "15-02-2023 18:39",
-                                                            "mensaje": "Foto.jpg",
-                                                            "fichero": true
+                                                            "fechaHora": "23-02-2023 18:34",
+                                                            "contenido": "Hay que cambiar las pastillas de freno.",
+                                                            "fichero": false
                                                         },
                                                         {
+                                                            "id": 1003,
                                                             "autor": "Mario Ruiz López",
-                                                            "fechaHora": "15-02-2023 18:39",
-                                                            "mensaje": "Gear.png",
+                                                            "fechaHora": "23-02-2023 18:36",
+                                                            "contenido": "user_ejemplo.jpg",
                                                             "fichero": true
                                                         }
                                                     ]
@@ -555,10 +568,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "BAD_REQUEST",
-                                                    "message": "La cita no pertenece al usuario que intenta enviar el fichero",
-                                                    "path": "/auth/cita/1/mensaje/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "message": "La cita no pertenece al usuario que intenta enviar el mensaje",
+                                                    "path": "/auth/cita/23/fichero",
                                                     "statusCode": 400,
-                                                    "date": "13/02/2023 20:36:25"
+                                                    "date": "23/02/2023 18:36:40"
                                                 }
                                             """
                             )}
@@ -600,10 +613,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra la cita con ID: 100",
-                                                    "path": "/auth/cita/100/mensaje/3e380d54-861c-4809-bb84-bd32bab42c2e",
+                                                    "message": "No se encuentra la cita con ID: 230",
+                                                    "path": "/auth/cita/230/fichero",
                                                     "statusCode": 404,
-                                                    "date": "13/02/2023 20:42:02"
+                                                    "date": "23/02/2023 18:36:57"
                                                 }
                                             """
                             )}
@@ -646,10 +659,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "BAD_REQUEST",
-                                                    "message": "El mecánico asignado tiene ocupada ese día y hora",
-                                                    "path": "/auth/cita/mec/27",
+                                                    "message": "No se puede modificar una cita en este estado",
+                                                    "path": "/auth/cita/mecanico/26",
                                                     "statusCode": 400,
-                                                    "date": "13/02/2023 17:42:43"
+                                                    "date": "23/02/2023 18:39:59"
                                                 }
                                             """
                             )}
@@ -691,10 +704,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra la cita con ID: 270",
-                                                    "path": "/auth/cita/mec/270",
+                                                    "message": "No se encuentra la cita con ID: 260",
+                                                    "path": "/auth/cita/mecanico/260",
                                                     "statusCode": 404,
-                                                    "date": "13/02/2023 17:43:33"
+                                                    "date": "23/02/2023 18:39:26"
                                                 }
                                             """
                             )}
@@ -715,6 +728,7 @@ public class CitaController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
+                                                    "id": 23,
                                                     "mecanico": "Mario Ruiz López",
                                                     "cliente": "Laura Gordillo Moreno",
                                                     "vehiculo": "5877FCD-Seat Ibiza",
@@ -734,7 +748,7 @@ public class CitaController {
                                                     "message": "La cita no pertenece al cliente especificado",
                                                     "path": "/auth/cita/23/cliente",
                                                     "statusCode": 400,
-                                                    "date": "15/02/2023 20:11:50"
+                                                    "date": "23/02/2023 18:40:33"
                                                 }
                                             """
                             )}
@@ -776,10 +790,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "NOT_FOUND",
-                                                    "message": "No se encuentra la cita con ID: 270",
-                                                    "path": "/auth/cita/cliente/f7d699b1-d7fd-4408-990a-5287b3229597/270",
+                                                    "message": "No se encuentra la cita con ID: 230",
+                                                    "path": "/auth/cita/230/cliente",
                                                     "statusCode": 404,
-                                                    "date": "13/02/2023 19:54:19"
+                                                    "date": "23/02/2023 18:40:50"
                                                 }
                                             """
                             )}
@@ -793,7 +807,7 @@ public class CitaController {
         return service.citaCliente(service.editCliente(usuario.getId(), id, edit));
     }
 
-    @Operation(summary = "Eliminar una cita, buscada por su ID")
+    @Operation(summary = "Eliminar una cita, en vista mecánico, buscada por su ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Cita eliminada correctamente, sin contenido",
                     content = {@Content(mediaType = "application/json",
@@ -811,10 +825,10 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "BAD_REQUEST",
-                                                    "message": "No se puede cancelar una cita en proceso de realización o ya terminada",
-                                                    "path": "/auth/cita/10",
+                                                    "message": "No se puede cancelar una cita en proceso de realización o terminada",
+                                                    "path": "/auth/cita/1",
                                                     "statusCode": 400,
-                                                    "date": "13/02/2023 16:54:07"
+                                                    "date": "23/02/2023 18:45:50"
                                                 }
                                             """
                             )}
@@ -857,7 +871,7 @@ public class CitaController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Eliminar una cita, buscada por su ID")
+    @Operation(summary = "Eliminar una cita, en vista cliente, buscada por su ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Cita eliminada correctamente, sin contenido",
                     content = {@Content(mediaType = "application/json",
@@ -875,8 +889,8 @@ public class CitaController {
                                     value = """
                                                 {
                                                     "status": "BAD_REQUEST",
-                                                    "message": "No se puede cancelar una cita en proceso de realización 
-                                                                o terminada, o que no perteneza al usuario",
+                                                    "message": "No se puede cancelar una cita en proceso de realización, 
+                                                    terminada, o que no perteneza al usuario",
                                                     "path": "/auth/cita/23/cliente",
                                                     "statusCode": 400,
                                                     "date": "13/02/2023 16:54:07"
@@ -913,7 +927,7 @@ public class CitaController {
                                                 }
                                             """
                             )}
-                    )}),
+                    )})
     })
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}/cliente")
@@ -938,9 +952,10 @@ public class CitaController {
                                                     "estado": "Aceptada",
                                                     "chat": [
                                                         {
+                                                            "id": 24,
                                                             "autor": "Laura Gordillo Moreno",
                                                             "fechaHora": "20-02-2022 16:35",
-                                                            "mensaje": "Cuando freno chirría un poco.",
+                                                            "contenido": "Cuando freno chirría un poco.",
                                                             "fichero": false
                                                         }
                                                     ]

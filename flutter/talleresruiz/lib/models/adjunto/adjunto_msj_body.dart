@@ -13,5 +13,3 @@ class AdjuntoMsjBody {
     return data;
   }
 }
-
-//CitaDetallesResponse

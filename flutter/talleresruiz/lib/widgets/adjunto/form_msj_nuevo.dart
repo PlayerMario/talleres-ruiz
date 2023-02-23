@@ -113,7 +113,9 @@ class _FormularioNuevoMensaje extends State<FormularioNuevoMensaje> {
                         },
                         child: const Text(
                           'Enviar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

@@ -8,7 +8,6 @@ import com.salesianostriana.dam.talleresruiz.models.dto.user.UserViews;
 import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,14 +37,14 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Contraseña del usuario modificada",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class)),
+                            schema = @Schema(implementation = UserDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
-                                                    "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
-                                                    "username": "mrl26",
-                                                    "nombre": "Mario Ruiz López",
-                                                    "avatar": "https://robohash.org/mrl26"
+                                                    "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
+                                                    "nombre": "Jose Javier Moriña León",
+                                                    "username": "cliente",
+                                                    "avatar": "cliente.png"
                                                 }
                                             """
                             )}
@@ -79,21 +78,6 @@ public class UserController {
                                                 }
                                             """
                             )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al usuario,
-                                                    "path": "/auth/user/changePsw",
-                                                    "statusCode": 404,
-                                                    "date": "11/02/2023 14:59:58"
-                                                }
-                                            """
-                            )}
                     )})
     })
     @JsonView(UserViews.Master.class)
@@ -104,16 +88,31 @@ public class UserController {
 
     @Operation(summary = "Modificar el avatar de un usuario")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Avatar del usuario modificado",
+            @ApiResponse(responseCode = "201", description = "Avatar del usuario modificado",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class)),
+                            schema = @Schema(implementation = UserDto.class),
                             examples = {@ExampleObject(
                                     value = """
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "nombre": "Mario Ruiz López",
-                                                    "username": "mrl26",
-                                                    "avatar": "Gear_419050.png"
+                                                    "username": "admin",
+                                                    "avatar": "ejemplo_105286.jpg"
+                                                }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Cuerpo para la creación aportado inválido",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorImpl.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                    "status": "BAD_REQUEST",
+                                                    "message": "No se ha adjuntado ningún fichero.",
+                                                    "path": "/auth/user/avatar",
+                                                    "statusCode": 400,
+                                                    "date": "23/02/2023 17:34:26"
                                                 }
                                             """
                             )}
@@ -129,21 +128,6 @@ public class UserController {
                                                     "path": "/error",
                                                     "statusCode": 401,
                                                     "date": "12/02/2023 12:53:44"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al usuario,
-                                                    "path": "/auth/user/changePsw",
-                                                    "statusCode": 404,
-                                                    "date": "11/02/2023 14:59:58"
                                                 }
                                             """
                             )}

@@ -37,8 +37,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-// COLORES: 
-// const Color.fromRGBO(43, 45, 66, 1) Gris oscuro
-// const Color.fromRGBO(237, 242, 244, 1) Blanco
-// const Color.fromRGBO(227,1,15, 1) Rojo

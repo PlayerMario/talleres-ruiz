@@ -13,7 +13,6 @@ class FormularioLogin extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   static Route route() {
-    print("Enrutando al login");
     return MaterialPageRoute<void>(builder: (context) {
       var authBloc = BlocProvider.of<UserBloc>(context);
       authBloc.add(EventUserSessionExpired());
@@ -130,7 +129,9 @@ class FormularioLogin extends StatelessWidget {
                         },
                         child: const Text(
                           'Login',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

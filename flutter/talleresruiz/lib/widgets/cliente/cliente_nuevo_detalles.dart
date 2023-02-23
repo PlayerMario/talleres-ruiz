@@ -3,7 +3,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class DetallesNuevoCliente extends StatelessWidget {
-  DetallesNuevoCliente({super.key, required this.cliente});
+  const DetallesNuevoCliente({super.key, required this.cliente});
   final ClienteCrearResponse cliente;
 
   @override

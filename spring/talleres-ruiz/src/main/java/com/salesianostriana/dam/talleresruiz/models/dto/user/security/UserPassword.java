@@ -18,7 +18,7 @@ public class UserPassword {
 
     @NotEmpty(message = "{nuevoCliente.password.notempty}")
     private String oldPassword;
-    
+
     @NotEmpty(message = "{nuevoCliente.password.notempty}")
     @PasswordSegura(message = "{nuevoCliente.password.passwordsegura}")
     private String newPassword;

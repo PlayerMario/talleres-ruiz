@@ -9,57 +9,40 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: const Text(
-              "ERROR",
-              style: TextStyle(
-                color: Color.fromRGBO(237, 242, 244, 1),
-              ),
-            ),
-            leading: Builder(builder: (context) {
-              return IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Color.fromRGBO(237, 242, 244, 1),
-                  ));
-            }),
-            backgroundColor: const Color.fromRGBO(43, 45, 66, 1)),*/
-        body: Center(child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            shadowColor: const Color.fromRGBO(43, 45, 66, 1),
-            //margin: const EdgeInsets.only(left: 50, top: 25, right: 25),
-            elevation: 10,
-            child: SingleChildScrollView(
-                child: Container(
-                    padding: const EdgeInsets.all(20),
-                    child: SizedBox(
-                      child: Column(
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Text(
-                                "${utf8.decode(error.statusCode!.toString().codeUnits)} - ${utf8.decode(error.status!.codeUnits)}",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                                textAlign: TextAlign.center,
-                              )),
-                          Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Text(
-                                utf8.decode(
-                                    error.message!.toString().codeUnits),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                                textAlign: TextAlign.center,
-                              )),
-                        ],
-                      ),
-                    ))))));
+        body: Center(
+            child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                shadowColor: const Color.fromRGBO(43, 45, 66, 1),
+                elevation: 10,
+                child: SingleChildScrollView(
+                    child: Container(
+                        padding: const EdgeInsets.all(20),
+                        child: SizedBox(
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Text(
+                                    "${utf8.decode(error.statusCode!.toString().codeUnits)} - ${utf8.decode(error.status!.codeUnits)}",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                    textAlign: TextAlign.center,
+                                  )),
+                              Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Text(
+                                    utf8.decode(
+                                        error.message!.toString().codeUnits),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ],
+                          ),
+                        ))))));
   }
 }
 
@@ -123,8 +106,6 @@ class SubErrorData extends StatelessWidget {
                                   : const SizedBox(width: 0)),
                         ],
                       ))
-                ])
-                    /*child:*/
-                    ))));
+                ])))));
   }
 }

@@ -15,7 +15,8 @@ EventTransformer<E> throttleDroppableCitaCliente<E>(Duration duration) {
   };
 }
 
-class ListasCitaClienteBloc extends Bloc<ListasCitaClienteEvent, ListasCitaClienteState> {
+class ListasCitaClienteBloc
+    extends Bloc<ListasCitaClienteEvent, ListasCitaClienteState> {
   final ClienteServiceAbs _clienteService;
   int nextPage;
 
@@ -28,8 +29,8 @@ class ListasCitaClienteBloc extends Bloc<ListasCitaClienteEvent, ListasCitaClien
         transformer: throttleDroppableCitaCliente(throttleDurationCitaCliente));
   }
 
-  Future<void> onClienteCitas(
-      EventListaCitasCliente event, Emitter<ListasCitaClienteState> emit) async {
+  Future<void> onClienteCitas(EventListaCitasCliente event,
+      Emitter<ListasCitaClienteState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == ListasCitaClienteStatus.initial) {
       await Future.delayed(const Duration(milliseconds: 500));

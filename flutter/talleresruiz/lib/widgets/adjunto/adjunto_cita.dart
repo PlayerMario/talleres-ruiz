@@ -2,7 +2,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class AdjuntosCita extends StatelessWidget {
-  AdjuntosCita(
+  const AdjuntosCita(
       {super.key,
       required this.adjuntos,
       required this.idCita,

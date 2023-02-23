@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.talleresruiz.services.ficheros;
 
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.BuscarFicheroException;
+import com.salesianostriana.dam.talleresruiz.errors.exceptions.OperacionDenegadaException;
 import com.salesianostriana.dam.talleresruiz.errors.exceptions.StorageException;
 import com.salesianostriana.dam.talleresruiz.models.dto.fichero.FicheroDto;
 import com.salesianostriana.dam.talleresruiz.utils.MediaTypeUrlResource;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -138,12 +139,21 @@ public class FileSystemStorageService implements StorageService {
     }
 
     public FicheroDto gestionFichero(MultipartFile fichero) {
+        comprobarFichero(fichero);
         String nombre = store(fichero);
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(nombre)
                 .toUriString();
         return FicheroDto.of(fichero, nombre, uri);
+    }
+
+    public void comprobarFichero(MultipartFile fichero) {
+        if (fichero.isEmpty()) {
+            throw new OperacionDenegadaException("No se ha adjuntado ningún fichero.");
+        } else if (Objects.requireNonNull(fichero.getOriginalFilename()).contains(" ")) {
+            throw new OperacionDenegadaException("El nombre del fichero no puede contener espacios.");
+        }
     }
 
 }

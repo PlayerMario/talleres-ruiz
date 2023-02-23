@@ -162,7 +162,6 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
-                                print(fechaHora);
                               });
                             },
                           ),
@@ -217,7 +216,9 @@ class _CitaEditarCliente extends State<CitaEditarCliente> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

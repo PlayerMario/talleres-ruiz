@@ -4,7 +4,8 @@ import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
 
 class ProviderDetallesCliente extends StatelessWidget {
-  const ProviderDetallesCliente({super.key, required this.id, required this.rol});
+  const ProviderDetallesCliente(
+      {super.key, required this.id, required this.rol});
   final String id;
   final String rol;
 

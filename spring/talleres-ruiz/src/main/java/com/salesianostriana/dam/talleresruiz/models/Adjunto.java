@@ -24,7 +24,6 @@ public class Adjunto {
     @GeneratedValue
     private Long id;
 
-    //@Lob
     private String contenido;
 
     @ManyToOne

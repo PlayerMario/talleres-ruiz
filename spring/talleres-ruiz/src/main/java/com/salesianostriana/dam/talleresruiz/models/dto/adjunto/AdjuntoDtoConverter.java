@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -31,6 +30,7 @@ public class AdjuntoDtoConverter {
 
     @Transactional
     public Adjunto toAdjuntoFichero(Long idCita, UUID idAutor, MultipartFile fichero) {
+        storageService.comprobarFichero(fichero);
         return Adjunto.builder()
                 .contenido(storageService.store(fichero))
                 .cita(citaService.findById(idCita))

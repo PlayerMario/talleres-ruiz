@@ -145,8 +145,7 @@ class DetallesMecanico extends StatelessWidget {
                             mecanico: mecanico, id: mecanico.id!);
                       }));
                     } else {
-                      showSnackbar(
-                          "Sólo puede modificar un ADMIN", context);
+                      showSnackbar("Sólo puede modificar un ADMIN", context);
                     }
                   })),
           Card(
@@ -172,8 +171,7 @@ class DetallesMecanico extends StatelessWidget {
                         return const ProviderAdMecHome();
                       }));
                     } else {
-                      showSnackbar(
-                          "Sólo puede eliminar un ADMIN", context);
+                      showSnackbar("Sólo puede eliminar un ADMIN", context);
                     }
                   })),
         ]))));

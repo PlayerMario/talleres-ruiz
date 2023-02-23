@@ -53,11 +53,11 @@ public class ClienteController {
                                                         {
                                                             "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                             "nombre": "Jose Javier Moriña León",
-                                                            "username": "jjml4",
+                                                            "username": "cliente",
                                                             "dni": "52874103V",
                                                             "email": "jj@jj.com",
                                                             "tlf": "675 796 623",
-                                                            "avatar": "user.png",
+                                                            "avatar": "cliente.png",
                                                             "vehiculo": "2014GMD-Kia Rio"
                                                         },
                                                         {
@@ -67,7 +67,7 @@ public class ClienteController {
                                                             "dni": "29556486K",
                                                             "email": "manu@manu.com",
                                                             "tlf": "698 520 147",
-                                                            "avatar": "user.png",
+                                                            "avatar": "mdh11.png",
                                                             "vehiculo": "8520KMM-Opel Astra"
                                                         },
                                                         {
@@ -77,7 +77,7 @@ public class ClienteController {
                                                             "dni": "60437101Y",
                                                             "email": "fran@fran.com",
                                                             "tlf": "641 785 203",
-                                                            "avatar": "user.png",
+                                                            "avatar": "fmf14.png",
                                                             "vehiculo": "0214HNM-Kia Ceed"
                                                         },
                                                         {
@@ -87,7 +87,7 @@ public class ClienteController {
                                                             "dni": "47017557I",
                                                             "email": "irene@irene.com",
                                                             "tlf": "692 014 752",
-                                                            "avatar": "user.png",
+                                                            "avatar": "ism5.png",
                                                             "vehiculo": "5221SCD-Renault Clio"
                                                         },
                                                         {
@@ -97,7 +97,7 @@ public class ClienteController {
                                                             "dni": "49655052A",
                                                             "email": "laura@laura.com",
                                                             "tlf": "685 027 893",
-                                                            "avatar": "user.png",
+                                                            "avatar": "lgm4.png",
                                                             "vehiculo": "5877FCD-Seat Ibiza"
                                                         }
                                                     ],
@@ -124,7 +124,7 @@ public class ClienteController {
                                             """
                             )}
                     )}),
-            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
                             examples = {@ExampleObject(
@@ -173,25 +173,27 @@ public class ClienteController {
                                                 {
                                                     "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "nombre": "Jose Javier Moriña León",
-                                                    "username": "jjml4",
+                                                    "username": "cliente",
                                                     "dni": "52874103V",
                                                     "email": "jj@jj.com",
                                                     "tlf": "675 796 623",
-                                                    "avatar": "https://robohash.org/jjml4",
+                                                    "avatar": "cliente.png",
                                                     "roles": [
                                                         "CLIENTE"
                                                     ],
                                                     "vehiculo": "2014GMD-Kia Rio",
                                                     "citas": [
                                                         {
+                                                            "id": 1,
                                                             "mecanico": "Mario Ruiz López",
-                                                            "fechaHora": "2023-01-18 12:00",
-                                                            "estado": "Terminado"
+                                                            "fechaHora": "18-01-2023 12:00",
+                                                            "estado": "Terminada"
                                                         },
                                                         {
+                                                            "id": 4,
                                                             "mecanico": "Alejandro Santos Pacheco",
-                                                            "fechaHora": "2022-05-18 10:00",
-                                                            "estado": "Terminado"
+                                                            "fechaHora": "18-05-2022 10:00",
+                                                            "estado": "Terminada"
                                                         }
                                                     ]
                                                 }
@@ -260,22 +262,24 @@ public class ClienteController {
                                                 {
                                                     "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "nombre": "Jose Javier Moriña León",
-                                                    "username": "jjml4",
+                                                    "username": "cliente",
                                                     "dni": "52874103V",
                                                     "email": "jj@jj.com",
                                                     "tlf": "675 796 623",
-                                                    "avatar": "https://robohash.org/jjml4",
+                                                    "avatar": "cliente.png",
                                                     "roles": [
                                                         "CLIENTE"
                                                     ],
                                                     "vehiculo": "2014GMD-Kia Rio",
                                                     "citas": [
                                                         {
+                                                            "id": 1,
                                                             "mecanico": "Mario Ruiz López",
                                                             "fechaHora": "18-01-2023 12:00",
                                                             "estado": "Terminada"
                                                         },
                                                         {
+                                                            "id": 4,
                                                             "mecanico": "Alejandro Santos Pacheco",
                                                             "fechaHora": "18-05-2022 10:00",
                                                             "estado": "Terminada"
@@ -311,21 +315,6 @@ public class ClienteController {
                                                     "path": "/auth/cliente/me",
                                                     "statusCode": 403,
                                                     "date": "14/02/2023 09:00:35"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Cliente no encontrado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al cliente con ID: d182a454-9998-4c82-a622-02d7bafc0379",
-                                                    "path": "/auth/cliente/d182a454-9998-4c82-a622-2d7bafc0379",
-                                                    "statusCode": 404,
-                                                    "date": "11/02/2023 14:59:58"
                                                 }
                                             """
                             )}
@@ -383,7 +372,7 @@ public class ClienteController {
                                             """
                             )}
                     )}),
-            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol del usuario",
+            @ApiResponse(responseCode = "403", description = "Acceso prohibido por rol",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorImpl.class),
                             examples = {@ExampleObject(
@@ -394,21 +383,6 @@ public class ClienteController {
                                                     "path": "/auth/cliente/me/citas",
                                                     "statusCode": 403,
                                                     "date": "15/02/2023 19:40:59"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Cliente no encontrado o sin citas",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No existen citas del cliente",
-                                                    "path": "/auth/cliente/76406075-be67-47f1-9f92-32388c019bb3/citas",
-                                                    "statusCode": 404,
-                                                    "date": "12/02/2023 19:23:03"
                                                 }
                                             """
                             )}
@@ -433,11 +407,11 @@ public class ClienteController {
                                                 {
                                                     "id": "d182a454-9998-4c82-a622-2d7bafc0379a",
                                                     "nombre": "Bartolomé Méndez Zuluaga",
-                                                    "username": "jjml4",
+                                                    "username": "cliente",
                                                     "dni": "52874103V",
                                                     "email": "bart@bart.com",
                                                     "tlf": "777 888 999",
-                                                    "avatar": "user.png",
+                                                    "avatar": "cliente.png",
                                                     "roles": [
                                                         "CLIENTE"
                                                     ],
@@ -509,21 +483,6 @@ public class ClienteController {
                                                     "path": "/auth/cliente/me",
                                                     "statusCode": 403,
                                                     "date": "15/02/2023 19:42:32"
-                                                }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Cliente no encontrado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al usuario",
-                                                    "path": "/auth/cliente/me",
-                                                    "statusCode": 404,
-                                                    "date": "11/02/2023 14:59:58"
                                                 }
                                             """
                             )}

@@ -67,7 +67,6 @@ class _CitaNuevaCliente extends State<CitaNuevaCliente> {
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
-                                print(fechaHora);
                               });
                             },
                           ),

@@ -42,7 +42,8 @@ class _ClienteListarPage extends State<ClienteListarPage> {
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.response.length
                     ? const BottomLoader()
-                    : ClienteListItem(cliente: state.response[index], rol: widget.rol);
+                    : ClienteListItem(
+                        cliente: state.response[index], rol: widget.rol);
               },
               itemCount: state.hasReachedMax
                   ? state.response.length

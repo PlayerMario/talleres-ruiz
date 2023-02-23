@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import '../main.dart';
-import 'package:http/http.dart' as http;
 
 abstract class UserServiceAbs {
   Future<dynamic> login(UserLoginBody login);
@@ -53,7 +50,10 @@ class UserService extends UserServiceAbs {
     if (token != null) {
       dynamic response = await _userRepository.putPswd(pswd);
       if (response.statusCode == 200) {
-        return [UserEditarPswdResponse.fromJson(jsonDecode(response.body)), true];
+        return [
+          UserEditarPswdResponse.fromJson(jsonDecode(response.body)),
+          true
+        ];
       } else {
         return [ErrorResponse.fromJson(jsonDecode(response.body)), false];
       }

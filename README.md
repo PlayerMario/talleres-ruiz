@@ -66,24 +66,55 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 ## Rutas disponibles según roles:
 ### Cualquier usuario no logueado:
 #### User:
-- **POST: http://localhost:8080/noauth/user/register**: Crea un nuevo usuaro de tipo cliente.
-- **POST: http://localhost:8080/noauth/user/login**: Permite hacer login en la aplicación.
+- **POST: http://localhost:8080/noauth/user/register**: Crear un nuevo usuaro de tipo cliente.
+- **POST: http://localhost:8080/noauth/user/login**: Hacer login en la aplicación.
 
 ### Usuarios logueados con rol CLIENTE:
 #### Cliente:
-- **GET: http://localhost:8080/auth/cliente/me**: Obtiene los datos del cliente logueado.
-- **GET: http://localhost:8080/auth/cliente/me/citas**: Obtiene el listado histórico de las citas del cliente logueado.
-- **PUT: http://localhost:8080/auth/cliente/me**: Modifica los datos de usuario y cliente del usuario logueado.
-- **DELETE: http://localhost:8080/auth/cliente/me**: Da de baja al cliente logueado, en este caso, lo desactiva en caso de tener citas relacionadas, o lo elimina si no.
+- **GET: http://localhost:8080/auth/cliente/me**: Obtener los datos del cliente logueado.
+- **GET: http://localhost:8080/auth/cliente/me/citas**: Obtener el listado histórico de las citas del cliente logueado.
+- **PUT: http://localhost:8080/auth/cliente/me**: Modificar los datos de usuario y cliente del usuario logueado.
+- **DELETE: http://localhost:8080/auth/cliente/me**: Dar de baja al cliente logueado, en este caso, lo desactiva en caso de tener citas asociadas, o lo elimina si no.
 
 #### Cita:
-- **POST: http://localhost:8080/auth/cita/cliente**: Crea una nueva cita para el cliente.
-- **PUT: http://localhost:8080/auth/cita/{id}/cliente**: Modifica una cita pedida para el cliente logueado, pasándole el **id** de la cita.
-- **DELETE: http://localhost:8080/auth/cita/{id}/cliente**: Cancela una de las citas del cliente, siendo esta la que se indique por su **id**.
+- **POST: http://localhost:8080/auth/cita/cliente**: Crear una nueva cita desde la vista de CLIENTE.
+- **PUT: http://localhost:8080/auth/cita/{id}/cliente**: Modificar una cita pedida desde la vista CLIENTE, pasándole el **id** de la cita.
+- **DELETE: http://localhost:8080/auth/cita/{id}/cliente**: Cancelar una de las citas del cliente, siendo esta la que se indique por su **id**.
 
 ### Usuarios logueados con rol ADMIN:
-- **GET: http://localhost:8080/auth/mecanico/{id}**: Obtiene los detalles de un admin/mecánico.
+#### Mecánico:
+- **GET: http://localhost:8080/auth/mecanico/{id}**: Obtener los detalles de un admin/mecánico.
+- **POST: http://localhost:8080/auth/mecanico/admin**: Crear un nuevo usuario con rol ADMIN y MEC.
+- **POST: http://localhost:8080/auth/mecanico/mec**: Crear un nuevo usuario con rol MEC.
+- **PUT: http://localhost:8080/auth/mecanico/{id}**: Modificar los datos de un usuario con rol ADMIN o MEC, buscado por su **id**.
+- **DELETE: http://localhost:8080/auth/mecanico/{id}**: Dar de baja a un usuario con rol ADMIN o MEC, buscado por su **id**. No lo elimina, si no que lo desactiva.
+
+#### Cliente:
+- **DELETE: http://localhost:8080/auth/cliente/{id}**: Dar de baja a un usuario con rol CLIENTE, buscado por su **id**. Si tiene alguna cita asociada, lo desactiva, y si no, lo elimina.
 
 ### Usuarios logueados con rol ADMIN o MEC:
+#### Mecánico:
+- **GET: http://localhost:8080/auth/mecanico/**: Obtener el listado completo de mecánicos.
+- **GET: http://localhost:8080/auth/mecanico/me**: Obtener los datos del admin/mecánico logueado.
+- **POST: http://localhost:8080/auth/cita/mecanico/me**: Crear una nueva cita desde la vista de ADMIN/MEC.
+- **PUT: http://localhost:8080/auth/cita/mecanico/{id}**: Modificar los datos de una cita desde la vista de ADMIN/MEC, buscando la cita por su **id**.
+
+#### Cliente:
+- **GET: http://localhost:8080/auth/cliente/**: Obtener el listado completo de clientes.
+- **GET: http://localhost:8080/auth/cliente/{id}**: Obtener los detalles de un clientes, buscado por su **id**.
+
+#### Cita:
+- **GET: http://localhost:8080/auth/cita/**: Obtener el listado completo de citas.
+- **DELETE: http://localhost:8080/auth/cita/{id}**: Cancelar una cita desde la vista ADMIN/MEC.
+
 
 ### Usuarios logueados con cualquier rol:
+#### User:
+- **PUT: http://localhost:8080/auth/user/changePsw**: Modificar la contraseña del usuario logueado.
+- **POST: http://localhost:8080/auth/user/avatar**: Modificar imagen de perfil del avatar del usuario logueado.
+
+#### Cita:
+- **GET: http://localhost:8080/auth/cita/{id}**: Obtener los detalles de una cita, buscada por su **id**.
+- **POST: http://localhost:8080/auth/cita/{id}/mensaje**: Agregar un comentario a una cita, buscada por su **id**.
+- **POST: http://localhost:8080/auth/cita/{id}/fichero**: Subir un fichero a una cita perteneciente al usuario logueado, buscada la cita por su **id**.
+- **DELETE: http://localhost:8080/auth/cita/{idC}/adjunto/{idF}**: Eliminar un fichero, buscado por su ID (**idF**), de una cita, buscada por su ID (**idC**).

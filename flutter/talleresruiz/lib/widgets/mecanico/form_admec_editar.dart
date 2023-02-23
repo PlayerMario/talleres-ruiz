@@ -3,7 +3,8 @@ import '../../../main.dart';
 import 'package:flutter/material.dart';
 
 class FormularioEditarAdMec extends StatefulWidget {
-  const FormularioEditarAdMec({super.key, required this.mecanico, required this.id});
+  const FormularioEditarAdMec(
+      {super.key, required this.mecanico, required this.id});
   final MecanicoMeResponse mecanico;
   final String id;
 
@@ -176,7 +177,9 @@ class _FormularioEditarAdMec extends State<FormularioEditarAdMec> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

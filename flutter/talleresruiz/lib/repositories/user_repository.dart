@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
-import 'package:talleresruiz/services/interceptor.dart';
 import '../main.dart';
-import '../services/localstorage_service.dart';
 
 @Order(-1)
 @singleton
 class UserRepository {
-  //late LocalStorageService _localStorageService;
   late Interceptor _http;
   late RestAuthenticatedClient _httpAuth;
 

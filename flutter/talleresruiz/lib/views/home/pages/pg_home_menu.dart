@@ -20,7 +20,9 @@ class _HomeMenuPage extends State<HomeMenuPage> {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
         appBar: AppBar(
-            title: Center(child: Image.asset('assets/images/banner.png', fit: BoxFit.contain)),
+            title: Center(
+                child: Image.asset('assets/images/banner.png',
+                    fit: BoxFit.contain)),
             backgroundColor: const Color.fromRGBO(237, 242, 244, 1)),
         body: Container(
           decoration: const BoxDecoration(

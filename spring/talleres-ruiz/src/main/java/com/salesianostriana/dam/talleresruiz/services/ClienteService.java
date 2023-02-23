@@ -77,9 +77,6 @@ public class ClienteService {
     }
 
     public void delete(UUID id) {
-        /*if (repository.existsById(id)) {
-            repository.deleteById(id);
-        }*/
         Cliente cliente = this.findById(id);
         if (cliente.getCitas().isEmpty()) {
             repository.deleteById(id);

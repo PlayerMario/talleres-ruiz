@@ -15,8 +15,8 @@ class ProviderNuevaCitaAdMec extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(237, 242, 244, 1),
       body: BlocProvider(
-        create: (_) => CitaBloc(citaService: citaService)
-          ..add(EventCrearCitaAdMec(cita)),
+        create: (_) =>
+            CitaBloc(citaService: citaService)..add(EventCrearCitaAdMec(cita)),
         child: CitaCrearClientePage(rol: rol),
       ),
     );

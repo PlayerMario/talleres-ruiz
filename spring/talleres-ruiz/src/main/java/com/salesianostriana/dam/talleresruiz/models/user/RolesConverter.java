@@ -24,7 +24,7 @@ public class RolesConverter implements AttributeConverter<EnumSet<Roles>, String
     @Override
     public EnumSet<Roles> convertToEntityAttribute(String dbData) {
         if (dbData != null) {
-            if (!dbData.isBlank()) { // isBlank Java 11
+            if (!dbData.isBlank()) {
                 return Arrays.stream(dbData.split(SEPARADOR))
                         .map(elem -> Roles.valueOf(elem))
                         .collect(Collectors.toCollection(() -> EnumSet.noneOf(Roles.class)));

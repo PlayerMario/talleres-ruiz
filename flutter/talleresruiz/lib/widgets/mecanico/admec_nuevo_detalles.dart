@@ -3,7 +3,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class DetallesNuevoAdMec extends StatelessWidget {
-  DetallesNuevoAdMec({super.key, required this.adMec});
+  const DetallesNuevoAdMec({super.key, required this.adMec});
   final MecanicoMeResponse adMec;
 
   @override

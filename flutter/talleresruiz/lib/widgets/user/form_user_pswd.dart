@@ -176,7 +176,9 @@ class _FormularioEditarPswd extends State<FormularioEditarPswd> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

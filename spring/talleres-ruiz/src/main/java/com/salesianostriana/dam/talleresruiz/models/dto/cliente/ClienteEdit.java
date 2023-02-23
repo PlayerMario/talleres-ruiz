@@ -1,7 +1,6 @@
 package com.salesianostriana.dam.talleresruiz.models.dto.cliente;
 
 import com.salesianostriana.dam.talleresruiz.models.dto.user.UserEdit;
-import com.salesianostriana.dam.talleresruiz.validation.annotation.UniqueMatricula;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +20,7 @@ public class ClienteEdit extends UserEdit {
     protected String vehiculo;
 
     @NotBlank(message = "{nuevoCliente.matricula.notblank}")
-    //@UniqueMatricula(message = "{nuevoCliente.matricula.uniquematricula}")
+    //@UniqueMatricula(message = "{nuevoCliente.matricula.uniquematricula}") // Para que al editar no de error de que ya existe
     protected String matricula;
 
 }

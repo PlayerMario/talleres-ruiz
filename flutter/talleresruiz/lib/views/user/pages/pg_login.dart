@@ -37,8 +37,6 @@ class _LoginPage extends State<LoginPage> {
             print("Login Admin-Mec");
             return const ProviderAdMecHome();
           }
-
-          return Center(child: Text("Logueado ${state.response}"));
         case UserStatus.initial:
           return const Center(child: CircularProgressIndicator());
       }

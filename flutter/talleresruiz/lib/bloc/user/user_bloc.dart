@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import '../../../main.dart';
 
 part './user_event.dart';

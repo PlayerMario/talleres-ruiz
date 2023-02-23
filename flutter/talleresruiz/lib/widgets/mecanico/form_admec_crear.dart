@@ -282,7 +282,9 @@ class _FormularioCrearAdMec extends State<FormularioCrearAdMec> {
                         },
                         child: const Text(
                           'Crear',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

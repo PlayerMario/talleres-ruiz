@@ -59,7 +59,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"jjml4\",\r\n    \"password\": \"cli1234\"\r\n}",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -97,7 +97,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"oldPassword\": \"admin1234\",\r\n    \"newPassword\": \"1aA_aaaaaaa\",\r\n    \"verifyNewPassword\": \"1aA_aaaaaaa\"\r\n}",
+									"raw": "{\r\n    \"oldPassword\": \"admin\",\r\n    \"newPassword\": \"1aA_aaaaaaa\",\r\n    \"verifyNewPassword\": \"1aA_aaaaaaa\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -121,7 +121,7 @@
 						{
 							"name": "Cambiar Avatar",
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "formdata",
@@ -129,7 +129,7 @@
 										{
 											"key": "fichero",
 											"type": "file",
-											"src": "/C:/Users/mario/Desktop/Gear.png"
+											"src": "/C:/Users/mario/Desktop/user_ejemplo.jpg"
 										}
 									]
 								},
@@ -539,7 +539,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"usernameMecanico\": \"mrl26\",\r\n    \"fechaHora\": \"2023-02-13T15:00:00\",\r\n    \"estado\": \"Terminada\"\r\n}",
+									"raw": "{\r\n    \"fechaHora\": \"2023-02-13T15:00:00\",\r\n    \"estado\": \"Terminada\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -723,10 +723,7 @@
 										{
 											"key": "ficheros",
 											"type": "file",
-											"src": [
-												"/C:/Users/mario/Desktop/Foto.jpg",
-												"/C:/Users/mario/Desktop/Gear.png"
-											]
+											"src": "/C:/Users/mario/Desktop/user_ejemplo.jpg"
 										}
 									]
 								},
@@ -756,7 +753,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/auth/fichero/download/Foto.jpg",
+									"raw": "{{BASE_URL}}/auth/fichero/download/userejemplo.jpg",
 									"host": [
 										"{{BASE_URL}}"
 									],
@@ -764,7 +761,7 @@
 										"auth",
 										"fichero",
 										"download",
-										"Foto.jpg"
+										"userejemplo.jpg"
 									]
 								}
 							},
@@ -781,7 +778,7 @@
 										{
 											"key": "fichero",
 											"type": "file",
-											"src": "/C:/Users/mario/Desktop/Gear.png"
+											"src": "/C:/Users/mario/Desktop/user_ejemplo.jpg"
 										}
 									]
 								},

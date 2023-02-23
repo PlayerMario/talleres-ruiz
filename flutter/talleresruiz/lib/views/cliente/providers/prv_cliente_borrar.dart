@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:talleresruiz/bloc/cliente/cliente_bloc.dart';
 import 'package:talleresruiz/config/inyeccion_dependencias.dart';
 import 'package:talleresruiz/main.dart';
 

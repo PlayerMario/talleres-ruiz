@@ -2,7 +2,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class NuevoAdjunto extends StatelessWidget {
-  NuevoAdjunto({super.key, required this.id, required this.rol});
+  const NuevoAdjunto({super.key, required this.id, required this.rol});
   final int id;
   final String rol;
 

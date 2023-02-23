@@ -8,7 +8,6 @@ import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaCreateCliente;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaDto;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.CitaEditMecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.page.PageDto;
-import com.salesianostriana.dam.talleresruiz.models.user.User;
 import com.salesianostriana.dam.talleresruiz.repositories.CitaRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.AdjuntoRepository;
 import com.salesianostriana.dam.talleresruiz.repositories.MecanicoRepository;
@@ -29,7 +28,6 @@ import javax.transaction.Transactional;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -117,8 +115,8 @@ public class CitaService {
             if (!Objects.equals(cita.getCliente().getId(), idCliente) ||
                     cita.getEstado().equalsIgnoreCase("Proceso") ||
                     cita.getEstado().equalsIgnoreCase("Terminada")) {
-                throw new OperacionDenegadaException("No se puede cancelar una cita en proceso de realización" +
-                        " o terminada, o que no perteneza al usuario");
+                throw new OperacionDenegadaException("No se puede cancelar una cita en proceso de realización, " +
+                        "terminada, o que no perteneza al usuario");
             }
             cita.borrarCliente(cita.getCliente());
             borrarFicheros(cita);
@@ -155,15 +153,11 @@ public class CitaService {
     public Cita mostrarCitaConChat(UUID idUsuario, Long idCita) {
         Cita cita = repository.findByIdChat(idCita).orElseThrow(() ->
                 new EntityNotFoundException("No se encuentra la cita con ID: " + idCita));
-        //if (cita.getCliente() != null && cita.getMecanico() != null) {
-        if (cita.getCliente().getId().equals(idUsuario) || mecanicoRepository.existsById(idUsuario)/*cita.getMecanico().getId().equals(idUsuario)*/) {
+        if (cita.getCliente().getId().equals(idUsuario) || mecanicoRepository.existsById(idUsuario)) {
             return cita;
         } else {
             throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta acceder");
         }
-        /*} else {
-            throw new OperacionDenegadaException("No se puede acceder a la cita");
-        }*/
     }
 
     public boolean validarFechaHora(LocalDateTime fechaHora) {

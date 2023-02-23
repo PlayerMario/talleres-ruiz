@@ -83,7 +83,6 @@ class _AgregarAdjunto extends State<AgregarAdjunto> {
       if (pickedFile != null) {
         _imagen = File(pickedFile.path);
         adjuntoService.agregarAdjunto(_imagen, id, context);
-        //guardarArchivo(_imagen);
       } else {
         print('No se ha seleccionado ningún archivo');
       }
@@ -115,31 +114,4 @@ class _AgregarAdjunto extends State<AgregarAdjunto> {
           );
         });
   }
-
-  /*Future<dynamic> guardarArchivo(File fichero) async {
-    print("Guardando fichero...");
-    String? token = _localStorageService.getFromDisk("user_token");
-    if (token != null) {
-      var request =
-          http.MultipartRequest('POST', Uri.parse('$baseUrl/auth/user/avatar'));
-      request.headers.addAll({"Authorization": "Bearer $token"});
-      request.files
-          .add(await http.MultipartFile.fromPath("fichero", fichero.path));
-      var response = await request.send();
-
-      /*var responsed = await http.Response.fromStream(response);
-
-      final responseData = json.decode(responsed.body);*/
-
-      if (response.statusCode == 201) {
-        //print("Fichero guardado con éxito");
-        //print(responseData);
-        showSnackbar("Avatar cambiado con éxito", context);
-      } else {
-        showSnackbar("No se ha podido completar la operación", context);
-      }
-    } else {
-      return FormularioLogin();
-    }
-  }*/
 }

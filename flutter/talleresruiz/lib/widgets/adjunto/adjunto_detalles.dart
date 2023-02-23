@@ -3,7 +3,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 
 class DetallesChat extends StatelessWidget {
-  DetallesChat(
+  const DetallesChat(
       {super.key, required this.chat, required this.idCita, required this.rol});
   final Chat chat;
   final int idCita;

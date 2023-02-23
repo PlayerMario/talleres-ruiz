@@ -1,8 +1,5 @@
 package com.salesianostriana.dam.talleresruiz.models.user;
 
-import java.util.EnumSet;
-import java.util.stream.Collectors;
-
 public enum Roles {
 
     ADMIN, MEC, CLIENTE;

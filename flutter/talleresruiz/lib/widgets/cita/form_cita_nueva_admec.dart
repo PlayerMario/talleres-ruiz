@@ -98,7 +98,6 @@ class _CitaNuevaAdMec extends State<CitaNuevaAdMec> {
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
-                                print(fechaHora);
                               });
                             },
                           ),

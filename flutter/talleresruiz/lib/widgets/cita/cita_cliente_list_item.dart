@@ -26,7 +26,8 @@ class CitaClienteListItem extends StatelessWidget {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(cita!.mecanico != null
+                        child: Text(
+                          cita!.mecanico != null
                               ? "Mecánico: \n${utf8.decode(cita!.mecanico!.codeUnits)}"
                               : "Mecánico: \nSin asignar",
                           style: const TextStyle(
@@ -55,7 +56,6 @@ class CitaClienteListItem extends StatelessWidget {
                   ],
                 )),
             onPressed: () {
-              print("A DETALLES DE LA CITA ${cita!.id}");
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return ProviderDetallesCita(id: cita!.id!, rol: rol);
               }));

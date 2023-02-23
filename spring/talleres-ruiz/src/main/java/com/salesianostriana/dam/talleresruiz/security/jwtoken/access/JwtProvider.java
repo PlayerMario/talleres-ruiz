@@ -74,7 +74,8 @@ public class JwtProvider {
         try {
             jwtParser.parseClaimsJws(token);
             return true;
-        } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+        } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException |
+                 IllegalArgumentException ex) {
             log.info("Error con el token: " + ex.getMessage());
             throw new JwtTokenException(ex.getMessage());
         }

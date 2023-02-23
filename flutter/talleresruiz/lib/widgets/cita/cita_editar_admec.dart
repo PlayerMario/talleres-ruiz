@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
-import 'package:intl/intl.dart';
 import '../../../main.dart';
 import 'dart:convert';
 import 'package:select_form_field/select_form_field.dart';
@@ -111,7 +110,6 @@ class _CitaEditarAdMec extends State<CitaEditarAdMec> {
                             onDateSelected: (value) {
                               setState(() {
                                 fechaHora = value;
-                                print(fechaHora);
                               });
                             },
                           ),
@@ -130,8 +128,7 @@ class _CitaEditarAdMec extends State<CitaEditarAdMec> {
                                   labelText: 'Estado',
                                   labelStyle: TextStyle(
                                       color: Color.fromRGBO(43, 45, 66, 1)),
-                                  hintText:
-                                      'Introduzca el estado de la cita',
+                                  hintText: 'Introduzca el estado de la cita',
                                   suffixIcon: Icon(
                                     Icons.check_box_outlined,
                                     color: Color.fromRGBO(43, 45, 66, 1),
@@ -144,7 +141,6 @@ class _CitaEditarAdMec extends State<CitaEditarAdMec> {
                               items: _items,
                               onChanged: (val) {
                                 estado = val;
-                                print(estado);
                               },
                             ))),
                     Container(
@@ -173,7 +169,9 @@ class _CitaEditarAdMec extends State<CitaEditarAdMec> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

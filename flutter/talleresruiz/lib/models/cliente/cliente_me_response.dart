@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../main.dart';
 
 class ClienteMeResponse {
@@ -61,25 +59,3 @@ class ClienteMeResponse {
     return data;
   }
 }
-
-/*class Citas {
-  String? mecanico;
-  String? fechaHora;
-  String? estado;
-
-  Citas({this.mecanico, this.fechaHora, this.estado});
-
-  Citas.fromJson(Map<String, dynamic> json) {
-    mecanico = json['mecanico'];
-    fechaHora = json['fechaHora'];
-    estado = json['estado'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['mecanico'] = this.mecanico;
-    data['fechaHora'] = this.fechaHora;
-    data['estado'] = this.estado;
-    return data;
-  }
-}*/

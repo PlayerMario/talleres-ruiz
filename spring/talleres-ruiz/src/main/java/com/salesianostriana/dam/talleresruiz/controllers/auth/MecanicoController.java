@@ -49,28 +49,31 @@ public class MecanicoController {
                                                 {
                                                     "content": [
                                                         {
-                                                            "nombre": "Alejandro Santos Pacheco",
-                                                            "username": "asp14",
-                                                            "dni": "30376644T",
-                                                            "email": "ale@ale.com",
-                                                            "tlf": "675 796 623",
-                                                            "avatar": "https://robohash.org/asp14"
-                                                        },
-                                                        {
+                                                            "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                             "nombre": "Mario Ruiz López",
-                                                            "username": "mrl26",
+                                                            "username": "admin",
                                                             "dni": "09124790Y",
                                                             "email": "mario@mario.com",
                                                             "tlf": "676 384 054",
-                                                            "avatar": "https://robohash.org/mrl26"
+                                                            "avatar": "admin.png"
                                                         },
                                                         {
+                                                            "id": "17f920ca-57ac-4053-933c-7d5a6c9cd328",
+                                                            "nombre": "Alejandro Santos Pacheco",
+                                                            "username": "mec",
+                                                            "dni": "30376644T",
+                                                            "email": "ale@ale.com",
+                                                            "tlf": "675 796 623",
+                                                            "avatar": "mec.png"
+                                                        },
+                                                        {
+                                                            "id": "43dc49e5-7cb2-461a-8ed4-e0f36c696b73",
                                                             "nombre": "Luis Verde Cantero",
                                                             "username": "lvc19",
                                                             "dni": "84731084D",
                                                             "email": "luis@luis.com",
                                                             "tlf": "620 485 963",
-                                                            "avatar": "https://robohash.org/lvc19"
+                                                            "avatar": "lvc19.png"
                                                         }
                                                     ],
                                                     "totalElements": 3,
@@ -145,11 +148,11 @@ public class MecanicoController {
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "nombre": "Mario Ruiz López",
-                                                    "username": "mrl26",
+                                                    "username": "admin",
                                                     "dni": "09124790Y",
                                                     "email": "mario@mario.com",
                                                     "tlf": "676 384 054",
-                                                    "avatar": "https://robohash.org/mrl26",
+                                                    "avatar": "admin.png",
                                                     "roles": [
                                                         "ADMIN",
                                                         "MEC"
@@ -220,11 +223,11 @@ public class MecanicoController {
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "nombre": "Mario Ruiz López",
-                                                    "username": "mrl26",
+                                                    "username": "admin",
                                                     "dni": "09124790Y",
                                                     "email": "mario@mario.com",
                                                     "tlf": "676 384 054",
-                                                    "avatar": "https://robohash.org/mrl26",
+                                                    "avatar": "admin.png",
                                                     "roles": [
                                                         "ADMIN",
                                                         "MEC"
@@ -262,21 +265,6 @@ public class MecanicoController {
                                                 }
                                             """
                             )}
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Mecánico no encontrado",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiErrorImpl.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "status": "NOT_FOUND",
-                                                    "message": "No se encuentra al mecánico",
-                                                    "path": "/auth/mecanico/me",
-                                                    "statusCode": 404,
-                                                    "date": "12/02/2023 17:04:37"
-                                                }
-                                            """
-                            )}
                     )})
     })
     @JsonView(MecanicoViews.DetallesMecanicos.class)
@@ -295,13 +283,13 @@ public class MecanicoController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
-                                                    "id": "c0a80180-8646-17f3-8186-46888f6d0000",
+                                                    "id": "c0a80180-867f-12f6-8186-7f3529990000",
                                                     "nombre": "Francisco Javier Quirón Martín",
                                                     "username": "fjqm23",
                                                     "dni": "65852014C",
                                                     "email": "javi@javi.com",
                                                     "tlf": "690 975 563",
-                                                    "avatar": "https://robohash.org/fjqm23",
+                                                    "avatar": "user.png",
                                                     "roles": [
                                                         "ADMIN",
                                                         "MEC"
@@ -378,13 +366,13 @@ public class MecanicoController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
-                                                    "id": "c0a80180-8646-146a-8186-4684c9f50000",
+                                                    "id": "c0a80180-867f-12f6-8186-7f3587cc0001",
                                                     "nombre": "Ismael Collado Bernal",
                                                     "username": "icb9",
                                                     "dni": "36520148V",
                                                     "email": "isma@isma.com",
                                                     "tlf": "643 980 764",
-                                                    "avatar": "https://robohash.org/icb9",
+                                                    "avatar": "user.png",
                                                     "roles": [
                                                         "MEC"
                                                     ]
@@ -462,11 +450,11 @@ public class MecanicoController {
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "nombre": "Bartolomé Méndez Zuluaga",
-                                                    "username": "mrl26",
+                                                    "username": "admin",
                                                     "dni": "09124790Y",
                                                     "email": "bart@bart.com",
                                                     "tlf": "777 888 999",
-                                                    "avatar": "https://robohash.org/mrl26",
+                                                    "avatar": "admin.png",
                                                     "roles": [
                                                         "ADMIN",
                                                         "MEC"

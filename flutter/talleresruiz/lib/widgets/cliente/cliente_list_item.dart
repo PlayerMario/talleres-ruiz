@@ -51,10 +51,9 @@ class ClienteListItem extends StatelessWidget {
               ],
             )),
         onPressed: () {
-          print("Detalles del usuario ${cliente!.id}");
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProviderDetallesCliente(id: cliente!.id!, rol: rol);
-            }));
+            return ProviderDetallesCliente(id: cliente!.id!, rol: rol);
+          }));
         },
       ),
     );

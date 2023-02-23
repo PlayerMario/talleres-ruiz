@@ -33,7 +33,6 @@ class CitaCrearAdMecBody {
   }
 }
 
-
 class CitaEditarAdMecBody {
   String? fechaHora;
   String? estado;

@@ -52,7 +52,6 @@ class MecanicoListItem extends StatelessWidget {
               ],
             )),
         onPressed: () {
-          print("Detalles del usuario ${mecanico!.id}");
           if (rol == "ADMIN") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return ProviderDetallesMecanico(id: mecanico!.id!, rol: rol);
@@ -64,10 +63,5 @@ class MecanicoListItem extends StatelessWidget {
         },
       ),
     );
-  }
-
-  void showSnackbar(String msg, BuildContext context) {
-    final snack = SnackBar(content: Text(msg));
-    ScaffoldMessenger.of(context).showSnackBar(snack);
   }
 }

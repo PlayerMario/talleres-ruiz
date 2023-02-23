@@ -54,12 +54,13 @@ public class UserNoAuthController {
                             examples = {@ExampleObject(
                                     value = """
                                                 {
+                                                    "id": "c0a80180-867e-10d6-8186-7f17a6c10000",
                                                     "nombre": "Mario Ruiz López",
                                                     "username": "playermario",
                                                     "dni": "11111111A",
                                                     "email": "m@m.com",
                                                     "tlf": "111 222 333",
-                                                    "avatar": "https://robohash.org/playermario",
+                                                    "avatar": "user.png",
                                                     "vehiculo": "1111AAA-Renault Clio"
                                                 }
                                             """
@@ -113,13 +114,13 @@ public class UserNoAuthController {
                                                 {
                                                     "id": "3e380d54-861c-4809-bb84-bd32bab42c2e",
                                                     "nombre": "Mario Ruiz López",
-                                                    "username": "mrl26",
-                                                    "avatar": "https://robohash.org/mrl26",
-                                                    "token": "..."
+                                                    "username": "admin",
+                                                    "avatar": "admin.png",
                                                     "roles": [
-                                                            "ADMIN",
-                                                            "MEC"
-                                                            ]
+                                                        "ADMIN",
+                                                        "MEC"
+                                                    ],
+                                                    "token": "..."
                                                 }
                                             """
                             )}
@@ -172,7 +173,6 @@ public class UserNoAuthController {
         String token = tokenProvider.generateToken(auth);
         User user = (User) auth.getPrincipal();
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.generarUserDtoToken(user, token));
-        //return userService.login(user, token);
     }
 
 }

@@ -129,7 +129,7 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                         child: SizedBox(
                           width: 350,
                           child: TextFormField(
-                            controller: tlf,                            
+                            controller: tlf,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
@@ -170,7 +170,8 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                                 labelText: 'Vehículos',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca la marca y modelo de su vehículo',
+                                hintText:
+                                    'Introduzca la marca y modelo de su vehículo',
                                 suffixIcon: Icon(
                                   Icons.car_repair_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
@@ -200,7 +201,8 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                                 labelText: 'Matrícula',
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(43, 45, 66, 1)),
-                                hintText: 'Introduzca la matrícula de su vehículo',
+                                hintText:
+                                    'Introduzca la matrícula de su vehículo',
                                 suffixIcon: Icon(
                                   Icons.car_crash_outlined,
                                   color: Color.fromRGBO(43, 45, 66, 1),
@@ -240,7 +242,9 @@ class _FormularioEditarCliente extends State<FormularioEditarCliente> {
                         },
                         child: const Text(
                           'Modificar',
-                          style: TextStyle(color: Color.fromRGBO(237, 242, 244, 1), fontSize: 18),
+                          style: TextStyle(
+                              color: Color.fromRGBO(237, 242, 244, 1),
+                              fontSize: 18),
                         ),
                       ),
                     ),

@@ -39,7 +39,6 @@ public class MecanicoService {
     private final UserService userService;
     private final CitaService citaService;
     private final CitaRepository citaRepository;
-    private final AdjuntoService mensajeService;
 
     public List<Mecanico> findAll() {
         List<Mecanico> result = repository.findAll();
@@ -81,16 +80,6 @@ public class MecanicoService {
     }
 
     public void delete(UUID id) {
-        /*if (repository.existsById(id)) {
-            Mecanico mec = this.findById(id);
-            if (!mec.getUsuario().getRoles().contains(Roles.ADMIN)) {
-                citaService.setearNullMecanico(mec);
-                mensajeService.setearNullAutor(mec.getUsuario());
-                repository.deleteById(id);
-            } else {
-                throw new OperacionDenegadaException("No se puede puede borrar un admin");
-            }
-        }*/
         Mecanico mec = this.findById(id);
         if (!mec.getUsuario().getRoles().contains(Roles.ADMIN)) {
             mec.getUsuario().setEnabled(false);
@@ -116,9 +105,6 @@ public class MecanicoService {
     }
 
     public void comprobarDisponibilidadModif(Long idCita, LocalDateTime fechaHora) {
-        /*
-         * Buscar la cita, mirar el mecánico, coger su id y pasarlo aquí
-         * */
         Mecanico mecanico = citaService.findById(idCita).getMecanico();
         List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(mecanico, fechaHora);
         if (!citas.isEmpty()) {

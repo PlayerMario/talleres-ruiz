@@ -32,9 +32,10 @@ class CitaListItem extends StatelessWidget {
                       )),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 10),
-                      child: Text(cita!.cliente != null
-                              ? "Cliente: \n${utf8.decode(cita!.cliente!.codeUnits)}"
-                              : "Cliente: \nSin asignar",
+                      child: Text(
+                        cita!.cliente != null
+                            ? "Cliente: \n${utf8.decode(cita!.cliente!.codeUnits)}"
+                            : "Cliente: \nSin asignar",
                         style: const TextStyle(
                             fontSize: 16,
                             color: Color.fromRGBO(237, 242, 244, 1)),
@@ -61,7 +62,6 @@ class CitaListItem extends StatelessWidget {
                 ],
               )),
           onPressed: () {
-            print("A DETALLES DE LA CITA ${cita!.id}");
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return ProviderDetallesCita(id: cita!.id!, rol: rol);
             }));
