@@ -3,6 +3,7 @@ package com.salesianostriana.dam.talleresruiz.controllers.auth;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.talleresruiz.errors.models.impl.ApiErrorImpl;
 import com.salesianostriana.dam.talleresruiz.models.Cita;
+import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.cita.*;
 import com.salesianostriana.dam.talleresruiz.models.dto.adjunto.AdjuntoCreate;
 import com.salesianostriana.dam.talleresruiz.models.dto.adjunto.AdjuntoDtoConverter;
@@ -715,9 +716,10 @@ public class CitaController {
     })
     @JsonView(CitaViews.DetallesCita.class)
     @PutMapping("/mecanico/{id}")
-    public CitaDto modificarCitaMec(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit) {
-        mecanicoService.comprobarDisponibilidadModif(id, edit.getFechaHora());
-        return service.generarCitaDtoDetails(service.edit(id, edit));
+    public CitaDto modificarCitaMec(@PathVariable Long id, @Valid @RequestBody CitaEditMecanico edit, @AuthenticationPrincipal User usuario) {
+        Mecanico mec = mecanicoService.findById(usuario.getId());
+        mecanicoService.comprobarDisponibilidadModif(id, edit.getFechaHora(), mec);
+        return service.generarCitaDtoDetails(service.edit(id, edit, mec));
     }
 
     @Operation(summary = "Modificar una cita en vista cliente")

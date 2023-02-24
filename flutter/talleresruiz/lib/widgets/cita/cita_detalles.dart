@@ -44,7 +44,7 @@ class DetallesCita extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Text(
-                          citaDetalles.mecanico != null
+                          citaDetalles.cliente != null
                               ? "Cliente: \n${utf8.decode(citaDetalles.cliente!.codeUnits)}"
                               : "Cliente: \nSin asignar",
                           style: const TextStyle(

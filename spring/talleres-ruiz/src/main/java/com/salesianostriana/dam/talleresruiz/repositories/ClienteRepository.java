@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.talleresruiz.repositories;
 
 import com.salesianostriana.dam.talleresruiz.models.Cliente;
+import com.salesianostriana.dam.talleresruiz.models.Mecanico;
 import com.salesianostriana.dam.talleresruiz.models.dto.cliente.ClienteDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -29,5 +30,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID>, JpaSpec
                  WHERE cliente.id = :id
             """)
     ClienteDto generarClienteDto(@Param("id") UUID id);
+
+    @Query("""
+                SELECT DISTINCT cliente
+                FROM Cliente cliente LEFT JOIN cliente.usuario usuario
+                WHERE usuario.nombre = :nombre
+           """)
+    Cliente findByNombre(@Param("nombre") String nombre);
 
 }

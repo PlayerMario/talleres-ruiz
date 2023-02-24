@@ -67,13 +67,15 @@ public class CitaService {
         return repository.save(cita);
     }
 
-    public Cita edit(Long id, CitaEditMecanico edit/*, Mecanico mecanico*/) {
+    public Cita edit(Long id, CitaEditMecanico edit, Mecanico mecanico) {
         return repository.findById(id)
                 .map(cita -> {
                     if (Objects.equals(cita.getEstado(), "Terminada")) {
                         throw new OperacionDenegadaException("No se puede modificar una cita en este estado");
                     }
-                    //cita.setMecanico(mecanico);
+                    if (cita.getMecanico() == null) {
+                        cita.setMecanico(mecanico);
+                    }
                     cita.setFechaHora(edit.getFechaHora());
                     cita.setEstado(edit.getEstado());
                     return repository.save(cita);
@@ -172,6 +174,8 @@ public class CitaService {
         Cita cita = this.findById(idCita);
         if (!cita.getCliente().getId().equals(idAutor) && !cita.getMecanico().getId().equals(idAutor)) {
             throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta enviar el mensaje");
+        } else if (cita.getMecanico() == null) {
+            throw new OperacionDenegadaException("No se puede enviar hasta que no se asigne un mecánico");
         }
         if ((cita.getEstado().equalsIgnoreCase("Terminada") && op == 1) ||
                 ((cita.getEstado().equalsIgnoreCase("Terminada") || cita.getEstado().equalsIgnoreCase("Proceso"))
@@ -183,6 +187,7 @@ public class CitaService {
     public CitaDto generarCitaDto(Cita cita) {
         CitaDto citaDto = repository.generarCitaDto(cita.getId());
         citaDto.setMecanico(cita.getMecanico() != null ? cita.getMecanico().getUsuario().getNombre() : "Por asignar");
+        citaDto.setCliente(cita.getCliente().getUsuario().getNombre());
         return citaDto;
     }
 
@@ -191,6 +196,15 @@ public class CitaService {
         if (!cita.getChat().isEmpty()) {
             citaDto.setChat(adjuntoRepository.generarChatDto(cita.getId()));
         }
+        return citaDto;
+    }
+
+    public CitaDto modifCitaMec(Cita cita) {
+        CitaDto citaDto = repository.generarCitaDtoDetails(cita.getId());
+        if (!cita.getChat().isEmpty()) {
+            citaDto.setChat(adjuntoRepository.generarChatDto(cita.getId()));
+        }
+        cita.setMecanico(mecanicoRepository.findByNombre(citaDto.getMecanico()));
         return citaDto;
     }
 

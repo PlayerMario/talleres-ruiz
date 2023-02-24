@@ -104,8 +104,7 @@ public class MecanicoService {
         }
     }
 
-    public void comprobarDisponibilidadModif(Long idCita, LocalDateTime fechaHora) {
-        Mecanico mecanico = citaService.findById(idCita).getMecanico();
+    public void comprobarDisponibilidadModif(Long idCita, LocalDateTime fechaHora, Mecanico mecanico) {
         List<Cita> citas = citaRepository.findDistinctByMecanicoAndFechaHora(mecanico, fechaHora);
         if (!citas.isEmpty()) {
             citas.forEach(cita -> {

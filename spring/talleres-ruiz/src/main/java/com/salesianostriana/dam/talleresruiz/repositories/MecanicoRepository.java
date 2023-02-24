@@ -20,4 +20,11 @@ public interface MecanicoRepository extends JpaRepository<Mecanico, UUID>, JpaSp
             """)
     MecanicoDto generarMecanicoDto(@Param("id") UUID id);
 
+    @Query("""
+                SELECT DISTINCT mecanico
+                FROM Mecanico mecanico LEFT JOIN mecanico.usuario usuario
+                WHERE usuario.nombre = :nombre
+           """)
+    Mecanico findByNombre(@Param("nombre") String nombre);
+
 }
