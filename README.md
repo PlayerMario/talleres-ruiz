@@ -1,15 +1,21 @@
 # TALLERES RUIZ
-Proyecto de desarrollo de una aplicación compuesta por un **back** que desarrolla una API-REST de gestión de un taller de automoción, y un **front** para móvil que consume dicha API.
+Proyecto de desarrollo de una aplicación compuesta por un **back** que desarrolla una API-REST de gestión de un taller de automoción, y un **front** para móvil que consume dicha API. En esta, 
+tendremos la posibilidad de crear un nuevo usuario con rol CLIENTE, además de loguearnos para acceder a las funcionalidades de la aplicaicón. Tendremos dos vías de acceso:
+- **Rol CLIENTE (cliente/cliente)**: Podrá ver su perfil, editar su información, contraseña y avatar, ver su última o próxima cita, el listado de citas histórico, pedir una nueva cita, y 
+  modificar una mientras esté en estado de trámite o aceptada. También podrá mantener un chat con el mecánico de su cita mediante mensajes o envío de fichero. 
+- **Rol ADMIN (admin/admin) y MEC (mec/mec)**: Se corresponde con el dueño del taller y/o a un mecánico del mismo. Al igual que antes, estos podrán ver su perfil, editar su información, ver 
+  los listados de citas, clientes y mecánicos, acceder a la información de las citas y utilizar el chat de la misma, aunque sólo podrá el mecánico que tenga asignado la cita, y, como ADMIN, se
+  podrá crear un nuevo ADMIN/MEC o un MEC.
 
 ## Tecnología y lenguaje utilizado:
 Para el desarrollo de la aplicación, se han utilizado los siguientes elementos:
-- **Spring Boot** como framework para el desarrollo back de la API-REST.
-- **Java** para el desarrollo del código que atiende las peticiones a la API.
+- **Spring Boot** como framework para el desarrollo back de la API-REST. El proyecto de Spring se ha desarrollado en su versión 2.7.8.
+- **Java** para el desarrollo del código que atiende las peticiones a la API. Se ha desarrollado en la versión 17.0.5 2022-10-18 LTS.
 - **PostgreSQL** para la gestión de la base de datos.
 - **pgAdmin4** como sistema gestor de base de datos.
 - **JPQL** para las consultas a la base de datos.
-- **Flutter** como framework para el desarrollo front que consume la API-REST.
-- **Dart** para el desarrollo del código de Flutter.
+- **Flutter** como framework para el desarrollo front que consume la API-REST. Esta parte se ha desarrollado con su versión 3.8.0-12.0.pre.12.
+- **Dart** para el desarrollo del código de Flutter. El código se ha desarrollado en la versión 3.0.0-228.0.dev del lenguaje.
 - **Docker** para montar el contenedor de Spring Boot y PostgreSQL.
 
 ## Entorno de desarrollo y ejecución:
@@ -22,7 +28,7 @@ seguir los siguiente pasos en este orden:
   sobre **Current File**, y luego **Edit Configuration**. Al aparecer la nueva ventana, pulsamos, en el menú superior, en el icono **+**, en el desplegable, seleccionamos **Maven**, y 
   en la opción **Run**, en **Command line**, escribimos **spring-boot:run -Dspring-boot.run.fork=false** y lo seleccionamos en el menú. Si pusiéramos solo **spring-boot:run**, podríamos 
   tener problemas con el UTF-8 y mostrarse los caracteres como las tildes o la "ñ" mal. Pulsamos en **Aplicar** y **Aceptar**. Ahora solo tendremos que pulsar el icono de **Play** junto 
-  a **tallere-ruiz spring-boot:run**, y, una vez finalice la ejecución en consola, tendremos el proyecto ejecutado y accesible desde la dirección **http://localhost:8080/** como ruta raíz.
+  a **talleres-ruiz spring-boot:run**, y, una vez finalice la ejecución en consola, tendremos el proyecto ejecutado y accesible desde la dirección **http://localhost:8080/** como ruta raíz.
 - **Ejecución del proyecto flutter**: Partiendo de la base de que tendremos instalado Flutter en nuestro equipo, una vez ejecutado el proyecto de **spring**, este paso podemos realizarlo 
   tanto en **Visual Studio Code** como en el **terminal** que utilicemos. Si estamos en **VSC**, abrimos la carpeta del proyecto de **flutter**, luego **talleresruiz**, y esta es la que 
   abrimos. Si lo hicieramos en el terminal, tendríamos que buscar este directorio. Una vez abierto, en **VSC** tendremos que abrir un terminal, que podremos hacerlo en el menú superior, 
