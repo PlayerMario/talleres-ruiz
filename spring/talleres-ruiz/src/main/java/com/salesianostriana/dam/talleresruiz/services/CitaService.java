@@ -172,12 +172,11 @@ public class CitaService {
 
     public void comprobarEstadoAutor(Long idCita, UUID idAutor, int op) {
         Cita cita = this.findById(idCita);
-        if (!cita.getCliente().getId().equals(idAutor) && !cita.getMecanico().getId().equals(idAutor)) {
-            throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta enviar el mensaje");
-        } else if (cita.getMecanico() == null) {
+        if (cita.getMecanico() == null) {
             throw new OperacionDenegadaException("No se puede enviar hasta que no se asigne un mecánico");
-        }
-        if ((cita.getEstado().equalsIgnoreCase("Terminada") && op == 1) ||
+        } else if (!cita.getCliente().getId().equals(idAutor) && !cita.getMecanico().getId().equals(idAutor)) {
+            throw new OperacionDenegadaException("La cita no pertenece al usuario que intenta enviar el mensaje");
+        } else if ((cita.getEstado().equalsIgnoreCase("Terminada") && op == 1) ||
                 ((cita.getEstado().equalsIgnoreCase("Terminada") || cita.getEstado().equalsIgnoreCase("Proceso"))
                         && op == 2)) {
             throw new OperacionDenegadaException("No se puede modificar una cita en este estado");
