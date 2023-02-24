@@ -6,6 +6,8 @@ tendremos la posibilidad de crear un nuevo usuario con rol CLIENTE, además de l
 - **Rol ADMIN (admin/admin) y MEC (mec/mec)**: Se corresponde con el dueño del taller y/o a un mecánico del mismo. Al igual que antes, estos podrán ver su perfil, editar su información, ver 
   los listados de citas, clientes y mecánicos, acceder a la información de las citas y utilizar el chat de la misma, aunque sólo podrá el mecánico que tenga asignado la cita, y, como ADMIN, se
   podrá crear un nuevo ADMIN/MEC o un MEC.
+- **Contraseñas**: Por facilidad en el uso de la aplicación, a la hora de crear una nueva contraseña, al tener validación de seguridad, las características de la misma
+  se definirán por tener, mínimo 6 caracteres y máximo 12, 1 minúscula, 1 mayúscula, 1 dígito y 1 caracter especial, por ejemplo **1aA_aa**.
 
 ## Tecnología y lenguaje utilizado:
 Para el desarrollo de la aplicación, se han utilizado los siguientes elementos:
