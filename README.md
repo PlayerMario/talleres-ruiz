@@ -124,3 +124,17 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 - **POST: http://localhost:8080/auth/cita/{id}/mensaje**: Agregar un comentario a una cita, buscada por su **id**.
 - **POST: http://localhost:8080/auth/cita/{id}/fichero**: Subir un fichero a una cita perteneciente al usuario logueado, buscada la cita por su **id**.
 - **DELETE: http://localhost:8080/auth/cita/{idC}/adjunto/{idF}**: Eliminar un fichero, buscado por su ID (**idF**), de una cita, buscada por su ID (**idC**).
+
+## Aspectos a desarrollar en el futuro:
+- **Validación**: Tiene que mejorarse el aspecto de la validación de los formularios de editar, en concreto, los de editar usuario, ya que a la hora de modificar,
+  como se usa el mismo DTO que para crear, se validan campos como la matrícula del vehículo o el email que tienen que ser únicos. Es por ello que como le paso un 
+  email y una matrícula existentes por el mismo usuario que estoy modificando da error y te pide que lo cambies, por ello lo he deshabilitado a expensas de
+  conseguir solucionarlo sin necesidad de crear un nuevo DTO.
+- **Front Angular**: Desarrollo de un front en Angular para la parte de la aplicación web.
+- **Servicios y recambios**: En la vista de mecánico, cuando se acceda a la creación o edición de la cita, se podrán seleccionar los distintos servicios y recambios 
+  a aplicar dentro de la cita, así como gestionar los mismos con sus propias entidades en las que se recojan los precios, tiempos de empleo en los servicios, etc.
+- **Cambios en entidades**: Con el desarrollo del futuro proyecto, tendrá más sentido que ahora la división entre cliente y mecánico, ya que, ahora, apenas hay
+  diferencias entre las entidades, pero más adelante, el cliente podrá seleccionar la marca y modelo de su vehículo a través de una entidad Vehículo que guarde
+  en la base de datos una colección de vehículos distintos. Por su parte, el mecánico tendrá también asociada una entidad Puesto que se caracterizará por el
+  puesto que tiene dentro de la empresa, su sueldo, etc., para poder gestionar la plantilla de forma más cómoda, así como otros atributos característicos de un empleado.
+- **Página de inicio**: En la página de inicio, tendremos información acerca de la empresa.
